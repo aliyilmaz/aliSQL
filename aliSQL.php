@@ -48,7 +48,8 @@ class aliSQL {
     private $sessset    = array(
         'path'=>'./session/',
         'path_status' => false,
-        'status_session' => true
+        'status_session' => true,
+        'csrf_status' => true
     );
 
     /*
@@ -71,6 +72,8 @@ class aliSQL {
     public $notice      = array(
         'error' =>  true
     );
+
+    public $csrftoken;
 
     /*
      * Function where dependencies
@@ -1514,6 +1517,7 @@ class aliSQL {
                      * */
                     chmod($this->sessset['path'].'/.htaccess', 644);
                 }
+
                 /*
                  * The session directory is introduced to php.
                  * */
@@ -1532,6 +1536,88 @@ class aliSQL {
                 session_start();
             }
 
+            /*
+             * If csrf protection is enabled, token is created.
+             * */
+            if($this->sessset['csrf_status']){
+
+                /*
+                 * This is a function to protect from cross-site request
+                 * fraud (CSRF) attacks.
+                 * */
+                if(!isset($_SESSION['csrf_token'])){
+                    $tdate  = date('d-m-Y H:i:s');
+                    $number = implode('', range('0', '9'));
+                    $alphab = implode('', range('a', 'z'));
+                    $_SESSION['csrf_token'] = md5(str_shuffle($tdate.$number.$alphab));
+                }
+            }
+
+        }
+    }
+
+    /*
+     * A function for routing.
+     * --------------------------
+     * string                   $url
+     * boolean                  $opt
+     * redirect                 return
+     * --------------------------
+     * */
+    public function redirect($url, $opt=false){
+
+        /*
+         * If it is true, a redirect occurs to the project directory.
+         * */
+        if($opt==true){
+            $url = dirname($_SERVER['SCRIPT_NAME']);
+        }
+
+        /*
+         * If this is true, the project directory is defined as the
+         * address variable.
+         * */
+        if(!empty($url)) {
+            header('Location: '.$url);
+        }
+
+        /*
+         * In the tests performed, it was seen that the process is
+         * continuing when this parameter is not specified.
+         * */
+        exit();
+    }
+
+    /*
+     * Used to compare csrf_token parameters. If there is incompatibility,
+     * a negative response is given, a positive response is given if it
+     * is compatible.
+     * --------------------------
+     * string                   $this->csrf_token
+     * string                   $_SESSION['csrf_token']
+     * boolean                  return
+     * --------------------------
+     * */
+    public function is_token(){
+
+        /*
+         * If csrf_token is sent, the comparison process is started.
+         * */
+        if(isset($this->post['csrf_token'])){
+
+            /*
+             * If the csrf_token value sent from the form is different from the
+             * csrf_token value of the session, a negative response is given.
+             * */
+            if($_SESSION['csrf_token'] != $this->post['csrf_token']){
+                return false;
+            } else {
+
+                /*
+                 * Otherwise, a positive answer is given.
+                 * */
+                return true;
+            }
         }
     }
 
@@ -2184,6 +2270,7 @@ class aliSQL {
          * */
         return $row['Field'];
     }
+
 
     /*
      * It is the error management function.
