@@ -73,8 +73,6 @@ class aliSQL {
         'error' =>  true
     );
 
-    public $csrftoken;
-
     /*
      * Function where dependencies
      * are executed.
