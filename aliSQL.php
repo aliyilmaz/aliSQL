@@ -2065,6 +2065,30 @@ class aliSQL {
          * */
         $request_uri = $_SERVER['REQUEST_URI'];
 
+
+        /*
+         * Make the calculation if the character at the end of
+         * the request is a forward slash symbol
+         * */
+        if(substr($request_uri, -1) == '/'){
+
+            /*
+             * The slash character is deleted.
+             * */
+            $request_uri = rtrim($request_uri, '/');
+
+            /*
+             * If the sum of the slash symbols in the request
+             * parameter is greater than 2, then redirects to
+             * that address. This means; Only the final slash
+             * symbol is allowed at the main project directory
+             * address.
+             * */
+            if(count(explode('/', $request_uri))>2){
+                $this->redirect($request_uri);
+            }
+        }
+
         /*
          * The browser address is parsed after the main directory
          * name is ignored.
