@@ -2061,60 +2061,39 @@ class aliSQL {
         }
 
         /*
-         * The browser address is obtained.
+         * The request parameter is being filtered.
          * */
-        $request_uri = $_SERVER['REQUEST_URI'];
-
+        $request = $this->filter($_SERVER['REQUEST_URI']);
 
         /*
-         * Make the calculation if the character at the end of
-         * the request is a forward slash symbol
+         * Project main directory is obtained.
          * */
-        if(substr($request_uri, -1) == '/'){
-
-            /*
-             * The slash character is deleted.
-             * */
-            $request_uri = rtrim($request_uri, '/');
-
-            /*
-             * If the sum of the slash symbols in the request
-             * parameter is greater than 2, then redirects to
-             * that address. This means; Only the final slash
-             * symbol is allowed at the main project directory
-             * address.
-             * */
-            if(count(explode('/', $request_uri))>2){
-                $this->redirect($request_uri);
-            }
-        }
+        $dirpath = dirname($_SERVER['SCRIPT_NAME']).'/';
 
         /*
-         * The browser address is parsed after the main directory
-         * name is ignored.
+         * If the $ url variable contains a slash, the project
+         * directory path is assigned to the variable.
          * */
-        if(strstr($request_uri, '/')){
-            $request = explode('/', trim($request_uri, '/'));
-
-            /*
-             * The first element of the array, ie the main directory name,
-             * is ignored.
-             * */
-            array_shift($request);
-        }
-
-        /*
-         * If there is no request, a slash is added.
-         * */
-        if(empty($request)){
-            $request = '/';
+        if($uri == '/'){
+            $uri = $dirpath;
         } else {
+
             /*
-             * If there is a request, the syntax is combined to
-             * construct a sentence.
+             * If it contains a parameter other than a slash, the project is
+             * appended to the end of the directory path and assigned to the
+             * variable.
              * */
-            $request = implode('/', $request);
+            $uri = $dirpath.$uri;
         }
+
+        /*
+         * If the address you want to reach is different with the current address,
+         * a negative response is given.
+         * */
+        if($request != $uri){
+            return false;
+        }
+
 
         /*
          * If the file variable is empty, a negative response is
