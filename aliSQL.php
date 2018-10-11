@@ -53,6 +53,12 @@ class aliSQL {
     );
 
     /*
+     * This variable moves the path of the
+     * project directory.
+     * */
+    public $baseurl;
+
+    /*
      * The time zone variable that
      * should be valid if the setting
      * is not defined
@@ -131,6 +137,10 @@ class aliSQL {
          * */
         date_default_timezone_set($_SESSION['timezone']);
 
+        /*
+         * The project directory path is obtained.
+         * */
+        $this->baseurl = dirname($_SERVER['SCRIPT_NAME']).'/';
     }
 
     /*
@@ -1568,7 +1578,7 @@ class aliSQL {
          * If it is true, a redirect occurs to the project directory.
          * */
         if($opt==true){
-            $url = dirname($_SERVER['SCRIPT_NAME']);
+            $url = $this->baseurl;
         }
 
         /*
@@ -2068,7 +2078,7 @@ class aliSQL {
         /*
          * Project main directory is obtained.
          * */
-        $dirpath = dirname($_SERVER['SCRIPT_NAME']).'/';
+        $dirpath = $this->baseurl;
 
         /*
          * If the $ url variable contains a slash, the project
