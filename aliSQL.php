@@ -49,7 +49,7 @@ class aliSQL {
         'path'=>'./session/',
         'path_status' => false,
         'status_session' => true,
-        'csrf_status' => false
+        'csrf_status' => true
     );
 
     /*
