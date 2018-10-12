@@ -49,7 +49,7 @@ class aliSQL {
         'path'=>'./session/',
         'path_status' => false,
         'status_session' => true,
-        'csrf_status' => true
+        'csrf_status' => false
     );
 
     /*
@@ -141,6 +141,12 @@ class aliSQL {
          * The project directory path is obtained.
          * */
         $this->baseurl = dirname($_SERVER['SCRIPT_NAME']).'/';
+
+        /*
+         * The csrf_token status is checked.
+         * */
+        $this->is_token();
+
     }
 
     /*
@@ -1544,23 +1550,6 @@ class aliSQL {
                 session_start();
             }
 
-            /*
-             * If csrf protection is enabled, token is created.
-             * */
-            if($this->sessset['csrf_status']){
-
-                /*
-                 * This is a function to protect from cross-site request
-                 * fraud (CSRF) attacks.
-                 * */
-                if(!isset($_SESSION['csrf_token'])){
-                    $tdate  = date('d-m-Y H:i:s');
-                    $number = implode('', range('0', '9'));
-                    $alphab = implode('', range('a', 'z'));
-                    $_SESSION['csrf_token'] = md5(str_shuffle($tdate.$number.$alphab));
-                }
-            }
-
         }
     }
 
@@ -1596,36 +1585,68 @@ class aliSQL {
         exit();
     }
 
+
     /*
-     * Used to compare csrf_token parameters. If there is incompatibility,
-     * a negative response is given, a positive response is given if it
-     * is compatible.
+     * csrf_token is the function where the controls are provided.
      * --------------------------
-     * string                   $this->csrf_token
-     * string                   $_SESSION['csrf_token']
-     * boolean                  return
+     * string                   $this->post['csrf_token']
+     * boolean, $_SESSION       return
      * --------------------------
      * */
     public function is_token(){
 
         /*
-         * If csrf_token is sent, the comparison process is started.
+         * If csrf_token is enabled, it starts the checks.
          * */
-        if(isset($this->post['csrf_token'])){
+        if($this->sessset['csrf_status']){
 
             /*
-             * If the csrf_token value sent from the form is different from the
-             * csrf_token value of the session, a negative response is given.
+             * The day-month-year-hour-minute-second syntax is generated.
              * */
-            if($_SESSION['csrf_token'] != $this->post['csrf_token']){
-                return false;
-            } else {
+            $tdate  = date('d-m-Y H:i:s');
+
+            /*
+             * Numbers 0-9 are created.
+             * */
+            $number = implode('', range('0', '9'));
+
+            /*
+             * The letters a-z are created.
+             * */
+            $alphab = implode('', range('a', 'z'));
+
+
+            /*
+             * It is created if csrf_token is not created.
+             * */
+            if(empty($_SESSION['csrf_token'])){
+                $_SESSION['csrf_token'] = md5(str_shuffle($tdate.$number.$alphab));
+            }
+
+            /*
+             * If csrf_token is not empty, the control is started.
+             * */
+            if(!empty($this->post['csrf_token']) ){
 
                 /*
-                 * Otherwise, a positive answer is given.
+                 * The current csrf_token parameter is compared to the csrf_token
+                 * sent from the form. A positive answer is given if both are the
+                 * same. If not, a negative response is given.
                  * */
-                return true;
+                if($_SESSION['csrf_token'] == $this->post['csrf_token']){
+                    return true;
+                } else {
+                    return false;
+                }
             }
+        } else {
+
+            /*
+             * If csrf_token is not enabled, the $_SESSION['csrf_token'] variable is
+             * emptied and a positive response is given.
+             * */
+            $_SESSION['csrf_token'] = '';
+            return true;
         }
     }
 
