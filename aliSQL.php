@@ -46,10 +46,10 @@ class aliSQL {
      * settings are kept.
      * */
     private $sessset    = array(
-        'path'=>'./session/',
-        'path_status' => false,
-        'status_session' => true,
-        'csrf_status' => true
+        'path'              =>  './session/',
+        'path_status'       =>  false,
+        'status_session'    =>  true,
+        'csrf_status'       =>  true
     );
 
     /*
@@ -65,19 +65,8 @@ class aliSQL {
      * */
     public $timezone    = 'Europe/Istanbul';
 
-    /*
-     * It is the variable that contains
-     * errors.
-     * */
-    public $error;
 
-    /*
-     * You can use true and false to
-     * change the display of errors.
-     * */
-    public $notice      = array(
-        'error' =>  true
-    );
+
 
     /*
      * Function where dependencies
@@ -86,10 +75,11 @@ class aliSQL {
     public function __construct(){
 
         /*
-         * It is the function to manage the
-         * display of errors.
+         * It is shown if there is an error.
          * */
-        $this->errors_check();
+        ini_set('error_reporting', -1 );
+        ini_set('display_errors', 'On');
+
 
         /*
          * If there is no active session,
@@ -231,23 +221,17 @@ class aliSQL {
             $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbname);
 
             /*
-             * Checks the database connection. If there is a
-             * problem, the problem is loaded into the
-             * $this->error variable.
+             * Checks the database connection.
              * */
             if(!$this->conn){
-                $this->error = mysqli_error($this->conn);
+                die("Connection error: " . mysqli_connect_error());
             }
+
 
             /*
              * The database character set is defined as utf8.
-             * If there is a problem, the $this->error variable
-             * is assigned an error.
              * */
-            if(!mysqli_set_charset($this->conn, 'utf8')){
-                $this->error = mysqli_error($this->conn);
-                $this->errors_check();
-            }
+            mysqli_set_charset($this->conn, 'utf8');
         }
     }
 
@@ -285,7 +269,6 @@ class aliSQL {
      * --------------------------
      * string                   $tblname
      * array                    $arr
-     * boolean                  return
      * --------------------------
      * */
     public function insert($tblname, $arr){
@@ -310,8 +293,7 @@ class aliSQL {
         $sql = 'INSERT INTO '.$tblname.'('.$column.') VALUES (\''.$values.'\')';
 
         /*
-         * By executing the prepared sql query, the returned
-         * response is returned.
+         * By executing the prepared sql query.
          * */
         return $this->querySQL($sql);
     }
@@ -323,7 +305,6 @@ class aliSQL {
      * string                   $tblname
      * array                    $arr
      * int, string              $id
-     * boolean                  return
      * --------------------------
      * */
     public function update($tblname, $arr, $id){
@@ -355,10 +336,10 @@ class aliSQL {
             $sql = 'UPDATE '.$tblname.' SET '.$field.' WHERE '.$special.'='.$id;
 
             /*
-             * By executing the prepared sql query, the
-             * returned response is returned.
+             * By executing the prepared sql query.
              * */
-            return $this->querySQL($sql);
+            $this->querySQL($sql);
+
         }
     }
 
@@ -369,7 +350,6 @@ class aliSQL {
      * --------------------------
      * string                   $tblname
      * int, string, array       $id
-     * boolean                  return
      * --------------------------
      * */
     public function delete($tblname, $id){
@@ -406,10 +386,9 @@ class aliSQL {
 
 
             /*
-             * By executing the prepared sql query, the
-             * returned response is returned.
+             * By executing the prepared sql query.
              * */
-            return $this->querySQL($sql);
+            $this->querySQL($sql);
         }
     }
 
@@ -445,10 +424,9 @@ class aliSQL {
 
 
             /*
-             * By executing the prepared sql query, the
-             * returned response is returned.
+             * By executing the prepared sql query.
              * */
-            return $this->querySQL($sql);
+            $this->querySQL($sql);
         }
     }
 
@@ -483,10 +461,9 @@ class aliSQL {
             $sql = 'DROP DATABASE '.$dbname;
 
             /*
-             * By executing the prepared sql query, the
-             * returned response is returned.
+             * By executing the prepared sql query.
              * */
-            return $this->querySQL($sql);
+            $this->querySQL($sql);
         }
     }
 
@@ -613,7 +590,6 @@ class aliSQL {
      * --------------------------
      * string, array            $tblname
      * string, array, null      $column
-     * boolean                  return
      * --------------------------
      * */
     public function cleartable($tblname, $column=null){
@@ -711,7 +687,7 @@ class aliSQL {
                  * By executing the prepared sql query, the
                  * returned response is returned.
                  * */
-                return $this->querySQL($sql);
+                $this->querySQL($sql);
             }
         }
     }
@@ -721,7 +697,6 @@ class aliSQL {
      * tables.
      * --------------------------
      * string, array            $tblname
-     * boolean                  return
      * --------------------------
      * */
     public function deletetable($tblname){
@@ -751,7 +726,7 @@ class aliSQL {
              * By executing the prepared sql query, the
              * returned response is returned.
              * */
-            return $this->querySQL($sql);
+            $this->querySQL($sql);
         }
     }
 
@@ -2303,40 +2278,44 @@ class aliSQL {
         return $row['Field'];
     }
 
-
     /*
-     * It is the error management function.
+     * Multi-language support is a function to provide. If there
+     * is a description, it is printed. If it is not, the request
+     * will be printed.
+     * --------------------------
+     * string             $path
+     * string             $name
+     * string             return
+     * --------------------------
      * */
-    public function errors_check(){
+    public function lang($path, $name){
 
         /*
-         * If true, all errors are displayed. If it is false
-         * all errors are hidden.
+         * If the parameter is not empty, the operation is executed.
          * */
-        if($this->notice['error']){
-            $dstatus = 'On';
-            $estatus = -1;
-        } else {
-            $dstatus = 'Off';
-            $estatus = 0;
-        }
+        if(!empty($name)){
 
-        /*
-         * Error management command
-         * */
-        ini_set('error_reporting', $estatus );
+            /*
+             * If file exists, start processing.
+             * */
+            if(file_exists($path.'.php')){
 
-        /*
-         * Error display command
-         * */
-        ini_set('display_errors', $dstatus);
+                /*
+                 * The file is included in the class.
+                 * */
+                include($path.'.php');
 
-        /*
-         * If there are any errors, stop the process and show
-         * the error.
-         * */
-        if(!empty($this->error)){
-            die($this->error);
+                /*
+                 * It is checked whether a rack is reserved for the specified
+                 * parameter. If there is a shelf, the value is printed in it.
+                 * If not, the parameter itself is printed.
+                 * */
+                if(array_key_exists($name, $lang)){
+                    echo $lang[$name];
+                } else {
+                    echo $name;
+                }
+            }
         }
     }
 
