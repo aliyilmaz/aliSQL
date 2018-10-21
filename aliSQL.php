@@ -2067,41 +2067,6 @@ class aliSQL {
         }
 
         /*
-         * The request parameter is being filtered.
-         * */
-        $request = $this->filter($_SERVER['REQUEST_URI']);
-
-        /*
-         * Project main directory is obtained.
-         * */
-        $dirpath = $this->baseurl;
-
-        /*
-         * If the $ url variable contains a slash, the project
-         * directory path is assigned to the variable.
-         * */
-        if($uri == '/'){
-            $uri = $dirpath;
-        } else {
-
-            /*
-             * If it contains a parameter other than a slash, the project is
-             * appended to the end of the directory path and assigned to the
-             * variable.
-             * */
-            $uri = $dirpath.$uri;
-        }
-
-        /*
-         * If the address you want to reach is different with the current address,
-         * a negative response is given.
-         * */
-        if($request != $uri){
-            return false;
-        }
-
-
-        /*
          * If the file variable is empty, a negative response is
          * given.
          * */
@@ -2110,35 +2075,58 @@ class aliSQL {
         }
 
         /*
+         * The request parameter is being filtered.
+         * */
+        $request = $this->filter($_SERVER['REQUEST_URI']);
+        $request = '/'.implode('/', array_filter(explode('/', $request)));
+
+
+        /*
+         * If the $ url variable contains a slash, the project
+         * directory path is assigned to the variable.
+         * */
+        if($uri == '/'){
+            $request .= '/';
+            $uri = $this->baseurl;
+        } else {
+
+            /*
+             * If it contains a parameter other than a slash, the project is
+             * appended to the end of the directory path and assigned to the
+             * variable.
+             * */
+            $uri = $this->baseurl.$uri;
+        }
+
+        /*
          * The process is started if the $uri parameter sent to
          * the request and function is equal.
          * */
-        if($request == $uri){
-
+        if($request == $uri) {
             /*
              * The file is included if it really exists.
              * */
-            if(file_exists($file.'.php')){
+            if (file_exists($file . '.php')) {
 
                 /*
                  * If a file defined for the cache is specified in a string
                  * type, it is converted to an array.
                  * */
-                if(!empty($cache) AND !is_array($cache)){
+                if (!empty($cache) AND !is_array($cache)) {
                     $cache = array($cache);
                 }
 
                 /*
                  * If the cache variable is not empty, the boot starts.
                  * */
-                if(!empty($cache)){
+                if (!empty($cache)) {
                     foreach ($cache as $cachefile) {
 
                         /*
                          * The cache file is included if available.
                          * */
-                        if(file_exists($cachefile.'.php')){
-                            include($cachefile.'.php');
+                        if (file_exists($cachefile . '.php')) {
+                            include($cachefile . '.php');
                         }
                     }
                 }
@@ -2146,7 +2134,7 @@ class aliSQL {
                 /*
                  * The file is added to the page.
                  * */
-                include($file.'.php');
+                include($file . '.php');
             }
         }
     }
