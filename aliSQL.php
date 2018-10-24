@@ -66,6 +66,22 @@ class aliSQL {
     public $timezone    = 'Europe/Istanbul';
 
 
+    /*
+     * Default language
+     * */
+    public $language    = 'tr';
+
+    /*
+     * The buffer variable where addresses
+     * are kept
+     * */
+    public $tempURI     = array();
+
+    /*
+     * The buffer variable where the file
+     * paths are kept
+     * */
+    public $tempFILES   = array();
 
 
     /*
@@ -2074,68 +2090,60 @@ class aliSQL {
             return false;
         }
 
-        /*
-         * The request parameter is being filtered.
-         * */
-        $request = $this->filter($_SERVER['REQUEST_URI']);
-        $request = '/'.implode('/', array_filter(explode('/', $request)));
+        $request = str_replace($this->baseurl, '', $_SERVER['REQUEST_URI']);
 
-
-        /*
-         * If the $ url variable contains a slash, the project
-         * directory path is assigned to the variable.
-         * */
-        if($uri == '/'){
-            $request .= '/';
+        if(empty($uri) OR $uri == '/' OR $uri == '?'){
             $uri = $this->baseurl;
-        } else {
-
-            /*
-             * If it contains a parameter other than a slash, the project is
-             * appended to the end of the directory path and assigned to the
-             * variable.
-             * */
-            $uri = $this->baseurl.$uri;
         }
 
-        /*
-         * The process is started if the $uri parameter sent to
-         * the request and function is equal.
-         * */
-        if($request == $uri) {
+
+        if(!empty($request)){
+            if(strstr($request, $uri)){
+                $this->mindload($file, $cache);
+                exit();
+            }
+        } else {
+            if($uri == $this->baseurl){
+                $this->mindload($file, $cache);
+                exit();
+            } else {
+                exit();
+            }
+        }
+    }
+
+    public function mindload($file, $cache){
+        if (file_exists($file . '.php')) {
+
             /*
-             * The file is included if it really exists.
+             * If a file defined for the cache is specified in a string
+             * type, it is converted to an array.
              * */
-            if (file_exists($file . '.php')) {
+            if (!empty($cache) AND !is_array($cache)) {
+                $cache = array($cache);
+            }
 
-                /*
-                 * If a file defined for the cache is specified in a string
-                 * type, it is converted to an array.
-                 * */
-                if (!empty($cache) AND !is_array($cache)) {
-                    $cache = array($cache);
-                }
+            /*
+             * If the cache variable is not empty, the boot starts.
+             * */
+            if (!empty($cache)) {
+                foreach ($cache as $cachefile) {
 
-                /*
-                 * If the cache variable is not empty, the boot starts.
-                 * */
-                if (!empty($cache)) {
-                    foreach ($cache as $cachefile) {
-
-                        /*
-                         * The cache file is included if available.
-                         * */
-                        if (file_exists($cachefile . '.php')) {
-                            include($cachefile . '.php');
-                        }
+                    /*
+                     * The cache file is included if available.
+                     * */
+                    if (file_exists($cachefile . '.php')) {
+                        require_once($cachefile . '.php');
                     }
                 }
-
-                /*
-                 * The file is added to the page.
-                 * */
-                include($file . '.php');
             }
+
+            /*
+             * The file is added to the page.
+             * */
+            require_once($file . '.php');
+
+
         }
     }
 
