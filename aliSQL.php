@@ -2090,10 +2090,64 @@ class aliSQL {
             return false;
         }
 
+
+
         $request = str_replace($this->baseurl, '', $_SERVER['REQUEST_URI']);
+
+        $tfields    = array();
+        $fields     = array();
 
         if(empty($uri) OR $uri == '/' OR $uri == '?'){
             $uri = $this->baseurl;
+        } else {
+
+            if(strstr($uri, ':')){
+                $tfields = array_filter(explode(':', $uri));
+                if(count($tfields)==1){
+                    $uri = implode('', $tfields);
+                }
+            }
+
+            if(!empty($tfields) AND count($tfields)==2){
+                list($uri, $tfields) = $tfields;
+                if(strstr($tfields, '@')){
+                    $fields = array_filter(explode('@', $tfields));
+                } else {
+                    $fields = array($tfields);
+                }
+            }
+
+        }
+
+
+        /*
+         * PARAMS
+         * */
+        $params = array();
+        if(strstr($request, '/')){
+            //step 1 - uri removed
+            $step1 = str_replace($uri, '', $request);
+
+            //step 2 - uri explode /
+            $step2 = explode('/', $step1);
+
+            //step 3 - uri filter
+            $step3 = array_filter($step2);
+
+            //final - uri key reset
+            $params = array_values($step3);
+        }
+
+        unset($this->post);
+
+        if(!empty($fields)){
+            foreach ($fields as $key => $field) {
+                if(!empty($params[$key])){
+                    $this->post[$field] = $params[$key];
+                }
+            }
+        } else {
+            $this->post = $params;
         }
 
 
