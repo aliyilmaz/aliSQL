@@ -48,8 +48,7 @@ class aliSQL {
     private $sessset    = array(
         'path'              =>  './session/',
         'path_status'       =>  false,
-        'status_session'    =>  true,
-        'csrf_status'       =>  true
+        'status_session'    =>  true
     );
 
     /*
@@ -65,24 +64,10 @@ class aliSQL {
      * */
     public $timezone    = 'Europe/Istanbul';
 
-
     /*
      * Default language
      * */
     public $language    = 'tr';
-
-    /*
-     * The buffer variable where addresses
-     * are kept
-     * */
-    public $tempURI     = array();
-
-    /*
-     * The buffer variable where the file
-     * paths are kept
-     * */
-    public $tempFILES   = array();
-
 
     /*
      * Function where dependencies
@@ -93,8 +78,8 @@ class aliSQL {
         /*
          * It is shown if there is an error.
          * */
-        ini_set('error_reporting', -1 );
-        ini_set('display_errors', 'On');
+        error_reporting(-1);
+
 
 
         /*
@@ -147,11 +132,6 @@ class aliSQL {
          * The project directory path is obtained.
          * */
         $this->baseurl = dirname($_SERVER['SCRIPT_NAME']).'/';
-
-        /*
-         * The csrf_token status is checked.
-         * */
-        $this->is_token();
 
     }
 
@@ -1574,71 +1554,6 @@ class aliSQL {
          * continuing when this parameter is not specified.
          * */
         exit();
-    }
-
-
-    /*
-     * csrf_token is the function where the controls are provided.
-     * --------------------------
-     * string                   $this->post['csrf_token']
-     * boolean, $_SESSION       return
-     * --------------------------
-     * */
-    public function is_token(){
-
-        /*
-         * If csrf_token is enabled, it starts the checks.
-         * */
-        if($this->sessset['csrf_status']){
-
-            /*
-             * The day-month-year-hour-minute-second syntax is generated.
-             * */
-            $tdate  = date('d-m-Y H:i:s');
-
-            /*
-             * Numbers 0-9 are created.
-             * */
-            $number = implode('', range('0', '9'));
-
-            /*
-             * The letters a-z are created.
-             * */
-            $alphab = implode('', range('a', 'z'));
-
-
-            /*
-             * It is created if csrf_token is not created.
-             * */
-            if(empty($_SESSION['csrf_token'])){
-                $_SESSION['csrf_token'] = md5(str_shuffle($tdate.$number.$alphab));
-            }
-
-            /*
-             * If csrf_token is not empty, the control is started.
-             * */
-            if(!empty($this->post['csrf_token']) ){
-
-                /*
-                 * The current csrf_token parameter is compared to the csrf_token
-                 * sent from the form. A positive answer is given if both are the
-                 * same. If not, a negative response is given.
-                 * */
-                if($_SESSION['csrf_token'] == $this->post['csrf_token']){
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } else {
-
-            /*
-             * If csrf_token is not enabled, the $_SESSION['csrf_token'] variable is
-             * emptied and a positive response is given.
-             * */
-            $_SESSION['csrf_token'] = '';
-            return true;
-        }
     }
 
     /*
