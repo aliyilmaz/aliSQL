@@ -2090,73 +2090,155 @@ class aliSQL {
             return false;
         }
 
-
-
+        /*
+         * The main directory is removed from the current address
+         * to define the $request variable.
+         * */
         $request = str_replace($this->baseurl, '', $_SERVER['REQUEST_URI']);
 
+        /*
+         * Temporary variables are predefined.
+         * */
         $tfields    = array();
         $fields     = array();
 
-        if(empty($uri) OR $uri == '/' OR $uri == '?'){
-            $uri = $this->baseurl;
-        } else {
+        /*
+         * If $uri is not empty, the process starts.
+         * */
+        if(!empty($uri)){
 
+            /*
+             * The address and parameter are parsed.
+             * */
             if(strstr($uri, ':')){
+
+                /*
+                 * Decomposition is performed.
+                 * */
                 $tfields = array_filter(explode(':', $uri));
+
+                /*
+                 * A valid data is defined as uri, if any.
+                 * */
                 if(count($tfields)==1){
                     $uri = implode('', $tfields);
                 }
             }
 
+            /*
+             * The resolved address and parameter are interpreted if
+             * appropriate.
+             * */
             if(!empty($tfields) AND count($tfields)==2){
+
+                /*
+                 * Address and parameter are parsing.
+                 * */
                 list($uri, $tfields) = $tfields;
+
+                /*
+                 * If there is a multi-parameter state, each parameter
+                 * is added to array. If not, it is added to the array.
+                 * */
                 if(strstr($tfields, '@')){
                     $fields = array_filter(explode('@', $tfields));
                 } else {
                     $fields = array($tfields);
                 }
             }
-
         }
 
+        /*
+         * If the slash symbol is used, the main directory path
+         * is defined as $uri.
+         * */
+        if($uri == '/'){
+            $uri = $this->baseurl;
+        }
 
         /*
-         * PARAMS
+         * The default parameter variable is set to array.
          * */
         $params = array();
+
+        /*
+         * If the parameter is present, the process is started.
+         * */
         if(strstr($request, '/')){
-            //step 1 - uri removed
+
+            /*
+             * The $uri is removed from the request parameter.
+             * */
             $step1 = str_replace($uri, '', $request);
 
-            //step 2 - uri explode /
+            /*
+             * The parameters are parsed.
+             * */
             $step2 = explode('/', $step1);
 
-            //step 3 - uri filter
+            /*
+             * Invalid parameters are filtered.
+             * */
             $step3 = array_filter($step2);
 
-            //final - uri key reset
+            /*
+             * Sequence numbers are reset after filtering.
+             * */
             $params = array_values($step3);
         }
 
-        unset($this->post);
+        /*
+         * The variable is cleared.
+         * */
+        $this->post = array();
 
+        /*
+         * If there are parameter names, the process is started.
+         * */
         if(!empty($fields)){
+
+            /*
+             * Parameter names are executed with the help of foreach.
+             * */
             foreach ($fields as $key => $field) {
+
+                /*
+                 * If there is a parameter with the specified sequence number
+                 * and it is not empty, it is added to $this->post variable.
+                 * */
                 if(!empty($params[$key])){
                     $this->post[$field] = $params[$key];
                 }
             }
         } else {
+
+            /*
+             * If parameter names are not specified, the parameters are
+             * added to $this->post.
+             * */
             $this->post = $params;
         }
 
 
+        /*
+         * If the request is not empty, the process is started.
+         * */
         if(!empty($request)){
+
+            /*
+             * Searching $uri address in request.  If found, the mind of
+             * that desire is being loaded.
+             * */
             if(strstr($request, $uri)){
                 $this->mindload($file, $cache);
                 exit();
             }
         } else {
+
+            /*
+             * If the $uri address is the same as the main directory address,
+             * the specified mind is loaded. If not, stops the operation.
+             * */
             if($uri == $this->baseurl){
                 $this->mindload($file, $cache);
                 exit();
@@ -2166,7 +2248,23 @@ class aliSQL {
         }
     }
 
+    /*
+     * It is the auxiliary function created for the route
+     * function. The responsibility for this function is
+     * to include the specified file or files if they were
+     * created.
+     --------------------------
+     * string                   $file
+     * string, array, null      $cache
+     * include                  return
+     * --------------------------
+     *
+     * */
     public function mindload($file, $cache){
+
+        /*
+         * Querying file asset.
+         * */
         if (file_exists($file . '.php')) {
 
             /*
