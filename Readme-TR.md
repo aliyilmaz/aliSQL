@@ -25,15 +25,6 @@ private $dbname      = 'mydb';
 private $username    = 'root';
 private $password    = '';
 </pre>
-<h2>Database Settings</h2>
-For a successful database connection, you must update the database information in the aliSQL.php file. This allows you to use aliSQL effectively.
-<h4>Example</h4>
-<pre>
-private $host        = 'localhost';
-private $dbname      = 'mydb';
-private $username    = 'root';
-private $password    = '';
-</pre>
 <h2>Oturum Ayarları</h2>
 Kullanıcılar için oluşturulan oturumları özelleştirebilir veya kapatabilirsiniz. Oturumlara izin vermemek için, <strong>session_status</strong> parametresini <strong><i>false</i></strong> olarak ayarlayabilirsiniz. Oturumların depolandığı klasör yolunu değiştirmek için <strong>path</strong> parametresini güncelleyebilirsiniz. Belirttiğiniz yolda oturumları tutmak için <strong>path_status</strong> parametresini <strong><i>true</i></strong> olarak ayarlayabilirsiniz.
 <h4>Örnek</h4>
