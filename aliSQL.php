@@ -2103,36 +2103,42 @@ class aliSQL {
         }
 
         /*
+         * If a form is not posted, the parameter is interpreted.
+         * */
+        if($_SERVER['REQUEST_METHOD'] != 'POST'){
+            /*
          * The variable is cleared.
          * */
-        $this->post = array();
-
-        /*
-         * If there are parameter names, the process is started.
-         * */
-        if(!empty($fields)){
+            $this->post = array();
 
             /*
-             * Parameter names are executed with the help of foreach.
+             * If there are parameter names, the process is started.
              * */
-            foreach ($fields as $key => $field) {
+            if(!empty($fields)){
 
                 /*
-                 * If there is a parameter with the specified sequence number
-                 * and it is not empty, it is added to $this->post variable.
+                 * Parameter names are executed with the help of foreach.
                  * */
-                if(!empty($params[$key])){
-                    $this->post[$field] = $params[$key];
-                }
-            }
-        } else {
+                foreach ($fields as $key => $field) {
 
-            /*
-             * If parameter names are not specified, the parameters are
-             * added to $this->post.
-             * */
-            $this->post = $params;
+                    /*
+                     * If there is a parameter with the specified sequence number
+                     * and it is not empty, it is added to $this->post variable.
+                     * */
+                    if(!empty($params[$key])){
+                        $this->post[$field] = $params[$key];
+                    }
+                }
+            } else {
+
+                /*
+                 * If parameter names are not specified, the parameters are
+                 * added to $this->post.
+                 * */
+                $this->post = $params;
+            }
         }
+
 
 
         /*
