@@ -2106,9 +2106,10 @@ class aliSQL {
          * If a form is not posted, the parameter is interpreted.
          * */
         if($_SERVER['REQUEST_METHOD'] != 'POST'){
+
             /*
-         * The variable is cleared.
-         * */
+             * The variable is cleared.
+             * */
             $this->post = array();
 
             /*
