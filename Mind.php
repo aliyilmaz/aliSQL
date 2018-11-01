@@ -7,7 +7,7 @@
  *
  * */
 
-class aliSQL {
+class Mind {
 
     /*
      * The variable of the database connection.
@@ -2390,7 +2390,7 @@ class aliSQL {
     }
 
 }
-new aliSQL;
+new Mind;
 
 
 ?>

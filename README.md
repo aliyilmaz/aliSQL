@@ -1,23 +1,23 @@
-<h2>What is aliSQL?</h2>
+<h2>What is Mind?</h2>
 $_GET, $_POST, $FILES requests, allows you to perform routing needs and database operations safely, and also has several important verification methods.
 <h2>How to install?</h2>
-Installation is very simple, you can add the aliSQL.php file to your project with the extends method or with the help of the new aliSQL() command.
+Installation is very simple, you can add the Mind.php file to your project with the extends method or with the help of the new Mind() command.
 <h4>Example</h4>
 <pre>
-require_once('./aliSQL.php');
-$db = new aliSQL();
+require_once('./Mind.php');
+$db = new Mind();
 </pre>
 
 <h5>or</h5>
 
 <pre>
-require_once('./aliSQL.php');
-class ClassName extends aliSQL{
+require_once('./Mind.php');
+class ClassName extends Mind{
 
 }
 </pre>
 <h2>Database settings</h2>
-For a successful database connection, you must update the database information in the aliSQL.php file. This allows you to use aliSQL effectively.
+For a successful database connection, you must update the database information in the Mind.php file. This allows you to use Mind effectively.
 <h4>Example</h4>
 <pre>
 private $host        = 'localhost';

@@ -1,23 +1,23 @@
-<h2>aliSQL nedir?</h2>
+<h2>Mind nedir?</h2>
 $_GET, $_POST, $FILES istekleri, yönlendirme ihtiyaçlarını ve veritabanı işlemlerini güvenle gerçekleştirmenizi sağlar ve ayrıca birkaç önemli doğrulama yöntemine sahiptir.
 <h2>Nasıl kurulur?</h2>
-Kurulum çok basittir, aliSQL.php dosyasını projenize extends yöntemi ile veya new aliSQL() komutunun yardımıyla ekleyebilirsiniz.
+Kurulum çok basittir, Mind.php dosyasını projenize extends yöntemi ile veya new Mind() komutunun yardımıyla ekleyebilirsiniz.
 <h4>Örnek</h4>
 <pre>
-require_once('./aliSQL.php');
-$db = new aliSQL();
+require_once('./Mind.php');
+$db = new Mind();
 </pre>
 
 <h4>yada</h4>
 
 <pre>
-require_once('./aliSQL.php');
-class ClassName extends aliSQL{
+require_once('./Mind.php');
+class ClassName extends Mind{
 
 }
 </pre>
 <h2>Veritabanı Ayarları</h2>
-Başarılı bir veritabanı bağlantısı için, veritabanı bilgilerini aliSQL.php dosyasında güncellemeniz gerekir. Bu, aliSQL'i etkili bir şekilde kullanmanıza izin verir.
+Başarılı bir veritabanı bağlantısı için, veritabanı bilgilerini Mind.php dosyasında güncellemeniz gerekir. Bu, Mind'i etkili bir şekilde kullanmanıza izin verir.
 <h4>Örnek</h4>
 <pre>
 private $host        = 'localhost';
