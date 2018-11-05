@@ -19,3 +19,15 @@ $db->route('/', 'view/home', 'middleware/home');
 <pre>
 $db->route('/', 'view/home', array('modal/home','middleware/home');
 </pre>
+
+<h2>Parametreler</h2>
+Parametre ismini (/) dışındaki rota tanımları için tanımlamak mümkündür.
+<h4>Örnek</h4>
+
+<pre>
+$db->route('delete:id', 'view/home');
+</pre>
+
+<h5>yada</h5>
+
+$db->route('delete:table@id', 'view/home');
