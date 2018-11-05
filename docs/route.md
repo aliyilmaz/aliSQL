@@ -29,5 +29,6 @@ $db->route('delete:id', 'view/home');
 </pre>
 
 <h5>or</h5>
-
+<pre>
 $db->route('delete:table@id', 'view/home');
+</pre>
