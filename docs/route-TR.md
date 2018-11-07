@@ -1,11 +1,17 @@
 <h2>Rota nedir?</h2>
 Özelleştirilebilir rotalar tanımlamak, zihinleri yüklemek için kullanılan bir fonksiyondur.
 <h2>Kullanım</h2>
-Mind.php dosyasıyla aynı dizinde bir index.php dosyası oluşturmanız gerekir. Sonra, oluşturduğunuz index.php dosyasına Mind'i eklemeniz gerekir. 3 alan gönderilebilir (url, file, cache). Cache alanı zorunlu değildir ve bir dizi olarak da gönderilebilir.
+Mind.php dosyasıyla aynı dizinde bir index.php dosyası oluşturmanız gerekir. Ardından, oluşturduğunuz index.php dosyasına Mind'ı eklemeniz gerekir. 3 alan gönderilebilir (url, file, cache). Önbellek alanı zorunlu değildir. File ve Cache dizi olarak gönderilebilir.
 <h4>Örnek</h4>
 
 <pre>
 $db->route('/', 'view/home');
+</pre>
+
+<h5>yada</h5>
+
+<pre>
+$db->route('/', array('view/header', 'view/content', 'view/footer'));
 </pre>
 
 <h5>yada</h5>
@@ -17,7 +23,7 @@ $db->route('/', 'view/home', 'middleware/home');
 <h5>yada</h5>
 
 <pre>
-$db->route('/', 'view/home', array('modal/home','middleware/home');
+$db->route('/', 'view/home', array('modal/home','middleware/home'));
 </pre>
 
 <h2>Parametreler</h2>

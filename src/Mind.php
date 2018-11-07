@@ -2176,7 +2176,7 @@ class Mind {
      * to include the specified file or files if they were
      * created.
      --------------------------
-     * string                   $file
+     * string, array            $file
      * string, array, null      $cache
      * include                  return
      * --------------------------
@@ -2185,9 +2185,10 @@ class Mind {
     public function mindload($file, $cache){
 
         /*
-         * Querying file asset.
+         * If the file or cache variable is not empty, the evaluations
+         * are started.
          * */
-        if (file_exists($file . '.php')) {
+        if(!empty($file) OR !empty($cache)){
 
             /*
              * If a file defined for the cache is specified in a string
@@ -2213,11 +2214,44 @@ class Mind {
             }
 
             /*
-             * The file is added to the page.
+             * If the file variable is not empty, the process is
+             * started.
              * */
-            require_once($file . '.php');
+            if(!empty($file)){
 
+                /*
+                 * The variable in which the files are kept is defined as
+                 * an array.
+                 * */
+                $files = array();
 
+                /*
+                 * If the incoming value is not in the array format, it is
+                 * converted to the array format.Otherwise, the files are
+                 * assigned to the variable as is.
+                 * */
+                if(!is_array($file)){
+                    $files = array($file);
+                } else {
+                    $files = $file;
+                }
+
+                /*
+                 * Files are uploaded to the project with the help of the foreach cycle.
+                 * */
+                foreach ($files as $file){
+
+                    /*
+                     * The file is loaded if available.
+                     * */
+                    if (file_exists($file . '.php')) {
+                        /*
+                         * The file is added to the page.
+                         * */
+                        require_once($file . '.php');
+                    }
+                }
+            }
         }
     }
 
