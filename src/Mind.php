@@ -214,7 +214,15 @@ class Mind {
              * The database connection is provided with MySQLi
              * and $this->conn is assigned.
              * */
-            $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbname);
+            $this->conn = mysqli_connect($this->host, $this->username, $this->password);
+
+            /*
+             * The existence of the database is queried. If available,
+             * the database is selected.
+             * */
+            if($this->is_database($this->dbname)){
+                mysqli_select_db($this->conn, $this->dbname);
+            }
 
             /*
              * Checks the database connection.
@@ -1115,6 +1123,39 @@ class Mind {
                 return $result;
             }
         }
+    }
+
+    /*
+     * Queries the database entity. A positive value is returned if
+     * the database exists. If the database does not exist, a
+     * negative response is returned.
+     * --------------------------
+     * string                   $dbname
+     * boolean                  return
+     * --------------------------
+     * */
+    public function is_database($dbname){
+
+        /*
+         * Syntax is prepared.
+         * */
+        $sql    = 'SHOW DATABASES LIKE \''.$dbname.'\'';
+
+        /*
+         * The query is executed.
+         * */
+        $query  = $this->querySQL($sql);
+
+        /*
+         * A positive answer is given if the database is available. Otherwise,
+         * a negative response is given.
+         * */
+        if($query->num_rows){
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     /*
