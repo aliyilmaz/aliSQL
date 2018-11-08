@@ -217,18 +217,25 @@ class Mind {
             $this->conn = mysqli_connect($this->host, $this->username, $this->password);
 
             /*
-             * The existence of the database is queried. If available,
-             * the database is selected.
-             * */
-            if($this->is_database($this->dbname)){
-                mysqli_select_db($this->conn, $this->dbname);
-            }
-
-            /*
              * Checks the database connection.
              * */
             if(!$this->conn){
                 die("Connection error: " . mysqli_connect_error());
+            }
+
+            /*
+             * If the database variable is not empty, the process starts.
+             * */
+            if(!empty($this->dbname)){
+                /*
+                 * The existence of the database is queried. If available,
+                 * the database is created and selected.
+                 * */
+                if(!$this->is_database($this->dbname)){
+                    $this->createdb($this->dbname);
+                }
+
+                mysqli_select_db($this->conn, $this->dbname);
             }
 
 
