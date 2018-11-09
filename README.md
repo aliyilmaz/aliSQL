@@ -1,5 +1,5 @@
 <h2>What is Mind?</h2>
-$_GET, $_POST, $FILES requests, allows you to perform routing needs and database operations safely, and also has several important verification methods.
+$_GET, $_POST, $_FILES requests, allows you to perform routing needs and database operations safely, and also has several important verification methods.
 <h2>How to install?</h2>
 Installation is very simple, you can add the Mind.php file to your project with the extends method or with the help of the new Mind() command.
 <h4>Example</h4>
