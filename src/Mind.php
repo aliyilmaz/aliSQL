@@ -2471,6 +2471,66 @@ class Mind {
         }
     }
 
+    /*
+     * A function used to load file or files.
+     * --------------------------
+     * array              $files
+     * string             $path
+     * array, boolean     return
+     * --------------------------
+     * */
+    public function fileupload($files, $path){
+
+        $response = array();
+
+        /*
+         * If there is a path, the process is started.
+         * */
+        if(is_dir($path)){
+
+            /*
+             * If the file variable is not empty and carries a
+             * single file, it is transferred to the array.
+             * */
+            if(!empty($files) AND !isset($files[0])){
+                $files = array($files);
+            }
+
+            /*
+             * Files are interpreted in the loop.
+             * */
+            foreach ($files as $file){
+
+                /*
+                 * The file extension is retrieved.
+                 * */
+                $ext        = $this->info($file['name'], 'extension');
+
+                /*
+                 * The unique file name is created and combined with path.
+                 * */
+                $newpath    = $path.'/'.md5(date('d-m-Y H:i:s')).'.'.$ext;
+
+                /*
+                 * File uploaded.
+                 * */
+                move_uploaded_file($file['tmp_name'], $newpath);
+
+                /*
+                 * Added file path to the array to be returned.
+                 * */
+                $response[] = $newpath;
+
+            }
+
+        }
+
+        /*
+         * An empty array is returned if the installation fails.
+         * */
+        return $response;
+    }
+
 }
 new Mind;
 
