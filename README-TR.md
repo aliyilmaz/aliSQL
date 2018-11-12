@@ -1,5 +1,5 @@
 <h2>Mind nedir?</h2>
-$_GET, $_POST, $FILES istekleri, yönlendirme ihtiyaçlarını ve veritabanı işlemlerini güvenle gerçekleştirmenizi sağlar ve ayrıca birkaç önemli doğrulama yöntemine sahiptir.
+$_GET, $_POST, $_FILES istekleri, yönlendirme ihtiyaçlarını ve veritabanı işlemlerini güvenle gerçekleştirmenizi sağlar ve ayrıca birkaç önemli doğrulama yöntemine sahiptir.
 <h2>Nasıl kurulur?</h2>
 Kurulum çok basittir, Mind.php dosyasını projenize extends yöntemi ile veya new Mind() komutunun yardımıyla ekleyebilirsiniz.
 <h4>Örnek</h4>
