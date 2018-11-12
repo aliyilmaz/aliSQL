@@ -2514,7 +2514,7 @@ class Mind {
                     /*
                      * The unique file name is created and combined with path.
                      * */
-                    $newpath    = $path.'/'.md5(date('d-m-Y g:i:s')). gettimeofday()['usec'].'.'.$ext;
+                    $newpath    = $path.'/'.md5(date('d-m-Y g:i:s').gettimeofday()['usec']).'.'.$ext;
 
                     /*
                      * File uploaded.
