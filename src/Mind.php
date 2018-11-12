@@ -2489,11 +2489,17 @@ class Mind {
         if(is_dir($path)){
 
             /*
-             * If the file variable is not empty and carries a
-             * single file, it is transferred to the array.
+             * If the files variable is not empty and carries a
+             * single file, it is transferred to the array. If
+             * the files variable is empty, an empty array is
+             * returned.
              * */
-            if(!empty($files) AND !isset($files[0])){
-                $files = array($files);
+            if(!empty($files)){
+                if(!isset($files[0])){
+                    $files = array($files);
+                }
+            } else {
+                return $response;
             }
 
             /*
