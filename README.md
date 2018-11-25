@@ -1320,11 +1320,12 @@ veya
     $u = $this->fileupload($this->post['multifile'], $path);
     print_r($u);
 
-##get_contents()
+## get_contents()
 
 Kendisiyle paylaşılan `string` yapıda ki veri de veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. Bir veya birden fazla öğe bulunuyorsa hepsini bir `dizi` olarak sunar. 
 
-#####Örnek
+##### Örnek
+
     $url 	= 'https://www.cloudflare.com/';
     $left 	= '<title>';
     $right	= '</title>';
