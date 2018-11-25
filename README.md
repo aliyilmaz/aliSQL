@@ -173,7 +173,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 
 -   [route](#route)
 -   [write](#write)
--   [fileupload](#fileupload)
+-   [upload](#upload)
 -   [get_contents](#get_contents)
 
 ----------
@@ -1290,7 +1290,7 @@ veya
 
 ----------
 
-## fileupload()
+## upload()
 
 Belirtilen dosya veya dosyaları, belirtilen klasöre yüklemek amacıyla kullanır, `$this->post['singlefile']` ve `$this->post['multifile']` dosyaların tutulduğu değişkenleri `$path` ise dosyaların yükleneceği klasör yolunu temsil etmektedir.
 
@@ -1304,7 +1304,7 @@ Belirtilen dosya veya dosyaları, belirtilen klasöre yüklemek amacıyla kullan
      </form>
 
     $path = './upload';
-    $u = $this->fileupload($this->post['singlefile'], $path);
+    $u = $this->upload($this->post['singlefile'], $path);
     print_r($u);
 
 veya 
@@ -1317,7 +1317,7 @@ veya
      </form>
 
     $path = './upload';
-    $u = $this->fileupload($this->post['multifile'], $path);
+    $u = $this->upload($this->post['multifile'], $path);
     print_r($u);
 
 ## get_contents()
