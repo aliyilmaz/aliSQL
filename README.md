@@ -1072,7 +1072,7 @@ veya
 
 ## request()
 
-`$_GET`, `$_POST` ve `$_FILES` isteklerini güvenli ve düzenli bir yapıya kavuşturmak amacıyla kullanılır, Verilere `$this->post` dizi değişkeni içinden erişilir.
+`$_GET`, `$_POST` ve `$_FILES` isteklerini güvenli ve düzenli bir yapıya kavuşturmak amacıyla kullanılır, Verilere `$this->post` dizi değişkeni içinden erişilir,`Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
 
 ##### type="text" kullanımı
 
@@ -1169,7 +1169,7 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 ## session_check()
 
-`session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır. Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar.
+`session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır, Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar,`Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
 
     $this->session_check();
 
