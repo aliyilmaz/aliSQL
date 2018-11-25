@@ -834,7 +834,7 @@ Bu fonksiyon özellikle dosya yükleme işlemleri sırasında yüklenmek istenen
 ##### Örnek
 
     $list = 'jpg';
-    if($this->is_type($this->post\['photo'\]\['name'\], $list)){
+    if($this->is_type($this->post['photo']['name'], $list)){
     	echo 'Yüklemek istediğiniz dosya müsade edilen bir uzantıya sahiptir.';
     } else {
     	echo 'Yüklemek istediğiniz dosya müsade edilen bir uzantıya sahip değildir.';
