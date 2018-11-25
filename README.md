@@ -38,7 +38,7 @@ veya
 
 ## Oturum Ayarları
 
-Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak için kullanılan kısımdır. Oturumlara izin vermemek için, `session_status` parametresini `_false_` olarak ayarlamak, Oturumların depolandığı klasör yolunu değiştirmek için `path` parametresini güncellemek gerekir. Belirttilen yolda oturumları tutmak için `path_status` parametresi `_true_` olarak ayarlanmalıdır. Varsayılan olarak sunucu oturum ayarlarına göre yapılandırılmıştır.
+Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak için kullanılan kısımdır. Oturumlara izin vermemek için, `session_status` parametresini `false` olarak ayarlamak, Oturumların depolandığı klasör yolunu değiştirmek için `path` parametresini güncellemek gerekir. Belirttilen yolda oturumları tutmak için `path_status` parametresi `true` olarak ayarlanmalıdır. Varsayılan olarak sunucu oturum ayarlarına göre yapılandırılmıştır.
 
 #### Örnek
 
