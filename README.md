@@ -999,7 +999,7 @@ veya
 
 veya
 
-    $str = 'http://example.com/';
+    $str = 'http://www.example.com/';
     if($this->is_url($str)){
         echo 'Bu bir bağlantıdır.';
     } else {
