@@ -2,7 +2,7 @@
     "name": "aliyilmaz/mind",
     "description": "In projects developed with PHP and MySQL; Database operations, Route definitions, $ _GET, $ _POST, $ _FILES requests, Middleware, Controller, View, Model is a class of php for managing layers such as.",
     "type": "project",
-    "license": "GPL3",
+    "license": "GPL-3.0-only",
     "authors": [
         {
             "name": "Ali Yilmaz",
