@@ -11,7 +11,5 @@
             "name": "Ali Yılmaz",
             "email": "aliyilmaz.work@gmail.com"
         }
-    ],
-    "minimum-stability": "stable",
-    "require": {}
+    ]
 }
