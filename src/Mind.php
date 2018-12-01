@@ -1,12 +1,13 @@
 <?php
+namespace Mind;
 
-/*
- * @author  :   Ali Yılmaz
- * @mail    :   aliyilmaz.work@gmail.com
- * @github  :   https://github.com/aliyilmaz
+/**
+ * Class Mind
  *
- * */
-
+ * @package Mind
+ * @author  Ali Yılmaz <aliyilmaz.work@gmail.com>
+ *
+ */
 class Mind {
 
     /*
