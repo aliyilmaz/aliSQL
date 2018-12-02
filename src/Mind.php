@@ -1638,12 +1638,9 @@ class Mind {
     }
 
     /*
-    * Checks if the specified value is a valid URL. It also
-    * has the ability to edit the url syntax and present it
-    * in response.
+    * Checks if the specified value is a valid URL.
     * --------------------------
     * string                   $url
-    * boolean, null            $fix
     * boolean, string          return
     * --------------------------
     */
@@ -1721,12 +1718,13 @@ class Mind {
         } else {
 
             /*
-             * The filter uses the mysqli_real_escape_string function
+             * The filter uses the preg_replace pattern
              * and the FILTER_SANITIZE_FULL_SPECIAL_CHARS property of
              * the filter_var function, and the filtered data is
              * returned.
              * */
-            return mysqli_real_escape_string($this->conn, filter_var($str,FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $str = filter_var($str,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            return preg_replace('~[\x00\x0A\x0D\x1A\x22\x27\x5C]~u', '\\\\$0', $str);
         }
 
     }
