@@ -1055,7 +1055,8 @@ Bu metod özel karakterleri, `sql_injection`, `xss` gibi istismar kodlarını et
 
 -   `filter_var`
     -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
--   `mysqli_real_escape_string`
+-   `preg_replace`
+    -   `~[\x00\x0A\x0D\x1A\x22\x27\x5C]~u`
 
 ##### Örnek
 
