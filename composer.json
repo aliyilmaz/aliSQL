@@ -9,6 +9,10 @@
             "email": "aliyilmaz.work@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "aliyilmaz\\mind\\": "src"
+        }
+    }
 }
