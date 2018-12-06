@@ -74,19 +74,25 @@ class Mind {
             $this->password = $conf['password'];
         }
 
-        $error          =   '';
+        $error          =   '<div style="background-color: #f3f3f3; padding:10px 20px 30px 20px;">';
         $class          =   '<br /> Class: '.__CLASS__;
         $function       =   '<br /> Function: '.__FUNCTION__;
         $line           =   '<br /> Line: '.(__LINE__+1);
-        $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbname);
+        $this->conn = mysqli_connect($this->host, $this->username, $this->password);
 
         if (!$this->conn) {
             $description    =   mysqli_connect_error();
-            $error  = '<div style="background-color: #f3f3f3; padding:10px 20px 30px 20px;">';
             $error .= $class.$function.$line."<br /> Error description: ".$description;
-            $error .= '</div>';
+
         } else {
-            mysqli_set_charset($this->conn, 'utf8');
+            if(!mysqli_select_db($this->conn, $this->dbname)){
+                $description    =   mysqli_error($this->conn);
+                $error .= $class.$function.$line."<br /> Error description: ".$description;
+                $error .= '</div>';
+            } else {
+                $error = '';
+                mysqli_set_charset($this->conn, 'utf8');
+            }
         }
 
         if(!empty($error)) {
@@ -103,9 +109,6 @@ class Mind {
      * @return mixed
      */
     public function prepare($sql){
-
-        $sql = filter_var($sql,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $sql = mysqli_escape_string($this->conn, $sql);
 
         return mysqli_query($this->conn, $sql);
 
@@ -130,11 +133,22 @@ class Mind {
         }
 
         foreach ($dbnames as $dbname) {
-
-            $sql = 'CREATE DATABASE '.$dbname;
-            $this->prepare($sql);
+            if($this->is_db($dbname)){
+                echo "Error: A database named ".$dbname." already exists.\n";
+                return false;
+            }
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
+                echo "Error: Make sure that the database name is alphanumeric.\n";
+                return false;
+            }
 
         }
+
+        foreach ($dbnames as $dbname) {
+            $sql = 'CREATE DATABASE '.$dbname;
+            $this->prepare($sql);
+        }
+
         return true;
     }
 
