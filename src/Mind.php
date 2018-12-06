@@ -133,11 +133,11 @@ class Mind {
 
         foreach ($dbnames as $dbname) {
             if($this->is_db($dbname)){
-                echo "Error: A database named ".$dbname." already exists.\n";
+                echo "Error: A database named (".$dbname.") already exists.\n";
                 return false;
             }
             if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
-                echo "Error: Make sure that the database name is alphanumeric.\n";
+                echo "Error: The database could not be created because (".$dbname.") is not alphanumeric.\n";
                 return false;
             }
 
@@ -161,11 +161,11 @@ class Mind {
     public function createtable($tblname, $arr){
 
         if($this->is_table($tblname)){
-            echo "Error: A Table named ".$tblname." already exists.\n";
+            echo "Error: A Table named (".$tblname.") already exists.\n";
             return false;
         }
         if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
-            echo "Error: Make sure that the table name is alphanumeric.\n";
+            echo "Error: The table could not be created because (".$tblname.") is not alphanumeric.\n";
             return false;
         }
 
@@ -227,7 +227,7 @@ class Mind {
     public function createcolumn($tblname, $arr){
 
         if(!$this->is_table($tblname)){
-            echo "A column cannot be added to a table that does not exist.\n";
+            echo "Error: Since there is no table named (".$tblname."), a column cannot be created in a table with that name.\n";
             return false;
         }
 
@@ -256,7 +256,7 @@ class Mind {
                     list($column, $type) = explode(':', $item);
 
                     if($this->is_column($tblname, $column)){
-                        echo "The column named ".$column." already exists.\n";
+                        echo "The column named (".$column.") already exists.\n";
                         return false;
                     }
 
@@ -498,6 +498,7 @@ class Mind {
     public function insert($tblname, $arr){
 
         if(!$this->is_table($tblname)){
+            echo "Error: Failed to add data because (".$tblname.") table could not be found.\n";
             return false;
         }
 
@@ -510,7 +511,8 @@ class Mind {
 
         foreach ($columns as $column){
 
-            if(!$this->is_column($tblname, $column)){
+            if($this->is_column($tblname, $column)){
+                echo "Error: You cannot add data to the non-existing column named (".$column.").\n";
                 return false;
             }
         }
