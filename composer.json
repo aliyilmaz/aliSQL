@@ -1,7 +1,7 @@
 {
-    "name": "aliyilmaz/mind",
+    "name": "mind/mind",
     "description": "PHP ve MySQL ile geliştirilen projelerde; Veritabanı ve Rota işlemleri, $_GET, $_POST, $_FILES istekleri, Model, View, Controller, Middleware gibi katmanların yönetimi ve çeşitli kontrol işlemlerini kolaylıkla gerçekleştirmeye olanak tanıyan PHP sınıfıdır.",
-    "type": "project",
+    "type": "library",
     "license": "GPL-3.0-only",
     "authors": [
         {
@@ -12,7 +12,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "aliyilmaz\\mind\\": "src"
+            "Mind\\": "src"
         }
     }
 }

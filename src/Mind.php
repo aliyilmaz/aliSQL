@@ -1,5 +1,5 @@
 <?php
-namespace aliyilmaz\Mind;
+namespace Mind;
 
 /**
  *
