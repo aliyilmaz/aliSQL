@@ -88,7 +88,6 @@ class Mind {
             if(!mysqli_select_db($this->conn, $this->dbname)){
                 $description    =   mysqli_error($this->conn);
                 $error .= $class.$function.$line."<br /> Error description: ".$description;
-                $error .= '</div>';
             } else {
                 $error = '';
                 mysqli_set_charset($this->conn, 'utf8');
@@ -96,7 +95,7 @@ class Mind {
         }
 
         if(!empty($error)) {
-            exit($error);
+            exit($error.'</div>');
         }
 
         return true;
