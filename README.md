@@ -35,13 +35,13 @@ veya
 #### Örnek
 
     require_once('./Mind.php');
-    use aliyilmaz\Mind\Mind;
+    use Mind\Mind;
     $Mind = new Mind();
 
 veya
 
     require_once('./Mind.php');
-    class ClassName extends \aliyilmaz\Mind\Mind{
+    class ClassName extends Mind\Mind{
     
     }
 
