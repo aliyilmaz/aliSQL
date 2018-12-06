@@ -169,6 +169,7 @@ class Mind {
             return false;
         }
 
+        $columns = array();
         $typeDefault = 'small';
 
         $typeLibrary = array(
@@ -177,7 +178,7 @@ class Mind {
             'large'         =>  'LONGTEXT'
         );
 
-        if(is_array($arr) AND preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
+        if(is_array($arr)){
 
             $sql = 'CREATE TABLE '.$tblname.'( ';
 
@@ -193,16 +194,28 @@ class Mind {
 
                     list($column, $type) = explode(':', $item);
 
+                    $columns[] = $column;
+
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
                         $xsql[] = $column.' INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY';
+                        $columns[] = $column;
                     }
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
                         $xsql[] = $column.' '.$typeLibrary[$type].' NULL';
+                        $columns[] = $column;
                     }
                 } else {
 
                     $xsql[] = $item.' '.$typeLibrary[$typeDefault].' NULL';
+                    $columns[] = $item;
+                }
+            }
+
+            foreach ($columns as $column) {
+                if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
+                    echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
+                    return false;
                 }
             }
 
@@ -256,7 +269,12 @@ class Mind {
                     list($column, $type) = explode(':', $item);
 
                     if($this->is_column($tblname, $column)){
-                        echo "The column named (".$column.") already exists.\n";
+                        echo "Error: The column named (".$column.") already exists.\n";
+                        return false;
+                    }
+
+                    if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
+                        echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
                         return false;
                     }
 
