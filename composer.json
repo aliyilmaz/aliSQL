@@ -1,0 +1,14 @@
+{
+    "name": "aliyilmaz/mind",
+    "description": "PHP ve MySQL ile geliştirilen projelerde; Veritabanı ve Rota işlemleri, $_GET, $_POST, $_FILES istekleri, Model, View, Controller, Middleware gibi katmanların yönetimi ve çeşitli kontrol işlemlerini kolaylıkla gerçekleştirmeye olanak tanıyan PHP sınıfıdır.",
+    "type": "project",
+    "license": "GPL-3.0-only",
+    "authors": [
+        {
+            "name": "Ali Yılmaz",
+            "email": "aliyilmaz.work@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
