@@ -105,7 +105,7 @@ class Mind {
     public function prepare($sql){
 
         $sql = filter_var($sql,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $sql = mysqli_real_escape_string($this->conn, $sql);
+        $sql = mysqli_escape_string($this->conn, $sql);
 
         return mysqli_query($this->conn, $sql);
 

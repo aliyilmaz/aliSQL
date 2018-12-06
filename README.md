@@ -166,11 +166,11 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 
 ## prepare()
 
-Sınıf içinden gönderilen veritabanı sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilememesi için `private` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
+SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilememesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
 
 -   `filter_var`
     -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
--   `mysqli_real_escape_string`   
+-   `mysqli_escape_string`   
 
 ##### Örnek
 

@@ -9,7 +9,10 @@
             "email": "aliyilmaz.work@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php" : "^5.0 || ^7.0",
+        "ext-mysqli": "*"
+    },
     "autoload": {
         "psr-4": {
             "Mind\\": "src"
