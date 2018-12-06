@@ -166,7 +166,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 
 ## prepare()
 
-SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilememesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
+SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilmesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
 
 -   `filter_var`
     -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
