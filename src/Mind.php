@@ -171,7 +171,6 @@ class Mind {
 
         $columns = array();
         $typeDefault = 'small';
-
         $typeLibrary = array(
             'small'         =>  'TEXT',
             'medium'        =>  'MEDIUMTEXT',
@@ -198,7 +197,6 @@ class Mind {
 
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
                         $xsql[] = $column.' INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY';
-                        $columns[] = $column;
                     }
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
@@ -212,7 +210,14 @@ class Mind {
                 }
             }
 
-            foreach ($columns as $column) {
+            $tcolumns = array_count_values($columns);
+            foreach ($columns as $key => $column) {
+
+                if($tcolumns[$column]>1){
+                    echo "Error: The column named (".$column.") already exists.\n";
+                    return false;
+                }
+
                 if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
                     echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
                     return false;
@@ -244,8 +249,8 @@ class Mind {
             return false;
         }
 
+        $columns = array();
         $typeDefault = 'small';
-
         $typeLibrary = array(
             'small'         =>  'TEXT',
             'medium'        =>  'MEDIUMTEXT',
@@ -268,33 +273,33 @@ class Mind {
 
                     list($column, $type) = explode(':', $item);
 
-                    if($this->is_column($tblname, $column)){
-                        echo "Error: The column named (".$column.") already exists.\n";
-                        return false;
-                    }
-
-                    if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                        echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
-                        return false;
-                    }
-
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
-
-                        $ainc = $this->increments($tblname);
-
-                        if(!empty($ainc)){
-                            return false;
-                        }
-
                         $xsql[] = 'ADD COLUMN '.$column.' INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY FIRST';
                     }
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
                         $xsql[] = 'ADD COLUMN '.$column.' '.$typeLibrary[$type].' NULL';
+                        $columns[] = $item;
                     }
                 } else {
 
                     $xsql[] = 'ADD COLUMN '.$item.' '.$typeLibrary[$typeDefault].' NULL';
+                    $columns[] = $item;
+                }
+            }
+
+            print_r($columns);
+            $tcolumns = array_count_values($columns);
+            foreach ($columns as $key => $column) {
+
+                if($tcolumns[$column]>1){
+                    echo "Error: The column named (".$column.") already exists.\n";
+                    return false;
+                }
+
+                if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
+                    echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
+                    return false;
                 }
             }
 
