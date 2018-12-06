@@ -93,6 +93,5 @@ echo '<h5>Delete database.</h5>';
 ?>
 
 
-
 <h2>The test is complete. All izz well.</h2>
 
