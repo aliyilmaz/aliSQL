@@ -123,18 +123,10 @@ class Mind {
 
         if(is_array($dbname)){
             foreach ($dbname as $key => $value) {
-                if(!$this->is_db($value)){
-                    $dbnames[] = $value;
-                } else {
-                    return false;
-                }
+                $dbnames[] = $value;
             }
         } else {
-            if(!$this->is_db($dbname)){
-                $dbnames[] = $dbname;
-            } else {
-                return false;
-            }
+            $dbnames[] = $dbname;
         }
 
         foreach ($dbnames as $dbname) {
@@ -154,10 +146,6 @@ class Mind {
      * @return  bool
      * */
     public function createtable($tblname, $arr){
-
-        if($this->is_table($tblname)){
-            return false;
-        }
 
         $typeDefault = 'small';
 
@@ -228,7 +216,7 @@ class Mind {
             'large'         =>  'LONGTEXT'
         );
 
-        if(is_array($arr) AND preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
+        if(is_array($arr)){
 
             $sql = 'ALTER TABLE '.$tblname.' ';
 
@@ -243,10 +231,6 @@ class Mind {
                     }
 
                     list($column, $type) = explode(':', $item);
-
-                    if($this->is_column($tblname, $column)){
-                        return false;
-                    }
 
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
 
@@ -290,15 +274,9 @@ class Mind {
 
         if(is_array($dbname)){
             foreach ($dbname as $key => $value) {
-                if(!$this->is_db($value)){
-                    return false;
-                }
                 $dbnames[] = $value;
             }
         } else {
-            if(!$this->is_db($dbname)){
-                return false;
-            }
             $dbnames[] = $dbname;
         }
         foreach ($dbnames as $dbname) {
