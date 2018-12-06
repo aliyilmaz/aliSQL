@@ -1,13 +1,13 @@
 
 # Mind nedir?
 
-`PHP` ve `MySQL` ile geliştirilmekte olan projelerde; Veritabanı işlemleri, Rota tanımları, `$_GET`, `$_POST`, `$_FILES` istekleri, Middleware, Controller, View, Model gibi katmanlar oluşturma, çeşitli kontrol işlemlerini güvenli ve kolay şekilde gerçekleştirmeye olanak tanıyan `PHP` sınıfıdır.
+`PHP` ve `MySQL` ile geliştirilen projelerde; Veritabanı ve Rota işlemleri, `$_GET`, `$_POST`, `$_FILES` istekleri, Model, View, Controller, Middleware gibi katmanların yönetimi ve çeşitli kontrol işlemlerini kolaylıkla gerçekleştirmeye olanak tanıyan`PHP` sınıfıdır.
 
-----------
+---------- 
 
 ## Veritabanı Ayarları
 
-Başarılı bir veritabanı bağlantısı için, veritabanı bilgilerini `Mind.php` dosyasında güncellemek gerekir. Bu güncelleme işlemi, `Mind`'i etkili şekilde kullanmayı mümkün kılar.
+Sınıfı kullanmak için veritabanı bilgilerini `Mind.php` dosyasında veya sınıf çağrılırken tanımlamak gerekir.
 
 #### Örnek
 
@@ -15,6 +15,16 @@ Başarılı bir veritabanı bağlantısı için, veritabanı bilgilerini `Mind.p
     private $dbname      = 'mydb';
     private $username    = 'root';
     private $password    = '';
+    
+veya
+
+    $conf = array(
+        'host'      =>  'localhost',
+        'dbname'    =>  'mydb',
+        'username'  =>  'root',
+        'password'  =>  ''
+    );
+    $Mind = new Mind($conf);
 
 ----------
 
@@ -25,12 +35,13 @@ Başarılı bir veritabanı bağlantısı için, veritabanı bilgilerini `Mind.p
 #### Örnek
 
     require_once('./Mind.php');
-    $db = new Mind();
+    use aliyilmaz\Mind\Mind;
+    $Mind = new Mind();
 
 veya
 
     require_once('./Mind.php');
-    class ClassName extends Mind{
+    class ClassName extends \aliyilmaz\Mind\Mind{
     
     }
 
@@ -52,49 +63,13 @@ Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak içi
 
 ## Zaman Dilimi Ayarı
 
-İçeriğin doğru zaman damgasıyla işaretlenebilmesi için zaman dilimini kişiselleştirmek mümkündür. Varsayılan olarak `Europe/Istanbul` tanımlanmıştır. [Desteklenen zaman dilimlerinin listesi](https://secure.php.net/manual/tr/timezones.php) bölümüne bakın.
+İçeriğin doğru zaman damgasıyla işaretlenebilmesi için zaman dilimini kişiselleştirmek mümkündür. Varsayılan olarak `Europe/Istanbul` tanımlanmıştır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır. [Desteklenen zaman dilimlerinin listesi](https://secure.php.net/manual/tr/timezones.php) bölümüne bakın.
+
+**Bilgi:** Gerektiği kadar kişiselleştirilmemiş sunucular proje zaman diliminden farklı zaman dilimi kullanabilmektedir, bu kısımda ki yapılan düzenleme farklı sunucularda doğru zaman damgasına sahip olmanızı sağlar. 
 
 #### Örnek
 
     public $timezone    = 'Europe/Istanbul';
-
-----------
-
-## Dil Ayarı
-
-Proje dili, varsayılan olması istenen bir dil ile güncellenebilir. Varsayılan dil Türkçe (`tr`) olarak tanımlanmıştır. [Ülke kısaltmaları listesi](https://www.ncbi.nlm.nih.gov/books/NBK7249/)ni inceleyebilirsiniz.
-
-#### Örnek
-
-    public $language    = 'tr';
-
-----------
-
-## Karakter Seti Ayarı
-
-Sayfa içeriğinin karakter türü isteğe bağlı olarak değiştirilebilir. Varsayılan olarak evrensel karakter kodlaması olan `utf-8` tanımlanmıştır. [Desteklenen karakter kodlamaları](https://secure.php.net/manual/tr/mbstring.supported-encodings.php)nı inceleyebilirsiniz.
-
-#### Örnek
-
-    header('Content-Type: text/html; charset=utf-8');
-
-veya
-
-    header('Content-Type: text/html; charset=iso-8859-1');
-
-----------
-
-## Hata Görünürlüğü
-
-Hataların görünürlüğü özelleştirilebilir. Tüm hataları gizlemek için `0`, tüm hataları göstermek için `-1` kullanılır. Varsayılan olarak `-1`'dir. [error_reporting](https://secure.php.net/manual/tr/function.error-reporting.php) sayfasını inceleyebilirsiniz.
-
-#### Örnek
-
-    error_reporting(0);
-
-veya
-
-    error_reporting(-1);
 
 ----------
 
@@ -127,7 +102,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 ##### Veritabanı
 
 -   [connection](#connection)
--   [querySQL](#querysql)
+-   [prepare](#prepare)
 -   [createdb](#createdb)
 -   [createtable](#createtable)
 -   [createcolumn](#createcolumn)
@@ -142,12 +117,12 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 -   [delete](#delete)
 -   [get](#get)
 -   [do_have](#do_have)
--   [lastid](#lastid)
--   [autoincrement](#autoincrement)
+-   [newid](#newid)
+-   [increment](#increment)
 
 ##### Denetleyici
 
--   [is_database](#is_database)
+-   [is_db](#is_db)
 -   [is_table](#is_table)
 -   [is_column](#is_column)
 -   [is_phone](#is_phone)
@@ -184,13 +159,17 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 
 ----------
 
-## querySQL()
+## prepare()
 
-Sınıf içinden gönderilen veritabanı sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilememesi için `private` tanımlamasına sahiptir. `String` olarak `SQL` sorgusu gönderilebilir.
+Sınıf içinden gönderilen veritabanı sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilememesi için `private` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
+
+-   `filter_var`
+    -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
+-   `mysqli_real_escape_string`   
 
 ##### Örnek
 
-    $this->querySQL($sql);
+    $Mind->prepare($sql);
 
 ----------
 
@@ -700,23 +679,23 @@ Bir veritabanı tablosuna eklenmesi planlanan kayda tahsis edilecek `auto_increm
 
 ----------
 
-## autoincrement()
+## increment()
 
 Veritabanı tablosunda ki `auto_increment` görevine sahip sütun adını göstermek amacıyla kullanılır. `$tblname` veritabanı tablo adını temsil etmektedir.
 ##### Örnek
 
     $tblname = 'users';
-    echo $this->autoincrement($tblname);
+    echo $this->increment($tblname);
 
 ----------
 
-## is_database()
+## is_db()
 
 Bu fonksiyon veritabanının varlığını sorgulamak amacıyla kullanır,`mydb` veritabanı adını temsil etmektedir. Veritabanı ismi `string` olarak gönderilebilir. Eğer veritabanı varsa `true` değeri döndürülür, yoksa `false` değeri döndürülür.
 
 ##### Örnek
 
-    if($this->is_database('mydb')){
+    if($this->is_db('mydb')){
         echo 'Veritabanı var';
     } else {
         echo 'Veritabanı yok';
@@ -853,7 +832,9 @@ veya
 
 ## is_size()
 
-Bu fonksiyon dosya yükleme işlemleri sırasında yüklenmek istenen dosyanın boyutunu kontrol etmek amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$size` ise müsade edilen dosya boyutu bilgisini temsil etmektedir. Eğer dosya müsade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür, bu işlem dosya dizisinde byte cinsinden gelen boyut değeriyle, bizim yazdığımız değerin byte cinsine çevrilmiş halinin karşılaştırılmasıyla gerçekleşir. **Bilgi:** `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir.
+Bu fonksiyon, dosya dizisinde bulunan `size` değerinin veya `string` yapıda belirtilen `byte` cinsinden  değerin kontrol edilmesi amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$manuelsize` string yapıda ki değeri, `$size` ise müsade edilen boyut bilgisini temsil etmektedir. Eğer dosya veya belirtilen değer müsade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
+ 
+ **Bilgi:** Dosyalarla çalışırken `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir.
 ##### Örnek
 
     $size = '35 KB';
@@ -894,6 +875,25 @@ veya
     } else {
     	echo 'Dosya belirtilen boyuttan büyüktür.';
     }
+veya
+
+    $size = '35 KB';
+    $manuelsize = '35839';
+    if($this->is_size($manuelsize, $size)){
+    	echo 'Değer belirtilen boyuttan küçüktür';
+    } else {
+    	echo 'Değer belirtilen boyuttan büyüktür.';
+    }
+veya
+
+    $size = '35 KB';
+    $manuelsize = '35840';
+    if($this->is_size($manuelsize, $size)){
+    	echo 'Değer belirtilen boyuttan küçüktür';
+    } else {
+    	echo 'Değer belirtilen boyuttan büyüktür.';
+    }
+
 
 ----------
 
@@ -1137,13 +1137,49 @@ veya
 
 ## mindload()
 
-Belirtilen dosya veya dosyaları `require_once` yöntemiyle projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebilir, eğer dosyalar varsa dahil edilir, `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Bu fonksiyona `route()` metodu için ihtiyaç duyulmuştur, yönetimi zorlaştıran kodlama eğilimini beslememesi için sınıf dışından erişime kapatılmıştır.
+Belirtilen dosya veya dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. 
 
+Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
+
+Öncelikle `$cache` dosyaları, ardından `$file` değişkenlerinde bulunan dosyalar projeye dahil edilir. `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+#####Örnek
+
+    $this->mindload('app/views/home');
+
+veya
+
+    $file = array(
+        'app/views/header',
+        'app/views/content',
+        'app/views/footer'
+    );
+    $this->mindload($file);
+
+veya
+
+    $this->mindload('app/views/home', 'app/modal/home');
+
+veya
+
+    $file = array(
+        'app/views/layout/header',
+        'app/views/home',
+        'app/views/layout/footer
+    );
+    $cache = array(
+        'app/middleware/auth',
+        'app/database/install',
+        'app/modal/home'
+    );
+    $this->mindload($file, $cache);
 ----------
 
 ## permalink()
 
 Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüştürmek amacıyla kullanılır. İki parametre alabilir, ikinci parametre isteğe bağlı olup belirtilme zorunluluğu bulunmamaktadır. İlk parametre de link yapısına dönüştürülmek istenen veri `string` olarak, ikinci parametre de ise veri içinde değiştirilmesi istenen kelimeler `dizi` olarak tutulur.
+
+##### Örnek
 
     $str = 'Merhaba dünya';
     echo $this->permalink($str);
@@ -1271,7 +1307,7 @@ veya
 
 ## write()
 
-Belirtilen içeriği, belirtilen isimde ki dosyaya yazmak amacıyla kullanılır, iki parametre alır;
+Belirtilen içeriği, belirtilen isimde ki dosyaya yazmak amacıyla kullanılır, eğer işlem başarılıysa `true`, değilse `false`  değeri döndürülür. İki parametre alır;
 
 ##### ilk parametre
 
