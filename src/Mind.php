@@ -111,7 +111,7 @@ class Mind {
 
     }
 
-    /*
+    /**
      * Creating a database.
      *
      * @param mixed $dbname
@@ -146,7 +146,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Creating a table.
      *
      * @param mixed   $tblname
@@ -207,7 +207,7 @@ class Mind {
 
     }
 
-    /*
+    /**
      * Creating a column.
      *
      * @param mixed   $tblname
@@ -278,7 +278,7 @@ class Mind {
         return false;
     }
 
-    /*
+    /**
      * Delete database.
      *
      * @param mixed   $dbname
@@ -308,7 +308,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Delete table.
      *
      * @param mixed   $tblname
@@ -338,7 +338,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Delete column.
      *
      * @param string   $tblname
@@ -369,7 +369,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Clear database.
      *
      * @param mixed   $dbname
@@ -405,7 +405,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Clear table.
      *
      * @param mixed   $tblname
@@ -436,7 +436,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Clear column.
      *
      * @param string   $tblname
@@ -482,7 +482,7 @@ class Mind {
 
     }
 
-    /*
+    /**
      * Add new record.
      *
      * @param string   $tblname
@@ -518,7 +518,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Record update.
      *
      * @param string   $tblname
@@ -561,7 +561,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Record delete.
      *
      * @param string   $tblname
@@ -617,7 +617,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Record reading.
      *
      * @param string   $tblname
@@ -745,7 +745,7 @@ class Mind {
         return $getdata;
     }
 
-    /*
+    /**
      * Entity verification.
      *
      * @param string   $tblname
@@ -782,7 +782,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * New id parameter.
      *
      * @param string   $tblname
@@ -813,7 +813,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Auto increment column.
      *
      * @param string   $tblname
@@ -827,7 +827,7 @@ class Mind {
         return $row['Field'];
     }
 
-    /*
+    /**
      * Database verification.
      *
      * @param string   $dbname
@@ -846,7 +846,7 @@ class Mind {
 
     }
 
-    /*
+    /**
      * Table verification.
      *
      * @param string   $tblname
@@ -864,7 +864,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Column verification.
      *
      * @param string   $tblname
@@ -889,7 +889,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Phone verification.
      *
      * @param string   $str
@@ -904,7 +904,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Date verification.
      *
      * @param string   $str
@@ -922,7 +922,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Mail verification.
      *
      * @param mixed   $str
@@ -937,7 +937,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Type verification.
      *
      * @param mixed   $str
@@ -962,7 +962,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Size verification.
      *
      * @param mixed   $str
@@ -1000,7 +1000,7 @@ class Mind {
         return false;
     }
 
-    /*
+    /**
      * Color verification.
      *
      * @param string   $color
@@ -1041,7 +1041,7 @@ class Mind {
         return false;
     }
 
-    /*
+    /**
      * URL verification.
      *
      * @param string   $str
@@ -1069,7 +1069,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Path information.
      *
      * @param string   $str
@@ -1082,7 +1082,7 @@ class Mind {
         return $object[$type];
     }
 
-    /*
+    /**
      * Protection from pests.
      *
      * @param mixed   $str
@@ -1103,7 +1103,7 @@ class Mind {
 
     }
 
-    /*
+    /**
      * Request collector.
      *
      * @param mixed   $_GET
@@ -1137,7 +1137,7 @@ class Mind {
         return true;
     }
 
-    /*
+    /**
      * Redirect.
      *
      * @param string   $url
@@ -1153,7 +1153,7 @@ class Mind {
         exit();
     }
 
-    /*
+    /**
      * Layer installer.
      *
      * @param   mixed $file
@@ -1196,7 +1196,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Permanent connection.
      *
      * @param string   $str
@@ -1315,7 +1315,7 @@ class Mind {
 
     }
 
-    /*
+    /**
      * Time zones.
      *
      * @return  mixed
@@ -1324,7 +1324,7 @@ class Mind {
         return timezone_identifiers_list();
     }
 
-    /*
+    /**
      * Sessions.
      *
      * @return  mixed
@@ -1357,7 +1357,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * Routing manager.
      *
      * @param   string  $uri
@@ -1473,7 +1473,7 @@ class Mind {
         }
     }
 
-    /*
+    /**
      * File writer.
      *
      * @param   mixed   $str
@@ -1500,7 +1500,7 @@ class Mind {
         return false;
     }
 
-    /*
+    /**
      * File uploader.
      *
      * @param   mixed   $files
@@ -1536,7 +1536,7 @@ class Mind {
         return false;
     }
 
-    /*
+    /**
      * Content researcher.
      *
      * @param   string   $left
