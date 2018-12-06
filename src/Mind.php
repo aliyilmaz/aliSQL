@@ -160,6 +160,15 @@ class Mind {
      * */
     public function createtable($tblname, $arr){
 
+        if($this->is_table($tblname)){
+            echo "Error: A Table named ".$tblname." already exists.\n";
+            return false;
+        }
+        if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
+            echo "Error: Make sure that the table name is alphanumeric.\n";
+            return false;
+        }
+
         $typeDefault = 'small';
 
         $typeLibrary = array(
@@ -218,6 +227,7 @@ class Mind {
     public function createcolumn($tblname, $arr){
 
         if(!$this->is_table($tblname)){
+            echo "A column cannot be added to a table that does not exist.\n";
             return false;
         }
 
@@ -244,6 +254,11 @@ class Mind {
                     }
 
                     list($column, $type) = explode(':', $item);
+
+                    if($this->is_column($tblname, $column)){
+                        echo "The column named ".$column." already exists.\n";
+                        return false;
+                    }
 
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
 

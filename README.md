@@ -217,7 +217,7 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır, `:` sembolünü
 
 ## createcolumn()
 
-Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, `:` sembolünün solunda ki parametre sütun adını, sağında ki parametre sütun özelliğini temsil etmektedir. Eğer sütun özellik alanı boş bırakılırsa varsayılan olarak sütun özelliği `small` kabul edilir. Kullanılabilir özellik listesi aşağıdadır. Sütun içerikleri varsayılan olarak `NULL` olarak tanımlanmıştır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. `:` sembolünün solunda ki parametre sütun adını, sağında ki parametre sütun özelliğini temsil etmektedir. Eğer sütun özellik alanı boş bırakılırsa varsayılan olarak sütun özelliği `small` kabul edilir. Kullanılabilir özellik listesi aşağıdadır. Sütun içerikleri varsayılan olarak `NULL` olarak tanımlanmıştır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Özellikler
 
