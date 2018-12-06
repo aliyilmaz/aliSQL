@@ -5,6 +5,9 @@
 
 ---------- 
 
+## İndirmeler
+Mind sınıfını [GitHub sayfasından](https://github.com/aliyilmaz/Mind/archive/master.zip) indirebilirsiniz veya komut istemcinizden `composer require mind/mind` komutu çalıştırarak bir sonraki aşamaya geçebilirsiniz. 
+
 ## Veritabanı Ayarları
 
 Sınıfı kullanmak için veritabanı bilgilerini `Mind.php` dosyasında veya sınıf çağrılırken tanımlamak gerekir.
@@ -1386,3 +1389,6 @@ veya
     print_r($data);
 
 
+
+
+[]: https://github.com/aliyilmaz/Mind/archive/master.zip
