@@ -168,6 +168,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 
 SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilmesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
 
+-   `mysqli_query`
 -   `filter_var`
     -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
 -   `mysqli_escape_string`   
