@@ -9,7 +9,7 @@ $Mind = new Mind();
  * Create table.
  *
  * @param string $tblname
- * @param mixed $arr
+ * @param array $arr
  * @return bool
  */
 $arr = array(

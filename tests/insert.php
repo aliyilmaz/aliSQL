@@ -8,7 +8,8 @@ $Mind = new Mind();
 /**
  * Add new record.
  *
- * @param string $dbname
+ * @param string $tblname
+ * @param array $rows
  * @return bool
  */
 $rows = array(
@@ -18,8 +19,8 @@ $rows = array(
     'created_at'    =>  date('d-m-Y H:i:s')
 );
 
-
-if(!$Mind->insert('phonebook', $rows)){
+$tblname = 'phonebook';
+if(!$Mind->insert($tblname, $rows)){
     exit('Error: Add new record.');
 }
 echo '<h5>Add new record.</h5>';

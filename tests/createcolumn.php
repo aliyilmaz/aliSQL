@@ -8,8 +8,8 @@ $Mind = new Mind();
 /**
  * Creating a column.
  *
- * @param mixed   $tblname
- * @param mixed   $arr
+ * @param string   $tblname
+ * @param array   $arr
  * @return  bool
  * */
 $arr = array(

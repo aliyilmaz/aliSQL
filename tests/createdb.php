@@ -20,7 +20,7 @@ echo '<h5>Create database. (string)</h5>';
 /**
  * Create database.
  *
- * @param mixed $dbname
+ * @param array $dbname
  * @return bool
  */
 $dbname = array('mindtest1', 'mindtest2');
