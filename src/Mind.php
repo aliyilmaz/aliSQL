@@ -302,14 +302,10 @@ class Mind {
                 }
             }
 
-            $ttypes = array_count_values($types);
-            foreach ($types as $key1 => $type){
-                if($ttypes[$type]>1){
-                    echo "Error: The auto_increment task cannot be defined in multiple columns.\n";
-                    return false;
-                }
+            if(count($types)>1 OR !empty($this->increments($tblname))){
+                echo "Error: The auto_increment task cannot be defined in multiple columns.\n";
+                return false;
             }
-
             $tcolumns = array_count_values($columns);
             foreach ($columns as $key => $column) {
 
