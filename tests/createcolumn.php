@@ -15,7 +15,6 @@ $Mind = new Mind();
 $arr = array(
     'username:small',
     'password',
-    'password',
     'address:medium',
     'about:large'
 );

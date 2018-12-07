@@ -269,6 +269,7 @@ class Mind {
                     $symbolsTotal = count(explode(':', $item));
 
                     if($symbolsTotal != 2){
+                        echo "Error: You can use the (:) symbol once.\n";
                         return false;
                     }
 
@@ -280,7 +281,7 @@ class Mind {
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
                         $xsql[] = 'ADD COLUMN '.$column.' '.$typeLibrary[$type].' NULL';
-                        $columns[] = $item;
+                        $columns[] = $column;
                     }
                 } else {
 
@@ -289,11 +290,10 @@ class Mind {
                 }
             }
 
-            print_r($columns);
             $tcolumns = array_count_values($columns);
             foreach ($columns as $key => $column) {
 
-                if($tcolumns[$column]>1){
+                if($tcolumns[$column]>1 OR $this->is_column($tblname, $column)){
                     echo "Error: The column named (".$column.") already exists.\n";
                     return false;
                 }
