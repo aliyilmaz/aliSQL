@@ -123,7 +123,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 -   [get](#get)
 -   [do_have](#do_have)
 -   [newid](#newid)
--   [increment](#increment)
+-   [increments](#increments)
 
 ##### Denetleyici
 
@@ -169,9 +169,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilmesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
 
 -   `mysqli_query`
--   `filter_var`
-    -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
--   `mysqli_escape_string`   
+   
 
 ##### Örnek
 
@@ -685,13 +683,13 @@ Bir veritabanı tablosuna eklenmesi planlanan kayda tahsis edilecek `auto_increm
 
 ----------
 
-## increment()
+## increments()
 
 Veritabanı tablosunda ki `auto_increment` görevine sahip sütun adını göstermek amacıyla kullanılır. `$tblname` veritabanı tablo adını temsil etmektedir.
 ##### Örnek
 
     $tblname = 'users';
-    echo $this->increment($tblname);
+    echo $this->increments($tblname);
 
 ----------
 
