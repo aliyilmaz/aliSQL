@@ -277,6 +277,12 @@ class Mind {
 
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
                         $xsql[] = 'ADD COLUMN '.$column.' INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY FIRST';
+                        
+                        $aic = $this->increments($tblname);
+                        if($aic){
+                            echo "Error: Because the auto_increment task is defined in the  (".$aic.") column, it cannot be defined in the column (".$column.").\n";
+                            return false;
+                        }
                     }
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
