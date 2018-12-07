@@ -212,7 +212,7 @@ class Mind {
                     $columns[] = $item;
                 }
             }
-            
+
             if(count($types)>1){
                 echo "Error: The auto_increment task cannot be defined in multiple columns.\n";
                 return false;
@@ -299,7 +299,7 @@ class Mind {
                 }
             }
 
-            if(count($types)>1 OR !empty($this->increments($tblname))){
+            if(count($types)>=1 AND !empty($this->increments($tblname))){
                 echo "Error: The auto_increment task cannot be defined in multiple columns.\n";
                 return false;
             }

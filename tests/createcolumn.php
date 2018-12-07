@@ -13,7 +13,7 @@ $Mind = new Mind();
  * @return  bool
  * */
 $arr = array(
-    'id:increments',
+    'phone',
     'username:small',
     'password',
     'address:medium',
