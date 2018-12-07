@@ -421,7 +421,6 @@ class Mind {
      * */
     public function cleardb($dbname){
 
-
         $dbnames = array();
 
         if(is_array($dbname)){
@@ -466,19 +465,24 @@ class Mind {
 
         if(is_array($tblname)){
             foreach ($tblname as $value) {
-
-                if(!$this->is_table($value)){
-                    return false;
-                }
                 $tblnames[] = $value;
             }
         } else {
-            if(!$this->is_table($tblname)){
-                return false;
-            }
             $tblnames[] = $tblname;
         }
+
         foreach ($tblnames as $tblname) {
+
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
+                echo "Error: Only tables with an alphanumeric name can be cleared. (".$tblname.") is not alphanumeric.\n";
+                return false;
+            }
+
+            if(!$this->is_table($tblname)){
+                echo "Error: Unable to clear because there is no table named  (".$tblname.").\n";
+                return false;
+            }
+
             $sql = 'TRUNCATE '.$tblname;
             $this->prepare($sql);
         }
