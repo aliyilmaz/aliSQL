@@ -14,6 +14,7 @@ $Mind = new Mind();
  */
 $arr = array(
     'id:increments',
+    'test_id:increments',
     'name',
     'phone',
     'email',

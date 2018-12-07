@@ -170,6 +170,7 @@ class Mind {
         }
 
         $columns = array();
+        $types  = array();
         $typeDefault = 'small';
         $typeLibrary = array(
             'small'         =>  'TEXT',
@@ -198,6 +199,7 @@ class Mind {
 
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
                         $xsql[] = $column.' INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY';
+                        $types[] = $type;
                     }
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
@@ -208,6 +210,14 @@ class Mind {
 
                     $xsql[] = $item.' '.$typeLibrary[$typeDefault].' NULL';
                     $columns[] = $item;
+                }
+            }
+
+            $ttypes = array_count_values($types);
+            foreach ($types as $key1 => $type){
+                if($ttypes[$type]>1){
+                    echo "Error: The auto_increment task cannot be defined in multiple columns.\n";
+                    return false;
                 }
             }
 
@@ -251,6 +261,7 @@ class Mind {
         }
 
         $columns = array();
+        $types  = array();
         $typeDefault = 'small';
         $typeLibrary = array(
             'small'         =>  'TEXT',
@@ -277,12 +288,7 @@ class Mind {
 
                     if(!array_key_exists($type, $typeLibrary) AND $type == 'increments'){
                         $xsql[] = 'ADD COLUMN '.$column.' INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY FIRST';
-                        
-                        $aic = $this->increments($tblname);
-                        if($aic){
-                            echo "Error: Because the auto_increment task is defined in the  (".$aic.") column, it cannot be defined in the column (".$column.").\n";
-                            return false;
-                        }
+                        $types[] = $type;
                     }
 
                     if(array_key_exists($type, $typeLibrary) AND $type != 'increments'){
@@ -293,6 +299,14 @@ class Mind {
 
                     $xsql[] = 'ADD COLUMN '.$item.' '.$typeLibrary[$typeDefault].' NULL';
                     $columns[] = $item;
+                }
+            }
+
+            $ttypes = array_count_values($types);
+            foreach ($types as $key1 => $type){
+                if($ttypes[$type]>1){
+                    echo "Error: The auto_increment task cannot be defined in multiple columns.\n";
+                    return false;
                 }
             }
 
