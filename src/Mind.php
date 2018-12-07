@@ -188,6 +188,7 @@ class Mind {
                     $symbolsTotal = count(explode(':', $item));
 
                     if($symbolsTotal != 2){
+                        echo "Error: You can use the (:) symbol once.\n";
                         return false;
                     }
 
