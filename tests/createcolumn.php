@@ -13,7 +13,6 @@ $Mind = new Mind();
  * @return  bool
  * */
 $arr = array(
-    'phone',
     'username:small',
     'password',
     'address:medium',
