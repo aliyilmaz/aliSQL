@@ -421,23 +421,28 @@ class Mind {
      * */
     public function cleardb($dbname){
 
+
         $dbnames = array();
 
         if(is_array($dbname)){
             foreach ($dbname as $key => $value) {
-                if(!$this->is_db($value)){
-                    return false;
-                }
                 $dbnames[] = $value;
             }
         } else {
-
-            if(!$this->is_db($dbname)){
-                return false;
-            }
             $dbnames[] = $dbname;
         }
         foreach ($dbnames as $dbname) {
+
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
+                echo "Error: Only databases with an alphanumeric name can be cleared. (".$dbname.") is not alphanumeric.\n";
+                return false;
+            }
+
+            if(!$this->is_db($dbname)){
+                echo "Error: Unable to clear because there is no database named  (".$dbname.").\n";
+                return false;
+            }
+
             $sql    = 'SHOW TABLES FROM '.$dbname;
             $query  = $this->prepare($sql);
             while($cRow = mysqli_fetch_array($query)){
