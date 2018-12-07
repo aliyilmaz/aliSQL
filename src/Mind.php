@@ -549,7 +549,7 @@ class Mind {
 
         foreach ($columns as $column){
 
-            if($this->is_column($tblname, $column)){
+            if(!$this->is_column($tblname, $column)){
                 echo "Error: You cannot add data to the non-existing column named (".$column.").\n";
                 return false;
             }
