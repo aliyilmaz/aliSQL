@@ -512,24 +512,30 @@ class Mind {
         $columns = array();
 
         if(!$this->is_table($tblname)){
+            echo "Error: The request to clean the column resulted in a negative because there was no table named (".$tblname.").\n";
             return false;
         }
 
         if(is_array($column)){
             foreach ($column as $key => $value) {
-                if(!$this->is_column($tblname, $value)){
-                    return false;
-                }
                 $columns[] = $value;
             }
         } else {
-            if(!$this->is_column($tblname, $column)){
-                return false;
-            }
             $columns[] = $column;
         }
 
         foreach ($columns as $column) {
+
+
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
+                echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
+                return false;
+            }
+
+            if(!$this->is_column($tblname, $column)){
+                echo "Error: You cannot clear the non-existing column named (".$column.").\n";
+                return false;
+            }
 
             $id   = $this->increments($tblname);
             $data = $this->get($tblname);
