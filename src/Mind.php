@@ -163,7 +163,7 @@ class Mind {
             return false;
         }
         if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
-            echo "The database table could not be created because (".$tblname.") is not an alphanumeric name.\n";
+            echo "Error: The database table could not be created because (".$tblname.") is not an alphanumeric name.\n";
             return false;
         }
 
