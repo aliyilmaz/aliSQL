@@ -29,4 +29,4 @@ if(!$Mind->cleartable($tblname)){
 }
 echo '<h5>Clear table. (array)</h5>';
 
-echo '<h1>The database clearing method is running.</h1>';
+echo '<h1>The database table clearing method is running.</h1>';
