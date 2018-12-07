@@ -346,6 +346,17 @@ class Mind {
             $dbnames[] = $dbname;
         }
         foreach ($dbnames as $dbname) {
+
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
+                echo "Error: Only database with an alphanumeric name can be cleared. (".$dbname.") is not alphanumeric.\n";
+                return false;
+            }
+
+            if(!$this->is_db($dbname)){
+                echo "Error: Unable to clear because there is no database named  (".$dbname.").\n";
+                return false;
+            }
+
             $sql = 'DROP DATABASE '.$dbname;
             $this->prepare($sql);
         }
