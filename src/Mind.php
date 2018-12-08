@@ -134,11 +134,11 @@ class Mind {
         foreach ($dbnames as $dbname) {
 
             if($this->is_db($dbname)){
-                echo "Error: A database named (".$dbname.") already exists.\n";
+                echo "Error: A database named '".$dbname."' already exists.\n";
                 return false;
             }
             if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
-                echo "Error: The database could not be created because (".$dbname.") is not alphanumeric.\n";
+                echo "Error: The database could not be created because '".$dbname."' is not alphanumeric.\n";
                 return false;
             }
 
@@ -159,11 +159,11 @@ class Mind {
     public function createtable($tblname, $arr){
 
         if($this->is_table($tblname)){
-            echo "Error: A Table named (".$tblname.") already exists.\n";
+            echo "Error: A Table named '".$tblname."' already exists.\n";
             return false;
         }
         if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
-            echo "Error: The database table could not be created because (".$tblname.") is not an alphanumeric name.\n";
+            echo "Error: The database table could not be created because '".$tblname."' is not an alphanumeric name.\n";
             return false;
         }
 
@@ -221,12 +221,12 @@ class Mind {
             foreach ($columns as $key => $column) {
 
                 if($tcolumns[$column]>1){
-                    echo "Error: The column named (".$column.") already exists.\n";
+                    echo "Error: The column named '".$column."' already exists.\n";
                     return false;
                 }
 
                 if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                    echo "Error: The table column could not be created because (".$column.") is not an alphanumeric name.\n";
+                    echo "Error: The table column could not be created because '".$column."' is not an alphanumeric name.\n";
                     return false;
                 }
             }
@@ -252,7 +252,7 @@ class Mind {
     public function createcolumn($tblname, $arr){
 
         if(!$this->is_table($tblname)){
-            echo "Error: Since there is no table named (".$tblname."), a column cannot be created in a table with that name.\n";
+            echo "Error: Since there is no table named '".$tblname."', a column cannot be created in a table with that name.\n";
             return false;
         }
 
@@ -309,12 +309,12 @@ class Mind {
             foreach ($columns as $key => $column) {
 
                 if($tcolumns[$column]>1 OR $this->is_column($tblname, $column)){
-                    echo "Error: The column named (".$column.") already exists.\n";
+                    echo "Error: The column named '".$column."' already exists.\n";
                     return false;
                 }
 
                 if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                    echo "Error: The table column could not be created because (".$column.") is not an alphanumeric name.\n";
+                    echo "Error: The table column could not be created because '".$column."' is not an alphanumeric name.\n";
                     return false;
                 }
             }
@@ -349,12 +349,12 @@ class Mind {
         foreach ($dbnames as $dbname) {
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
-                echo "Error: Only database with an alphanumeric name can be deleted. (".$dbname.") is not alphanumeric.\n";
+                echo "Error: Only database with an alphanumeric name can be deleted. '".$dbname."' is not alphanumeric.\n";
                 return false;
             }
 
             if(!$this->is_db($dbname)){
-                echo "Error: Unable to delete because there is no database named  (".$dbname.").\n";
+                echo "Error: Unable to delete because there is no database named  '".$dbname."'.\n";
                 return false;
             }
 
@@ -384,12 +384,12 @@ class Mind {
         foreach ($tblnames as $tblname) {
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
-                echo "Error: Only tables with an alphanumeric name can be deleted. (".$tblname.") is not alphanumeric.\n";
+                echo "Error: Only tables with an alphanumeric name can be deleted. '".$tblname."' is not alphanumeric.\n";
                 return false;
             }
 
             if(!$this->is_table($tblname)){
-                echo "Error: Unable to delete because there is no table named (".$tblname.").\n";
+                echo "Error: Unable to delete because there is no table named '".$tblname."'.\n";
                 return false;
             }
 
@@ -409,7 +409,7 @@ class Mind {
     public function deletecolumn($tblname, $column){
 
         if(!$this->is_table($tblname)){
-            echo "Error: The request to delete the column resulted in a negative because there was no table named (".$tblname.").\n";
+            echo "Error: The request to delete the column resulted in a negative because there was no table named '".$tblname."'.\n";
             return false;
         }
 
@@ -425,12 +425,12 @@ class Mind {
         foreach ($columns as $column) {
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                echo "Error: The column named (".$column.") could not be delete because it is not alphanumeric.\n";
+                echo "Error: The column named '".$column."' could not be delete because it is not alphanumeric.\n";
                 return false;
             }
 
             if(!$this->is_column($tblname, $column)){
-                echo "Error: You cannot delete the non-existing column named (".$column.").\n";
+                echo "Error: You cannot delete the non-existing column named '".$column."'.\n";
                 return false;
             }
 
@@ -460,12 +460,12 @@ class Mind {
         foreach ($dbnames as $dbname) {
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
-                echo "Error: Only the database with the alphanumeric name can be cleared. (".$dbname.") is not alphanumeric.\n";
+                echo "Error: Only the database with the alphanumeric name can be cleared. '".$dbname."' is not alphanumeric.\n";
                 return false;
             }
 
             if(!$this->is_db($dbname)){
-                echo "Error: Unable to clear because there is no database named  (".$dbname.").\n";
+                echo "Error: Unable to clear because there is no database named  '".$dbname."'.\n";
                 return false;
             }
 
@@ -501,12 +501,12 @@ class Mind {
         foreach ($tblnames as $tblname) {
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
-                echo "Error: Only tables with an alphanumeric name can be cleared. (".$tblname.") is not alphanumeric.\n";
+                echo "Error: Only tables with an alphanumeric name can be cleared. '".$tblname."' is not alphanumeric.\n";
                 return false;
             }
 
             if(!$this->is_table($tblname)){
-                echo "Error: Unable to clear because there is no table named  (".$tblname.").\n";
+                echo "Error: Unable to clear because there is no table named  '".$tblname."'.\n";
                 return false;
             }
 
@@ -528,7 +528,7 @@ class Mind {
         $columns = array();
 
         if(!$this->is_table($tblname)){
-            echo "Error: The request to clean the column resulted in a negative because there was no table named (".$tblname.").\n";
+            echo "Error: The request to clean the column resulted in a negative because there was no table named '".$tblname."'.\n";
             return false;
         }
 
@@ -544,12 +544,12 @@ class Mind {
 
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
+                echo "Error: The column named '".$column."' could not be created because it is not alphanumeric.\n";
                 return false;
             }
 
             if(!$this->is_column($tblname, $column)){
-                echo "Error: You cannot clear the non-existing column named (".$column.").\n";
+                echo "Error: You cannot clear the non-existing column named '".$column."'.\n";
                 return false;
             }
 
@@ -578,7 +578,7 @@ class Mind {
     public function insert($tblname, $arr){
 
         if(!$this->is_table($tblname)){
-            echo "Error: Failed to add data because (".$tblname.") table could not be found.\n";
+            echo "Error: Failed to add data because '".$tblname."' table could not be found.\n";
             return false;
         }
 
@@ -589,16 +589,15 @@ class Mind {
 
         $columns = array_keys($arr);
 
-
         foreach ($columns as $column){
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                echo "Error: Data could not be added because a column named non-alphanumeric (".$column.") was specified.\n";
+                echo "Error: Data could not be added because a column named non-alphanumeric '".$column."' was specified.\n";
                 return false;
             }
 
             if(!$this->is_column($tblname, $column)){
-                echo "Error: You cannot add data to the non-existing column named (".$column.").\n";
+                echo "Error: You cannot add data to the non-existing column named '".$column."'.\n";
                 return false;
             }
         }
@@ -624,7 +623,7 @@ class Mind {
     public function update($tblname, $arr, $id, $special=null){
 
         if(!$this->is_table($tblname)){
-            echo "Error: Failed to update data because (".$tblname.") table could not be found.\n";
+            echo "Error: Failed to update data because '".$tblname."' table could not be found.\n";
             return false;
         }
 
@@ -637,21 +636,21 @@ class Mind {
 
             $special = $this->increments($tblname);
             if(empty($special)){
-                echo "Error: Because the (".$tblname.") table does not have a column with the auto_increment task, you must specify the column name.\n";
+                echo "Error: Because the '".$tblname."' table does not have a column with the auto_increment task, you must specify the column name.\n";
                 return false;
             }
 
         }
 
         if(!$this->do_have($tblname, $id, $special)){
-            echo "Error: Update failed because the (".$special.") value could not be found as (".$id.").\n";
+            echo "Error: Update failed because the '".$special."'value could not be found as '".$id."'.\n";
             return false;
         }
 
         foreach ($arr as $name => $value) {
 
             if(!$this->is_column($tblname, $name)){
-                echo "Error: Update operation failed because there is no column named (".$name.").\n";
+                echo "Error: Update operation failed because there is no column named '".$name."'.\n";
               return false;
             }
 
@@ -677,7 +676,7 @@ class Mind {
         $ids = array();
 
         if(!$this->is_table($tblname)){
-            echo "Error: Failed to delete the record because the database table with the name (".$tblname.") could not be found.\n";
+            echo "Error: Failed to delete the record because the database table with the name '".$tblname."' could not be found.\n";
             return false;
         }
 
@@ -686,7 +685,7 @@ class Mind {
             $special = $this->increments($tblname);
 
             if(empty($special)){
-                echo "Error: Because the (".$tblname.") table does not have a column with the auto_increment task, you must specify the column name.\n";
+                echo "Error: Because the '".$tblname."' table does not have a column with the auto_increment task, you must specify the column name.\n";
                 return false;
             }
 
@@ -707,12 +706,12 @@ class Mind {
         foreach ($ids as $id) {
 
             if(!$this->do_have($tblname, $id, $special)){
-                echo "Error: Delete failed because the (".$special.") value could not be found as (".$id.").\n";
+                echo "Error: Delete failed because the '".$special."'value could not be found as '".$id."'.\n";
                 return false;
             }
 
             if(!$this->is_column($tblname, $special)){
-                echo "The deletion operation failed because the column (".$special.") does not exist.\n";
+                echo "The deletion operation failed because the column '".$special."' does not exist.\n";
                 return false;
             }
 
@@ -736,11 +735,11 @@ class Mind {
         $column  = '*';
         $special = '';
         $keyword = '';
+        $getdata = array();
 
-        if($this->is_table($tblname)){
-            $getdata = array();
-        } else {
-            $getdata = '';
+        if(!$this->is_table($tblname)){
+            echo "Error: The process failed because there was no table named '".$tblname."'.\n";
+            return false;
         }
 
         $sql = 'SHOW COLUMNS FROM '.$tblname;
@@ -757,6 +756,12 @@ class Mind {
                     $arr['column']= array($arr['column']);
                 }
 
+                foreach ($arr['column'] as $column) {
+                    if(!$this->is_column($tblname, $column)){
+                        echo "Error: The process failed because there was no column named '".$column."'.\n";
+                        return false;
+                    }
+                }
                 $arr['column'] = array_intersect($arr['column'], $columns);
                 $column = implode(',', array_values($arr['column']));
 

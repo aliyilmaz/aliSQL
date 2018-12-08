@@ -214,9 +214,10 @@ Eğer güncellenmesi istenen kaydın yer aldığı belirtilen sütun yoksa aşa�
     --Hata: "column" adlı bir sütun olmadığı için güncelleme işlemi başarısız oldu.
 
 
+
 --------delete()
 
-Eğer kaydın silinmesi istenen veritabanı tablosu yoksa aşağıda ki hata meydana gelir.
+Eğer kaydın silineceği veritabanı tablosu yoksa aşağıda ki hata meydana gelir.
     --Error: Failed to delete the record because the database table with the name "tblname" could not be found.
     --Hata: "tblname" adı verilen veritabanı tablosu bulunamadığı için kayıt silinemedi.
 
@@ -232,6 +233,21 @@ Eğer silinmesi istenen kayıt yoksa aşağıda ki hata meydana gelir.
 Eğer silinmesi istenen kaydın yer aldığı belirtilen sütun yoksa aşağıda ki hata meydana gelir.
     --Error: The deletion operation failed because the column "column" does not exist.
     --Hata: Silme işlemi başarısız oldu, çünkü "column" mevcut değil.
+
+
+
+--------get()
+
+Eğer verilerin okunacağı veritabanı tablosu yoksa aşağıda ki hata meydana gelir.
+    --Error: The process failed because there was no table named 'tblname'.
+    --Hata: İşlem, 'tblname' adında bir tablo olmadığından başarısız oldu.
+
+Eğer tablo da olmayan sütunlardan veri okumak istenirse aşağıda ki hata meydana gelir.
+    --Error: The process failed because there was no column named 'column'.
+    --Hata: İşlem, 'column' adında bir sütun olmadığı için başarısız oldu.
+
+
+
 </pre>
 </body>
 </html>
