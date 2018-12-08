@@ -14,7 +14,7 @@ $Mind = new Mind();
  * @return  bool
  * */
 $rows = array(
-    'name'          => 'Ali Yılmaz'.rand(1,100),
+    'name'          => 'Ali Yılmaz1',
 );
 
 $tblname = 'phonebook';
@@ -37,7 +37,7 @@ $rows = array(
 );
 
 $tblname = 'phonebook';
-if(!$Mind->update($tblname, $rows, 'Ali Yılmaz95', 'name')){
+if(!$Mind->update($tblname, $rows, 'Ali Yılmaz', 'name')){
     exit('Error: Record updated. (special)');
 }
 echo '<h5>Record updated. (special)</h5>';

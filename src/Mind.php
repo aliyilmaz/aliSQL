@@ -623,26 +623,29 @@ class Mind {
     public function update($tblname, $arr, $id, $special=null){
 
         if(!$this->is_table($tblname)){
-          return false;
+            echo "Error: Failed to update data because (".$tblname.") table could not be found.\n";
+            return false;
         }
 
         if(empty($special)){
 
             $special = $this->increments($tblname);
-
             if(empty($special)){
+                echo "Error: Because the (".$tblname.") table does not have a column with the auto_increment task, you must specify the column name.\n";
                 return false;
             }
 
         }
 
         if(!$this->do_have($tblname, $id, $special)){
+            echo "Error: The update operation failed because the record specified as (".$special.") number (".$id.") was not found.\n";
             return false;
         }
 
         foreach ($arr as $name => $value) {
 
             if(!$this->is_column($tblname, $name)){
+                echo "Error: Update operation failed because there is no column named (".$name.").\n";
               return false;
             }
 
