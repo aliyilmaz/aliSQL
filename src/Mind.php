@@ -592,7 +592,7 @@ class Mind {
         foreach ($columns as $column){
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
-                echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
+                echo "Error: Data could not be added because a column named non-alphanumeric (".$column.") was specified.\n";
                 return false;
             }
 
