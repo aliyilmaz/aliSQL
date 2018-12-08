@@ -502,7 +502,7 @@ veya
 
 ----------
 
-#### search:where Heryerde aramak
+#### search:where Her yerde aramak
 
 Veritabanı tablosunun tamamında genel eşmele prensibiyle arama yapmak amacıyla kullanılır, `string` veya `dizi` olarak kelimeler gönderilebilir, `where` özelliğin adını, `keyword` aranan kelimeleri temsil etmektedir, bu özelliği kullanmak için `all` parametresi belirtilmelidir.
 
@@ -531,7 +531,7 @@ veya
 
 ----------
 
-#### search:column Sütunlarda aramak
+#### search:column Sütunlar da aramak
 
 Veritabanı tablosunun belirtilen sütunlarında tam veya genel eşleme prensibiyle arama yapmak amacıyla kullanılır, `string` veya `dizi` olarak kelime ve sütunlar gönderilebilir, `column` özelliğin adını, `id`, `title`, `content` ve `tag` hangi sütunlarda arama yapılacağını temsil etmektedir.
 
@@ -674,12 +674,12 @@ veya
 
 ----------
 
-## lastid()
+## newid()
 
 Bir veritabanı tablosuna eklenmesi planlanan kayda tahsis edilecek `auto_increment` değerini göstermeye yarar. `$tblname` tablo adını temsil etmektedir.
 ##### Örnek
     $tblname  = 'users';
-    echo $this->lastid($tblname);
+    echo $this->newid($tblname);
 
 ----------
 
@@ -839,6 +839,7 @@ veya
 Bu fonksiyon, dosya dizisinde bulunan `size` değerinin veya `string` yapıda belirtilen `byte` cinsinden  değerin kontrol edilmesi amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$manuelsize` string yapıda ki değeri, `$size` ise müsade edilen boyut bilgisini temsil etmektedir. Eğer dosya veya belirtilen değer müsade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
  
  **Bilgi:** Dosyalarla çalışırken `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir.
+
 ##### Örnek
 
     $size = '35 KB';
@@ -1138,6 +1139,7 @@ veya
     $this->redirect('https://www.google.com');
 
 ----------
+
 
 ## mindload()
 
