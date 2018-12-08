@@ -638,7 +638,7 @@ class Mind {
         }
 
         if(!$this->do_have($tblname, $id, $special)){
-            echo "Error: The update operation failed because the record specified as (".$special.") number (".$id.") was not found.\n";
+            echo "Error: Update failed because the (".$special.") value could not be found as (".$id.").\n";
             return false;
         }
 
