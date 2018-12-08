@@ -9,7 +9,7 @@ $Mind = new Mind();
  * Add new record.
  *
  * @param string $tblname
- * @param array $rows
+ * @param mixed $rows
  * @return bool
  */
 $rows = array(
