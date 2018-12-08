@@ -61,9 +61,9 @@ echo '<h5>Record delete. (array)</h5>';
  * @return  bool
  * */
 $tblname = 'phonebook';
-$arr = array(8,9);
-if(!$Mind->delete($tblname, $arr)){
-    exit('Error: Record delete. (array)');
+$arr = array('Ali Yılmaz', 'Ali Yılmaz83');
+if(!$Mind->delete($tblname, $arr, 'name')){
+    exit('<br>Error: Record delete. (array|special)');
 }
 echo '<h5>Record delete. (array|special)</h5>';
 

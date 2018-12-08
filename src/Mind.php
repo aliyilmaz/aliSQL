@@ -671,6 +671,7 @@ class Mind {
         $ids = array();
 
         if(!$this->is_table($tblname)){
+            echo "Error: Failed to delete the record because the database table with the name (".$tblname.") could not be found.\n";
             return false;
         }
 
@@ -679,6 +680,7 @@ class Mind {
             $special = $this->increments($tblname);
 
             if(empty($special)){
+                echo "Error: Because the (".$tblname.") table does not have a column with the auto_increment task, you must specify the column name.\n";
                 return false;
             }
 
@@ -687,17 +689,10 @@ class Mind {
         if(is_array($id)){
 
           foreach ($id as $key => $value) {
-              if(!$this->do_have($tblname, $value, $special)){
-                return false;
-              }
               $ids[] = $value;
           }
 
         } else {
-
-          if(!$this->do_have($tblname, $id, $special)){
-            return false;
-          }
 
           $ids[] = $id;
 
@@ -705,8 +700,18 @@ class Mind {
 
         foreach ($ids as $id) {
 
-          $sql = 'DELETE FROM '.$tblname.' WHERE '.$special.'='.$id;
-          $this->prepare($sql);
+            if(!$this->do_have($tblname, $id, $special)){
+                echo "Error: Delete failed because the (".$special.") value could not be found as (".$id.").\n";
+                return false;
+            }
+
+            if(!$this->is_column($tblname, $special)){
+                echo "The deletion operation failed because the column (".$special.") does not exist.\n";
+                return false;
+            }
+
+            $sql = 'DELETE FROM '.$tblname.' WHERE '.$special.'='.$id;
+            $this->prepare($sql);
 
         }
 

@@ -188,23 +188,42 @@ Kaydın ekleneceği sütun yoksa aşağıda ki hata meydana gelir.
 
 --------update()
 
-Kaydın güncelleneceği tablo yoksa aşağıda ki hata meydana gelir.
+Eğer kaydın güncelleneceği tablo yoksa aşağıda ki hata meydana gelir.
     --Error: Failed to update data because "tblname" table could not be found.
     --Hata: "tblname" tablosu bulunamadığı için veriler güncellenemedi.
 
-Kaydın güncelleneceği tablo da auto_increment görevi tanımlanmış sütun yoksa aşağıda ki hata meydana gelir.
+Eğer kaydın güncelleneceği tablo da auto_increment görevi tanımlanmış sütun yoksa ve sütun adı belirtilmemiş ise
+aşağıda ki hata meydana gelir.
     --Error: Because the "tblname" table does not have a column with the auto_increment task, you must specify the column name.
     --Hata: "tblname" tablosunun auto_increment görevine sahip bir sütunu olmadığından, sütun adını belirtmeniz gerekir.
 
-Güncellenmesi istenen kaydın olmaması halinde aşağıda ki hata meydana gelir.
+Eğer güncellenmesi istenen kayıt yoksa halinde aşağıda ki hata meydana gelir.
     --Error: Update failed because the "id" value could not be found as "3".
     --Hata: Güncelleme başarısız oldu, çünkü "id" değeri "3" olarak bulunamadı.
 
-Güncellenmesi istenen kaydın yer aldığı belirtilen sütun yoksa aşağıda ki hata meydana gelir.
+Eğer güncellenmesi istenen kaydın yer aldığı belirtilen sütun yoksa aşağıda ki hata meydana gelir.
     --Error: Update operation failed because there is no column named "column".
     --Hata: "column" adlı bir sütun olmadığı için güncelleme işlemi başarısız oldu.
 
 
+--------delete()
+
+Eğer kaydın silinmesi istenen veritabanı tablosu yoksa aşağıda ki hata meydana gelir.
+    --Error: Failed to delete the record because the database table with the name "tblname" could not be found.
+    --Hata: "tblname" adı verilen veritabanı tablosu bulunamadığı için kayıt silinemedi.
+
+Eğer kaydın silineceği tablo da auto_increment görevi tanımlanmış sütun yoksa ve sütun adı belirtilmemiş ise
+aşağıda ki hata meydana gelir.
+    --Error: Because the "tblname" table does not have a column with the auto_increment task, you must specify the column name.
+    --Hata: "tblname" tablosunun auto_increment görevine sahip bir sütunu olmadığından, sütun adını belirtmeniz gerekir.
+
+Eğer silinmesi istenen kayıt yoksa aşağıda ki hata meydana gelir.
+    --Error: Delete failed because the "id" value could not be found as "3".
+    --Hata: Silme başarısız oldu, çünkü "id" değeri "3" olarak bulunamadı.
+
+Eğer silinmesi istenen kaydın yer aldığı belirtilen sütun yoksa aşağıda ki hata meydana gelir.
+    --Error: The deletion operation failed because the column "column" does not exist.
+    --Hata: Silme işlemi başarısız oldu, çünkü "column" mevcut değil.
 </pre>
 </body>
 </html>
