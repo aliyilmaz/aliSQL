@@ -881,10 +881,9 @@ class Mind {
                 $special .= ' LIMIT '.$start.$end;
 
             }
-
-
+            
             $sql     = 'SELECT '.$column.' FROM '.$tblname.' '.$special;
-            echo $sql;
+
             $query   = $this->prepare($sql);
 
             if(!$query){
