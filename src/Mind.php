@@ -8,7 +8,7 @@ namespace Mind;
  * @license    GNU General Public License v3.0
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for Php.
- * @github     https://github.com/aliyilmaz/Mind
+ * @url        https://github.com/aliyilmaz/Mind
  *
  */
 class Mind {
