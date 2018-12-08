@@ -23,6 +23,8 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
     --Error: The database could not be created because "dbname" is not alphanumeric.
     --Hata: "dbname" alfasayısal olmadığından veritabanı oluşturulamadı.
 
+
+
 --------createtable()
 
 Eğer tablo zaten mevcutsa aşağıda ki hata meydana gelir.
@@ -51,6 +53,8 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
     --Error: The table column could not be created because "column" is not an alphanumeric name.
     --Hata: Tablo sütunu oluşturulamadı çünkü "column" bir alfasayısal ad değil.
 
+
+
 --------createcolumn()
 
 Eğer varolmayan bir tabloda sütun oluşturmak istenirse aşağıda ki hata meydana gelir.
@@ -77,6 +81,7 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
     --Hata: Tablo sütunu oluşturulamadı çünkü "column" bir alfasayısal ad değil.
 
 
+
 --------deletedb()
 
 Eğer silinmek istenen veritabanı adı, veritabanı adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
@@ -88,6 +93,8 @@ Eğer silinmek istenen veritabanı yoksa aşağıda ki hata meydana gelir.
     --Error: Unable to delete because there is no database named  "dbname".
     --Hata: "dbname" adında bir veritabanı olmadığı için silinemiyor.
 
+
+
 --------deletetable()
 
 Eğer silinmek istenen tablo adı veritabanı tablo adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
@@ -98,6 +105,7 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
 Eğer silinmek istenen tablo yoksa aşağıda ki hata meydana gelir.
     --Error: Unable to delete because there is no table named "tblname".
     --Hata: "tblname" adında bir tablo olmadığı için silinemiyor.
+
 
 
 --------deletecolumn()
@@ -114,6 +122,51 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
 Eğer silinmek istenen sütun yoksa aşağıda ki hata meydana gelir.
     --Error: You cannot delete a non-existing column named "column".
     --Hata: "column" adlı mevcut olmayan sütunu silemezsiniz.
+
+
+
+--------cleardb()
+
+Eğer temizlenmek istenen veritabanı, veritabanı adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: Only the database with the alphanumeric name can be cleared. "dbname" is not alphanumeric.
+    --Hata: Yalnızca alfasayısal adı olan veritabanı temizlenebilir. "dbname" alfasayısal değil.
+
+Eğer temizlenmek istenen veritabanı yoksa aşağıda ki hata meydana gelir.
+    --Error: Unable to clear because there is no database named "dbname".
+    --Hata: "dbname" adında bir veritabanı olmadığı için temizlenemedi.
+
+
+
+--------cleartable()
+
+Eğer temizlenmek istenen veritabanı tablosu, veritabanı tablo adı kurallarına uygun değilse, yani alfasayısal ve
+alttan tire dışında karakterler içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: Only tables with an alphanumeric name can be cleared. "tblname" is not alphanumeric.
+    --Hata: Yalnızca alfasayısal adı olan tablolar temizlenebilir. "tblname" alfasayısal değil.
+
+Eğer temizlenmek istenen veritabanı tablosu yoksa aşağıda ki hata meydana gelir.
+    --Error: Unable to clear because there is no table named  "tblname".
+    --Hata: "tblname" adında bir tablo olmadığından temizlenemedi.
+
+
+
+--------clearcolumn()
+
+Eğer temizlenmek istenen sütunun yer aldığı belirtilen tablo yoksa aşağıda ki hata meydana gelir.
+    --Error: The request to clean the column resulted in a negative because there was no table named "tblname".
+    --Hata: Sütun temizleme isteği, "tblname" adında bir tablo olmadığından olumsuz sonuçlandı.
+
+Eğer temizlenmek istenen sütun adı, veritabanı sütun kurallarına uygun değilse, yani alfasayısal ve alttan tire
+    dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: The column named "column" could not be created because it is not alphanumeric.
+    --Hata: "column" adlı sütun, alfasayısal olmadığından oluşturulamadı.
+
+Eğer temizlemek istenen sütun veritabanı tablosunda yoksa aşağıda ki hata meydana gelir.
+    --Error: You cannot clear a non-existing column named "column".
+    --Hata: "column" adlı mevcut olmayan sütunu temizleyemezsiniz.
+
+
 
 --------insert()
 

@@ -460,7 +460,7 @@ class Mind {
         foreach ($dbnames as $dbname) {
 
             if(!preg_match('/^[A-Za-z0-9_]+$/', $dbname)){
-                echo "Error: Only databases with an alphanumeric name can be cleared. (".$dbname.") is not alphanumeric.\n";
+                echo "Error: Only the database with the alphanumeric name can be cleared. (".$dbname.") is not alphanumeric.\n";
                 return false;
             }
 
@@ -590,6 +590,11 @@ class Mind {
 
 
         foreach ($columns as $column){
+
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $column)){
+                echo "Error: The column named (".$column.") could not be created because it is not alphanumeric.\n";
+                return false;
+            }
 
             if(!$this->is_column($tblname, $column)){
                 echo "Error: You cannot add data to the non-existing column named (".$column.").\n";
