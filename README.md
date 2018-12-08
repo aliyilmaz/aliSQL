@@ -1149,7 +1149,7 @@ Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebili
 
 Öncelikle `$cache` dosyaları, ardından `$file` değişkenlerinde bulunan dosyalar projeye dahil edilir. `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
-#####Örnek
+##### Örnek
 
     $this->mindload('app/views/home');
 
