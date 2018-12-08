@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<pre>
+
+-----------------------------HATA SENARYOLARI-----------------------------
+
+--------createdb
+
+Eğer veritabanı zaten mevcutsa aşağıda ki hata meydana gelir.
+    --Error: A database named "dbname" already exists.
+    --Hata: "dbname" adlı bir veritabanı zaten var.
+
+Eğer oluşturulmak istenen veritabanı adı, veritabanı adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: The database could not be created because "dbname" is not alphanumeric.
+    --Hata: "dbname" alfasayısal olmadığından veritabanı oluşturulamadı.
+
+--------createtable()
+
+Eğer tablo zaten mevcutsa aşağıda ki hata meydana gelir.
+    --Error: A Table named "tablename" already exists.
+    --Hata: "tablename" adlı bir tablo zaten var.
+
+Eğer oluşturulmak istenen tablo adı, veritabanı tablo adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: The database table could not be created because "tablename" is not an alphanumeric name.
+    --Hata: "tablename" bir alfasayısal ad olmadığı için veritabanı tablosu oluşturulamadı.
+
+Eğer sütun adı ve sütun türünü ayıran : iki nokta üst üste sembolünden 1'den fazla varsa aşağıda ki hata meydana gelir.
+    --Error: You can use the (:) symbol once.
+    --Hata: (:) sembolünü bir kez kullanabilirsiniz.
+
+Eğer auto_increment değeri birden çok sütuna tanımlanmışsa aşağıda ki hata meydana gelir.
+    --Error: The auto-increment feature can only be in one column.
+    --Hata: auto-increment özelliği yalnızca bir sütunda olabilir.
+
+Eğer sütun adı birden çok kez belirtilmişse aşağıda ki hata meydana gelir.
+    --Error: The column named "column" already exists.
+    --Hata: "column" adlı sütun zaten mevcut.
+
+Eğer oluşturulmak istenen sütun adı, veritabanı sütun adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: The table column could not be created because "column" is not an alphanumeric name.
+    --Hata: Tablo sütunu oluşturulamadı çünkü "column" bir alfasayısal ad değil.
+
+--------createcolumn()
+
+Eğer varolmayan bir tabloda sütun oluşturmak istenirse aşağıda ki hata meydana gelir.
+    --Error: Since there is no table named "tblname", a column cannot be created in a table with that name.
+    --Hata: "tblname" adında bir tablo olmadığından, bu ada sahip bir tabloda bir sütun oluşturulamıyor.
+
+Eğer sütun adı ve sütun türünü ayıran : iki nokta üst üste sembolünden 1'den fazla varsa aşağıda ki hata meydana gelir.
+    --Error: You can use the (:) symbol once.
+    --Hata: (:) sembolünü bir kez kullanabilirsiniz.
+
+Eğer birden çok sütuna auto_increment görevi tanımlanmışsa ve tabloda daha önce auto_increment değerine sahip sütun
+oluşturulmuşsa aşağıda ki hata meydana gelir.
+    --Error: The auto-increment feature can only be in one column.
+    --Hata: auto_increment özelliği yalnızca bir sütunda olabilir.
+
+Eğer birden çok aynı isme sahip sütun adı belirtilmiş ise veya daha önce oluşturulmuş bir sütun adı belirtilmiş ise
+aşağıda ki hata meydana gelir.
+    --Error: The column named "column" already exists.
+    --Hata: "column" adlı sütun zaten mevcut.
+
+Eğer oluşturulmak istenen sütun adı, veritabanı sütun adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: The table column could not be created because "column" is not an alphanumeric name.
+    --Hata: Tablo sütunu oluşturulamadı çünkü "column" bir alfasayısal ad değil.
+
+
+--------deletedb()
+
+Eğer silinmek istenen veritabanı adı, veritabanı adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: Only database with an alphanumeric name can be deleted. "dbname" is not alphanumeric.
+    --Hata: Yalnızca alfasayısal adı olan veritabanı silinebilir. "dbname" alfasayısal değil.
+
+Eğer silinmek istenen veritabanı yoksa aşağıda ki hata meydana gelir.
+    --Error: Unable to delete because there is no database named  "dbname".
+    --Hata: "dbname" adında bir veritabanı olmadığı için silinemiyor.
+
+--------deletetable()
+
+Eğer silinmek istenen tablo adı veritabanı tablo adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: Only tables with an alphanumeric name can be deleted. "tblname" is not alphanumeric.
+    --Hata: Yalnızca alfasayısal adı olan tablolar silinebilir. "tblname" alfasayısal değil.
+
+Eğer silinmek istenen tablo yoksa aşağıda ki hata meydana gelir.
+    --Error: Unable to delete because there is no table named "tblname".
+    --Hata: "tblname" adında bir tablo olmadığı için silinemiyor.
+
+
+--------deletecolumn()
+
+Eğer silinmek istenen sütunun bulunduğu tablo yoksa aşağıda ki hata meydana gelir.
+    --Error: The request to delete the column resulted in a negative because there was no table named "tblname".
+    --Hata: "tblname" adında bir tablo olmadığından sütunu silme isteği olumsuz sonuçlandı.
+
+Eğer silinmek istenen sütun adı, veritabanı sütun adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+    --Error: The column named "column" could not be delete because it is not alphanumeric.
+    --Hata: "column" adlı sütun, alfasayısal olmadığından silinemedi.
+
+Eğer silinmek istenen sütun yoksa aşağıda ki hata meydana gelir.
+    --Error: You cannot delete a non-existing column named "column".
+    --Hata: "column" adlı mevcut olmayan sütunu silemezsiniz.
+
+--------insert()
+
+Kaydın ekleneceği tablo yoksa aşağıda ki hata meydana gelir.
+    --Error: Failed to add data because "tblname" table could not be found.
+    --Hata: "tblname" tablosu bulunamadığı için veri eklenemedi.
+
+
+</pre>
+</body>
+</html>
