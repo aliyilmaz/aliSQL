@@ -18,7 +18,7 @@ $arr = array(
 $tblname = 'phonebook';
 $get = $Mind->get($tblname, $arr);
 
-if(empty($get)){
+if(!$get){
     exit('Error: Record reading. (column[string])');
 } else {
     echo '<pre>';
@@ -43,7 +43,7 @@ $arr = array(
 $tblname = 'phonebook';
 $get = $Mind->get($tblname, $arr);
 
-if(empty($get)){
+if(!$get){
     exit('Error: Record reading. (column[array])');
 } else {
     echo '<pre>';
