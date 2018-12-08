@@ -1392,6 +1392,3 @@ veya
     print_r($data);
 
 
-
-
-[]: https://github.com/aliyilmaz/Mind/archive/master.zip
