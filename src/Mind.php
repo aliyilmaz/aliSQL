@@ -376,18 +376,23 @@ class Mind {
 
         if(is_array($tblname)){
             foreach ($tblname as $key => $value) {
-                if(!$this->is_table($value)){
-                    return false;
-                }
                 $tblnames[] = $value;
             }
         } else {
-            if(!$this->is_table($tblname)){
-                return false;
-            }
             $tblnames[] = $tblname;
         }
         foreach ($tblnames as $tblname) {
+
+            if(!preg_match('/^[A-Za-z0-9_]+$/', $tblname)){
+                echo "Error: Only tables with an alphanumeric name can be deleted. (".$tblname.") is not alphanumeric.\n";
+                return false;
+            }
+
+            if(!$this->is_table($tblname)){
+                echo "Error: Unable to delete because there is no table named (".$tblname.").\n";
+                return false;
+            }
+
             $sql = 'DROP TABLE '.$tblname;
             $this->prepare($sql);
         }

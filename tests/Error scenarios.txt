@@ -67,9 +67,16 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
 --Hata: Tablo sütunu oluşturulamadı çünkü "column" bir alfasayısal ad değil.
 
 
+--------deletetable()
 
+Eğer silinmek istenen tablo adı veritabanı tablo adı kurallarına uygun değilse, yani alfasayısal ve alttan tire
+dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
+--Error: Only tables with an alphanumeric name can be deleted. "tblname" is not alphanumeric.
+--Hata: Yalnızca alfasayısal adı olan tablolar silinebilir. "tblname" alfasayısal değil.
 
-
+Eğer silinmek istenen tablo yoksa aşağıda ki hata meydana gelir.
+--Error: Unable to delete because there is no table named "tblname".
+--Hata: "tblname" adında bir tablo olmadığı için silinemiyor.
 
 
 
