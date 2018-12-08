@@ -38,8 +38,8 @@ dışında karakter içeriyorsa aşağıda ki hata meydana gelir.
     --Hata: "tablename" bir alfasayısal ad olmadığı için veritabanı tablosu oluşturulamadı.
 
 Eğer sütun adı ve sütun türünü ayıran : iki nokta üst üste sembolünden 1'den fazla varsa aşağıda ki hata meydana gelir.
-    --Error: You can use the (:) symbol once.
-    --Hata: (:) sembolünü bir kez kullanabilirsiniz.
+    --Error: You can use the ':' symbol once.
+    --Hata: ':' sembolünü bir kez kullanabilirsiniz.
 
 Eğer auto_increment değeri birden çok sütuna tanımlanmışsa aşağıda ki hata meydana gelir.
     --Error: The auto-increment feature can only be in one column.
@@ -63,8 +63,8 @@ Eğer varolmayan bir tabloda sütun oluşturmak istenirse aşağıda ki hata mey
     --Hata: "tblname" adında bir tablo olmadığından, bu ada sahip bir tabloda bir sütun oluşturulamıyor.
 
 Eğer sütun adı ve sütun türünü ayıran : iki nokta üst üste sembolünden 1'den fazla varsa aşağıda ki hata meydana gelir.
-    --Error: You can use the (:) symbol once.
-    --Hata: (:) sembolünü bir kez kullanabilirsiniz.
+    --Error: You can use the ':' symbol once.
+    --Hata: ':' sembolünü bir kez kullanabilirsiniz.
 
 Eğer birden çok sütuna auto_increment görevi tanımlanmışsa ve tabloda daha önce auto_increment değerine sahip sütun
 oluşturulmuşsa aşağıda ki hata meydana gelir.
@@ -246,7 +246,22 @@ Eğer tablo da olmayan sütunlardan veri okumak istenirse aşağıda ki hata mey
     --Error: The process failed because there was no column named 'column'.
     --Hata: İşlem, 'column' adında bir sütun olmadığı için başarısız oldu.
 
+Eğer arama yapılacak sütunlar veritabanı tablosunda yoksa aşağıda ki hata meydana gelir.
+    --Error: The search operation failed because there is no column named 'column'.
+    --Hata: Arama işlemi başarısız oldu, çünkü 'column' adlı sütun yok.
 
+Eğer nasıl arama yapılacağının belirtildiği 'where' kısmında 'all' parametresi dışında bir değer varsa aşağıda ki
+hata meydana gelir.
+    --Error: Only the 'all' parameter can be specified for the 'where' property.
+    --'where' özelliği için yalnızca 'all' parametresi belirtilebilir.
+
+Eğer veriler sıralanmak istenirse ve 'ASC' ve 'DESC' dışında bir parametre belirtilirse aşağıda ki hata meydana gelir.
+    --Error: Only 'ASC' and 'DESC' parameters can be defined in the 'sort' property.
+    --Hata: 'sort' özelliğinde sadece 'ASC' ve 'DESC' parametreleri tanımlanabilir.
+
+Eğer sütun adı ve sıralama türünü ayıran : iki nokta üst üste sembolünden 1'den fazla varsa aşağıda ki hata meydana gelir.
+    --Error: In the 'sort' feature, you can use the ':' symbol only once.
+    --Hata: 'sort' özelliğinde, ':' sembolünü yalnızca bir kez kullanabilirsiniz.
 
 </pre>
 </body>

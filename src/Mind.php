@@ -188,7 +188,7 @@ class Mind {
                     $symbolsTotal = count(explode(':', $item));
 
                     if($symbolsTotal != 2){
-                        echo "Error: You can use the (:) symbol once.\n";
+                        echo "Error: You can use the ':' symbol once.\n";
                         return false;
                     }
 
@@ -278,7 +278,7 @@ class Mind {
                     $symbolsTotal = count(explode(':', $item));
 
                     if($symbolsTotal != 2){
-                        echo "Error: You can use the (:) symbol once.\n";
+                        echo "Error: You can use the ':' symbol once.\n";
                         return false;
                     }
 
@@ -756,9 +756,9 @@ class Mind {
                     $arr['column']= array($arr['column']);
                 }
 
-                foreach ($arr['column'] as $column) {
-                    if(!$this->is_column($tblname, $column)){
-                        echo "Error: The process failed because there was no column named '".$column."'.\n";
+                foreach ($arr['column'] as $xcolumn) {
+                    if(!$this->is_column($tblname, $xcolumn)){
+                        echo "Error: The process failed because there was no column named '".$xcolumn."'.\n";
                         return false;
                     }
                 }
@@ -777,11 +777,26 @@ class Mind {
                         $arr['search']['column'] = array($arr['search']['column']);
                     }
 
+                    foreach ($arr['search']['column'] as $xcolumn) {
+
+                        if(!$this->is_column($tblname, $xcolumn)){
+                            echo "Error: The search operation failed because there is no column named '".$xcolumn."'.\n";
+                            return false;
+                        }
+
+                    }
+
                     $columns = array_intersect($arr['search']['column'], $columns);
                 }
 
-                if(!empty($arr['search']['where']) AND $arr['search']['where']=='all'){
-                    $p = '%';
+                if(!empty($arr['search']['where'])){
+
+                    if($arr['search']['where']=='all'){
+                        $p = '%';
+                    } else {
+                        echo "Error: Only the 'all' parameter can be specified for the 'where' property.\n";
+                        return false;
+                    }
                 } else {
                     $p = '';
                 }
@@ -805,24 +820,57 @@ class Mind {
 
             if(!empty($arr['sort'])){
 
-                list($columname, $sort) = explode(':', $arr['sort']);
+                $ssort = explode(':', trim($arr['sort'], ':'));
 
-                if(ctype_alpha($sort) AND in_array($sort, array('ASC','DESC'))){
-                    $special .= ' ORDER BY '.$columname.' '.$sort;
+                if(count($ssort)==2){
+                    list($columname, $sort) = explode(':', $arr['sort']);
+
+                    if(ctype_alpha($sort) AND in_array($sort, array('ASC','DESC'))){
+                        $special .= ' ORDER BY '.$columname.' '.$sort;
+                    } else {
+                        echo "Error: Only 'ASC' and 'DESC' parameters can be defined in the 'sort' property.\n";
+                        return false;
+                    }
+                } else {
+
+                    echo "Error: In the 'sort' feature, you can use the ':' symbol only once.\n";
+                    return false;
                 }
 
             }
 
             if(!empty($arr['limit'])){
 
-                if(!empty($arr['limit']['start']) AND $arr['limit']['start']>0){
-                    $start = $arr['limit']['start'].',';
+                if(!empty($arr['limit']['start'])){
+
+                    if(ctype_digit($arr['limit']['start'])){
+
+                        if($arr['limit']['start']>0){
+                            $start = $arr['limit']['start'].',';
+                        }
+
+                    } else {
+
+                        echo "Error: An integer value must be entered in the 'start' property.\n";
+                        return false;
+                    }
+
                 } else {
                     $start = '0,';
                 }
 
-                if(!empty($arr['limit']['end']) AND $arr['limit']['end']>0){
-                    $end = $arr['limit']['end'];
+                if(!empty($arr['limit']['end'])){
+
+                    if(ctype_digit($arr['limit']['end'])){
+
+                        if($arr['limit']['end']>0){
+                            $end = $arr['limit']['end'];
+                        }
+                    } else {
+                        echo "Error: An integer value must be entered in the 'end' property.\n";
+                        return false;
+                    }
+
                 } else {
 
                     $sql     = 'SELECT * FROM '.$tblname;
@@ -834,7 +882,9 @@ class Mind {
 
             }
 
+
             $sql     = 'SELECT '.$column.' FROM '.$tblname.' '.$special;
+            echo $sql;
             $query   = $this->prepare($sql);
 
             if(!$query){
