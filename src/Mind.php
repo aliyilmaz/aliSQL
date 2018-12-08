@@ -583,6 +583,7 @@ class Mind {
         }
 
         if(!is_array($arr)){
+            echo "Error: The record to be added must be in the form of an array. ('column'=> 'value').\n";
             return false;
         }
 
@@ -624,6 +625,11 @@ class Mind {
 
         if(!$this->is_table($tblname)){
             echo "Error: Failed to update data because (".$tblname.") table could not be found.\n";
+            return false;
+        }
+
+        if(!is_array($arr)){
+            echo "Error: The record to be updated must be in the form of an array. ('column'=> 'value').\n";
             return false;
         }
 

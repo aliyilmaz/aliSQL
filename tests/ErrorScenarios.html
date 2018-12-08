@@ -175,6 +175,10 @@ Kaydın ekleneceği tablo yoksa aşağıda ki hata meydana gelir.
     --Error: Failed to add data because "tblname" table could not be found.
     --Hata: "tblname" tablosu bulunamadığı için veri eklenemedi.
 
+Kayıt dizi biçiminde gönderilmemişse aşağıda ki hata meydana gelir.
+    --Error: The record to be added must be in the form of an array. ("column" => "value").
+    --Hata: Eklenecek kayıt bir dizi şeklinde olmalıdır. ("column" => "value").
+
 Kaydın ekleneceği sütun adı, veritabanı sütun kurallarına uygun değilse, yani alfasayısal ve alttan tire dışında
 karakter içeriyorsa aşağıda ki hata meydana gelir.
     --Error: Data could not be added because a column named non-alphanumeric "column" was specified.
@@ -191,6 +195,10 @@ Kaydın ekleneceği sütun yoksa aşağıda ki hata meydana gelir.
 Eğer kaydın güncelleneceği tablo yoksa aşağıda ki hata meydana gelir.
     --Error: Failed to update data because "tblname" table could not be found.
     --Hata: "tblname" tablosu bulunamadığı için veriler güncellenemedi.
+
+Eğer güncellenecek kayıt dizi biçiminde gönderilmemişse aşağıda ki hata meydana gelir.
+    --Error: The record to be updated must be in the form of an array. ("column" => "value").
+    --Hata: Güncellenecek kayıt bir dizi şeklinde olmalıdır. ("column" => "value").
 
 Eğer kaydın güncelleneceği tablo da auto_increment görevi tanımlanmış sütun yoksa ve sütun adı belirtilmemiş ise
 aşağıda ki hata meydana gelir.
