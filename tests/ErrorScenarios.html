@@ -246,14 +246,18 @@ Eğer tablo da olmayan sütunlardan veri okumak istenirse aşağıda ki hata mey
     --Error: The process failed because there was no column named 'column'.
     --Hata: İşlem, 'column' adında bir sütun olmadığı için başarısız oldu.
 
-Eğer arama yapılacak sütunlar veritabanı tablosunda yoksa aşağıda ki hata meydana gelir.
-    --Error: The search operation failed because there is no column named 'column'.
-    --Hata: Arama işlemi başarısız oldu, çünkü 'column' adlı sütun yok.
-
 Eğer nasıl arama yapılacağının belirtildiği 'where' kısmında 'all' parametresi dışında bir değer varsa aşağıda ki
 hata meydana gelir.
     --Error: Only the 'all' parameter can be specified for the 'where' property.
     --'where' özelliği için yalnızca 'all' parametresi belirtilebilir.
+
+Eğer arama yapılacak sütunlar veritabanı tablosunda yoksa aşağıda ki hata meydana gelir.
+    --Error: The search operation failed because there is no column named 'column'.
+    --Hata: Arama işlemi başarısız oldu, çünkü 'column' adlı sütun yok.
+
+Eğer equel özelliğinde belirtilen sütunlar veritabanı tablosunda yoksa aşağıdaki hata meydana gelir.
+    --Error: The search[equal] operation failed because there is no column named '".$name."'.
+    --Hata: 'name' adında bir sütun olmadığı için [equal] araması başarısız oldu.
 
 Eğer veriler sıralanmak istenirse ve 'ASC' ve 'DESC' dışında bir parametre belirtilirse aşağıda ki hata meydana gelir.
     --Error: Only 'ASC' and 'DESC' parameters can be defined in the 'sort' property.
