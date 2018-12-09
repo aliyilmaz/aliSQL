@@ -12,7 +12,7 @@ $Mind = new Mind();
  * @param string   $arr[column]
  * @return  mixed
  * */
-/*$arr = array(
+$arr = array(
     'column' => 'name'
 );
 $tblname = 'phonebook';
@@ -26,7 +26,7 @@ if(!$get){
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (column[string])</h5>';*/
+echo '<h5>Record reading. (column[string])</h5>';
 
 /**
  * Record reading.
@@ -35,7 +35,7 @@ echo '<h5>Record reading. (column[string])</h5>';*/
  * @param mixed   $arr[column]
  * @return  mixed
  * */
-/*$arr = array(
+$arr = array(
     'column' => array(
         'name'
     )
@@ -51,7 +51,7 @@ if(!$get){
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (column[array])</h5>';*/
+echo '<h5>Record reading. (column[array])</h5>';
 
 /**
  * Record reading.
@@ -60,7 +60,7 @@ echo '<h5>Record reading. (column[array])</h5>';*/
  * @param string   $arr[search][keyword]
  * @return  mixed
  * */
-/*$arr = array(
+$arr = array(
     'search' => array(
         'keyword'=>'Ali Yılmaz'
     )
@@ -76,7 +76,7 @@ if(!$get){
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (search[keyword][string])</h5>';*/
+echo '<h5>Record reading. (search[keyword][string])</h5>';
 
 /**
  * Record reading.
@@ -85,7 +85,7 @@ echo '<h5>Record reading. (search[keyword][string])</h5>';*/
  * @param mixed   $arr[search][keyword]
  * @return  mixed
  * */
-/*$arr = array(
+$arr = array(
     'search' => array(
         'keyword'=>array('Ali Yılmaz', 'Ali Yılmaz83')
     )
@@ -101,7 +101,34 @@ if(!$get){
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (search[keyword][array])</h5>';*/
+echo '<h5>Record reading. (search[keyword][array])</h5>';
+
+
+/**
+ * Record reading.
+ *
+ * @param string   $tblname
+ * @param string   $arr[search][where]
+ * @return  mixed
+ * */
+$arr = array(
+    'search' => array(
+        'keyword'=>'Ali Yılmaz',
+        'where'=>'all'
+    )
+);
+$tblname = 'phonebook';
+$get = $Mind->get($tblname, $arr);
+
+if(!$get){
+    exit('Error: Record reading. (search[where])');
+} else {
+    echo '<pre>';
+    print_r($get);
+    echo '</pre>';
+
+}
+echo '<h5>Record reading. (search[where])</h5>';
 
 /**
  * Record reading.
@@ -110,7 +137,7 @@ echo '<h5>Record reading. (search[keyword][array])</h5>';*/
  * @param string   $arr[search][column]
  * @return  mixed
  * */
-/*$arr = array(
+$arr = array(
     'search' => array(
         'keyword'=>'Ali Yılmaz',
         'column'=>'name'
@@ -127,7 +154,7 @@ if(!$get){
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (search[column][string])</h5>';*/
+echo '<h5>Record reading. (search[column][string])</h5>';
 
 /**
  * Record reading.
@@ -136,7 +163,7 @@ echo '<h5>Record reading. (search[column][string])</h5>';*/
  * @param mixed   $arr[search][column]
  * @return  mixed
  * */
-/*$arr = array(
+$arr = array(
     'search' => array(
         'keyword'=>'Ali Yılmaz',
         'column'=>array('name', 'phone')
@@ -153,33 +180,32 @@ if(!$get){
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (search[column][array])</h5>';*/
+echo '<h5>Record reading. (search[column][array])</h5>';
+
 
 /**
  * Record reading.
  *
  * @param string   $tblname
- * @param string   $arr[search][where]
+ * @param mixed   $arr[search][equal]
  * @return  mixed
  * */
 $arr = array(
     'search' => array(
-        'keyword'=>'Ali Yılmaz',
-        'column'=>array('name', 'phone'),
-        'where'=>'all'
+        'equal'=>array('username'=>'admin', 'password'=>'root')
     )
 );
 $tblname = 'phonebook';
 $get = $Mind->get($tblname, $arr);
 
 if(!$get){
-    exit('Error: Record reading. (search[where])');
+    exit('Error: Record reading. (search[equal])');
 } else {
     echo '<pre>';
     print_r($get);
     echo '</pre>';
 
 }
-echo '<h5>Record reading. (search[column])</h5>';
+echo '<h5>Record reading. (search[equal])</h5>';
 
 echo '<h1>The record reading method is running.</h1>';

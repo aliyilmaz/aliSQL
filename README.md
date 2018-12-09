@@ -583,6 +583,27 @@ veya
 
 ----------
 
+#### search:equal Çoklu eşitlik denklemi
+
+Bir kaydın farklı sütunlarına pay edilen verileri sorgulamak amacıyla kullanılır, eğer tümünde veriler varsa o kayıt veya kayıtlar elde edilir. Bu özelliği, kullanıcı girişi sırasında veya `token` ve `api` gibi verilerin aidiyetlerini sorgulamak gerektiğinde kullanmak mümkündür.
+
+****Bilgi:**** Bu özellik kullanıldığında `search:keyword`, `search:where` ve `search:column` özellikleri gözardı edilir.
+
+##### Örnek
+
+    $par = array(
+        'username'=>'admin', 
+        'password'=>'root'
+    );
+    $arr = array(
+        'search' => array(
+            'equal'=>$par
+        )
+    );
+    $tblname = 'phonebook';
+    print_r($this->get($tblname, $arr));
+----------
+
 #### format: Sonuçların formatı
 
 Veritabanı tablosundan elde edilen verilerin çıktı formatını belirlemek amacıyla kullanılır, şuan için `dizi` formatı dışında `json` formatını desteklemektedir.

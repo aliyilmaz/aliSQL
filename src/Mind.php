@@ -732,6 +732,7 @@ class Mind {
      * */
     public function get($tblname, $arr=null){
 
+
         $column  = '*';
         $special = '';
         $keyword = '';
@@ -767,9 +768,20 @@ class Mind {
 
             }
 
-            if(!empty($arr['search']['keyword'])){
 
-                $keyword = $arr['search']['keyword'];
+            $p       = '';
+            if(!empty($arr['search']['where'])){
+
+                if($arr['search']['where']=='all'){
+                    $p = '%';
+                } else {
+                    echo "Error: Only the 'all' parameter can be specified for the 'where' property.\n";
+                    return false;
+                }
+            }
+
+
+            if(!empty($arr['search']['keyword'])){
 
                 if(!empty($arr['search']['column'])){
 
@@ -789,17 +801,8 @@ class Mind {
                     $columns = array_intersect($arr['search']['column'], $columns);
                 }
 
-                if(!empty($arr['search']['where'])){
 
-                    if($arr['search']['where']=='all'){
-                        $p = '%';
-                    } else {
-                        echo "Error: Only the 'all' parameter can be specified for the 'where' property.\n";
-                        return false;
-                    }
-                } else {
-                    $p = '';
-                }
+                $keyword = $arr['search']['keyword'];
 
                 if(is_array($keyword)){
                     foreach ($keyword as $key => $value) {
@@ -817,6 +820,23 @@ class Mind {
                     $special = 'WHERE '.$content.' LIKE \''.$p.$keyword.$p.'\'';
                 }
             }
+
+            if(!empty($arr['search']['equal']) AND is_array($arr['search']['equal'])){
+                $special = 'WHERE ';
+                $content = array();
+                foreach ($arr['search']['equal'] as $name => $value) {
+
+                    if(!$this->is_column($tblname, $name)){
+                        echo "Error: The search[equal] operation failed because there is no column named '".$name."'.\n";
+                        return false;
+                    }
+
+                    $xcontent   = $name.'=\''.$value.'\'';
+                    $content[]  = $xcontent;
+                }
+                $special   .= implode(' AND ', $content);
+            }
+
 
             if(!empty($arr['sort'])){
 
@@ -884,6 +904,8 @@ class Mind {
             
             $sql     = 'SELECT '.$column.' FROM '.$tblname.' '.$special;
 
+                       /* print_r($sql);
+                        exit();*/
             $query   = $this->prepare($sql);
 
             if(!$query){
