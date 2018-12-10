@@ -1225,7 +1225,7 @@ class Mind {
     /**
      * URL verification.
      *
-     * @param string   $str
+     * @param string   $url
      * @return  bool
      * */
     public function is_url($url){
@@ -1248,32 +1248,6 @@ class Mind {
         } else {
             return false;
         }
-    }
-
-    /**
-     * Decimal number control.
-     *
-     * @param int   $number
-     * @return bool
-     */
-    public function is_decimal($number){
-
-        if(is_string($number) AND strstr($number,',')){
-
-            $numberClear = trim($number, ',');
-            $numberExplode = explode(',', $numberClear);
-
-            if(count($numberExplode)==2){
-
-                list($m, $d) = $numberExplode;
-
-                if(ctype_digit($m) AND ctype_digit($d)){
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -1782,8 +1756,6 @@ class Mind {
             }
         }
     }
-
-
 
 }
 ?>
