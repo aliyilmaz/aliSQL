@@ -1034,6 +1034,18 @@ veya
 
 ----------
 
+## is_decimal()
+
+Belirtilen parametrenin ondalık bir sayı olup olmadığını kontrol etmek amacıyla kullanılır.
+
+    if($this->is_decimal('7,2')){
+        echo 'Bu ondalık bir sayıdır.';
+    } else {
+        echo 'Bu ondalık bir sayı değildir.';
+    }
+
+----------
+
 ## info()
 
 Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullanılır. Aldığı her iki parametre `string` olarak belirtilmelidir. `$str` yolu, `$type` bilgi türü parametresini temsil etmektedir.

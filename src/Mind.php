@@ -186,9 +186,9 @@ class Mind {
 
                 if(strstr($item, ':')){
 
-                    $symbolsTotal = count(explode(':', $item));
+                    $symbols = explode(':', trim($item,':'));
 
-                    if($symbolsTotal != 2){
+                    if(count($symbols) != 2){
                         echo "Error: You can use the ':' symbol once.\n";
                         return false;
                     }
@@ -276,9 +276,9 @@ class Mind {
 
                 if(strstr($item, ':')){
 
-                    $symbolsTotal = count(explode(':', $item));
+                    $symbols = explode(':', trim($item,':'));
 
-                    if($symbolsTotal != 2){
+                    if(count($symbols) != 2){
                         echo "Error: You can use the ':' symbol once.\n";
                         return false;
                     }
@@ -902,7 +902,7 @@ class Mind {
                 $special .= ' LIMIT '.$start.$end;
 
             }
-            
+
             $sql     = 'SELECT '.$column.' FROM '.$tblname.' '.$special;
             $query   = $this->prepare($sql);
 
@@ -1248,6 +1248,32 @@ class Mind {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Decimal number control.
+     *
+     * @param int   $number
+     * @return bool
+     */
+    public function is_decimal($number){
+
+        if(is_string($number) AND strstr($number,',')){
+
+            $numberClear = trim($number, ',');
+            $numberExplode = explode(',', $numberClear);
+
+            if(count($numberExplode)==2){
+
+                list($m, $d) = $numberExplode;
+
+                if(ctype_digit($m) AND ctype_digit($d)){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -1756,6 +1782,8 @@ class Mind {
             }
         }
     }
+
+
 
 }
 ?>
