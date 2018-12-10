@@ -137,6 +137,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 -   [is_size](#is_size)
 -   [is_color](#is_color)
 -   [is_url](#is_url)
+-   [is_decimal](#is_decimal)
 
 ##### Yardımcı
 
