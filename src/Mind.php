@@ -27,6 +27,7 @@ class Mind {
     public  $post;
     public  $baseurl;
     public  $timezone    =  'Europe/Istanbul';
+    public  $error       =  array();
 
     public function __construct($conf=array()){
 
@@ -903,9 +904,6 @@ class Mind {
             }
             
             $sql     = 'SELECT '.$column.' FROM '.$tblname.' '.$special;
-
-                       /* print_r($sql);
-                        exit();*/
             $query   = $this->prepare($sql);
 
             if(!$query){
