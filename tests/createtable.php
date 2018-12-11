@@ -13,16 +13,16 @@ $Mind = new Mind();
  * @return bool
  */
 $scheme = array(
-    'id:increments',
-    'name:string:120',
-    'phone',
-    'email',
-    'age:int:11',
-    'about:medium',
-    'address:large',
-    'amount:decimal:6,2',
-    'created_at',
-    'updated_at'
+    'id:increments', //AUTO_INCREMENT
+    'name:string:120', //VARCHAR
+    'phone', //TEXT
+    'email', //TEXT
+    'age:int:11', //INT
+    'about:medium', //MEDIUMTEXT
+    'address:large', //LONGTEXT
+    'amount:decimal:6,2', //DECIMAL
+    'created_at', //TEXT
+    'updated_at' //TEXT
 );
 if(!$Mind->createtable('phonebook', $scheme)){
     exit('Error: Create table.');

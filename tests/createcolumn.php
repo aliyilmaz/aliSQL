@@ -13,10 +13,11 @@ $Mind = new Mind();
  * @return  bool
  * */
 $arr = array(
-    'username:small',
-    'password',
-    'address:medium',
-    'about:large'
+    'username:small', //TEXT
+    'password', //TEXT
+    'new_amount:decimal:15,8', //DECIMAL
+    'number:int', //INT
+    'title:string:100' //VARCHAR
 );
 if(!$Mind->createcolumn('phonebook', $arr)){
     exit('Error: Creating a column.');
