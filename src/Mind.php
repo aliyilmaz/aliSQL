@@ -27,7 +27,6 @@ class Mind {
     public  $post;
     public  $baseurl;
     public  $timezone    =  'Europe/Istanbul';
-    public  $error;
 
     public function __construct($conf=array()){
 
