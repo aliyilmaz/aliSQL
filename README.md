@@ -223,7 +223,7 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başar
         'title:string:120',
         'age:int'
     );
-    $this->createtable('users', $scheme);
+    $this->createtable('phonebook', $scheme);
 
 #### int
 
