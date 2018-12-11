@@ -39,7 +39,7 @@ class Mind {
 
         if(
             empty(
-                $_SESSION['timezone']
+            $_SESSION['timezone']
             ) OR in_array(
                 $_SESSION['timezone'], $this->timezones()
             )
@@ -573,13 +573,13 @@ class Mind {
 
         if(is_array($id)){
 
-          foreach ($id as $key => $value) {
-              $ids[] = $value;
-          }
+            foreach ($id as $key => $value) {
+                $ids[] = $value;
+            }
 
         } else {
 
-          $ids[] = $id;
+            $ids[] = $id;
 
         }
 
@@ -614,15 +614,16 @@ class Mind {
         $column  = '*';
         $special = '';
         $keyword = '';
-        $getdata = array();
 
-        if(!$this->is_table($tblname)){
-            return false;
+        if($this->is_table($tblname)){
+            $getdata = array();
+        } else {
+            $getdata = '';
         }
 
         $sql = 'SHOW COLUMNS FROM '.$tblname;
-        $query = $this->prepare($sql);
 
+        $query = $this->prepare($sql);
         if(!empty($query)){
             while($row = $query->fetch_assoc()){
                 $columns[] = $row['Field'];
@@ -639,16 +640,9 @@ class Mind {
 
             }
 
-            $p       = '';
-            if(!empty($arr['search']['where'])){
-
-                if($arr['search']['where']=='all'){
-                    $p = '%';
-                }
-            }
-
-
             if(!empty($arr['search']['keyword'])){
+
+                $keyword = $arr['search']['keyword'];
 
                 if(!empty($arr['search']['column'])){
 
@@ -659,15 +653,18 @@ class Mind {
                     $columns = array_intersect($arr['search']['column'], $columns);
                 }
 
-
-                $keyword = $arr['search']['keyword'];
+                if(!empty($arr['search']['where']) AND $arr['search']['where']=='all'){
+                    $p = '%';
+                } else {
+                    $p = '';
+                }
 
                 if(is_array($keyword)){
                     foreach ($keyword as $key => $value) {
 
-                        $xcontent   = ' LIKE \''.$p.$value.$p.'\' OR ';
-                        $ycontent   = ' LIKE \''.$p.$value.$p.'\'';
-                        $content[]  = implode($xcontent, $columns).$ycontent;
+                        $xcontent = ' LIKE \''.$p.$value.$p.'\' OR ';
+                        $ycontent = ' LIKE \''.$p.$value.$p.'\'';
+                        $content[] = implode($xcontent, $columns).$ycontent;
                     }
 
                     $special = 'WHERE '.implode(' OR ', $content);
@@ -692,43 +689,23 @@ class Mind {
 
             if(!empty($arr['sort'])){
 
-                $ssort = explode(':', trim($arr['sort'], ':'));
-
-                if(count($ssort)==2){
-                    list($columname, $sort) = explode(':', $arr['sort']);
-
-                    if(ctype_alpha($sort) AND in_array($sort, array('ASC','DESC'))){
-                        $special .= ' ORDER BY '.$columname.' '.$sort;
-                    }
+                list($columname, $sort) = explode(':', $arr['sort']);
+                if(ctype_alpha($sort) AND in_array($sort, array('ASC','DESC'))){
+                    $special .= ' ORDER BY '.$columname.' '.$sort;
                 }
 
             }
 
             if(!empty($arr['limit'])){
 
-                if(!empty($arr['limit']['start'])){
-
-                    if(ctype_digit($arr['limit']['start'])){
-
-                        if($arr['limit']['start']>0){
-                            $start = $arr['limit']['start'].',';
-                        }
-
-                    }
-
+                if(!empty($arr['limit']['start']) AND $arr['limit']['start']>0){
+                    $start = $arr['limit']['start'].',';
                 } else {
                     $start = '0,';
                 }
 
-                if(!empty($arr['limit']['end'])){
-
-                    if(ctype_digit($arr['limit']['end'])){
-
-                        if($arr['limit']['end']>0){
-                            $end = $arr['limit']['end'];
-                        }
-                    }
-
+                if(!empty($arr['limit']['end']) AND $arr['limit']['end']>0){
+                    $end = $arr['limit']['end'];
                 } else {
 
                     $sql     = 'SELECT * FROM '.$tblname;
@@ -753,6 +730,7 @@ class Mind {
 
             if(isset($arr['format'])){
                 switch ($arr['format']) {
+
                     case 'json':
                         $getdata = json_encode($getdata);
                         break;
