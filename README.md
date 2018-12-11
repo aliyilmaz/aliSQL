@@ -323,7 +323,7 @@ Belirtilen karakter uzunluğunda ki string veriyi tutmak için kullanılır, 3 p
        );
        $this->createtable('phonebook', $scheme);     
 
-#### increment (auto_increment)
+#### increments (auto_increment)
 
 Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olması amacıyla kullanılır. 3 parametre alır, `id`:`increments`:`11` ilk parametre sütun adı, ikinci parametre sütun türü, üçüncü parametreyse artışın maksimum limitini temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
 
