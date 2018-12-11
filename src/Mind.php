@@ -117,37 +117,6 @@ class Mind {
     }
 
     /**
-     * Creating a database.
-     *
-     * @param mixed $dbname
-     * @return  bool
-     * */
-    public function createdb($dbname){
-
-        $dbnames = array();
-
-        if(is_array($dbname)){
-            foreach ($dbname as $key => $value) {
-                $dbnames[] = $value;
-            }
-        } else {
-            $dbnames[] = $dbname;
-        }
-
-        foreach ($dbnames as $dbname) {
-
-            if($this->is_db($dbname)){
-                return false;
-            }
-
-            $sql = 'CREATE DATABASE '.$dbname;
-            $this->prepare($sql);
-        }
-
-        return true;
-    }
-
-    /**
      * Column sql syntax creator.
      *
      * @param array $scheme
@@ -177,7 +146,7 @@ class Mind {
                 $columnType = 'small';
             }
 
-            if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 7.2; }
+            if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
             if(is_null($columnValue)){ $columnValue = 11; }
 
             $first = '';
@@ -214,6 +183,37 @@ class Mind {
         }
 
         return $sql;
+    }
+
+    /**
+     * Creating a database.
+     *
+     * @param mixed $dbname
+     * @return  bool
+     * */
+    public function createdb($dbname){
+
+        $dbnames = array();
+
+        if(is_array($dbname)){
+            foreach ($dbname as $key => $value) {
+                $dbnames[] = $value;
+            }
+        } else {
+            $dbnames[] = $dbname;
+        }
+
+        foreach ($dbnames as $dbname) {
+
+            if($this->is_db($dbname)){
+                return false;
+            }
+
+            $sql = 'CREATE DATABASE '.$dbname;
+            $this->prepare($sql);
+        }
+
+        return true;
     }
 
     /**

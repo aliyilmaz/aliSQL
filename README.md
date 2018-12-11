@@ -108,6 +108,7 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 
 -   [connection](#connection)
 -   [prepare](#prepare)
+-   [cGeneration](#cGeneration)
 -   [createdb](#createdb)
 -   [createtable](#createtable)
 -   [createcolumn](#createcolumn)
@@ -177,6 +178,12 @@ SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `S
 
 ----------
 
+## cGeneration()
+Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `createtable` ve `createcolumn` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
+
+
+----------
+
 ## createdb()
 
 Yeni bir veya daha fazla veritabanı oluşturmak amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, oluşturulacak veritabanı isimleri `string` veya `dizi` olarak gönderildiğinde veritabanı oluşturma işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
@@ -191,49 +198,156 @@ veya
 
 ## createtable()
 
-Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır, `:` sembolünün solunda ki parametre sütun adını, sağında ki parametre sütun özelliğini temsil etmektedir. Eğer sütun özellik alanı boş bırakılırsa varsayılan olarak sütun özelliği `small` kabul edilir. Kullanılabilir özellik listesi aşağıdadır. Sütun içerikleri varsayılan olarak `NULL` olarak tanımlanmıştır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır, Sütun içerikleri varsayılan olarak `NULL` olarak tanımlanmıştır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
+
 
 ##### Özellikler
 
--   increments - (`AUTO_INCREMENT`)
--   small - (`TEXT`)
--   medium - (`MEDIUMTEXT`)
--   large - (`LONGTEXT`)
+-   int - (`int`)
+-   decimal - (`decimal`)
+-   string - (`varchar`)
+-   small - (`text`)
+-   medium - (`mediumtext`)
+-   large - (`longtext`)
+-   increments - (`auto_increment`)
 
 ##### Örnek
 
-    $arr = array(
+    $scheme = array(
         'id:increments',
         'username:small',
         'password',
         'address:medium',
-        'about:large'
+        'about:large',
+        'amount:decimal:6,2',
+        'title:string:120,
+        'age:int
     );
-    $this->createtable('users', $arr);
+    $this->createtable('users', $scheme);
+
+#### int
+
+Sayıları tutmak için kullanılır, 3 parametre alır, `number`:`int`:`11` ilk parametre sütun adıdır, ikinci parametre sütun türüdür, üçüncü parametre sütun değerlerinin maksimum limitidir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+
+##### Örnek
+
+    $scheme = array(
+        'number:int:12'
+    );
+    $this->createtable('phonebook', $scheme);
+    
+veya
+
+    $scheme = array(
+        'number:int'
+    );
+    $this->createtable('phonebook', $scheme);
+ 
+ 
+ #### decimal
+ 
+ Parasal değerleri tutmak için kullanılır, 3 parametre alır, `amount`:`decimal`:`6,2` ilk parametre sütun adıdır, ikinci parametre sütun türüdür, üçüncü parametreyse sütunun aldığı değerdir.  Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `6,2` değerini alır.
+ 
+ ##### Örnek
+ 
+     $scheme = array(
+         'amount:decimal:6,2'
+     );
+     $this->createtable('phonebook', $scheme);
+     
+veya
+
+ 
+     $scheme = array(
+         'amount:decimal'
+     );
+     $this->createtable('phonebook', $scheme);
+     
+#### string (varchar)
+
+Belirtilen karakter uzunluğunda ki string veriyi tutmak için kullanılır, 3 parametre alır, `title`:`string`:`120` ilk parametre sütun adıdır, ikinci parametre sütun türüdür, üçüncü parametreyse sütunun taşıyacağı string değerin maksimum karakter sayısını temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+
+  ##### Örnek
+   
+       $scheme = array(
+           'title:string:120'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+  veya
+  
+   
+       $scheme = array(
+           'title:string'
+       );
+       $this->createtable('phonebook', $scheme);
+     
+#### small (text)
+
+`65535` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır, 2 parametre alır, `content`:`small` ilk parametre sütunun adı, ikinci parametre sütunun türüdür. İkinci parametre zorunlu değildir. Eğer ikinci parametre belirtilmezse sütun varsayılan olarak `small` türünü alır.
+
+ ##### Örnek
+   
+       $scheme = array(
+           'content:small'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+  veya
+  
+   
+       $scheme = array(
+           'content'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+#### medium (mediumtext)
+
+`16777215` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır, 2 parametre alır, `description`:`medium` ilk parametre sütun adı, ikinci parametre sütun türüdür. Her iki parametrenin de belirtilme zorunluluğu bulunmaktadır.
+
+ ##### Örnek
+   
+       $scheme = array(
+           'description:medium'
+       );
+       $this->createtable('phonebook', $scheme);
+  
+#### large (longtext)
+
+`4294967295` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır, 2 parametre alır, `content`:`large` ilk parametre sütun adı, ikinci parametre sütun türüdür. Her iki parametrenin de belirtilme zorunluluğu bulunmaktadır.
+
+ ##### Örnek
+   
+       $scheme = array(
+           'content:large'
+       );
+       $this->createtable('phonebook', $scheme);     
+
+#### increment (auto_increment)
+
+Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olması amacıyla kullanılır. 3 parametre alır, `id`:`increments`:`11` ilk parametre sütun adı, ikinci parametre sütun türü, üçüncü parametreyse artışın maksimum limitini temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+
+ ##### Örnek
+   
+       $scheme = array(
+           'id:increments:12'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+  veya
+  
+   
+       $scheme = array(
+           'id:increments'
+       );
+       $this->createtable('phonebook', $scheme);
+       
 
 ----------
 
 ## createcolumn()
 
-Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. `:` sembolünün solunda ki parametre sütun adını, sağında ki parametre sütun özelliğini temsil etmektedir. Eğer sütun özellik alanı boş bırakılırsa varsayılan olarak sütun özelliği `small` kabul edilir. Kullanılabilir özellik listesi aşağıdadır. Sütun içerikleri varsayılan olarak `NULL` olarak tanımlanmıştır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
-
-##### Özellikler
-
--   increments - (`AUTO_INCREMENT`)
--   small - (`TEXT`)
--   medium - (`MEDIUMTEXT`)
--   large - (`LONGTEXT`)
-
-##### Örnek
-
-    $arr = array(
-        'id:increments',
-        'username:small',
-        'password',
-        'address:medium',
-        'about:large'
-    );
-    $this->createcolumn('users', $arr);
+Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. Daha fazla bilgi için `createtable()` metoduna gözatabilirsiniz.
 
 ----------
 
