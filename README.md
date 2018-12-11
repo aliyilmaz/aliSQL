@@ -198,7 +198,7 @@ veya
 
 ## createtable()
 
-Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır, Sütun içerikleri varsayılan olarak `NULL` olarak tanımlanmıştır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
+Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
 
 
 ##### Özellikler
