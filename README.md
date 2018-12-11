@@ -137,7 +137,6 @@ Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES`
 -   [is_size](#is_size)
 -   [is_color](#is_color)
 -   [is_url](#is_url)
--   [is_decimal](#is_decimal)
 
 ##### Yardımcı
 
@@ -1033,17 +1032,6 @@ veya
         echo 'Bu bir bağlantı değildir.';
     }
 
-----------
-
-## is_decimal()
-
-Belirtilen parametrenin ondalık bir sayı olup olmadığını kontrol etmek amacıyla kullanılır.
-
-    if($this->is_decimal('7,2')){
-        echo 'Bu ondalık bir sayıdır.';
-    } else {
-        echo 'Bu ondalık bir sayı değildir.';
-    }
 
 ----------
 
