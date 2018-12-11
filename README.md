@@ -220,8 +220,8 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır, Sütun içerikl
         'address:medium',
         'about:large',
         'amount:decimal:6,2',
-        'title:string:120,
-        'age:int
+        'title:string:120',
+        'age:int'
     );
     $this->createtable('users', $scheme);
 
