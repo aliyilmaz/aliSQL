@@ -1039,7 +1039,7 @@ veya
 
 ## is_color()
 
-Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığını kontrol etmeye yarar, eğer söz konusu değer transparent veya tüm tarayıcılar ile uyumlu olan 148 renk isminden biriyse yada HEX, RGB, RGBA, HLS, HLSA ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. `$color` renk değerini temsil etmektedir.
+Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığını kontrol etmeye yarar, eğer söz konusu değer transparent veya tüm tarayıcılar ile uyumlu olan 148 renk isminden biriyse yada HEX, RGB, RGBA, HSL, HSLA ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. `$color` renk değerini temsil etmektedir.
 ##### Örnek
 ##### TRANSPARENT
 
@@ -1086,7 +1086,7 @@ Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığı
         echo 'Geçerli bir renk parametresi değildir.';
       }
 
-##### HLS
+##### HSL
 
       $color = 'hsl(10,30%,40%)';
       if($this->is_color($color)){
@@ -1095,7 +1095,7 @@ Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığı
         echo 'Geçerli bir renk parametresi değildir.';
       }
 
-##### HLSA
+##### HSLA
 
       $color = 'hsla(120, 60%, 70%, 0.3)';
       if($this->is_color($color)){
