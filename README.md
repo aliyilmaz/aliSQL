@@ -96,7 +96,7 @@ Veritabanı bağlantısı `$this->conn` değişkeninde tutulur, bu değişkene s
 
 ##### public $post
 
-Sınıfın dahil edildiği projede, gerçekleşen `$_GET`, `$_POST` ve `$_FILES` istekleri, `$this->post` değişkeninde tutulur, sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+Sınıfın dahil edildiği projede gerçekleşen `$_GET`, `$_POST` ve `$_FILES` istekleri, `$this->post` değişkeninde tutulur, sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 ##### public $baseurl
 
