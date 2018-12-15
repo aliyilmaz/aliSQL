@@ -206,12 +206,10 @@ class Mind {
 
         foreach ($dbnames as $dbname) {
 
-            if($this->is_db($dbname)){
+            $sql = 'CREATE DATABASE '.$dbname;
+            if(!$this->prepare($sql)){
                 return false;
             }
-
-            $sql = 'CREATE DATABASE '.$dbname;
-            $this->prepare($sql);
         }
 
         return true;
@@ -226,17 +224,15 @@ class Mind {
      * */
     public function createtable($tblname, $scheme){
 
-        if($this->is_table($tblname)){
-            return false;
-        }
-
         if(is_array($scheme)){
 
             $sql = 'CREATE TABLE '.$tblname.'( ';
 
             $sql .= implode(',', $this->cGenerator($scheme)).')';
 
-            $this->prepare($sql);
+            if(!$this->prepare($sql)){
+                return false;
+            }
 
             return true;
         }
@@ -254,17 +250,15 @@ class Mind {
      * */
     public function createcolumn($tblname, $scheme){
 
-        if(!$this->is_table($tblname)){
-            return false;
-        }
-
         if(is_array($scheme)){
 
             $sql = 'ALTER TABLE '.$tblname.' ';
 
             $sql .= implode(',', $this->cGenerator($scheme, 'createcolumn'));
 
-            $this->prepare($sql);
+            if(!$this->prepare($sql)){
+                return false;
+            }
 
             return true;
         }
@@ -291,12 +285,10 @@ class Mind {
         }
         foreach ($dbnames as $dbname) {
 
-            if(!$this->is_db($dbname)){
+            $sql = 'DROP DATABASE '.$dbname;
+            if(!$this->prepare($sql)){
                 return false;
             }
-
-            $sql = 'DROP DATABASE '.$dbname;
-            $this->prepare($sql);
         }
         return true;
     }
@@ -320,12 +312,10 @@ class Mind {
         }
         foreach ($tblnames as $tblname) {
 
-            if(!$this->is_table($tblname)){
+            $sql = 'DROP TABLE '.$tblname;
+            if(!$this->prepare($sql)){
                 return false;
             }
-
-            $sql = 'DROP TABLE '.$tblname;
-            $this->prepare($sql);
         }
         return true;
     }
@@ -339,10 +329,6 @@ class Mind {
      * */
     public function deletecolumn($tblname, $column){
 
-        if(!$this->is_table($tblname)){
-            return false;
-        }
-
         $columns = array();
 
         if(is_array($column)){
@@ -355,7 +341,9 @@ class Mind {
         foreach ($columns as $column) {
 
             $sql = 'ALTER TABLE '.$tblname.' DROP COLUMN '.$column;
-            $this->prepare($sql);
+            if(!$this->prepare($sql)){
+                return false;
+            }
         }
         return true;
     }
@@ -379,15 +367,19 @@ class Mind {
         }
         foreach ($dbnames as $dbname) {
 
-            if(!$this->is_db($dbname)){
-                return false;
-            }
-
             $sql    = 'SHOW TABLES FROM '.$dbname;
             $query  = $this->prepare($sql);
+            if(!$query){
+                return false;
+            }
             while($cRow = mysqli_fetch_array($query)){
+
                 mysqli_select_db($this->conn, $dbname);
-                $this->cleartable($cRow[0]);
+
+                if(!$this->cleartable($cRow[0])){
+                    return false;
+                }
+
             }
             mysqli_select_db($this->conn, $this->dbname);
         }
@@ -414,12 +406,10 @@ class Mind {
 
         foreach ($tblnames as $tblname) {
 
-            if(!$this->is_table($tblname)){
+            $sql = 'TRUNCATE '.$tblname;
+            if(!$this->prepare($sql)){
                 return false;
             }
-
-            $sql = 'TRUNCATE '.$tblname;
-            $this->prepare($sql);
         }
         return true;
     }
@@ -435,10 +425,6 @@ class Mind {
 
         $columns = array();
 
-        if(!$this->is_table($tblname)){
-            return false;
-        }
-
         if(is_array($column)){
             foreach ($column as $key => $value) {
                 $columns[] = $value;
@@ -448,10 +434,6 @@ class Mind {
         }
 
         foreach ($columns as $column) {
-
-            if(!$this->is_column($tblname, $column)){
-                return false;
-            }
 
             $id   = $this->increments($tblname);
             $data = $this->get($tblname);
@@ -477,28 +459,19 @@ class Mind {
      * */
     public function insert($tblname, $arr){
 
-        if(!$this->is_table($tblname)){
-            return false;
-        }
-
         if(!is_array($arr)){
             return false;
         }
 
         $columns = array_keys($arr);
 
-        foreach ($columns as $column){
-
-            if(!$this->is_column($tblname, $column)){
-                return false;
-            }
-        }
-
         $column = implode(',', $columns);
         $values = '\''.implode('\',\'', array_values($arr)).'\'';
         $sql = 'INSERT INTO '.$tblname.'('.$column.') VALUES ('.$values.')';
 
-        $this->prepare($sql);
+        if(!$this->prepare($sql)){
+            return false;
+        }
 
         return true;
     }
@@ -514,10 +487,6 @@ class Mind {
      * */
     public function update($tblname, $arr, $id, $special=null){
 
-        if(!$this->is_table($tblname)){
-            return false;
-        }
-
         if(!is_array($arr)){
             return false;
         }
@@ -531,16 +500,15 @@ class Mind {
 
         }
 
-        if(!$this->do_have($tblname, $id, $special)){
-            return false;
-        }
-
         foreach ($arr as $name => $value) {
 
             $field = $name.'=\''.$value.'\'';
             $newfield = $special.'=\''.$id.'\'';
             $sql = 'UPDATE '.$tblname.' SET '.$field.' WHERE '.$newfield;
-            $this->prepare($sql);
+
+            if(!$this->prepare($sql)){
+                return false;
+            }
         }
         return true;
     }
@@ -556,10 +524,6 @@ class Mind {
     public function delete($tblname, $id, $special=null){
 
         $ids = array();
-
-        if(!$this->is_table($tblname)){
-            return false;
-        }
 
         if(empty($special)){
 
@@ -585,16 +549,11 @@ class Mind {
 
         foreach ($ids as $id) {
 
-            if(!$this->do_have($tblname, $id, $special)){
-                return false;
-            }
-
-            if(!$this->is_column($tblname, $special)){
-                return false;
-            }
-
             $sql = 'DELETE FROM '.$tblname.' WHERE '.$special.'='.$id;
-            $this->prepare($sql);
+
+            if(!$this->prepare($sql)){
+                return false;
+            }
 
         }
 
@@ -614,16 +573,13 @@ class Mind {
         $column  = '*';
         $special = '';
         $keyword = '';
+        $getdata = array();
 
-        if($this->is_table($tblname)){
-            $getdata = array();
-        } else {
-            $getdata = '';
-        }
 
         $sql = 'SHOW COLUMNS FROM '.$tblname;
 
         $query = $this->prepare($sql);
+
         if(!empty($query)){
             while($row = $query->fetch_assoc()){
                 $columns[] = $row['Field'];
@@ -690,7 +646,7 @@ class Mind {
             if(!empty($arr['sort'])){
 
                 list($columname, $sort) = explode(':', $arr['sort']);
-                if(ctype_alpha($sort) AND in_array($sort, array('ASC','DESC'))){
+                if(in_array($sort, array('ASC','DESC'))){
                     $special .= ' ORDER BY '.$columname.' '.$sort;
                 }
 
