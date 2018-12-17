@@ -109,6 +109,7 @@ Sınıfın dahil edildiği projede gerçekleşen `$_GET`, `$_POST` ve `$_FILES` 
 -   [connection](#connection)
 -   [prepare](#prepare)
 -   [cGeneration](#cGeneration)
+-   [pGeneration](#pGeneration)
 -   [createdb](#createdb)
 -   [createtable](#createtable)
 -   [createcolumn](#createcolumn)
@@ -180,6 +181,13 @@ SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `S
 
 ## cGeneration()
 Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `createtable` ve `createcolumn` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
+
+----------
+
+## pGeneration()
+Bu fonksiyon, `route` metoduna gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
+
+****Bilgi:**** `pGeneration` metodunun, proje içinde ki işlemlere özel oluşturulan controller sınıflarında bulunan metodlara erişimle ilgili bir geliştirme de kullanılması düşünülmektedir, bu geliştirme `mindload` metodunda gerçekleşecek olmasına rağmen sadece dosya yolu kabul etme prensibine sadık kalınacaktır.
 
 
 ----------
