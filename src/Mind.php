@@ -1,4 +1,5 @@
 <?php
+
 namespace Mind;
 
 /**
@@ -1113,39 +1114,66 @@ class Mind {
      * */
     public function mindload($file, $cache=null){
 
-        if(!empty($file) OR !empty($cache)){
+        if (!empty($cache) AND !is_array($cache)) {
+            $cache = array($cache);
+        }
 
-            if (!empty($cache) AND !is_array($cache)) {
-                $cache = array($cache);
-            }
+        if (!empty($cache)) {
+            foreach ($cache as $cachefile) {
 
-            if (!empty($cache)) {
-                foreach ($cache as $cachefile) {
-
-                    if (file_exists($cachefile . '.php')) {
-                        require_once($cachefile . '.php');
-                    }
-                }
-            }
-
-            if(!empty($file)){
-
-                $files = array();
-
-                if(!is_array($file)){
-                    $files = array($file);
-                } else {
-                    $files = $file;
-                }
-
-                foreach ($files as $file){
-
-                    if (file_exists($file . '.php')) {
-                        require_once($file . '.php');
-                    }
+                if (file_exists($cachefile . '.php')) {
+                    require_once($cachefile . '.php');
                 }
             }
         }
+
+        if(!empty($file)){
+
+            $files = array();
+
+            if(!is_array($file)){
+                $files = array($file);
+            } else {
+                $files = $file;
+            }
+
+            foreach ($files as $file){
+
+                if (file_exists($file . '.php')) {
+                    require_once($file . '.php');
+                }
+            }
+        }
+    }
+
+    /**
+     * Parameter parser.
+     *
+     * @param string $str
+     * @return mixed|bool
+     *
+     */
+    public function pGenerator($str){
+
+        $Result = array();
+        if(strstr($str, ':')){
+            $strExplode = array_filter(explode(':', trim($str, ':')));
+            if(count($strExplode) == 2){
+                list($filePath, $funcPar) = $strExplode;
+                $Result['name'] = $filePath;
+
+                if(strstr($funcPar, '@')){
+                    $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
+                } else {
+                    $funcExplode = array($funcPar);
+                }
+                if(!empty($funcExplode)){
+                    $Result['params'] = $funcExplode;
+                }
+                return $Result;
+            }
+        }
+
     }
 
     /**
@@ -1357,23 +1385,12 @@ class Mind {
 
         if(!empty($uri)){
 
-            if(strstr($uri, ':')){
-
-                $tfields = array_filter(explode(':', $uri));
-
-                if(count($tfields)==1){
-                    $uri = implode('', $tfields);
-                }
+            $uriData = $this->pGenerator($uri);
+            if(!empty($uriData['name'])){
+                $uri = $uriData['name'];
             }
-
-            if(!empty($tfields) AND count($tfields)==2){
-
-                list($uri, $tfields) = $tfields;
-                if(strstr($tfields, '@')){
-                    $fields = array_filter(explode('@', $tfields));
-                } else {
-                    $fields = array($tfields);
-                }
+            if(!empty($uriData['params'])){
+                $fields = $uriData['params'];
             }
         }
 
@@ -1499,6 +1516,7 @@ class Mind {
     public function get_contents($left, $right, $url){
 
         set_time_limit(0);
+
         $result = array();
 
         if($this->is_url($url)) {
@@ -1527,8 +1545,6 @@ class Mind {
             }
         }
     }
-
-
 
 }
 ?>
