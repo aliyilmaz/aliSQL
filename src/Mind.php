@@ -1121,8 +1121,31 @@ class Mind {
         if (!empty($cache)) {
             foreach ($cache as $cachefile) {
 
-                if (file_exists($cachefile . '.php')) {
-                    require_once($cachefile . '.php');
+                $cacheExplode = $this->pGenerator($cachefile);
+                if(!empty($cacheExplode['name'])){
+
+                    $cachefile = $cacheExplode['name'];
+                    $fileName = basename($cacheExplode['name']);
+
+                    if (file_exists($cachefile . '.php')) {
+                        require_once($cachefile . '.php');
+
+                        if(class_exists($fileName)){
+                            if(!empty($cacheExplode['params'])){
+
+                                $ClassName = new $fileName();
+                                $funcList = get_class_methods($fileName);
+
+                                foreach ($cacheExplode['params'] as $param) {
+
+                                    if(in_array($param, $funcList)){
+                                        $ClassName->$param();
+                                    }
+
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
