@@ -1176,27 +1176,31 @@ class Mind {
      * @return mixed|bool
      *
      */
-    public function pGenerator($str){
+    public function pGenerator($str=null){
 
         $Result = array();
-        if(strstr($str, ':')){
-            $strExplode = array_filter(explode(':', trim($str, ':')));
-            if(count($strExplode) == 2){
-                list($filePath, $funcPar) = $strExplode;
-                $Result['name'] = $filePath;
+        if(!is_null($str)){
 
-                if(strstr($funcPar, '@')){
-                    $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
-                } else {
-                    $funcExplode = array($funcPar);
+            if(strstr($str, ':')){
+                $strExplode = array_filter(explode(':', trim($str, ':')));
+                if(count($strExplode) == 2){
+                    list($filePath, $funcPar) = $strExplode;
+                    $Result['name'] = $filePath;
+
+                    if(strstr($funcPar, '@')){
+                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
+                    } else {
+                        $funcExplode = array($funcPar);
+                    }
+                    if(!empty($funcExplode)){
+                        $Result['params'] = $funcExplode;
+                    }
                 }
-                if(!empty($funcExplode)){
-                    $Result['params'] = $funcExplode;
-                }
-                return $Result;
+            } else {
+                $Result['name'] = $str;
             }
         }
-
+        return $Result;
     }
 
     /**
