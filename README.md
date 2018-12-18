@@ -185,10 +185,7 @@ Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden
 ----------
 
 ## pGeneration()
-Bu fonksiyon, `route` metoduna gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
-
-****Bilgi:**** `pGeneration` metodunun, proje içinde ki işlemlere özel oluşturulan controller sınıflarında bulunan metodlara erişimle ilgili bir geliştirme de kullanılması düşünülmektedir, bu geliştirme `mindload` metodunda gerçekleşecek olmasına rağmen sadece dosya yolu kabul etme prensibine sadık kalınacaktır.
-
+Bu fonksiyon, `route` ve `mindload` metotlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
 
 ----------
 
@@ -1369,7 +1366,7 @@ Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel z
 
 #### Giriş
 
-`url`, `file` ve `cache` parametreleri alabilen `route()` fonksiyonu, `url` parametresini `string` olarak kabul eder, `file` ve `cache` parametreleriniyse `string` ve `dizi` olarak kabul etmektedir. Bu üç parametreden sadece `cache` parametresinin belirtilme zorunluluğu yoktur. `file` ve `cache` parametreleri, uzantısı belirtilmeyen `php` dosyalarının yollarından meydana gelir.
+`url`, `file` ve `cache` parametreleri alabilen `route()` fonksiyonu, `url` parametresini `string` olarak kabul eder, `file` ve `cache` parametreleriniyse `string` ve `dizi` olarak kabul etmektedir. Bu üç parametreden sadece `cache` parametresinin belirtilme zorunluluğu yoktur. `file` ve `cache` parametreleri, uzantısı belirtilmeyen `php` dosyalarının yollarından meydana gelir. `cache` parametresi aynı zamanda sınıf metodlarını çağırmak için de kullanılabilir.
 
 #### Url
 
@@ -1422,7 +1419,7 @@ veya
 
 #### Cache
 
-Eğer `cache` parametresi belirtilirse, belirtilen `cache` dosyaları, `file` parametresinde belirtilen dosya(lar) henüz projeye dahil edilmeden önce, ilk eklenenden son eklenene doğru tek tek varlık kontrolünden geçirilerek projeye dahil edilir.
+Eğer `cache` parametresi belirtilirse, belirtilen `cache` dosyaları, `file` parametresinde belirtilen dosya(lar) henüz projeye dahil edilmeden önce, ilk eklenenden son eklenene doğru tek tek varlık kontrolünden geçirilerek projeye dahil edilir. İsteğe bağlı olarak `cache` parametresinde sınıfa ait metod veya metodlar çalıştırılabilir.
 
 ##### Örnek
 
@@ -1435,6 +1432,46 @@ veya
         'modal/home'
     );
     $this->route('/', 'view/home', $arr);
+    
+veya
+
+`app/controller/HomeController.php` dosyasını oluşturup içine aşağıda ki kodları kaydedin.
+ 
+    <?php
+    
+    class HomeController extends \Mind\Mind
+    {
+    
+        public function __construct($conf = array())
+        {
+            parent::__construct($conf);
+        }
+    
+        public function index()
+        {
+            //
+            echo 'merhaba ben index';
+        }
+    
+        public function create()
+        {
+            //
+            echo 'merhaba ben create';
+        }
+    
+    }
+
+daha sonra aşağıda ki rotayı tanımlayın ve kontrol edin.
+
+    
+    $this->route('home', 'app/views/home', 'app/controller/HomeController:index@create');
+
+Sınıf içinde ki `index` ve `create` metodlarının çalıştığını görebilirsiniz. Bir veya daha fazla metodu bir rotaya tanımlamak mümkündür. 
+
+Oluşturulan bu `HomeController` sınıfı içinden `Mind` metodlarına `$this->` ön ekiyle ulaşılabilir.
+
+Eğer metod çağırılırsa sınıf adıyla dosya adının aynı olması gerekmektedir.
+
 
 #### .htaccess
 
