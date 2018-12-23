@@ -1356,7 +1356,6 @@ Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüşt�
 
  veya
  
-  ##### Örnek
   
       $str = 'Merhaba dünya';
       $option = array(

@@ -1299,7 +1299,6 @@ class Mind {
             $char_map = array();
         }
 
-
         $options['replacements'] = array_merge($replacements, $char_map);
 
         if(!empty($options['replacements']) AND is_array($options['replacements'])){
