@@ -917,7 +917,7 @@ veya
 
 ## is_date()
 
-Bu fonksiyon kendisiyle paylaşılan tarih biçiminin gerçek olup olmadığını kontrol etmek amacıyla kullanılır, tarih ve formak `string` olarak gönderilebilir. `$date` ve `01.02.1987` tarihi, `$format` ve `d.m.Y` tarihin hangi formatta kontrol edilmesi gerektiği bilgisini temsil etmektedir. Format parametresinin belirtilmesi isteğe bağlıdır, belirtilmediğinde tarih formatının varsayılan olarak `d-m-Y H:i:s` olduğu varsayılır. Eğer tarih geçerliyse yanıt olarak `true` değeri döndürülür, geçerli değilse `false` değeri döndürülür.
+Bu fonksiyon kendisiyle paylaşılan tarih biçiminin gerçek olup olmadığını kontrol etmek amacıyla kullanılır, tarih ve format `string` olarak gönderilebilir. `$date` ve `01.02.1987` tarihi, `$format` ve `d.m.Y` tarihin hangi formatta kontrol edilmesi gerektiği bilgisini temsil etmektedir. Format parametresinin belirtilmesi isteğe bağlıdır, belirtilmediğinde tarih formatının varsayılan olarak `d-m-Y H:i:s` olduğu varsayılır. Eğer tarih geçerliyse yanıt olarak `true` değeri döndürülür, geçerli değilse `false` değeri döndürülür.
 ##### Örnek
 
     $date = '01.02.1987';
@@ -1324,22 +1324,81 @@ veya
 
 ## permalink()
 
-Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüştürmek amacıyla kullanılır. İki parametre alabilir, ikinci parametre isteğe bağlı olup belirtilme zorunluluğu bulunmamaktadır. İlk parametre de link yapısına dönüştürülmek istenen veri `string` olarak, ikinci parametre de ise veri içinde değiştirilmesi istenen kelimeler `dizi` olarak tutulur.
+Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüştürmek amacıyla kullanılır. İki parametre alabilir, İlk parametre de link yapısına dönüştürülmek istenen veri `string` olarak, ikinci parametrede ise aşağıda belirtilen ayarlar yer alır. ikinci parametre isteğe bağlı olup belirtilme zorunluluğu bulunmamaktadır.
 
 ##### Örnek
 
     $str = 'Merhaba dünya';
     echo $this->permalink($str);
 
-veya
+
+#### Ayraç (delimiter)
+ Varsayılan olarak `string` yapıda ki veri içinde bulunan boşluklar tire `-` yardımıyla ayrılır, eğer tire `-` yerine başka bir parametre barındırması arzu edilirse, `delimiter` özelliği kullanılabilir.
+ 
+##### Örnek
 
     $str = 'Merhaba dünya';
-    $arr = array(
-        'replacements' => array(
-            'dünya'=>'dostum'
+    $option = array(
+        'delimiter' => '_'
+    );
+    echo $this->permalink($str, $option);
+
+#### Limit (limit)
+ Varsayılan olarak `string` yapıda ki veri `SEO` dostu bir yapıya kavuşturularak geriye döndürülür , eğer belli bir karakter sayısında döndürülmesi istenirse, `limit` özelliği kullanılabilir.
+ 
+ ##### Örnek
+ 
+     $str = 'Merhaba dünya';
+     $option = array(
+         'limit'=>'3'
+     );
+     echo $Mind->permalink($str, $option);
+
+ veya
+ 
+  ##### Örnek
+  
+      $str = 'Merhaba dünya';
+      $option = array(
+          'limit'=>3
+      );
+      echo $Mind->permalink($str, $option);
+
+#### Harf boyutu (lowercase)
+Varsayılan olarak `string` yapıda ki veri tamamıyla küçük harfe dönüştürülür, eğer harflerin yazıldığı boyutta kalması istenirse, `lowercase` özelliği kullanılabilir.
+
+##### Örnek
+
+    $str = 'Merhaba dünya';
+    $option = array(
+        'lowercase'=>false
+    );
+    echo $Mind->permalink($str, $option); 
+
+#### Kelime değişimi (replacements)
+`string` yapıda ki veri içinde belirtilen kelimeleri değiştirmek mümkündür, 
+
+##### Örnek
+
+    $str = 'Merhaba dünya';
+    $option = array(
+        'replacements'=>array(
+            'Merhaba'=>'hello', 
+            'dünya'=>'world'
         )
     );
-    echo $this->permalink($str, $arr);
+    echo $Mind->permalink($str, $option);
+    
+#### Karakter desteği (transliterate)
+Farklı alfabelere ait harfler varsayılan olarak `SEO` dostu karşılıklarıyla değiştirilir, eğer olduğu gibi yazılmaları istenirse, `false` parametresi belirtilmelidir.
+
+##### Örnek
+
+    $str = 'Merhaba dünya';
+       $option = array(
+           'transliterate'=>false
+       );
+       echo $Mind->permalink($str, $option);
 
 ----------
 

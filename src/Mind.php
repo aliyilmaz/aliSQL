@@ -1295,9 +1295,10 @@ class Mind {
             $replacements = $options['replacements'];
         }
 
-        if(!$defaults['transliterate']){
+        if(!$options['transliterate']){
             $char_map = array();
         }
+
 
         $options['replacements'] = array_merge($replacements, $char_map);
 
@@ -1310,6 +1311,7 @@ class Mind {
         }
 
         $options = array_merge($defaults, $options);
+
         $str = preg_replace('/[^\p{L}\p{Nd}]+/u', $options['delimiter'], $str);
         $str = preg_replace('/(' . preg_quote($options['delimiter'], '/') . '){2,}/', '$1', $str);
         $str = mb_substr($str, 0, ($options['limit'] ? $options['limit'] : mb_strlen($str, 'UTF-8')), 'UTF-8');
