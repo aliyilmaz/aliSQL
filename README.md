@@ -185,7 +185,7 @@ Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden
 ----------
 
 ## pGeneration()
-Bu fonksiyon, `route` ve `mindload` metotlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
+Bu fonksiyon, `route` ve `mindload` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
 
 ----------
 
@@ -353,6 +353,20 @@ Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olma
 ## createcolumn()
 
 Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. Daha fazla bilgi için `createtable()` metoduna gözatabilirsiniz.
+
+##### Örnek
+
+    $scheme = array(
+        'id:increments',
+        'username:small',
+        'password',
+        'address:medium',
+        'about:large',
+        'amount:decimal:6,2',
+        'title:string:120',
+        'age:int'
+    );
+    $this->createcolumn('phonebook', $scheme);
 
 ----------
 
@@ -1355,8 +1369,7 @@ Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüşt�
      echo $Mind->permalink($str, $option);
 
  veya
- 
-  
+
       $str = 'Merhaba dünya';
       $option = array(
           'limit'=>3
