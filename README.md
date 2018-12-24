@@ -1319,7 +1319,7 @@ veya
 
 veya
 
-    $this->mindload('app/views/home', 'app/modal/home');
+    $this->mindload('app/views/home', 'app/model/home');
 
 veya
 
@@ -1331,7 +1331,7 @@ veya
     $cache = array(
         'app/middleware/auth',
         'app/database/install',
-        'app/modal/home'
+        'app/model/home'
     );
     $this->mindload($file, $cache);
 ----------
@@ -1432,7 +1432,7 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 ## route()
 
-Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel zihinler yüklemek için kullanılır. Zihin kelimesi, Modal, View, Controller, Middleware gibi çeşitli katmanları tanımlamak amacıyla kullanılmıştır. Böylelikle geliştirici, katmanların hangi rotaya tanımlandığını açıkça görebilir, yönetilebilir ve proje ihtiyacına özel tasarım deseni oluşturabilir.  
+Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel zihinler yüklemek için kullanılır. Zihin kelimesi, Model, View, Controller, Middleware gibi çeşitli katmanları tanımlamak amacıyla kullanılmıştır. Böylelikle geliştirici, katmanların hangi rotaya tanımlandığını açıkça görebilir, yönetilebilir ve proje ihtiyacına özel tasarım deseni oluşturabilir.  
   
 
 #### Giriş
@@ -1500,7 +1500,7 @@ veya
 
     $arr = array(
         'database/CreateTable,
-        'modal/home'
+        'model/home'
     );
     $this->route('/', 'view/home', $arr);
     
