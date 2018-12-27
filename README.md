@@ -454,7 +454,7 @@ veya
 
 ## insert()
 
-Veritabanı tablosuna veri eklemek amacıyla kullanılır, `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir, değerler `dizi` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır, `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir, değerler `dizi` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -463,6 +463,30 @@ Veritabanı tablosuna veri eklemek amacıyla kullanılır, `my_table` veritaban�
     	'content' => '123456',
     	'tag' => 'test@mail.com'
     ));
+
+veya
+
+    $query = $this->insert('my_table', array(
+            array(
+                'name'          => 'Ali Yılmaz',
+                'phone'         => '10101010101',
+                'email'         => 'aliyilmaz.work@gmail.com',
+                'created_at'    =>  date('d-m-Y H:i:s')
+            ),
+            array(
+                'name'          => 'Deniz Yılmaz',
+                'phone'         => '20202020202',
+                'email'         => 'deniz@gmail.com',
+                'created_at'    =>  date('d-m-Y H:i:s')
+            ),
+            array(
+                'name'          => 'Hasan Yılmaz',
+                'phone'         => '30303030303',
+                'email'         => 'hasan@gmail.com',
+                'created_at'    =>  date('d-m-Y H:i:s')
+            )
+        )
+    );
 
 ----------
 
