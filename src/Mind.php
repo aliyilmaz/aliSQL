@@ -464,14 +464,20 @@ class Mind {
             return false;
         }
 
-        $columns = array_keys($arr);
+        if(!empty($arr[0])){
+            foreach ($arr as $key => $row){
+                $this->insert($tblname, $row);
+            }
+        } else {
+            $columns = array_keys($arr);
 
-        $column = implode(',', $columns);
-        $values = '\''.implode('\',\'', array_values($arr)).'\'';
-        $sql = 'INSERT INTO '.$tblname.'('.$column.') VALUES ('.$values.')';
+            $column = implode(',', $columns);
+            $values = '\''.implode('\',\'', array_values($arr)).'\'';
+            $sql = 'INSERT INTO '.$tblname.'('.$column.') VALUES ('.$values.')';
 
-        if(!$this->prepare($sql)){
-            return false;
+            if(!$this->prepare($sql)){
+                return false;
+            }
         }
 
         return true;
