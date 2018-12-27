@@ -466,7 +466,9 @@ class Mind {
 
         if(!empty($arr[0])){
             foreach ($arr as $key => $row){
-                $this->insert($tblname, $row);
+                if(!$this->insert($tblname, $row)){
+                    return false;
+                }
             }
         } else {
             $columns = array_keys($arr);
