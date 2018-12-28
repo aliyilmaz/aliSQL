@@ -188,6 +188,40 @@ class Mind {
     }
 
     /**
+     * Parameter parser.
+     *
+     * @param string $str
+     * @return mixed|bool
+     *
+     */
+    public function pGenerator($str=null){
+
+        $Result = array();
+        if(!is_null($str)){
+
+            if(strstr($str, ':')){
+                $strExplode = array_filter(explode(':', trim($str, ':')));
+                if(count($strExplode) == 2){
+                    list($filePath, $funcPar) = $strExplode;
+                    $Result['name'] = $filePath;
+
+                    if(strstr($funcPar, '@')){
+                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
+                    } else {
+                        $funcExplode = array($funcPar);
+                    }
+                    if(!empty($funcExplode)){
+                        $Result['params'] = $funcExplode;
+                    }
+                }
+            } else {
+                $Result['name'] = $str;
+            }
+        }
+        return $Result;
+    }
+
+    /**
      * Creating a database.
      *
      * @param mixed $dbname
@@ -1175,40 +1209,6 @@ class Mind {
                 }
             }
         }
-    }
-
-    /**
-     * Parameter parser.
-     *
-     * @param string $str
-     * @return mixed|bool
-     *
-     */
-    public function pGenerator($str=null){
-
-        $Result = array();
-        if(!is_null($str)){
-
-            if(strstr($str, ':')){
-                $strExplode = array_filter(explode(':', trim($str, ':')));
-                if(count($strExplode) == 2){
-                    list($filePath, $funcPar) = $strExplode;
-                    $Result['name'] = $filePath;
-
-                    if(strstr($funcPar, '@')){
-                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
-                    } else {
-                        $funcExplode = array($funcPar);
-                    }
-                    if(!empty($funcExplode)){
-                        $Result['params'] = $funcExplode;
-                    }
-                }
-            } else {
-                $Result['name'] = $str;
-            }
-        }
-        return $Result;
     }
 
     /**
