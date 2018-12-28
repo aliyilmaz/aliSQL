@@ -139,6 +139,7 @@ Sınıfın dahil edildiği projede gerçekleşen `$_GET`, `$_POST` ve `$_FILES` 
 -   [is_size](#is_size)
 -   [is_color](#is_color)
 -   [is_url](#is_url)
+-   [is_json](#is_json)
 
 ##### Yardımcı
 
@@ -1190,6 +1191,24 @@ veya
     }
 
 
+----------
+
+## is_json()
+
+Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadığını kontrol etmek amacıyla kullanılır, `$schema` json verisini temsil etmektedir. Eğer söz konusu veri bir json sözdizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
+
+
+    $schema = array(
+        'test'=>'ali'
+    );
+    
+    if($this->is_json(json_encode($schema))){
+        echo 'Bu bir json sözdizimidir.';
+    } else {
+        echo 'Bu bir json sözdizimi değildir.';
+    }
+
+    
 ----------
 
 ## info()
