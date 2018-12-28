@@ -4,3 +4,5 @@
 /vendor/
 
 index\.php
+
+composer\.lock
