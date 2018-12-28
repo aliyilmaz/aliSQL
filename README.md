@@ -11,7 +11,7 @@ Mind, is a free and open source PHP framework designed for junior and senior dev
 
 ## Requirements
 
-* PHP 5.3.0 or higher
+* PHP 5.6.0 or higher
 * Database (eg: MySQL)
 * Web Server (eg: Apache)
 
