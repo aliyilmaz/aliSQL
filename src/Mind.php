@@ -1541,9 +1541,9 @@ class Mind {
             foreach ($files as $file){
 
                 if(!empty($file['name'])){
-
+                    $xdat       = date('d-m-Y g:i:s').gettimeofday();
                     $ext        = $this->info($file['name'], 'extension');
-                    $newpath    = $path.'/'.md5(date('d-m-Y g:i:s').gettimeofday()['usec']).'.'.$ext;
+                    $newpath    = $path.'/'.md5($xdat['usec']).'.'.$ext;
                     move_uploaded_file($file['tmp_name'], $newpath);
                     $response[] = $newpath;
 
