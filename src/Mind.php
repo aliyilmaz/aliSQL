@@ -1065,6 +1065,25 @@ class Mind {
     }
 
     /**
+     * Json control of a string
+     *
+     * @param string $schema
+     * @return bool
+     **/
+    public function is_json($schema){
+
+        if(is_null($schema) OR is_array($schema)) {
+            return false;
+        }
+
+        if(json_decode($schema)){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Path information.
      *
      * @param string   $str
