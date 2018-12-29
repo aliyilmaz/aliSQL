@@ -91,3 +91,17 @@ Methods that meet requirements such as session management, database connectivity
 -   [request()](#request)
 
 ----------
+
+## Active variables
+
+##### private $ conn
+
+The database connection is held in `$this->conn`. To prevent access from outside the class `private` property is defined.
+
+##### public $ post
+
+The `$_GET`,`$_POST` and `$_FILES` requests made in the project where the class is included are kept in `$this-> post`. To allow access from outside the classroom, the `public` property is defined.
+
+##### public $ baseurl
+
+The path of the folder where `Mind.php` is located is kept in `$this->baseurl`, and `public` is defined to allow access from outside the class.
