@@ -105,3 +105,64 @@ The `$_GET`,`$_POST` and `$_FILES` requests made in the project where the class 
 ##### public $ baseurl
 
 The path of the folder where `Mind.php` is located is kept in `$this->baseurl`, and `public` is defined to allow access from outside the class.
+
+----------
+
+## Methods
+
+##### Database
+
+-   [connection](#connection)
+-   [prepare](#prepare)
+-   [cGeneration](#cGeneration)
+-   [pGeneration](#pGeneration)
+-   [createdb](#createdb)
+-   [createtable](#createtable)
+-   [createcolumn](#createcolumn)
+-   [deletedb](#deletedb)
+-   [deletetable](#deletetable)
+-   [deletecolumn](#deletecolumn)
+-   [cleardb](#cleardb)
+-   [cleartable](#cleartable)
+-   [clearcolumn](#clearcolumn)
+-   [insert](#insert)
+-   [update](#update)
+-   [delete](#delete)
+-   [get](#get)
+-   [do_have](#do_have)
+-   [newid](#newid)
+-   [increments](#increments)
+
+##### Validator
+
+-   [is_db](#is_db)
+-   [is_table](#is_table)
+-   [is_column](#is_column)
+-   [is_phone](#is_phone)
+-   [is_date](#is_date)
+-   [is_email](#is_email)
+-   [is_type](#is_type)
+-   [is_size](#is_size)
+-   [is_color](#is_color)
+-   [is_url](#is_url)
+-   [is_json](#is_json)
+
+##### Helper
+
+-   [info](#info)
+-   [filter](#filter)
+-   [request](#request)
+-   [redirect](#redirect)
+-   [mindload](#mindload)
+-   [permalink](#permalink)
+-   [timezones](#timezones)
+-   [session_check](#session_check)
+
+##### System
+
+-   [route](#route)
+-   [write](#write)
+-   [upload](#upload)
+-   [get_contents](#get_contents)
+
+----------
