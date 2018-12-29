@@ -53,6 +53,7 @@ If you discover any security related issues, please email aliyilmaz.work@gmail.c
 -   Codes, documents and tests will be updated according to phpdoc standards.
 -   A reporting method will be created to instantly access all transaction results, including faulty transactions.
 -   Functions will be created to retrieve database backups and install backups.
+-   Must be Nginx support.
 
 ## Author
 
