@@ -94,11 +94,11 @@ Oturum yönetimi, veritabanı bağlantısı, `$_GET`, `$_POST` ve `$_FILES` iste
 
 ##### private $conn
 
-Veritabanı bağlantısı `$this->conn` değişkeninde tutulur, bu değişkene sınıf dışından erişimi engellemek için `private` özelliği tanımlanmıştır.
+Veritabanı bağlantısı `$this->conn` değişkeninde tutulur. Sınıf dışından erişimi engellemek için `private` özelliği tanımlanmıştır.
 
 ##### public $post
 
-Sınıfın dahil edildiği projede gerçekleşen `$_GET`, `$_POST` ve `$_FILES` istekleri, `$this->post` değişkeninde tutulur, sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istekleri, `$this->post` değişkeninde tutulur. Sınıf dışından erişime müsaade etmek için `public` özelliği tanımlanmıştır.
 
 ##### public $baseurl
 
