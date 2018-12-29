@@ -68,3 +68,16 @@ This is the part used to customize or close sessions created for users. To close
     );
 
 ----------
+
+
+## Time zones settings
+
+It is possible to personalize the time zone to mark the content with the correct time zone. By default `Europe/Istanbul` is defined. The `public` property is defined to allow access from outside the class. See the [List of Supported Timezones](https://secure.php.net/manual/en/timezones.php) section.
+
+**Info:** Servers that are not as personalized as required may use different time periods from the project timeframe. Editing in this section allows you to have the correct timestamp on different servers. 
+
+#### Example
+
+    public $timezone    = 'Europe/Istanbul';
+
+----------
