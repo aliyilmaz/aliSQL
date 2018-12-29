@@ -104,6 +104,8 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 
 `Mind.php` dosyasının içinde bulunduğu klasörün yolu `$this->baseurl` değişkeninde tutulur, sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
+----------
+
 ## Metodlar
 
 ##### Veritabanı
@@ -129,7 +131,7 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 -   [newid](#newid)
 -   [increments](#increments)
 
-##### Denetleyici
+##### Doğrulayıcı
 
 -   [is_db](#is_db)
 -   [is_table](#is_table)
