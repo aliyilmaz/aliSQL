@@ -35,3 +35,22 @@ or
     $Mind = new Mind($conf);
 
 ----------
+
+## Installation
+
+After adding `Mind.php` to the project with a method like `require_once`, it is possible to get the class ready for use with the command `extends` or `new Mind()`.
+
+#### Example
+
+    require_once('./Mind.php');
+    use Mind\Mind;
+    $Mind = new Mind();
+
+or
+
+    require_once('./Mind.php');
+    class ClassName extends Mind\Mind{
+    
+    }
+
+----------
