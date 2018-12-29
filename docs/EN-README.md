@@ -54,3 +54,17 @@ or
     }
 
 ----------
+
+## Session settings
+
+This is the part used to customize or close sessions created for users. To close sessions, simply set the session_status parameter to `false`. To change the folder path where the sessions are stored, the `path` parameter must be updated. To keep sessions on the specified path, the `path_status` parameter must be set to `true`. By default, the server is configured according to the session settings.
+
+#### Example
+
+    private $sessset    = array(
+        'path'              =>  './session/',
+        'path_status'       =>  false,
+        'status_session'    =>  true
+    );
+
+----------
