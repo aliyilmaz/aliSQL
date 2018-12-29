@@ -82,7 +82,7 @@ Bu, kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak 
 
 ## Etkin Metodlar
 
-Oturum yönetimi, Veritabanı bağlantısı, `$_GET`, `$_POST` ve `$_FILES` isteklerinin yönetimi gibi ihtiyaçları karşılayan metodlar `Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir, bu metodlar aşağıda ki gibidir.
+Oturum yönetimi, veritabanı bağlantısı, `$_GET`, `$_POST` ve `$_FILES` istekleri gibi gereksinimleri karşılayan yöntemler, `Mind.php` dosyasında `__construct()` yöntemi çalıştırılarak etkinleştirilmiştir.
 
 -   [session_check()](#session_check)
 -   [connection()](#connection)
