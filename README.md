@@ -46,6 +46,14 @@ Please see [Releases](../../releases) for more information what has changed rece
 
 If you discover any security related issues, please email aliyilmaz.work@gmail.com instead of using the issue tracker.
 
+## To-do list
+
+-   Completion of the English document.
+-   PDO will be preferred as the connection method.
+-   Codes, documents and tests will be updated according to phpdoc standards.
+-   A reporting method will be created to instantly access all transaction results, including faulty transactions.
+-   Functions will be created to retrieve database backups and install backups.
+
 ## Author
 
 - [Ali Yılmaz](https://github.com/aliyilmaz)
