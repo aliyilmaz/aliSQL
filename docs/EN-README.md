@@ -81,3 +81,13 @@ It is possible to personalize the time zone to mark the content with the correct
     public $timezone    = 'Europe/Istanbul';
 
 ----------
+
+## Active Methods
+
+Methods that meet requirements such as session management, database connectivity, `$_GET`, `$_POST`, and `$_FILES` requests are enabled by running the `__construct()` method in the `Mind.php` file.
+
+-   [session_check()](#session_check)
+-   [connection()](#connection)
+-   [request()](#request)
+
+----------
