@@ -173,10 +173,7 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 
 ## prepare()
 
-SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilmesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir.  İçinde bulunan metodlar aşağıda ki gibidir.
-
--   `mysqli_query`
-   
+SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilmesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir. 
 
 ##### Örnek
 
