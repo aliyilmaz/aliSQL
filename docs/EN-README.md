@@ -169,4 +169,4 @@ The path of the folder where `Mind.php` is located is kept in `$this->baseurl`, 
 
 ## connection()
 
-It is used to provide database connection in the light of the information specified in the [installation](#installation) phase. It was run in `__construct ()` method in `Mind.php` file.
+It is used to provide database connection in the light of the information specified in the [installation](#installation) phase. It was run in `__construct()` method in `Mind.php` file.
