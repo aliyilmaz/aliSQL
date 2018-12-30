@@ -167,7 +167,7 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 
 ## connection()
 
-[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veritabanı bağlantısı sağlamak amacıyla kullanılır, `Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
+[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak için kullanılır. `Mind.php` dosyasındaki `__construct()` metodunda çalıştırılmıştır.
 
 ----------
 
