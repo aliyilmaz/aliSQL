@@ -170,3 +170,15 @@ The path of the folder where `Mind.php` is located is kept in `$this->baseurl`, 
 ## connection()
 
 It is used to provide database connection in the light of the information specified in the [installation](#installation) phase. It was run in `__construct()` method in `Mind.php` file.
+
+----------
+
+## prepare()
+
+It is used to run SQL queries, it has `public` definition to send `SQL` query from outside the class. The `SQL` query can be sent as `string`.
+   
+##### Example
+
+    $Mind->prepare($sql);
+
+----------
