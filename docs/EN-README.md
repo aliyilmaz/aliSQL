@@ -389,7 +389,7 @@ It is used to have an automatically incrementing number of entries added to the 
 
 ## deletedb()
 
-Used to delete one or more databases, `mydb0` and` mydb1` represent the database names, `string` or `array` database names are sent as the database deletion occurs. If the operation is successful, `true ', otherwise` false' is returned.
+Used to delete one or more databases, `mydb0` and` mydb1` represent the database names, `string` or `array` database names are sent as the database deletion occurs. If the operation is successful, `true`, otherwise` false' is returned.
 
 ##### Example
 
@@ -399,4 +399,3 @@ or
 
     $this->deletedb(array('mydb0','mydb1'));
 
-----------
