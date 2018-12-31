@@ -412,4 +412,19 @@ It is used to delete one or more database tables, `my_table0` and `my_table1` re
 or
 
     $this->deletetable(array('my_table0', 'my_table1'));
+
+----------
+
+## deletecolumn()
+
+Used to delete one or more columns in the database table. `users` represents the table name, `username` and `password` the columns that are to be deleted. When the column names are sent as `string` or `array`, deletion is performed. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $this->deletecolumn('users', 'username');
+
+or
+
+    $this->deletecolumn('users', array('username', 'password'));
+
 ----------
