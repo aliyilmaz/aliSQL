@@ -237,3 +237,152 @@ Used to create a new database table. If the operation is successful, `true`, oth
     
 ****Info:**** For more information about creating a column, see the [createcolumn](#createcolumn) method.
 
+----------
+
+## createcolumn()
+
+Used to create one or more columns in a database table. Column name and property can be sent as `array`. If the operation succeeds, it is returned `true`, otherwise `false`.
+
+##### Features
+
+-   int - (`int`)
+-   decimal - (`decimal`)
+-   string - (`varchar`)
+-   small - (`text`)
+-   medium - (`mediumtext`)
+-   large - (`longtext`)
+-   increments - (`auto_increment`)
+
+#### Example
+
+    $scheme = array(
+        'id:increments',
+        'username:small',
+        'password',
+        'address:medium',
+        'about:large',
+        'amount:decimal:6,2',
+        'title:string:120',
+        'age:int'
+    );
+    $this->createcolumn('phonebook', $scheme);
+
+
+#### int
+
+Used to hold numbers. It takes 3 parameters. `number`:`int`:`11` is the name of the first parameter column. The second parameter is the column type. The third parameter is the maximum limit of the column values. The third parameter is not mandatory, if not specified it defaults to `11`.
+
+##### Example
+
+    $scheme = array(
+        'number:int:12'
+    );
+    $this->createtable('phonebook', $scheme);
+    
+or
+
+    $scheme = array(
+        'number:int'
+    );
+    $this->createtable('phonebook', $scheme);
+ 
+ 
+ #### decimal
+ 
+ Used to hold monetary values, takes 3 parameters. `amount`:`decimal`:`6,2` The first parameter is the column name. The second parameter is the column type. The third parameter is the value that the column takes. The third parameter is not mandatory, if not specified it defaults to `6,2`.
+ 
+ ##### Example
+ 
+     $scheme = array(
+         'amount:decimal:6,2'
+     );
+     $this->createtable('phonebook', $scheme);
+     
+or
+
+ 
+     $scheme = array(
+         'amount:decimal'
+     );
+     $this->createtable('phonebook', $scheme);
+     
+#### string (varchar)
+
+Used to hold string data with the specified character length. It takes 3 parameters. `title`:`string`:`120` is the name of the first parameter column. The second parameter is the column type. The third parameter represents the maximum number of characters of the string that the column moves. The third parameter is not mandatory, if not specified it defaults to `11`.
+
+  ##### Example
+   
+   $scheme = array(
+       'title:string:120'
+   );
+   $this->createtable('phonebook', $scheme);
+       
+  or
+  
+   
+       $scheme = array(
+           'title:string'
+       );
+       $this->createtable('phonebook', $scheme);
+     
+#### small (text)
+
+It is used to hold the string data which is `65535` characters long. It takes 2 parameters. `content`:`small` is the name of the first parameter column, the second parameter is the type of the column. The second parameter is not mandatory. If the second parameter is not specified, the column defaults to `small`.
+
+ ##### Example
+   
+       $scheme = array(
+           'content:small'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+  or
+  
+   
+       $scheme = array(
+           'content'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+#### medium (mediumtext)
+
+It is used to hold the string data which is `16777215` characters long. It takes 2 parameters. `description`:`medium` is the first parameter column name, the second parameter is the column type. Both parameters have to be specified.
+
+ ##### Example
+   
+       $scheme = array(
+           'description:medium'
+       );
+       $this->createtable('phonebook', $scheme);
+  
+#### large (longtext)
+
+It is used to hold the string data which is `4294967295` characters long. It takes 2 parameters. `content`:`large` is the first parameter column name, the second parameter is the column type. Both parameters have to be specified.
+
+ ##### Example
+   
+       $scheme = array(
+           'content:large'
+       );
+       $this->createtable('phonebook', $scheme);     
+
+#### increments (auto_increment)
+
+It is used to have an automatically incrementing number of entries added to the database table. It takes 3 parameters. `id`:`increments`:`11` is the name of the first parameter column. The second parameter is the column type. The third parameter represents the maximum limit of the increase. The third parameter is not mandatory, if not specified it defaults to `11`.
+
+ ##### Example
+   
+       $scheme = array(
+           'id:increments:12'
+       );
+       $this->createtable('phonebook', $scheme);
+       
+  or
+  
+   
+       $scheme = array(
+           'id:increments'
+       );
+       $this->createtable('phonebook', $scheme);
+
+----------
