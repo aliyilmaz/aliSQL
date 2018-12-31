@@ -366,7 +366,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
 
 #### increments (auto_increment)
 
-Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olması amacıyla kullanılır. 3 parametre alır, `id`:`increments`:`11` ilk parametre sütun adı, ikinci parametre sütun türü, üçüncü parametreyse artışın maksimum limitini temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olması amacıyla kullanılır. 3 parametre alır. `id`:`increments`:`11` ilk parametre sütun adıdır. İkinci parametre sütun türüdür. Üçüncü parametreyse artışın maksimum limitini temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
 
  ##### Örnek
    
