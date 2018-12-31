@@ -386,3 +386,17 @@ It is used to have an automatically incrementing number of entries added to the 
        $this->createtable('phonebook', $scheme);
 
 ----------
+
+## deletedb()
+
+Used to delete one or more databases, `mydb0` and` mydb1` represent the database names, `string` or `array` database names are sent as the database deletion occurs. If the operation is successful, `true ', otherwise` false' is returned.
+
+##### Example
+
+    $this->deletedb('mydb0');
+
+or
+
+    $this->deletedb(array('mydb0','mydb1'));
+
+----------
