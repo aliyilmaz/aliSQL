@@ -456,3 +456,15 @@ or
     $this->cleartable(array('my_table0', 'my_table1'));
 
 ----------
+
+## clearcolumn()
+
+Used to delete all records belonging to one or more columns in a database table. Column names can be sent as `string` or `array`. `username` and `password` represent column names. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $this->clearcolumn('username');
+
+or
+
+    $this->clearcolumn(array('username', 'password'));
