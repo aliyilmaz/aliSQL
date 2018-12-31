@@ -286,7 +286,7 @@ veya
  
  #### decimal
  
- Parasal değerleri tutmak için kullanılır, 3 parametre alır, `amount`:`decimal`:`6,2` ilk parametre sütun adıdır, ikinci parametre sütun türüdür, üçüncü parametreyse sütunun aldığı değerdir.  Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `6,2` değerini alır.
+Parasal değerleri tutmak için kullanılır, 3 parametre alır. `amount`:`decimal`:`6,2` ilk parametre sütun adıdır. İkinci parametre sütun türüdür. Üçüncü parametreyse sütunun aldığı değerdir.  Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `6,2` değerini alır.
  
  ##### Örnek
  
