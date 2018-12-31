@@ -471,7 +471,7 @@ veya
 
 ## insert()
 
-Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır, `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir, değerler `dizi` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır. `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir. Değerler `dizi` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
