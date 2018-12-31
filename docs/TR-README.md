@@ -305,7 +305,7 @@ veya
      
 #### string (varchar)
 
-Belirtilen karakter uzunluğunda ki string veriyi tutmak için kullanılır, 3 parametre alır, `title`:`string`:`120` ilk parametre sütun adıdır, ikinci parametre sütun türüdür, üçüncü parametreyse sütunun taşıyacağı string değerin maksimum karakter sayısını temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 parametre alır. `title`:`string`:`120` ilk parametre sütun adıdır. İkinci parametre sütun türüdür. Üçüncü parametreyse sütunun taşıyacağı string değerin maksimum karakter sayısını temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
 
   ##### Örnek
    
