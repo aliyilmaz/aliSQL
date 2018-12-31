@@ -443,7 +443,7 @@ veya
 
 ## cleartable()
 
-Bir veya daha fazla veritabanı tablosu içindeki kayıtların tamamını(auto_increment değerleri dahil) silmek amacıyla kullanılır, `string` veya `dizi` olarak veritabanı tablo isimleri gönderilebilir, `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bir veya daha fazla veritabanı tablosu içindeki kayıtların tamamını(auto_increment değerleri dahil) silmek amacıyla kullanılır. Veritabanı tablo isimleri `string` veya `dizi` olarak gönderilebilir. `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
