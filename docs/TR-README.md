@@ -232,6 +232,39 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başar
     );
     $this->createtable('phonebook', $scheme);
 
+****Bilgi:**** Bir sütun oluşturma hakkında daha fazla bilgi için [createcolumn](#createcolumn) metoduna bakın.
+
+----------
+
+## createcolumn()
+
+Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
+
+##### Özellikler
+
+-   int - (`int`)
+-   decimal - (`decimal`)
+-   string - (`varchar`)
+-   small - (`text`)
+-   medium - (`mediumtext`)
+-   large - (`longtext`)
+-   increments - (`auto_increment`)
+
+#### Örnek
+
+    $scheme = array(
+        'id:increments',
+        'username:small',
+        'password',
+        'address:medium',
+        'about:large',
+        'amount:decimal:6,2',
+        'title:string:120',
+        'age:int'
+    );
+    $this->createcolumn('phonebook', $scheme);
+
+
 #### int
 
 Sayıları tutmak için kullanılır. 3 parametre alır. `number`:`int`:`11` ilk parametre sütun adıdır. ikinci parametre sütun türüdür. Üçüncü parametre sütun değerlerinin maksimum limitidir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
@@ -348,27 +381,6 @@ Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olma
            'id:increments'
        );
        $this->createtable('phonebook', $scheme);
-       
-
-----------
-
-## createcolumn()
-
-Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. Daha fazla bilgi için `createtable()` metoduna gözatabilirsiniz.
-
-##### Örnek
-
-    $scheme = array(
-        'id:increments',
-        'username:small',
-        'password',
-        'address:medium',
-        'about:large',
-        'amount:decimal:6,2',
-        'title:string:120',
-        'age:int'
-    );
-    $this->createcolumn('phonebook', $scheme);
 
 ----------
 
