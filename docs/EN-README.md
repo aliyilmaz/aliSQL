@@ -399,3 +399,17 @@ or
 
     $this->deletedb(array('mydb0','mydb1'));
 
+----------
+
+## deletetable()
+
+It is used to delete one or more database tables, `my_table0` and `my_table1` represent the database table names, deletion is performed when table names are sent as `string` or `array`. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $this->deletetable('my_table0');
+
+or
+
+    $this->deletetable(array('my_table0', 'my_table1'));
+----------
