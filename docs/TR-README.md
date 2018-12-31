@@ -415,7 +415,7 @@ veya
 
 ## deletecolumn()
 
-Veritabanı tablosunda bulunan bir veya daha fazla sütunu silmek amacıyla kullanılır, `users` tablo adını, `username` ve `password` silinmesi istenen sütunları temsil etmektedir, `string` veya `dizi` olarak sütun isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir veya daha fazla sütunu silmek amacıyla kullanılır, `users` tablo adını, `username` ve `password` silinmesi istenen sütunları temsil etmektedir. `string` veya `dizi` olarak sütun isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
