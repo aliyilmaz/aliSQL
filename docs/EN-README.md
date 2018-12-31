@@ -428,3 +428,15 @@ or
     $this->deletecolumn('users', array('username', 'password'));
 
 ----------
+
+## cleardb()
+
+Used to delete one or more database contents (including auto_increment values), `mydb0` and `mydb1` represent the database names. Deletes when database names are sent as `string` or `array`. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $this->cleardb('mydb0');
+
+or
+
+    $this->cleardb(array('mydb0','mydb1'));
