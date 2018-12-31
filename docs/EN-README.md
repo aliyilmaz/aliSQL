@@ -468,3 +468,43 @@ Used to delete all records belonging to one or more columns in a database table.
 or
 
     $this->clearcolumn(array('username', 'password'));
+    
+----------
+
+## insert()
+
+Used to add one or more records to a database table. `my_table` represents the database table name,`title`, `content` and `tag` represents columns in the table `my_table`. When the values are sent in `array`, the recording is performed. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $query = $this->insert('my_table', array(
+    	'title' => 'test user',
+    	'content' => '123456',
+    	'tag' => 'test@mail.com'
+    ));
+
+or
+
+    $query = $this->insert('my_table', array(
+            array(
+                'name'          => 'Ali Yılmaz',
+                'phone'         => '10101010101',
+                'email'         => 'aliyilmaz.work@gmail.com',
+                'created_at'    =>  date('d-m-Y H:i:s')
+            ),
+            array(
+                'name'          => 'Deniz Yılmaz',
+                'phone'         => '20202020202',
+                'email'         => 'deniz@gmail.com',
+                'created_at'    =>  date('d-m-Y H:i:s')
+            ),
+            array(
+                'name'          => 'Hasan Yılmaz',
+                'phone'         => '30303030303',
+                'email'         => 'hasan@gmail.com',
+                'created_at'    =>  date('d-m-Y H:i:s')
+            )
+        )
+    );
+
+----------
