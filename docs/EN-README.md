@@ -204,3 +204,36 @@ Used to create new one or more databases. `mydb0` and` mydb1` represent the data
 or
 
     $this->createdb(array('mydb0','mydb1'));
+    
+----------
+    
+## createtable()
+
+Used to create a new database table. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Features
+
+-   int - (`int`)
+-   decimal - (`decimal`)
+-   string - (`varchar`)
+-   small - (`text`)
+-   medium - (`mediumtext`)
+-   large - (`longtext`)
+-   increments - (`auto_increment`)
+
+##### Example
+
+    $scheme = array(
+        'id:increments',
+        'username:small',
+        'password',
+        'address:medium',
+        'about:large',
+        'amount:decimal:6,2',
+        'title:string:120',
+        'age:int'
+    );
+    $this->createtable('phonebook', $scheme);
+    
+****Info:**** For more information about creating a column, see the [createcolumn](#createcolumn) method.
+
