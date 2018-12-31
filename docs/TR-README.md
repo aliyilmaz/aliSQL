@@ -234,7 +234,7 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başar
 
 #### int
 
-Sayıları tutmak için kullanılır, 3 parametre alır, `number`:`int`:`11` ilk parametre sütun adıdır, ikinci parametre sütun türüdür, üçüncü parametre sütun değerlerinin maksimum limitidir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+Sayıları tutmak için kullanılır. 3 parametre alır. `number`:`int`:`11` ilk parametre sütun adıdır. ikinci parametre sütun türüdür. Üçüncü parametre sütun değerlerinin maksimum limitidir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
 
 ##### Örnek
 
