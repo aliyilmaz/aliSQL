@@ -324,7 +324,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
      
 #### small (text)
 
-`65535` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır, 2 parametre alır, `content`:`small` ilk parametre sütunun adı, ikinci parametre sütunun türüdür. İkinci parametre zorunlu değildir. Eğer ikinci parametre belirtilmezse sütun varsayılan olarak `small` türünü alır.
+`65535` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır. 2 parametre alır. `content`:`small` ilk parametre sütunun adı, ikinci parametre sütunun türüdür. İkinci parametre zorunlu değildir. Eğer ikinci parametre belirtilmezse sütun varsayılan olarak `small` türünü alır.
 
  ##### Örnek
    
@@ -343,7 +343,8 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        
 #### medium (mediumtext)
 
-`16777215` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır, 2 parametre alır, `description`:`medium` ilk parametre sütun adı, ikinci parametre sütun türüdür. Her iki parametrenin de belirtilme zorunluluğu bulunmaktadır.
+`16777215` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır. 2 parametre alır. `description`:`medium` ilk parametre sütun adı, ikinci parametre sütun türüdür. Her iki parametrenin de belirtilme zorunluluğu bulunmaktadır.
+
 
  ##### Örnek
    
@@ -354,7 +355,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
   
 #### large (longtext)
 
-`4294967295` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır, 2 parametre alır, `content`:`large` ilk parametre sütun adı, ikinci parametre sütun türüdür. Her iki parametrenin de belirtilme zorunluluğu bulunmaktadır.
+`4294967295` karakterlik string yapıda ki veriyi tutmak amacıyla kullanılır. 2 parametre alır. `content`:`large` ilk parametre sütun adı, ikinci parametre sütun türüdür. Her iki parametrenin de belirtilme zorunluluğu bulunmaktadır.
 
  ##### Örnek
    
