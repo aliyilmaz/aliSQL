@@ -466,6 +466,8 @@ Bir veritabanı tablosunda bulunan bir veya daha fazla sütuna ait kayıtların 
 veya
 
     $this->clearcolumn(array('username', 'password'));
+    
+----------
 
 ## insert()
 
