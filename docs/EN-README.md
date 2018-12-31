@@ -440,3 +440,19 @@ Used to delete one or more database contents (including auto_increment values), 
 or
 
     $this->cleardb(array('mydb0','mydb1'));
+    
+----------
+
+## cleartable()
+
+Used to delete all records (including auto_increment values) in one or more database tables. Database table names can be sent as `string` or `array` . `my_table0` and `my_table1` represent the database table names. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $this->cleartable('my_table0');
+
+or
+
+    $this->cleartable(array('my_table0', 'my_table1'));
+
+----------
