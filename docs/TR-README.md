@@ -569,7 +569,7 @@ Bir veritabanı tablosunun tüm kayıtlarını elde etmek için kullanılır. Ek
 
 #### column: Tablo sütunlarına ulaşmak
 
-Bir veritabanı tablosundaki kayıtlar için belirtilen sütun verilerini elde etmek için kullanılır. Tüm sütun verilerini almadığından, daha hafif bir sorgulamaya izin verir. `column`, özelliğin adını, `title` ve `tag`, sütun adlarını temsil eder.
+Bir veritabanı tablosundaki belirtilen sütun verilerini elde etmek için kullanılır. Tüm sütun verilerini almadığından, daha hafif bir sorgulamaya izin verir. `column`, özelliğin adını, `title` ve `tag`, sütun adlarını temsil eder.
 
 ##### Örnek
 
@@ -592,7 +592,7 @@ veya
 
 #### limit: Kayıt aralığına ulaşmak
 
-Veritabanı tablosunda bulunan kayıtları belirtilen limitler doğrultusunda elde etmek amacıyla kullanılır. `limit` özelliğin adını, `start` ve `end` alt özellikleri temsil etmektedir. Kayıt aralığını elde etmek için `start` özelliğine başlangıç değeri, `end` özelliğine ise bitiş değeri belirtmek gerekir.
+Veritabanındaki kayıtları belirtilen limitlere göre elde etmek için kullanılır. `limit`, özelliğin adını, `start` ve `end` alt özellik adlarını temsil eder. Kayıt aralığını elde etmek için `start` ve `end` belirtilmelidir.
 
 ##### Örnek
 
