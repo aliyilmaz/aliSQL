@@ -555,7 +555,7 @@ or
 
 ## get()
 
-Used to obtain records in a database table as they are or by filtering. `my_table0` shows the table name, `$ arr` parameters and usage examples are given below.
+Used to obtain records in a database table as they are or by filtering. `my_table0` shows the table name, `$arr` parameters and usage examples are given below.
 
 #### Access all records
 
