@@ -508,3 +508,25 @@ or
     );
 
 ----------
+
+## update()
+
+Used to update a record in the database table. `my_table` represents the database table name. `title`, `content` and `tag` represent columns in `my_table` table. The `17` represents the `id` of the record to be updated. When the new values are sent as `array`, the update process takes place. To search the `id` parameter in a column whose `auto_increment` property is not defined, it is necessary to specify the column name in parameter 4. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $query = $this->update('my_table', array(
+    	'title' => 'test user',
+    	'content' => '123456',
+    	'tag' => 'example@mail.com'
+    ),17);
+
+or
+
+    $query = $this->update('my_table', array(
+    	'title' => 'test user',
+    	'content' => '123456',
+    	'tag' => 'example@mail.com'
+    ),'test user', 'title');
+
+----------
