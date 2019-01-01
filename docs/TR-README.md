@@ -509,7 +509,7 @@ veya
 
 ## update()
 
-Veritabanı tablosunda bulunan herhangi bir kaydı güncellemek amacıyla kullanılır, `my_table` veritabanı tablo adını, `title`, `content` ve `tag`, `my_table` tablosu içinde ki sütunları, `17` güncellenmesi istenen kaydın `id`'sini temsil etmektedir, yeni değerler `dizi` şeklinde gönderildiğinde güncelleme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 4'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir kaydı güncellemek amacıyla kullanılır. `my_table` veritabanı tablo adını temsil eder. `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil eder. `17` güncellenmesi istenen kaydın `id`'sini temsil eder. Yeni değerler `dizi` şeklinde gönderildiğinde güncelleme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 4'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
