@@ -592,7 +592,7 @@ veya
 
 #### limit: Kayıt aralığına ulaşmak
 
-Veritabanı tablosunda bulunan kayıtları belirtilen limitler doğrultusunda elde etmek amacıyla kullanılır, `limit` özelliğin adını, `start` ve `end` alt özellikleri temsil etmekte olup, tablo da ki kayıt aralığını elde etmek için `start` özelliğine başlangıç değeri, `end` özelliğine ise bitiş değeri tanımlamak gerekir.
+Veritabanı tablosunda bulunan kayıtları belirtilen limitler doğrultusunda elde etmek amacıyla kullanılır. `limit` özelliğin adını, `start` ve `end` alt özellikleri temsil etmektedir. Kayıt aralığını elde etmek için `start` özelliğine başlangıç değeri, `end` özelliğine ise bitiş değeri belirtmek gerekir.
 
 ##### Örnek
 
