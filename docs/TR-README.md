@@ -531,7 +531,7 @@ veya
 
 ## delete()
 
-Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır, `my_table` veritabanı tablo adını, `14` değeri silinmesi istenen bir kaydı, `15` ve `16` değerleri silinmesi istenen kayıtların id'sini temsil etmektedir, id'ler `string` veya `dizi` olarak gönderildiğinde kayıtları silme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 3'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. `my_table` veritabanı tablo adını, `14` değeri silinmesi istenen bir kaydı, `15` ve `16` değerleri silinmesi istenen kayıtların id'sini temsil etmektedir. id'ler `string` veya `dizi` olarak gönderildiğinde kayıtları silme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 3'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
