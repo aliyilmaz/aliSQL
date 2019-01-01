@@ -530,3 +530,25 @@ or
     ),'test user', 'title');
 
 ----------
+
+## delete()
+
+Used to delete one or more records in the database table. `my_table` represents the database table name,`14` is a record that is to be deleted, `15` and `16` represent the id of the records to be deleted. Deleting records occurs when the ids are sent as `string` or `array`. To search the `id` parameter in a column whose `auto_increment` property is not defined, it is necessary to specify the column name in parameter 3. If the operation is successful, `true`, otherwise `false` is returned.
+
+##### Example
+
+    $this->delete('my_table',14);
+
+or
+
+    $this->delete('my_table',array(15,16));
+
+or
+
+    $this->delete('my_table',14, 'age');
+
+or
+
+    $this->delete('my_table',array(15,16), 'age');
+
+----------
