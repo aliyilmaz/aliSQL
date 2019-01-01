@@ -552,3 +552,40 @@ or
     $this->delete('my_table',array(15,16), 'age');
 
 ----------
+
+## get()
+
+Used to obtain records in a database table as they are or by filtering. `my_table0` shows the table name, `$ arr` parameters and usage examples are given below.
+
+#### Access all records
+
+Used to obtain all records of a database table. It is possible to use it without the need for an extra parameter, but obtaining a large number of data at one time can reduce project performance by creating a load on the server and user side.
+
+
+##### Example
+
+    print_r($this->get('my_table0'));
+
+
+
+#### column: Reach table columns
+
+It is used to obtain the specified column data for records in a database table. Because it does not obtain all the column data, it allows for a lighter query, `column` represents the name of the property, `title` and `tag` represent the column names.
+
+##### Example
+
+    $arr = array(
+    	'column' => array(
+    	      'title',
+    	      'tag'
+    	)
+    );
+    print_r($this->get('my_table0',$arr));
+
+or
+
+    $arr = array(
+    	'column' => 'title'
+    );
+    print_r($this->get('my_table0',$arr));
+
