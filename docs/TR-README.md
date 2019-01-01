@@ -553,23 +553,23 @@ veya
 
 ## get()
 
-Bir veritabanı tablosunda ki kayıtları olduğu gibi yada belirli kriterlere göre filtreleyerek elde etmek amacıyla kullanılır, `my_table0` veritabanı tablo adını temsil etmekte olup, `$arr` parametreleri ve kullanım örneklerine aşağıda yer verilmiştir.
+Bir veritabanı tablosundaki kayıtları olduğu gibi veya filtreleyerek elde etmek için kullanılır. `my_table0` tablo ismini gösterir, `$arr` parametreleri ve kullanım örneklerine aşağıda yer verilmiştir.
 
-----------
+
 
 #### Tüm kayıtlara ulaşmak
 
-Bir veritabanı tablosunun tüm kayıtlarını elde etmek amacıyla kullanılır, ekstra bir parametreye ihtiyaç duymadan kullanılması mümkündür, fakat çok sayıda verinin tek seferde elde edilmesi, sunucu ve kullanıcı tarafında yük oluşturarak proje performansını düşürebilir.
+Bir veritabanı tablosunun tüm kayıtlarını elde etmek için kullanılır. Ek bir parametreye ihtiyaç duymadan kullanmak mümkündür, ancak bir kerede çok sayıda veri elde etmek, sunucu ve kullanıcı tarafında bir yük oluşturarak proje performansını düşürebilir.
 
 ##### Örnek
 
     print_r($this->get('my_table0'));
 
-----------
+
 
 #### column: Tablo sütunlarına ulaşmak
 
-Bir veritabanı tablosunda bulunan kayıtların belirtilen sütun verilerini elde etmek amacıyla kullanılır, tüm sütun verilerini elde etmediği için daha hafif bir sorgu yapılmasına olanak tanır, `column` özelliğin adını, `title` ve `tag` sütun isimlerini temsil etmektedir.
+Bir veritabanı tablosundaki kayıtlar için belirtilen sütun verilerini elde etmek için kullanılır. Tüm sütun verilerini almadığından, daha hafif bir sorgulamaya izin verir. `column`, özelliğin adını, `title` ve `tag`, sütun adlarını temsil eder.
 
 ##### Örnek
 
@@ -588,7 +588,7 @@ veya
     );
     print_r($this->get('my_table0',$arr));
 
-----------
+
 
 #### limit: Kayıt aralığına ulaşmak
 
@@ -601,7 +601,7 @@ Veritabanı tablosunda bulunan kayıtları belirtilen limitler doğrultusunda el
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### limit:start Belirtilen miktarda ilk kaydı gözardı etmek
 
@@ -614,7 +614,7 @@ Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru b
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### limit:end Belirtilen miktar kadar kayda ulaşmak
 
@@ -627,7 +627,7 @@ Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kulla
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### sort: Kayıtları sıralamak
 
@@ -647,7 +647,7 @@ veya
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### search: Arama yapmak
 
@@ -674,7 +674,7 @@ veya
     );
     print_r($this->get('my_table0',$arr));
 
-----------
+
 
 #### search:where Her yerde aramak
 
@@ -703,7 +703,7 @@ veya
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### search:column Sütunlar da aramak
 
@@ -755,7 +755,7 @@ veya
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### search:equal Çoklu eşitlik denklemi
 
@@ -776,7 +776,7 @@ Bir kaydın farklı sütunlarına pay edilen verileri sorgulamak amacıyla kulla
     );
     $tblname = 'phonebook';
     print_r($this->get($tblname, $arr));
-----------
+
 
 #### format: Sonuçların formatı
 
@@ -789,7 +789,7 @@ Veritabanı tablosundan elde edilen verilerin çıktı formatını belirlemek am
     );
     print_r($this->get('my_table',$arr));
 
-----------
+
 
 #### Özelliklerin bir arada kullanımı
 
