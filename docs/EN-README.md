@@ -568,9 +568,9 @@ Used to obtain all records of a database table. It is possible to use it without
 
 
 
-#### column: Reach table columns
+#### column: Reach the table columns
 
-It is used to obtain the specified column data for records in a database table. Because it does not obtain all the column data, it allows for a lighter query, `column` represents the name of the property, `title` and `tag` represent the column names.
+It is used to obtain the specified column data in a database table. Because it does not retrieve all column data, it allows a lighter query. `column` represents the name of the property, `title` and `tag`, representing the column names.
 
 ##### Example
 
@@ -589,3 +589,14 @@ or
     );
     print_r($this->get('my_table0',$arr));
 
+
+#### limit: Reach record range
+
+It is used to retrieve the records in the database according to the specified limits. `limit` represents the name of the feature, `start` and `end` represents the sub-feature names. In order to obtain the recording interval, `start` and `end` must be specified.
+
+##### Example
+
+    $arr = array(
+    	'limit' => array('start'=>'1', 'end'=>'10')
+    );
+    print_r($this->get('my_table',$arr));
