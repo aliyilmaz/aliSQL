@@ -1,7 +1,14 @@
 ﻿﻿
 # Mind
 
- ![Latest Stable Version](https://img.shields.io/github/release/aliyilmaz/Mind.svg) [![HitCount](http://hits.dwyl.io/aliyilmaz/Mind.svg)](https://github.com/aliyilmaz/Mind)
+  [![License](https://poser.pugx.org/mind/mind/license?format=flat-square)](https://packagist.org/packages/mind/mind)
+  [![Latest Stable Version](https://poser.pugx.org/mind/mind/v/stable?format=flat-square)](https://packagist.org/packages/mind/mind)
+  [![HitCount](http://hits.dwyl.io/aliyilmaz/Mind.svg)](https://github.com/aliyilmaz/Mind)
+  [![Total Downloads](https://poser.pugx.org/mind/mind/downloads?format=flat-square)](https://packagist.org/packages/mind/mind)
+  [![Monthly Downloads](https://poser.pugx.org/mind/mind/d/monthly?format=flat-square)](https://packagist.org/packages/mind/mind)
+  [![Daily Downloads](https://poser.pugx.org/mind/mind/d/daily?format=flat-square)](https://packagist.org/packages/mind/mind)
+  
+ 
 
 Mind, is a free and open source PHP framework designed for junior and senior developers. To create new design patterns and frameworks, Mind offers great tools.
  
