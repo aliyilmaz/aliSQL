@@ -1,7 +1,7 @@
 ﻿﻿
 # Mind
 
- ![Latest Stable Version](https://img.shields.io/github/release/aliyilmaz/Mind.svg) ![Total Downloads](https://img.shields.io/github/downloads/aliyilmaz/Mind/total.svg)
+ ![Latest Stable Version](https://img.shields.io/github/release/aliyilmaz/Mind.svg) [![HitCount](http://hits.dwyl.io/aliyilmaz/Mind.svg)](http://hits.dwyl.io/aliyilmaz/Mind)
 
 Mind, is a free and open source PHP framework designed for junior and senior developers. To create new design patterns and frameworks, Mind offers great tools.
  
