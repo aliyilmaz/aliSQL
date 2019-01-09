@@ -626,3 +626,23 @@ Used to obtain the specified number of records in the database. `limit` represen
     print_r($this->get('my_table',$arr));
 
 
+
+
+#### sort: Sort records
+
+Used to sort records in database table from small to large or from small to small according to specified column content. `sort` represents the name of the property, `columnname` represents the column name for sorting, `ASC` represents the request for sorting from small to large, `DESC` represents the request for sorting from large to small.
+
+##### Example
+
+    $arr = array(
+    	'sort' => 'columnname:ASC'
+    );
+    print_r($this->get('my_table',$arr));
+
+or
+
+    $arr = array(
+    	'sort' => 'columnname:DESC'
+    );
+    print_r($this->get('my_table',$arr));
+
