@@ -651,7 +651,7 @@ veya
 
 #### search: Arama yapmak
 
-Belirtilen anahtar kelimeyi veya anahtar kelimeleri, tüm veritabanı tablosunda tam eşleme ilkesine göre aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını,` keyword` aranan anahtar kelimeleri temsil eder.
+Belirtilen anahtar sözcüğü veya anahtar kelimeleri veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını,` keyword` aranan anahtar kelimeleri temsil eder.
 
 ##### Örnek
 
