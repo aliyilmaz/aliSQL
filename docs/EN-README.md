@@ -649,7 +649,7 @@ or
 
 #### search: Searching
 
-Used to look up the specified keyword or keywords with the exact match principle in the entire database table. Keywords can be sent as `string` or `array`. `search` represents the name of the feature,` keyword` represents the searched keywords.
+Used to look up the specified keyword or keywords with the exact match principle in the entire database table. Keywords can be sent as `string` or `array`. `search` represents the name of the feature, `keyword` represents the searched keywords.
 
 ##### Example
 
