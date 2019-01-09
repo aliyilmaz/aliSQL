@@ -649,7 +649,7 @@ or
 
 #### search: Searching
 
-Used to look up the specified keyword or keywords with the exact match principle in the entire database table. Keywords can be sent as `string` or `array`. `search` represents the name of the feature, `keyword` represents the searched keywords.
+It is used to search for the specified keyword or keywords in the database table. Keywords can be sent as `string` or `array`. `search` represents the name of the feature, `keyword` represents the searched keywords.
 
 ##### Example
 
@@ -671,4 +671,5 @@ or
     	)
     );
     print_r($this->get('my_table0',$arr));
+
 
