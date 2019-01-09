@@ -605,7 +605,7 @@ Veritabanındaki kayıtları belirtilen limitlere göre elde etmek için kullan�
 
 #### limit:start Belirtilen miktarda ilk kaydı gözardı etmek
 
-Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru belirtilen sayı kadarının gözardı edilmesi amacıyla kullanılır, `limit` özelliğin adını, `start` gözardı edilecek kayıt miktarını temsil etmektedir.
+Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru belirtilen sayı kadarının gözardı edilmesi amacıyla kullanılır. `limit` özelliğin adını, `start` gözardı edilecek kayıt miktarını temsil etmektedir.
 
 ##### Örnek
 
@@ -618,7 +618,7 @@ Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru b
 
 #### limit:end Belirtilen miktar kadar kayda ulaşmak
 
-Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kullanılır, `limit` özelliğin adını, `end` elde edilmek istenen kayıt miktarını temsil etmektedir.
+Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kullanılır. `limit` özelliğin adını, `end` elde edilmek istenen kayıt miktarını temsil etmektedir.
 
 ##### Örnek
 
@@ -631,7 +631,7 @@ Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kulla
 
 #### sort: Kayıtları sıralamak
 
-Veritabanı tablosundaki kayıtları belirtilen sütun içeriğine göre küçükten büyüğe veya büyükten küçüğe doğru sıralamak amacıyla kullanılır, `sort` özelliğin adını, `columnname` sıralamanın yapılacağı sütun adını, `ASC` küçükten büyüğe sıralama talebini, `DESC` ise büyükten küçüğe doğru sıralama talebini temsil etmektedir.
+Veritabanı tablosundaki kayıtları belirtilen sütun içeriğine göre küçükten büyüğe veya büyükten küçüğe doğru sıralamak amacıyla kullanılır. `sort` özelliğin adını, `columnname` sıralamanın yapılacağı sütun adını, `ASC` küçükten büyüğe sıralama talebini, `DESC` ise büyükten küçüğe doğru sıralama talebini temsil etmektedir.
 
 ##### Örnek
 
@@ -651,7 +651,7 @@ veya
 
 #### search: Arama yapmak
 
-Veritabanı tablosunun tamamında tam eşleme prensibiyle arama yapmak amacıyla kullanılır, `string` veya `dizi` olarak kelimeler gönderilebilir, `search` özelliğin adını, `keyword` aranan kelimeleri temsil etmektedir.
+Belirtilen anahtar kelimeyi veya anahtar kelimeleri, tüm veritabanı tablosunda tam eşleme ilkesine göre aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını,` keyword` aranan anahtar kelimeleri temsil eder.
 
 ##### Örnek
 
