@@ -600,3 +600,17 @@ It is used to retrieve the records in the database according to the specified li
     	'limit' => array('start'=>'1', 'end'=>'10')
     );
     print_r($this->get('my_table',$arr));
+    
+
+#### limit:start Ignoring first records
+
+Used to ignore the specified number of old records.`limit` represents the name of the feature, `start` represents the amount of record to be ignored.
+
+##### Example
+
+    $arr = array(
+    	'limit' => array('start'=>'2')
+    );
+    print_r($this->get('my_table',$arr));
+
+
