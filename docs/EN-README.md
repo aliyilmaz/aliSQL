@@ -614,3 +614,15 @@ Used to ignore the specified number of old records.`limit` represents the name o
     print_r($this->get('my_table',$arr));
 
 
+#### limit:end Recording up to the specified amount
+
+Used to obtain the specified number of records in the database. `limit` represents the name of the feature, `end` represents the desired amount of recording.
+
+##### Example
+
+    $arr = array(
+    	'limit' => array('end'=>'10')
+    );
+    print_r($this->get('my_table',$arr));
+
+
