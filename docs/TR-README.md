@@ -737,9 +737,9 @@ veya
 
 
 
-#### search:equal Çoklu eşitlik denklemi
+#### search:equal Çoklu denklem araması
 
-Bir kaydın farklı sütunlarına pay edilen verileri sorgulamak amacıyla kullanılır, eğer tümünde veriler varsa o kayıt veya kayıtlar elde edilir. Bu özelliği, kullanıcı girişi sırasında veya `token` ve `api` gibi verilerin aidiyetlerini sorgulamak gerektiğinde kullanmak mümkündür.
+Bir kaydın farklı sütunlarına bulunan verileri sorgulamak amacıyla kullanılır. Eğer tümünde veriler varsa veriler dizi olarak geri döndürülür. Bu özelliği, kullanıcı girişi sırasında veya `token` ve `api` gibi verilerin aidiyetlerini sorgulamak gerektiğinde kullanmak mümkündür.
 
 ****Bilgi:**** Bu özellik kullanıldığında `search:keyword`, `search:where` ve `search:column` özellikleri gözardı edilir.
 
@@ -751,7 +751,7 @@ Bir kaydın farklı sütunlarına pay edilen verileri sorgulamak amacıyla kulla
     );
     $arr = array(
         'search' => array(
-            'equal'=>$par
+            'equal'=> $par
         )
     );
     $tblname = 'phonebook';
