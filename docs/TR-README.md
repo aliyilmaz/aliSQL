@@ -739,7 +739,7 @@ veya
 
 #### search:equal Çoklu denklem araması
 
-Bir kaydın farklı sütunlarına bulunan verileri sorgulamak amacıyla kullanılır. Eğer tümünde veriler varsa veriler dizi olarak geri döndürülür. Bu özelliği, kullanıcı girişi sırasında veya `token` ve `api` gibi verilerin aidiyetlerini sorgulamak gerektiğinde kullanmak mümkündür.
+Bir kaydın farklı sütunlarındaki verileri sorgulamak için kullanılır. Eğer tümünde veriler varsa veriler dizi olarak geri döndürülür. Bu özelliği, kullanıcı girişi sırasında veya `token` ve `api` gibi verilerin aidiyetlerini sorgulamak gerektiğinde kullanmak mümkündür.
 
 ****Bilgi:**** Bu özellik kullanıldığında `search:keyword`, `search:where` ve `search:column` özellikleri gözardı edilir.
 
