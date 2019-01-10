@@ -705,9 +705,9 @@ veya
 
 
 
-#### search:column Sütunlar da aramak
+#### search:column Sütunlarda aramak
 
-Veritabanı tablosunun belirtilen sütunlarında tam veya genel eşleme prensibiyle arama yapmak amacıyla kullanılır, `string` veya `dizi` olarak kelime ve sütunlar gönderilebilir, `column` özelliğin adını, `id`, `title`, `content` ve `tag` hangi sütunlarda arama yapılacağını temsil etmektedir.
+Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme politikası ile aramak için kullanılır, kelimeler ve sütunlar `string` veya `dizi` olarak gönderilebilir. `column` özellik adını,`id`, `title`, `content` ve `tag` sütun adlarını temsil eder.
 
 ##### Örnek
 
