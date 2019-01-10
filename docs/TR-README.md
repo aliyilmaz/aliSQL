@@ -735,26 +735,6 @@ veya
     );
     print_r($this->get('my_table',$arr));
 
-veya
-
-    $arr = array(
-    	'search' => array(
-    		'column'=>array('id', 'title', 'content', 'tag'),
-    		'keyword'=>'merhaba dünya'
-    	)
-    );
-    print_r($this->get('my_table',$arr));
-
-veya
-
-    $arr = array(
-    	'search' => array(
-    		'column'=>'title',
-    		'keyword'=>'merhaba dünya'
-    	)
-    );
-    print_r($this->get('my_table',$arr));
-
 
 
 #### search:equal Çoklu eşitlik denklemi
