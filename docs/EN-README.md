@@ -730,3 +730,25 @@ or
     	)
     );
     print_r($this->get('my_table',$arr));
+
+
+#### search:equal Multiple equation search
+
+It is used to query data in different columns of a record. If all of the data is present, the data is returned as an array. It is possible to use this feature during user input or when it is necessary to query the data belonging to `token` and` api`.
+
+****Info:**** When this feature is used, `search:keyword`, `search: where` and `search: column` are ignored.
+
+##### Example
+
+    $par = array(
+        'username'=>'admin', 
+        'password'=>'root'
+    );
+    $arr = array(
+        'search' => array(
+            'equal'=> $par
+        )
+    );
+    $tblname = 'phonebook';
+    print_r($this->get($tblname, $arr));
+
