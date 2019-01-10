@@ -700,3 +700,54 @@ or
     );
     print_r($this->get('my_table',$arr));
 
+
+#### search:column Search columns
+
+Used to search the specified columns of a database table with a full or global mapping policy, words and columns can be sent as `string` or `array`. `column` represents the name of the feature,`id`, `title`, `content` and `tag` represents the column names.
+
+##### Example
+
+    $arr = array(
+    	'search' => array(
+    		'column'=>array('id', 'title', 'content', 'tag'),
+    		'keyword'=>array(
+    			'hello world!',
+    			'merhaba dünya'
+    		)
+    	)
+    );
+    print_r($this->get('my_table',$arr));
+
+or
+
+    $arr = array(
+    	'search' => array(
+    		'column'=>'title',
+    		'keyword'=>array(
+    			'hello world!',
+    			'merhaba dünya'
+    		)
+    	)
+    );
+    print_r($this->get('my_table',$arr));
+
+or
+
+    $arr = array(
+    	'search' => array(
+    		'column'=>array('id', 'title', 'content', 'tag'),
+    		'keyword'=>'merhaba dünya'
+    	)
+    );
+    print_r($this->get('my_table',$arr));
+
+or
+
+    $arr = array(
+    	'search' => array(
+    		'column'=>'title',
+    		'keyword'=>'merhaba dünya'
+    	)
+    );
+    print_r($this->get('my_table',$arr));
+
