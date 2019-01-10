@@ -649,17 +649,17 @@ or
 
 #### search: Searching
 
-It is used to search for the specified keyword or keywords in the database table. Keywords can be sent as `string` or `array`. `search` represents the name of the feature, `keyword` represents the searched keywords.
+Used to search for keywords in a database table. Keywords can be sent as `string` or `array`. `search` represents the name of the feature, `keyword` represents the searched keywords.
 
 ##### Example
 
     $arr = array(
-    	'search' => array(
-    		'keyword'=> array(
-    			'hello world!',
-    			'merhaba dünya'
-    		)
-    	)
+        'search' => array(
+            'keyword'=> array(
+                'hello world!',
+                'merhaba dünya'
+            )
+        )
     );
     print_r($this->get('my_table0',$arr));
 
