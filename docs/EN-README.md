@@ -673,3 +673,30 @@ or
     print_r($this->get('my_table0',$arr));
 
 
+#### search:where Broad match search
+
+Used to search for keywords in the database table as broad match. Words can be sent as `string` or` array`. `where` represents the name of the feature,`keyword` represents the searched words. To use this feature, the `all` parameter must be specified.
+
+##### Example
+
+    $arr = array(
+    	'search' => array(
+    		'keyword'=>array(
+    			'hello world!',
+    			'merhaba dünya'
+    		),
+    		'where'=>'all'
+    	)
+    );
+    print_r($this->get('my_table',$arr));
+
+or
+
+    $arr = array(
+    	'search' => array(
+    		'keyword'=>'merhaba dünya',
+    		'where'=>'all'
+    	)
+    );
+    print_r($this->get('my_table',$arr));
+
