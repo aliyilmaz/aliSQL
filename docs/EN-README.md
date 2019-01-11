@@ -752,3 +752,15 @@ Used to query data in different columns of a record. If all of the data is prese
     $tblname = 'phonebook';
     print_r($this->get($tblname, $arr));
 
+
+#### format: Format of results
+
+The result is used to determine the output format, `array` and `json` formats are available.
+
+##### Example
+
+    $arr = array(
+    	'format' => 'json'
+    );
+    print_r($this->get('my_table',$arr));
+
