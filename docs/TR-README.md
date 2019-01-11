@@ -760,7 +760,7 @@ Bir kaydın farklı sütunlarındaki verileri sorgulamak için kullanılır. Eğ
 
 #### format: Sonuçların formatı
 
-Veritabanı tablosundan elde edilen verilerin çıktı formatını belirlemek amacıyla kullanılır, şuan için `dizi` formatı dışında `json` formatını desteklemektedir.
+Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `dizi` formatı dışında `json` formatını desteklemektedir.
 
 ##### Örnek
 
