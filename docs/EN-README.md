@@ -764,3 +764,61 @@ The result is used to determine the output format, `array` and `json` formats ar
     );
     print_r($this->get('my_table',$arr));
 
+
+#### Use of features
+
+All `get()` features can be used together, this usage does not create any load, but for projects that require high performance is life saver.
+
+##### Example
+
+    $arr = array(
+    	'search'=>array(
+    		'column'=>array(
+    			'id',
+    			'title',
+    			'content',
+    			'tag'
+    		),
+    		'keyword'=>array(
+    			'merhaba',
+    			'hello'
+    		),
+    		'where'=>'all'
+    	),
+    	'format'=>'json',
+    	'sort'=>'id:ASC',
+    	'limit'=>array(
+    		'start'=>'1',
+    		'end'=>'5'
+    	),
+    	'column'=>array(
+    		'id',
+    		'title'
+    		)
+    );
+    print_r($this->get('my_table',$arr));
+
+or
+
+    $arr = array(
+    	'search'=>array(
+    		'equal'=>array(
+    		    'username'=>'aliyilmaz',
+    		    'password'=>'123456'
+    		)
+    	),
+    	'format'=>'json',
+    	'sort'=>'id:ASC',
+    	'limit'=>array(
+    		'start'=>'1',
+    		'end'=>'5'
+    	),
+    	'column'=>array(
+    		'username',
+    		'password'
+    		)
+    );
+    print_r($this->get('users',$arr));
+
+
+----------
