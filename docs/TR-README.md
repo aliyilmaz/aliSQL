@@ -804,6 +804,28 @@ Tüm `get()` özellikleri birlikte kullanılabilir, bu kullanım herhangi bir y�
     );
     print_r($this->get('my_table',$arr));
 
+veya
+
+    $arr = array(
+    	'search'=>array(
+    		'equal'=>array(
+    		    'username'=>'aliyilmaz',
+    		    'password'=>'123456'
+    		)
+    	),
+    	'format'=>'json',
+    	'sort'=>'id:ASC',
+    	'limit'=>array(
+    		'start'=>'1',
+    		'end'=>'5'
+    	),
+    	'column'=>array(
+    		'username',
+    		'password'
+    		)
+    );
+    print_r($this->get('users',$arr));
+
 ----------
 
 ## do_have()
