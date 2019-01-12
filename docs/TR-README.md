@@ -773,7 +773,7 @@ Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `dizi
 
 #### Özelliklerin bir arada kullanımı
 
-Şimdiye kadar anlatılan tüm `get()` özellikleri birarada kullanılabilir, bu kullanım şekli herhangi bir yük oluşturmayacağı gibi, yüksek performansa ihtiyaç duyan projeler için hayat kurtarıcıdır.
+Tüm `get()` özellikleri birlikte kullanılabilir, bu kullanım herhangi bir yük oluşturmaz, ancak yüksek performans gerektiren projeler için hayat kurtarıcıdır.
 
 ##### Örnek
 
