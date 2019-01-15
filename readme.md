@@ -39,7 +39,7 @@ Fork the repository, make the code changes then submit a pull request.
 
 Please, be very clear on your commit messages and pull requests, empty pull request messages may be rejected without reason.
 
-Please note that this project is released with a [Contributor Code of Conduct](https://github.com/aliyilmaz/Mind/blob/master/CONTRIBUTING.md#code-of-conduct). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://github.com/aliyilmaz/Mind/blob/master/contributing.md#code-of-conduct). By participating in this project you agree to abide by its terms.
 
 ## Translation
 
