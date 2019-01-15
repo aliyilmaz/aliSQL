@@ -55,12 +55,12 @@ If you discover any security related issues, please email aliyilmaz.work@gmail.c
 
 ## To-do list
 
--   Completion of the English document.
--   PDO will be preferred as the connection method.
--   Codes, documents and tests will be updated according to phpdoc standards.
--   A reporting method will be created to instantly access all transaction results, including faulty transactions.
--   Functions will be created to retrieve database backups and install backups.
--   Must be Nginx support.
+- [ ] Completion of the English document.
+- [ ] PDO will be preferred as the connection method.
+- [ ] Codes, documents and tests will be updated according to phpdoc standards.
+- [ ] A reporting method will be created to instantly access all transaction results, including faulty transactions.
+- [ ] Functions will be created to retrieve database backups and install backups.
+- [ ] Must be Nginx support.
 
 ## Author
 
@@ -68,10 +68,10 @@ If you discover any security related issues, please email aliyilmaz.work@gmail.c
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [[Contribute](contributing.md)].
 
 - [All Contributors](../../contributors)
 
 ## License
 
-Mind is released under the [GPLv3 license](LICENSE.md).
+Mind is released under the [GPLv3 license](license.md).
