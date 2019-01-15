@@ -752,17 +752,24 @@ class Mind {
 
         if(!empty($tblname) AND !empty($str)){
 
-            $arr = array(
-                'search'=> array(
-                    'keyword' => $this->filter($str)
-                )
-            );
-
-            if(!empty($column)){
+            if(!is_array($str)){
+                $arr = array(
+                    'search'=> array(
+                        'keyword' => $str
+                    )
+                );
+                if(!empty($column)){
+                    $arr = array(
+                        'search' =>array(
+                            'keyword' => $str,
+                            'column' => $column
+                        )
+                    );
+                }
+            } else {
                 $arr = array(
                     'search' =>array(
-                        'keyword' => $this->filter($str),
-                        'column' => $this->filter($column)
+                        'equal'=> $str
                     )
                 );
             }
