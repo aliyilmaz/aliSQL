@@ -1542,31 +1542,30 @@ class Mind {
      * */
     public function upload($files, $path){
 
-        $response = array();
+        $result = array();
 
-        if(is_dir($path)){
-
-            if(!empty($files) AND !isset($files[0])){
-                $files = array($files);
-            }
-
-            foreach ($files as $file){
-
-                if(!empty($file['name'])){
-                    $xdat       = date('d-m-Y g:i:s').gettimeofday();
-                    $ext        = $this->info($file['name'], 'extension');
-                    $newpath    = $path.'/'.md5($xdat['usec']).'.'.$ext;
-                    move_uploaded_file($file['tmp_name'], $newpath);
-                    $response[] = $newpath;
-
-                }
-
-            }
-
-            return $response;
+        if(isset($files['name'])){
+            $files = array($files);
         }
 
-        return false;
+        foreach ($files as $file) {
+
+            #Path syntax correction for Windows.
+            $tmp_name = str_replace('\\\\', '\\', $file['tmp_name']);
+            $file['tmp_name'] = $tmp_name;
+
+            $xtime      = gettimeofday();
+            $xdat       = date('d-m-Y g:i:s').$xtime['usec'];
+            $ext        = $this->info($file['name'], 'extension');
+            $newpath    = $path.'/'.md5($xdat).'.'.$ext;
+
+            move_uploaded_file($file['tmp_name'], $newpath);
+
+            $result[]   = $newpath;
+
+        }
+
+        return $result;
     }
 
     /**
