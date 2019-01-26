@@ -1,8 +1,7 @@
 
-\.idea/
-
-/vendor/
-
-index\.php
-
-composer\.lock
+.idea/encodings.xml
+.idea/Mind.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
