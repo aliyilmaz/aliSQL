@@ -1100,6 +1100,11 @@ class Mind {
     public function info($str, $type){
 
         $object = pathinfo($str);
+
+        if($type == 'extension'){
+           return strtolower($object[$type]);
+        }
+
         return $object[$type];
     }
 
