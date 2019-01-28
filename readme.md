@@ -15,8 +15,8 @@ Mind, is a free and open source PHP framework designed for junior and senior dev
  Because it is easy to create a custom design pattern for your needs, the features that will always remain small remain small. It enables controlled and safe growth for a growing project.
 
 * [Documentation](https://github.com/aliyilmaz/Mind/tree/master/docs) 
-  * Turkish (Completed)
-  * English (Continues)
+  * [Turkish (Completed)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
+  * [English (Continues)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
 * [Tests](https://github.com/aliyilmaz/Mind/tree/master/tests) 
 
 ## Requirements
