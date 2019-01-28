@@ -142,6 +142,7 @@ class Mind {
                 $columnType = 'small';
             }
 
+            if(is_null($columnValue) AND $columnType =='string'){ $columnValue = 255; }
             if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
             if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
 
