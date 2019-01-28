@@ -38,13 +38,7 @@ class Mind {
 
         $this->request();
 
-        if(
-            empty(
-            $_SESSION['timezone']
-            ) OR in_array(
-                $_SESSION['timezone'], $this->timezones()
-            )
-        ){
+        if(empty($_SESSION['timezone']) OR in_array($_SESSION['timezone'], $this->timezones())){
             $_SESSION['timezone'] = $this->timezone;
         }
 
@@ -149,7 +143,7 @@ class Mind {
             }
 
             if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
-            if(is_null($columnValue)){ $columnValue = 11; }
+            if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
 
             $first = '';
             $prefix = '';
@@ -157,7 +151,6 @@ class Mind {
                 $first = 'FIRST';
                 $prefix = 'ADD COLUMN ';
             }
-
 
             switch ($columnType){
                 case 'int':
@@ -1516,14 +1509,14 @@ class Mind {
     public function write($str, $path) {
 
         if(is_array($str)){
-            $content 	= implode(':', $str);
+            $content    = implode(':', $str);
         } else {
             $content    = $str;
         }
 
         if(isset($content)){
 
-            $writedb 		= fopen($path, "a+");
+            $writedb        = fopen($path, "a+");
             fwrite($writedb, $content."\r\n");
             fclose($writedb);
 
@@ -1586,8 +1579,8 @@ class Mind {
 
             $arrContextOptions = stream_context_create(array(
                 'ssl' => array(
-                    'verify_peer' 		=> false,
-                    'verify_peer_name' 	=> false,
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
                 )
             ));
 
