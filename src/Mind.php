@@ -29,6 +29,7 @@ class Mind {
     public  $post;
     public  $baseurl;
     public  $timezone    =  'Europe/Istanbul';
+    public  $errorfile   =  'app/views/errors/404';
 
     public function __construct($conf=array()){
 
@@ -1487,14 +1488,24 @@ class Mind {
 
         if(!empty($request)){
 
-            if(strstr($request, $uri)){
+            if(!empty($params)){
+                $uri .='/'.implode('/', $params);
+            }
+            if($request == $uri){
                 $this->mindload($file, $cache);
                 exit();
+            } else {
+                $this->mindload($this->errorfile);
+                exit();
             }
+
         } else {
 
             if($uri == $this->baseurl){
                 $this->mindload($file, $cache);
+                exit();
+            } else {
+                $this->mindload($this->errorfile);
                 exit();
             }
         }
