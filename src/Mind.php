@@ -1496,7 +1496,6 @@ class Mind {
             }
 
             if(!strstr($uri, trim($request, '/')) AND $uri != $this->baseurl) {
-                echo trim($request, '/');
                 $this->mindload($this->errorfile);
                 exit();
             }
@@ -1505,7 +1504,7 @@ class Mind {
             $this->mindload($file, $cache);
             exit();
         }
-        
+
     }
 
 
