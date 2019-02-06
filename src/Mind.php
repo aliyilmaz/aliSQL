@@ -1487,29 +1487,26 @@ class Mind {
         }
 
         if(!empty($request)){
-
             if(!empty($params)){
                 $uri .='/'.implode('/', $params);
             }
-            if($request == $uri){
+            if($request == $uri OR trim($request, '/') == $uri){
                 $this->mindload($file, $cache);
-                exit();
-            } else {
-                $this->mindload($this->errorfile);
                 exit();
             }
 
-        } else {
-
-            if($uri == $this->baseurl){
-                $this->mindload($file, $cache);
-                exit();
-            } else {
-                $this->mindload($this->errorfile);
-                exit();
-            }
+        } elseif($uri == $this->baseurl) {
+            $this->mindload($file, $cache);
+            exit();
         }
+
+        if(!strstr($uri, trim($request, '/')) AND $uri != $this->baseurl) {
+            $this->mindload($this->errorfile);
+            exit();
+        }
+
     }
+
 
     /**
      * File writer.
