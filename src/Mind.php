@@ -1495,16 +1495,17 @@ class Mind {
                 exit();
             }
 
+            if(!strstr($uri, trim($request, '/')) AND $uri != $this->baseurl) {
+                echo trim($request, '/');
+                $this->mindload($this->errorfile);
+                exit();
+            }
+
         } elseif($uri == $this->baseurl) {
             $this->mindload($file, $cache);
             exit();
         }
-
-        if(!strstr($uri, trim($request, '/')) AND $uri != $this->baseurl) {
-            $this->mindload($this->errorfile);
-            exit();
-        }
-
+        
     }
 
 
