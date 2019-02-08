@@ -5,7 +5,7 @@ namespace Mind;
 /**
  *
  * @package    Mind
- * @version    Release: 2.3.2
+ * @version    Release: 2.3.3
  * @license    GNU General Public License v3.0
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for Php.
@@ -1486,6 +1486,8 @@ class Mind {
             }
         }
 
+        $error_status = false;
+
         if(!empty($request)){
 
             if(!empty($params)){
@@ -1497,9 +1499,8 @@ class Mind {
                 exit();
             }
 
-            if(!strstr($uri, trim($request, '/')) AND $uri != $this->baseurl) {
-                $this->mindload($this->errorfile);
-                exit();
+            if(!strstr($uri, trim($request, '/')) AND $uri == $request) {
+                $error_status = true;
             }
 
         } else {
@@ -1508,6 +1509,11 @@ class Mind {
                 exit();
             }
 
+        }
+
+        if($error_status){
+            $this->mindload($this->errorfile);
+            exit();
         }
 
     }
