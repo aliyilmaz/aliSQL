@@ -1487,9 +1487,11 @@ class Mind {
         }
 
         if(!empty($request)){
+
             if(!empty($params)){
                 $uri .='/'.implode('/', $params);
             }
+
             if($request == $uri OR trim($request, '/') == $uri){
                 $this->mindload($file, $cache);
                 exit();
@@ -1500,9 +1502,12 @@ class Mind {
                 exit();
             }
 
-        } elseif($uri == $this->baseurl) {
-            $this->mindload($file, $cache);
-            exit();
+        } else {
+            if($uri == $this->baseurl) {
+                $this->mindload($file, $cache);
+                exit();
+            }
+
         }
 
     }
