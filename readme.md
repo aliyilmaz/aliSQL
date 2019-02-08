@@ -64,6 +64,15 @@ If you discover any security related issues, please email aliyilmaz.work@gmail.c
 - [ ] Functions will be created to retrieve database backups and install backups.
 - [ ] Must be Nginx support.
 
+
+## Screenshots
+
+#### Main Page
+[![Main](screenshots/main.jpg)](https://github.com/aliyilmaz/Mind)
+
+#### Error Page
+[![Main](screenshots/error.jpg)](https://github.com/aliyilmaz/Mind)
+
 ## Author
 
 - [Ali Yılmaz](https://github.com/aliyilmaz)
