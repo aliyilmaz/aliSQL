@@ -1494,6 +1494,7 @@ class Mind {
             }
 
             if($request == $uri OR trim($request, '/') == $uri){
+                $this->error_status = false;
                 $this->mindload($file, $cache);
                 exit();
             }
@@ -1502,6 +1503,7 @@ class Mind {
 
         } else {
             if($uri == $this->baseurl) {
+                $this->error_status = false;
                 $this->mindload($file, $cache);
                 exit();
             }
