@@ -16,20 +16,21 @@ namespace Mind;
 class Mind {
 
     private $conn;
-    private $host        =  'localhost';
-    private $dbname      =  'mydb';
-    private $username    =  'root';
-    private $password    =  '';
-    private $sessset     =  array(
-        'path'              =>  './session/',
-        'path_status'       =>  false,
-        'status_session'    =>  true
+    private $host           =  'localhost';
+    private $dbname         =  'mydb';
+    private $username       =  'root';
+    private $password       =  '';
+    private $sessset        =  array(
+        'path'                  =>  './session/',
+        'path_status'           =>  false,
+        'status_session'        =>  true
     );
 
     public  $post;
     public  $baseurl;
-    public  $timezone    =  'Europe/Istanbul';
-    public  $errorfile   =  'app/views/errors/404';
+    public  $timezone       =  'Europe/Istanbul';
+    public  $error_status   =  false;
+    public  $errorfile      =  'app/views/errors/404';
 
     public function __construct($conf=array()){
 
@@ -1486,8 +1487,6 @@ class Mind {
             }
         }
 
-        $error_status = false;
-
         if(!empty($request)){
 
             if(!empty($params)){
@@ -1499,9 +1498,7 @@ class Mind {
                 exit();
             }
 
-            if(!strstr($uri, trim($request, '/')) AND $uri == $request) {
-                $error_status = true;
-            }
+            $this->error_status = true;
 
         } else {
             if($uri == $this->baseurl) {
@@ -1511,13 +1508,7 @@ class Mind {
 
         }
 
-        if($error_status){
-            $this->mindload($this->errorfile);
-            exit();
-        }
-
     }
-
 
     /**
      * File writer.
@@ -1622,5 +1613,12 @@ class Mind {
         }
     }
 
+    public function __destruct()
+    {
+        if($this->error_status){
+            $this->mindload(dirname($_SERVER['SCRIPT_FILENAME']).'/'.$this->errorfile);
+            exit();
+        }
+    }
 }
 ?>
