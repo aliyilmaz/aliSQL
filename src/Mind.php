@@ -5,7 +5,7 @@ namespace Mind;
 /**
  *
  * @package    Mind
- * @version    Release: 2.3.3
+ * @version    Release: 2.3.4
  * @license    GNU General Public License v3.0
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for Php.
