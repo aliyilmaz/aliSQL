@@ -1483,7 +1483,7 @@ class Mind {
                     } 
                 }
             } else {
-                $this->post = $params;
+                $this->post = array_diff($params, array('', ' '));
             }
         }
 
