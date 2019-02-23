@@ -1465,8 +1465,8 @@ class Mind {
         if(strstr($request, '/')){
 
             $step1 = str_replace($uri, '', $request);
-            $step2 = explode('/', $step1);
-            $step3 = array_filter($step2);
+            $step2 = explode('/', trim($step1,'/'));
+            $step3 = array_filter($step2, 'is_string');
             $params = array_values($step3);
         }
 
@@ -1478,9 +1478,9 @@ class Mind {
 
                 foreach ($fields as $key => $field) {
 
-                    if(!empty($params[$key])){
+                    if(!empty($params[$key]) OR $params[$key] == '0'){
                         $this->post[$field] = $params[$key];
-                    }
+                    } 
                 }
             } else {
                 $this->post = $params;
