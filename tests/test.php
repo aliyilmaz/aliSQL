@@ -1,6 +1,5 @@
 <?php
-require_once '../src/Mind.php';
 
-use Mind\Mind;
+require_once '../src/Mind.php';
 
 $Mind = new Mind();
