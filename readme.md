@@ -22,14 +22,6 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP çerçeve
   * [Projeye başlayın](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#kurulum)
 
 
-## Katkı
-
-Depoyu çatallayın, kod değişikliklerini yapın ve ardından bir çekme isteği gönderin.
-
-Lütfen taahhüt mesajlarınız ve çekme talepleriniz konusunda çok net olun, boş çekme talebi mesajları sebepsiz olarak reddedilebilir.
-
-Lütfen bu projenin bir [Katılımcı Davranış Kuralları] ile serbest bırakıldığını unutmayın (https://github.com/aliyilmaz/Mind/blob/master/contributing.md#code-of-conduct). Bu projeye katılarak, şartlara uymayı kabul edersiniz.
-
 ## Güvenlik
 
 Güvenlikle ilgili herhangi bir sorun tespit ederseniz, herkese açık sorun bildiriciyi kullanmak yerine lütfen aliyilmaz.work@gmail.com adresine e-posta gönderin.
@@ -48,10 +40,8 @@ Güvenlikle ilgili herhangi bir sorun tespit ederseniz, herkese açık sorun bil
 
 ## Katkıda bulunanlar
 
-Bu proje katkıda bulunan herkese teşekkürler. [[Katılımcı Davranış Kuralları](contributing.md)].
-
 - [Katkıda Bulunanlar](../../contributors)
 
 ## Lisans
 
-Mind Genel Kamu Lisansı versiyon 3 ile lisanslanmıştır. [GPLv3 license](license.md).
+Mind, Genel Kamu Lisansı versiyon 3 ile lisanslanmıştır. [GPLv3 license](license.md).
