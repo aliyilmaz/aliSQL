@@ -1,7 +1,7 @@
 ﻿﻿
 # Mind
 
-Mind, geliştiriciler için tasarlanmış ücretsiz ve açık kaynaklı bir PHP çerçevesidir. Yeni tasarım desenleri ve çerçeveler oluşturmak için araçlar sunar.
+Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP çerçevesidir. Yeni tasarım desenleri ve çerçeveler oluşturmak için araçlar sunar.
  
 
 * [Dökümanlar](https://github.com/aliyilmaz/Mind/tree/master/docs) 
