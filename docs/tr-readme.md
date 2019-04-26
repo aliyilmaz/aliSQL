@@ -10,7 +10,7 @@ Rotaya özel modülerliği benimsemiştir bu nedenle bir rotanın kaderini tayin
 ---------- 
 
 ## İndirmeler
-Mind sınıfını [GitHub sayfasından](https://github.com/aliyilmaz/Mind/archive/master.zip) indirebilir veya komut istemcinizden `composer require mind/mind` komutunu çalıştırarak bir sonraki aşamaya geçebilirsiniz. 
+Mind sınıfını [GitHub sayfasından](https://github.com/aliyilmaz/Mind/archive/master.zip) indirebilirsiniz.
 
 ---------- 
 
