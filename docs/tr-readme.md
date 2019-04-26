@@ -103,7 +103,19 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 
 ##### public $baseurl
 
-`Mind.php` dosyasının içinde bulunduğu klasörün yolu `$this->baseurl` değişkeninde tutulur, sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+`Mind.php` dosyasının içinde bulunduğu klasörün yolu `$this->baseurl` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+##### public $timezone
+
+Projenin zaman dili tutulur, varsayılan olarak `Europe/Istanbul` olarak belirtilmiştir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+##### public $error_status
+
+Hata durumlarını `true` veya `false` olarak taşıyan değişkendir, varsayılan olarak `false` belirtilmiştir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+##### public $errorfile
+
+Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsayılan olarak `app/views/errors/404` belirtilmiştir, eğer söz konusu dosya yoksa boş bir sayfa gösterilir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 ----------
 
