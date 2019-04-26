@@ -3,7 +3,9 @@
 
 `PHP` ve `MySQL` ile geliştirilen projelerde; Veritabanı ve yönlendirme işlemleri `$_GET`, `$_POST`, `$_FILES` istekleri, `Model`, `View`, `Controller`, `Middleware` gibi çeşitli kontrol katmanlarının yönetimini basitleştiren PHP kod çerçevesidir.
 
-Yeni tasarım desenleri ve çerçeveler oluşturmak için Mind harika araçlar sunar. İhtiyaçlarınız için özel bir tasarım deseni oluşturmak kolay olduğu için her zaman küçük kalacak özellikler küçük kalır. Büyüyen bir proje için kontrollü ve güvenli bir büyüme sağlar.
+Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP çerçevesidir. Yeni tasarım desenleri ve çerçeveler oluşturmak için araçlar sunar. Büyüyen bir proje için kontrollü ve güvenli bir büyüme sağlar.
+
+Rotaya özel modülerliği benimsemiştir bu nedenle bir rotanın kaderini tayin eden tüm faktörlere ulaşmak ve yönetmek kolaydır.
 
 ---------- 
 
@@ -42,13 +44,12 @@ veya
 #### Örnek
 
     require_once('./Mind.php');
-    use Mind\Mind;
     $Mind = new Mind();
 
 veya
 
     require_once('./Mind.php');
-    class ClassName extends Mind\Mind{
+    class ClassName extends Mind{
     
     }
 
