@@ -28,7 +28,7 @@ Güvenlikle ilgili herhangi bir sorun tespit ederseniz, herkese açık sorun bil
 
 ## Ekran görüntüsü
 
-#### Ana sayfa
+#### Anasayfa
 [![Main](screenshots/main.jpg)](https://github.com/aliyilmaz/Mind)
 
 #### Hata Sayfası
