@@ -1,11 +1,8 @@
 
 # Mind nedir?
 
-`PHP` ve `MySQL` ile geliştirilen projelerde; Veritabanı ve yönlendirme işlemleri `$_GET`, `$_POST`, `$_FILES` istekleri, `Model`, `View`, `Controller`, `Middleware` gibi çeşitli kontrol katmanlarının yönetimini basitleştiren PHP kod çerçevesidir.
+Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfıdır. Yeni tasarım desenleri ve uygulama çatıları oluşturmak için çeşitli araçlar sunar. Büyüyen bir proje için kontrollü ve güvenli bir büyüme sağlar.
 
-Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP çerçevesidir. Yeni tasarım desenleri ve çerçeveler oluşturmak için araçlar sunar. Büyüyen bir proje için kontrollü ve güvenli bir büyüme sağlar.
-
-Rotaya özel modülerliği benimsemiştir bu nedenle bir rotanın kaderini tayin eden tüm faktörlere ulaşmak ve yönetmek kolaydır.
 
 ---------- 
 
