@@ -6,8 +6,8 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP çerçeve
 
 * [Dökümanlar](https://github.com/aliyilmaz/Mind/tree/master/docs) 
   * [Türkçe (Tamamlandı)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
-  * [English (Devam ediyor)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
-* [Tests](https://github.com/aliyilmaz/Mind/tree/master/tests) 
+  * [İngilizce (Devam ediyor)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
+* [Testler](https://github.com/aliyilmaz/Mind/tree/master/tests) 
 
 ## Gereksinimler
 
