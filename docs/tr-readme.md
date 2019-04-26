@@ -1578,7 +1578,7 @@ veya
  
     <?php
     
-    class HomeController extends \Mind\Mind
+    class HomeController extends Mind
     {
     
         public function __construct($conf = array())
