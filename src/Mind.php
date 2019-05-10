@@ -1168,7 +1168,9 @@ class Mind {
         if(empty($url)){
             $url = $this->baseurl;
         } else {
-            $url = $this->baseurl.$url;
+            if(!$this->is_url($url)){
+                $url = $this->baseurl.$url;
+            } 
         }
 
         header('Location: '.$url);
