@@ -1617,6 +1617,45 @@ class Mind {
         }
     }
 
+    /**
+     * File downloader
+     *
+     * @param $links
+     * @param array $opt
+     * @return array|bool
+     */
+    public function download($links, $opt=array('path'=>'download'))
+    {
+
+        $path = './';
+        $result = array();
+
+        if(empty($links)){
+            return false;
+        }
+
+        if(!is_array($links)){
+            $links = array($links);
+        }
+
+        if(!empty($opt['path']) AND !is_dir($path.$opt['path'])){
+            
+            $path .= $opt['path'];
+
+        }
+
+        foreach($links as $link){
+
+            $link_path = parse_url($this->info($link, 'dirname'));
+
+            mkdir($path.ltrim($link_path['path']), 0777, true);
+            copy($link, $path.$link_path['path'].'/'.urldecode($this->info($link, 'basename')));
+            $result[] = $path.$link_path['path'].'/'.urldecode($this->info($link, 'basename'));
+        }
+
+        return $result;
+    }
+
     public function __destruct()
     {
         if($this->error_status){
