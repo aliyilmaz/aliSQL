@@ -1096,7 +1096,7 @@ class Mind {
         $object = pathinfo($str);
 
         if($type == 'extension'){
-           return strtolower($object[$type]);
+            return strtolower($object[$type]);
         }
 
         return $object[$type];
@@ -1170,7 +1170,7 @@ class Mind {
         } else {
             if(!$this->is_url($url)){
                 $url = $this->baseurl.$url;
-            } 
+            }
         }
 
         header('Location: '.$url);
@@ -1482,7 +1482,7 @@ class Mind {
 
                     if(!empty($params[$key]) OR $params[$key] == '0'){
                         $this->post[$field] = $params[$key];
-                    } 
+                    }
                 }
             } else {
                 $this->post = array_diff($params, array('', ' '));
@@ -1627,7 +1627,8 @@ class Mind {
     public function download($links, $opt=array('path'=>'download'))
     {
 
-        $path = './';
+        $path = './'.$opt['path'];
+
         $result = array();
 
         if(empty($links)){
@@ -1638,19 +1639,14 @@ class Mind {
             $links = array($links);
         }
 
-        if(!empty($opt['path']) AND !is_dir($path.$opt['path'])){
-            
-            $path .= $opt['path'];
-
-        }
-
         foreach($links as $link){
 
             $link_path = parse_url($this->info($link, 'dirname'));
+            $destination = $path.urldecode($link_path['path']);
 
-            mkdir($path.ltrim($link_path['path']), 0777, true);
-            copy($link, $path.$link_path['path'].'/'.urldecode($this->info($link, 'basename')));
-            $result[] = $path.$link_path['path'].'/'.urldecode($this->info($link, 'basename'));
+            mkdir($destination, 0777, true);
+            copy($link, $destination.'/'.urldecode($this->info($link, 'basename')));
+            $result[] = $destination.'/'.urldecode($this->info($link, 'basename'));
         }
 
         return $result;
