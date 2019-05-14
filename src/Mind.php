@@ -1643,13 +1643,48 @@ class Mind {
 
             $link_path = parse_url($this->info($link, 'dirname'));
             $destination = $path.urldecode($link_path['path']);
+            $other_path = urldecode($this->info($link, 'basename'));
 
             mkdir($destination, 0777, true);
-            copy($link, $destination.'/'.urldecode($this->info($link, 'basename')));
-            $result[] = $destination.'/'.urldecode($this->info($link, 'basename'));
+
+            copy($link, $destination.'/'.$other_path);
+
+            $remote_file = $this->rfilesize($link);
+            $local_file = filesize($destination.'/'.$other_path);
+
+            if(file_exists($destination.'/'.$other_path)){
+
+                if($remote_file != $local_file){
+                    unlink($destination.'/'.$other_path);
+                    $this->download($link);
+
+                }
+            }
+
+            $result[] = $link;
         }
 
         return $result;
+    }
+
+    /**
+     * Learns the size of the remote file.
+     *
+     * @param $url
+     * @return mixed
+     */
+    public function rfilesize($url){
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, TRUE);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+
+        $data = curl_exec($ch);
+        $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+
+        curl_close($ch);
+        return $size;
     }
 
     public function __destruct()
