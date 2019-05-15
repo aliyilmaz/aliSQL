@@ -1656,7 +1656,7 @@ class Mind {
 
                 if($remote_file != $local_file){
                     unlink($destination.'/'.$other_path);
-                    $this->download($link);
+                    $this->download($link, $path);
 
                 }
             }
