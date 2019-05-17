@@ -1702,6 +1702,47 @@ veya
     $path = './upload';
     $u = $this->upload($this->post['multifile'], $path);
     print_r($u);
+    
+----------
+
+## download()
+
+Yerel ve Uzak sunucuda barınan dosyaları indirmeye yarar. Dosya yolları `string` veya `dizi` olarak belirtilebilir. İki parametre alır, ilk parametre `string` veya `dizi` türünde belirtilen dosya yollarını, ikinci parametre ise `dizi` olarak tanımlanan `path` yolunu temsil eder. 
+
+  **Bilgi:** Geliştirmeye açık olduğu için ikinci parametre `dizi` türündedir ve belirtilme zorunluluğu yoktur. Eğer ikinci parametre belirtilmezse varsayılan olarak inecek dosyaların kökdizini `download` olur. 
+
+##### Örnek
+
+    print_r($this->download('../contributing.md',array('path'=>'../download')));
+    
+
+veya 
+
+    print_r($Mind->download('https://github.com/fluidicon.png',array('path'=>'../download')));
+        
+
+veya
+
+    $links = array(
+                'https://github.com/aliyilmaz/Mind/archive/master.zip',
+                'https://github.com/aliyilmaz/PhoneBook/archive/master.zip',
+                '../license.md',
+                'https://github.com/aliyilmaz/pure-blog/archive/master.zip'
+            );
+            
+    print_r($Mind->download($links, array('path'=>'../download')));
+    
+veya
+
+    $links = array(
+                    'https://github.com/aliyilmaz/Mind/archive/master.zip',
+                    'https://github.com/aliyilmaz/PhoneBook/archive/master.zip',
+                    '../license.md',
+                    'https://github.com/aliyilmaz/pure-blog/archive/master.zip'
+                );
+    print_r($Mind->download($links));
+    
+----------
 
 ## get_contents()
 
