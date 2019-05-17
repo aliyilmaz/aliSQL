@@ -174,6 +174,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [route](#route)
 -   [write](#write)
 -   [upload](#upload)
+-   [download](#download)
 -   [get_contents](#get_contents)
 
 ----------
