@@ -167,6 +167,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [permalink](#permalink)
 -   [timezones](#timezones)
 -   [session_check](#session_check)
+-   [remote_filesize](#remote_filesize)
 
 ##### Sistem
 
@@ -1506,6 +1507,14 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 `session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır, Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar,`Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
 
     $this->session_check();
+
+----------
+
+## remote_filesize()
+
+Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
+
+    echo $Mind->remote_filesize('https://github.com/fluidicon.png');
 
 ----------
 
