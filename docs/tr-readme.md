@@ -124,8 +124,8 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 -   [connection](#connection)
 -   [prepare](#prepare)
--   [cGeneration](#cGeneration)
--   [pGeneration](#pGeneration)
+-   [cGeneration](#cgeneration)
+-   [pGeneration](#pgeneration)
 -   [createdb](#createdb)
 -   [createtable](#createtable)
 -   [createcolumn](#createcolumn)
