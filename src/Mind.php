@@ -1645,23 +1645,27 @@ class Mind {
             $destination = $path.urldecode($link_path['path']);
             $other_path = urldecode($this->info($link, 'basename'));
 
-            mkdir($destination, 0777, true);
+            if(!is_dir($destination)){
+                mkdir($destination, 0777, true);
+            }
 
-            copy($link, $destination.'/'.$other_path);
+            if(!file_exists($destination.'/'.$other_path)){
+                copy($link, $destination.'/'.$other_path);
+            }
 
-            $remote_file = $this->rfilesize($link);
+            $remote_file = $this->remote_filesize($link);
             $local_file = filesize($destination.'/'.$other_path);
 
             if(file_exists($destination.'/'.$other_path)){
 
                 if($remote_file != $local_file){
                     unlink($destination.'/'.$other_path);
-                    $this->download($link, $path);
+                    copy($link, $destination.'/'.$other_path);
 
                 }
             }
 
-            $result[] = $link;
+            $result[] = $destination.'/'.$other_path;
         }
 
         return $result;
