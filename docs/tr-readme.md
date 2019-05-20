@@ -692,7 +692,7 @@ veya
 
 #### search:where Her yerde aramak
 
-Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `dizi` olarak gönderilebilir. `where` özelliğin adını temsil eder, `anahtar kelime` aranan kelimeleri temsil eder. Bu özelliği kullanmak için `all` parametresi belirtilmelidir.
+Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `dizi` olarak gönderilebilir. `where` özelliğin adını temsil eder, `keyword` aranan kelimeleri temsil eder. Bu özelliği kullanmak için `all` parametresi belirtilmelidir.
 
 ##### Örnek
 
