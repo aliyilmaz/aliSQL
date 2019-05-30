@@ -46,8 +46,8 @@ class Mind {
 
         $this->baseurl = dirname($_SERVER['SCRIPT_NAME']).'/';
 
-        #error_reporting(E_ALL);
-        #ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
 
     }
 
@@ -1332,7 +1332,7 @@ class Mind {
             $replacements = $options['replacements'];
         }
 
-        if(!$options['transliterate']){
+        if(!empty($options['transliterate']) AND !$options['transliterate']){
             $char_map = array();
         }
 
