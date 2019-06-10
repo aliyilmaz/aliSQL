@@ -1,46 +1,30 @@
 <?php
-
-require_once '../src/Mind.php';
+require_once('../src/Mind.php');
 
 $Mind = new Mind();
 
-/**
- * Record update.
- *
- * @param string $tblname
- * @param mixed  $arr
- * @param mixed  $id
- *
- * @return bool
- * */
-$rows = array(
-    'name' => 'Ali Yılmaz1',
+echo '<br>';
+$values = array(
+    'username'=>'Ali Yılmaz',
+    'password'=>md5('123456')
 );
 
-$tblname = 'phonebook';
-if (!$Mind->update($tblname, $rows, 1)) {
-    exit('Error: Record updated');
+if($Mind->update('users', $values, 3)){
+    echo 'Kayıt güncellendi.';
+} else {
+    echo 'Kayıt güncellenemedi.';
 }
-echo '<h5>Record updated. </h5>';
 
-/**
- * Record update.
- *
- * @param string $tblname
- * @param mixed  $arr
- * @param mixed  $id
- * @param mixed  $special
- *
- * @return bool
- * */
-$rows = array(
-    'name' => 'Ali Yılmaz'.rand(1, 100),
+
+
+echo '<br>';
+$values = array(
+    'username'=>'Ali Yılmaz11',
+    'password'=>md5('123456')
 );
 
-$tblname = 'phonebook';
-if (!$Mind->update($tblname, $rows, 'Ali Yılmaz', 'name')) {
-    exit('Error: Record updated. (special)');
+if($Mind->update('users', $values, 3, 'id')){
+    echo 'Kayıt güncellendi.';
+} else {
+    echo 'Kayıt güncellenemedi.';
 }
-echo '<h5>Record updated. (special)</h5>';
-
-echo '<h1>The record update method is running.</h1>';

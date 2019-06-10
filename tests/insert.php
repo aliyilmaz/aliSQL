@@ -1,63 +1,38 @@
 <?php
-require_once '../src/Mind.php';
+require_once('../src/Mind.php');
 
 $Mind = new Mind();
 
-/**
- * Add new record.
- *
- * @param string $tblname
- * @param mixed $rows
- * @return bool
- */
-$rows = array(
-    'name'          => 'Ali Yılmaz',
-    'phone'         => '01010101010',
-    'email'         => 'aliyilmaz.work@gmail.com',
-    'created_at'    =>  date('d-m-Y H:i:s')
+echo '<br>';
+$values = array(
+    'username'=>'Ali Yılmaz',
+    'password'=>md5('123456')
 );
 
-$tblname = 'phonebook';
-if(!$Mind->insert($tblname, $rows)){
-    exit('Error: Add new record. (single)');
+if($Mind->insert('users', $values)){
+    echo 'Kayıt eklendi.';
+} else {
+    echo 'Kayıt eklenemedi.';
 }
-echo '<h5>Add new record. (single)</h5>';
 
-echo '<br><hr><br>';
-
-
-/**
- * Add new record.
- *
- * @param string $tblname
- * @param array $rows
- * @return bool
- */
-$rows = array(
+echo '<br>';
+$values = array(
     array(
-        'name'          => 'Ali Yılmaz',
-        'phone'         => '10101010101',
-        'email'         => 'aliyilmaz.work@gmail.com',
-        'created_at'    =>  date('d-m-Y H:i:s')
+        'username'=>'Ali Yılmaz0',
+        'password'=>md5('123456')
     ),
     array(
-        'name'          => 'Deniz Yılmaz',
-        'phone'         => '20202020202',
-        'email'         => 'deniz@gmail.com',
-        'created_at'    =>  date('d-m-Y H:i:s')
+        'username'=>'Ali Yılmaz1',
+        'password'=>md5('123456')
     ),
     array(
-        'name'          => 'Hasan Yılmaz',
-        'phone'         => '30303030303',
-        'email'         => 'hasan@gmail.com',
-        'created_at'    =>  date('d-m-Y H:i:s')
+        'username'=>'Ali Yılmaz2',
+        'password'=>md5('123456')
     )
 );
 
-$tblname = 'phonebook';
-if(!$Mind->insert($tblname, $rows)){
-    exit('Error: Add new record. (multi)');
+if($Mind->insert('users', $values)){
+    echo 'Kayıt eklendi.';
+} else {
+    echo 'Kayıt eklenemedi.';
 }
-echo '<h5>Add new record. (multi)</h5>';
-
-echo '<h1>The add new record method is running.</h1>';
