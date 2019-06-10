@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 2.3.7
+ * @version    Release: 3.0.0
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -11,234 +11,217 @@
  *
  */
 
-class Mind {
-
-    private $conn;
+/**
+ * Class Mind
+ */
+class Mind extends PDO
+{
     private $host           =  'localhost';
-    private $dbname         =  'mydb';
+    private $dbName         =  'mydb';
     private $username       =  'root';
     private $password       =  '';
-    private $sessset        =  array(
+    private $charset        =  'utf8';
+
+    private $sess_set       =  array(
         'path'                  =>  './session/',
         'path_status'           =>  false,
         'status_session'        =>  true
     );
 
     public  $post;
-    public  $baseurl;
+    public  $base_url;
     public  $timezone       =  'Europe/Istanbul';
+    public  $timestamp;
     public  $error_status   =  false;
-    public  $errorfile      =  'app/views/errors/404';
-
-    public function __construct($conf=array()){
-
-        $this->session_check();
-
-        $this->connection($conf);
-
-        $this->request();
-
-        if(empty($_SESSION['timezone']) OR in_array($_SESSION['timezone'], $this->timezones())){
-            $_SESSION['timezone'] = $this->timezone;
-        }
-
-        date_default_timezone_set($_SESSION['timezone']);
-
-        $this->baseurl = dirname($_SERVER['SCRIPT_NAME']).'/';
-
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-
-    }
+    public  $error_file     =  'app/views/errors/404';
 
     /**
-     * Connection method.
-     *
+     * Mind constructor.
+     * @param array $conf
      */
-    public function connection($conf){
+    public function __construct($conf=array()){
 
-        if(!empty($conf['host'])){
+        if(isset($conf['host'])){
             $this->host = $conf['host'];
         }
 
-        if(!empty($conf['dbname'])){
-            $this->dbname = $conf['dbname'];
+        if(isset($conf['dbName'])){
+            $this->dbName = $conf['dbName'];
         }
 
-        if(!empty($conf['username'])){
+        if(isset($conf['username'])){
             $this->username = $conf['username'];
         }
 
-        if(!empty($conf['password'])){
+        if(isset($conf['password'])){
             $this->password = $conf['password'];
         }
 
-        $error          =   '<div style="background-color: #f3f3f3; padding:10px 20px 30px 20px;">';
-        $class          =   '<br /> Class: '.__CLASS__;
-        $function       =   '<br /> Function: '.__FUNCTION__;
-        $line           =   '<br /> Line: '.(__LINE__+1);
-        $this->conn = mysqli_connect($this->host, $this->username, $this->password);
-
-        if (!$this->conn) {
-            $description    =   mysqli_connect_error();
-            $error .= $class.$function.$line."<br /> Error description: ".$description;
-
-        } else {
-            if(!mysqli_select_db($this->conn, $this->dbname)){
-                $description    =   mysqli_error($this->conn);
-                $error .= $class.$function.$line."<br /> Error description: ".$description;
-            } else {
-                $error = '';
-                mysqli_set_charset($this->conn, 'utf8');
-            }
+        if(isset($conf['charset'])){
+            $this->charset = $conf['charset'];
         }
 
-        if(!empty($error)) {
-            exit($error.'</div>');
+        try {
+            parent::__construct('mysql:host=' . $this->host . ';dbname=' . $this->dbName, $this->username, $this->password);
+            $this->query('SET CHARACTER SET ' . $this->charset);
+            $this->query('SET NAMES ' . $this->charset);
+            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        } catch ( PDOException $e ){
+            print $e->getMessage();
         }
 
-        return true;
+        $this->request();
+        $this->session_check();
+
+        error_reporting(-1);
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
+        date_default_timezone_set($this->timezone);
+        $this->timestamp = date("d-m-Y H:i:s");
+        $this->base_url = dirname($_SERVER['SCRIPT_NAME']).'/';
+
     }
 
     /**
-     * Query method.
+     * Database selector.
      *
-     * @param string $sql
-     * @return mixed
+     * @param $dbName
      */
-    public function prepare($sql){
-
-        return mysqli_query($this->conn, $sql);
-
+    public function selectDB($dbName){
+        if($this->is_db($dbName)){
+            $this->exec("USE ".$dbName);
+        }
     }
 
     /**
-     * Column sql syntax creator.
+     * Lists the databases.
      *
-     * @param array $scheme
-     * @param string|null $funcName
      * @return array
      */
-    public function cGenerator($scheme, $funcName=null){
+    public function dbList(){
 
-        $sql = array();
+        $dbNames = array();
+        $sql     = 'SHOW DATABASES';
 
-        foreach (array_values($scheme) as $array_value) {
+        try{
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
 
-            $colonParse = array();
-            if(strstr($array_value, ':')){
-                $colonParse = array_filter(explode(':', trim($array_value, ':')));
+            foreach ( $query as $database ) {
+                $dbNames[] = implode('', $database);
             }
 
-            $columnValue = null;
-            $columnType = null;
+            return $dbNames;
 
-            if(count($colonParse)==3){
-                list($columnName, $columnType, $columnValue) = $colonParse;
-            }elseif (count($colonParse)==2){
-                list($columnName, $columnType) = $colonParse;
-            } else {
-                $columnName = $array_value;
-                $columnType = 'small';
-            }
-
-            if(is_null($columnValue) AND $columnType =='string'){ $columnValue = 255; }
-            if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
-            if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
-
-            $first = '';
-            $prefix = '';
-            if(!is_null($funcName) AND $funcName == 'createcolumn'){
-                $first = 'FIRST';
-                $prefix = 'ADD COLUMN ';
-            }
-
-            switch ($columnType){
-                case 'int':
-                    $sql[] = $prefix.$columnName.' int('.$columnValue.')';
-                    break;
-                case 'decimal':
-                    $sql[] = $prefix.$columnName.' DECIMAL('.$columnValue.')';
-                    break;
-                case 'string':
-                    $sql[] = $prefix.$columnName.' VARCHAR('.$columnValue.')';
-                    break;
-                case 'small':
-                    $sql[] = $prefix.$columnName.' TEXT';
-                    break;
-                case 'medium':
-                    $sql[] = $prefix.$columnName.' MEDIUMTEXT';
-                    break;
-                case 'large':
-                    $sql[] = $prefix.$columnName.' LONGTEXT';
-                    break;
-                case 'increments':
-                    $sql[] = $prefix.$columnName.' int('.$columnValue.') UNSIGNED AUTO_INCREMENT PRIMARY KEY '.$first;
-                    break;
-            }
+        } catch (Exception $e){
+            return $dbNames;
         }
-
-        return $sql;
     }
 
     /**
-     * Parameter parser.
+     * Lists database tables.
      *
-     * @param string $str
-     * @return mixed|bool
-     *
+     * @param null $dbName
+     * @return array
      */
-    public function pGenerator($str=null){
+    public function tableList($dbName=null){
 
-        $Result = array();
-        if(!is_null($str)){
+        $tblNames = array();
 
-            if(strstr($str, ':')){
-                $strExplode = array_filter(explode(':', trim($str, ':')));
-                if(count($strExplode) == 2){
-                    list($filePath, $funcPar) = $strExplode;
-                    $Result['name'] = $filePath;
-
-                    if(strstr($funcPar, '@')){
-                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
-                    } else {
-                        $funcExplode = array($funcPar);
-                    }
-                    if(!empty($funcExplode)){
-                        $Result['params'] = $funcExplode;
-                    }
-                }
-            } else {
-                $Result['name'] = $str;
-            }
+        if(!is_null($dbName)){
+            $dbParameter = ' FROM '.$dbName;
+        } else {
+            $dbParameter = '';
         }
-        return $Result;
+
+        $sql     = 'SHOW TABLES'.$dbParameter;
+
+        try{
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
+
+            foreach ($query as $tblName){
+                $tblNames[] = implode('', $tblName);
+            }
+
+            return $tblNames;
+
+        } catch (Exception $e){
+            return $tblNames;
+        }
+    }
+
+    /**
+     * Lists table columns.
+     *
+     * @param $tblName
+     * @return array
+     */
+    public function columnList($tblName){
+
+        $columns = array();
+        $sql = 'SHOW COLUMNS FROM ' . $tblName;
+
+        try{
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
+
+            $columns = array();
+
+            foreach ( $query as $column ) {
+
+                $columns[] = $column['Field'];
+            }
+
+            return $columns;
+
+        } catch (Exception $e){
+            return $columns;
+        }
     }
 
     /**
      * Creating a database.
      *
-     * @param mixed $dbname
-     * @return  bool
-     * */
-    public function createdb($dbname){
+     * @param $dbName
+     * @return bool
+     */
+    public function dbCreate($dbName){
 
-        $dbnames = array();
+        $dbNames = array();
 
-        if(is_array($dbname)){
-            foreach ($dbname as $key => $value) {
-                $dbnames[] = $value;
+        if(is_array($dbName)){
+            foreach ($dbName as $key => $value) {
+                $dbNames[] = $value;
             }
         } else {
-            $dbnames[] = $dbname;
+            $dbNames[] = $dbName;
         }
 
-        foreach ($dbnames as $dbname) {
+        $xDbNames = $this->dbList();
 
-            $sql = 'CREATE DATABASE '.$dbname;
-            if(!$this->prepare($sql)){
+        foreach ($dbNames as $db) {
+            if(in_array($db, $xDbNames)){
                 return false;
             }
+        }
+
+        try{
+
+            foreach ( $dbNames as $dbName ) {
+
+                $sql = "CREATE DATABASE";
+                $sql .= " ".$dbName;
+
+                $query = $this->query($sql);
+                if(!$query){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        }catch (Exception $e){
+            return false;
         }
 
         return true;
@@ -247,23 +230,28 @@ class Mind {
     /**
      * Creating a table.
      *
-     * @param mixed   $tblname
-     * @param mixed   $scheme
-     * @return  bool
-     * */
-    public function createtable($tblname, $scheme){
+     * @param $tblName
+     * @param $scheme
+     * @return bool
+     */
+    public function tableCreate($tblName, $scheme){
 
-        if(is_array($scheme)){
+        if(is_array($scheme) AND !$this->is_table($tblName)){
 
-            $sql = 'CREATE TABLE '.$tblname.'( ';
+            try{
 
-            $sql .= implode(',', $this->cGenerator($scheme)).')';
+                $sql = "CREATE TABLE";
+                $sql .= " ".$tblName."( ";
+                $sql .= implode(',', $this->cGenerator($scheme));
+                $sql .= ")";
 
-            if(!$this->prepare($sql)){
+                if(!$this->query($sql)){
+                    return false;
+                }
+                return true;
+            }catch (Exception $e){
                 return false;
             }
-
-            return true;
         }
 
         return false;
@@ -273,23 +261,29 @@ class Mind {
     /**
      * Creating a column.
      *
-     * @param mixed   $tblname
-     * @param mixed   $scheme
-     * @return  bool
-     * */
-    public function createcolumn($tblname, $scheme){
+     * @param $tblName
+     * @param $scheme
+     * @return bool
+     */
+    public function columnCreate($tblName, $scheme){
 
-        if(is_array($scheme)){
+        if($this->is_table($tblName)){
 
-            $sql = 'ALTER TABLE '.$tblname.' ';
+            try{
 
-            $sql .= implode(',', $this->cGenerator($scheme, 'createcolumn'));
+                $sql = "ALTER TABLE";
+                $sql .= " ".$tblName." ";
+                $sql .= implode(',', $this->cGenerator($scheme, 'columnCreate'));
 
-            if(!$this->prepare($sql)){
+                if(!$this->query($sql)){
+                    return false;
+                } else {
+                    return true;
+                }
+
+            }catch (Exception $e){
                 return false;
             }
-
-            return true;
         }
 
         return false;
@@ -298,24 +292,80 @@ class Mind {
     /**
      * Delete database.
      *
-     * @param mixed   $dbname
-     * @return  bool
-     * */
-    public function deletedb($dbname){
+     * @param $dbName
+     * @return bool
+     */
+    public function dbDelete($dbName){
 
-        $dbnames = array();
+        $dbNames = array();
 
-        if(is_array($dbname)){
-            foreach ($dbname as $key => $value) {
-                $dbnames[] = $value;
+        if(is_array($dbName)){
+            foreach ($dbName as $key => $value) {
+                $dbNames[] = $value;
             }
         } else {
-            $dbnames[] = $dbname;
+            $dbNames[] = $dbName;
         }
-        foreach ($dbnames as $dbname) {
+        foreach ($dbNames as $dbName) {
 
-            $sql = 'DROP DATABASE '.$dbname;
-            if(!$this->prepare($sql)){
+            if(!$this->is_db($dbName)){
+
+                return false;
+
+            }
+
+            try{
+
+                $sql = "DROP DATABASE";
+                $sql .= " ".$dbName;
+
+                $query = $this->query($sql);
+                if(!$query){
+                    return false;
+                }
+            }catch (Exception $e){
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+    /**
+     * Table delete.
+     *
+     * @param $tblName
+     * @return bool
+     */
+    public function tableDelete($tblName){
+
+        $tblNames = array();
+
+        if(is_array($tblName)){
+            foreach ($tblName as $key => $value) {
+                $tblNames[] = $value;
+            }
+        } else {
+            $tblNames[] = $tblName;
+        }
+        foreach ($tblNames as $tblName) {
+
+            if(!$this->is_table($tblName)){
+
+                return false;
+
+            }
+
+            try{
+
+                $sql = "DROP TABLE";
+                $sql .=" ".$tblName;
+
+                $query = $this->query($sql);
+                if(!$query){
+                    return false;
+                }
+            }catch (Exception $e){
                 return false;
             }
         }
@@ -323,54 +373,41 @@ class Mind {
     }
 
     /**
-     * Delete table.
+     * Column delete.
      *
-     * @param mixed   $tblname
-     * @return  bool
-     * */
-    public function deletetable($tblname){
-
-        $tblnames = array();
-
-        if(is_array($tblname)){
-            foreach ($tblname as $key => $value) {
-                $tblnames[] = $value;
-            }
-        } else {
-            $tblnames[] = $tblname;
-        }
-        foreach ($tblnames as $tblname) {
-
-            $sql = 'DROP TABLE '.$tblname;
-            if(!$this->prepare($sql)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Delete column.
-     *
-     * @param string   $tblname
-     * @param mixed   $column
-     * @return  bool
-     * */
-    public function deletecolumn($tblname, $column){
+     * @param $tblName
+     * @param $column
+     * @return bool
+     */
+    public function columnDelete($tblName, $column){
 
         $columns = array();
 
         if(is_array($column)){
-            foreach ($column as $key => $value) {
-                $columns[] = $value;
+            foreach ($column as $col) {
+                $columns[] = $col;
             }
         } else {
             $columns[] = $column;
         }
         foreach ($columns as $column) {
 
-            $sql = 'ALTER TABLE '.$tblname.' DROP COLUMN '.$column;
-            if(!$this->prepare($sql)){
+            if(!$this->is_column($tblName, $column)){
+
+                return false;
+
+            }
+
+            try{
+
+                $sql = "ALTER TABLE";
+                $sql .= " ".$tblName." DROP COLUMN ".$column;
+
+                $query = $this->query($sql);
+                if(!$query){
+                    return false;
+                }
+            }catch (Exception $e){
                 return false;
             }
         }
@@ -380,37 +417,29 @@ class Mind {
     /**
      * Clear database.
      *
-     * @param mixed   $dbname
-     * @return  bool
+     * @param mixed   $dbName
+     * @return bool
      * */
-    public function cleardb($dbname){
+    public function dbClear($dbName){
 
-        $dbnames = array();
+        $dbNames = array();
 
-        if(is_array($dbname)){
-            foreach ($dbname as $key => $value) {
-                $dbnames[] = $value;
+        if(is_array($dbName)){
+            foreach ($dbName as $db) {
+                $dbNames[] = $db;
             }
         } else {
-            $dbnames[] = $dbname;
+            $dbNames[] = $dbName;
         }
-        foreach ($dbnames as $dbname) {
 
-            $sql    = 'SHOW TABLES FROM '.$dbname;
-            $query  = $this->prepare($sql);
-            if(!$query){
-                return false;
-            }
-            while($cRow = mysqli_fetch_array($query)){
+        foreach ( $dbNames as $dbName ) {
 
-                mysqli_select_db($this->conn, $dbname);
-
-                if(!$this->cleartable($cRow[0])){
+            $this->selectDB($dbName);
+            foreach ($this->tableList($dbName) as $tblName){
+                if(!$this->tableClear($tblName)){
                     return false;
                 }
-
             }
-            mysqli_select_db($this->conn, $this->dbname);
         }
         return true;
     }
@@ -418,27 +447,35 @@ class Mind {
     /**
      * Clear table.
      *
-     * @param mixed   $tblname
-     * @return  bool
-     * */
-    public function cleartable($tblname){
+     * @param $tblName
+     * @return bool
+     */
+    public function tableClear($tblName){
 
-        $tblnames = array();
+        $tblNames = array();
 
-        if(is_array($tblname)){
-            foreach ($tblname as $value) {
-                $tblnames[] = $value;
+        if(is_array($tblName)){
+            foreach ($tblName as $value) {
+                $tblNames[] = $value;
             }
         } else {
-            $tblnames[] = $tblname;
+            $tblNames[] = $tblName;
         }
 
-        foreach ($tblnames as $tblname) {
+        foreach ($tblNames as $tblName) {
 
-            $sql = 'TRUNCATE '.$tblname;
-            if(!$this->prepare($sql)){
+            $sql = 'TRUNCATE '.$tblName;
+
+            try{
+                if($this->query($sql)){
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception $e){
                 return false;
             }
+
         }
         return true;
     }
@@ -446,32 +483,38 @@ class Mind {
     /**
      * Clear column.
      *
-     * @param string   $tblname
-     * @param mixed   $column
-     * @return  bool
-     * */
-    public function clearcolumn($tblname, $column){
+     * @param $tblName
+     * @param null $column
+     * @return bool
+     */
+    public function columnClear($tblName, $column=null){
+
+        if(empty($column)){
+            return false;
+        }
 
         $columns = array();
 
         if(is_array($column)){
-            foreach ($column as $key => $value) {
-                $columns[] = $value;
+            foreach ($column as $col) {
+                $columns[] = $col;
             }
         } else {
             $columns[] = $column;
         }
 
+        $columns = array_intersect($columns, $this->columnList($tblName));
+
         foreach ($columns as $column) {
 
-            $id   = $this->increments($tblname);
-            $data = $this->get($tblname);
+            $id   = $this->increments($tblName);
+            $data = $this->getData($tblName);
 
             foreach ($data as $row) {
-                $arr = array(
+                $values = array(
                     $column => ''
                 );
-                $this->update($tblname, $arr, $row[$id]);
+                $this->update($tblName, $values, $row[$id]);
             }
         }
 
@@ -482,32 +525,53 @@ class Mind {
     /**
      * Add new record.
      *
-     * @param string   $tblname
-     * @param mixed   $arr
-     * @return  bool
-     * */
-    public function insert($tblname, $arr){
+     * @param $tblName
+     * @param $values
+     * @return bool
+     */
+    public function insert($tblName, $values){
 
-        if(!is_array($arr)){
+        if(!is_array($values)){
             return false;
         }
 
-        if(!empty($arr[0])){
-            foreach ($arr as $key => $row){
-                if(!$this->insert($tblname, $row)){
+        if(!empty($values[0])){
+            foreach ($values as $key => $row){
+                if(!$this->insert($tblName, $row)){
                     return false;
                 }
             }
         } else {
-            $columns = array_keys($arr);
 
-            $column = implode(',', $columns);
-            $values = '\''.implode('\',\'', array_values($arr)).'\'';
-            $sql = 'INSERT INTO '.$tblname.'('.$column.') VALUES ('.$values.')';
+            $xColumns = array_keys($values);
 
-            if(!$this->prepare($sql)){
+            $columns = $this->columnList($tblName);
+
+            $prepareArray = array();
+            foreach ( $xColumns as $col ) {
+
+                if(!in_array($col, $columns)){
+                    return false;
+                }
+
+                $prepareArray[] = $col.'=?';
+            }
+
+            $values = array_values($values);
+
+            $sql = implode(',', $prepareArray);
+
+            try{
+
+                $query = $this->prepare("INSERT INTO".' '.$tblName.' SET '.$sql);
+                $query->execute($values);
+                return true;
+
+            }catch (Exception $e){
+                echo $e->getMessage();
                 return false;
             }
+
         }
 
         return true;
@@ -516,327 +580,371 @@ class Mind {
     /**
      * Record update.
      *
-     * @param string   $tblname
-     * @param mixed   $arr
-     * @param mixed   $id
-     * @param mixed   $special
-     * @return  bool
-     * */
-    public function update($tblname, $arr, $id, $special=null){
+     * @param $tblName
+     * @param $values
+     * @param $needle
+     * @param null $column
+     * @return bool
+     */
+    public function update($tblName, $values, $needle, $column=null){
 
-        if(!is_array($arr)){
+        if(empty($column)){
+
+            $column = $this->increments($tblName);
+
+            if(empty($column)){
+                return false;
+            }
+
+        }
+
+        $xColumns = array_keys($values);
+
+        $columns = $this->columnList($tblName);
+
+        $prepareArray = array();
+        foreach ( $xColumns as $col ) {
+
+            if(!in_array($col, $columns)){
+                return false;
+            }
+
+            $prepareArray[] = $col.'=?';
+        }
+
+        $values[$column] = $needle;
+
+        $values = array_values($values);
+
+        $sql = implode(',', $prepareArray);
+        $sql .= ' WHERE '.$column.'=?';
+        try{
+            if($this->do_have($tblName, $needle, $column)){
+
+                $query = $this->prepare("UPDATE".' '.$tblName.' SET '.$sql);
+                $query->execute($values);
+                return true;
+            } else {
+                return false;
+            }
+
+        }catch (Exception $e){
+            echo $e->getMessage();
             return false;
         }
 
-        if(empty($special)){
-
-            $special = $this->increments($tblname);
-            if(empty($special)){
-                return false;
-            }
-
-        }
-
-        foreach ($arr as $name => $value) {
-
-            $field = $name.'=\''.$value.'\'';
-            $newfield = $special.'=\''.$id.'\'';
-            $sql = 'UPDATE '.$tblname.' SET '.$field.' WHERE '.$newfield;
-
-            if(!$this->prepare($sql)){
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
      * Record delete.
      *
-     * @param string   $tblname
-     * @param mixed   $id
-     * @param mixed   $special
-     * @return  bool
-     * */
-    public function delete($tblname, $id, $special=null){
+     * @param $tblName
+     * @param $needle
+     * @param null $column
+     * @return bool
+     */
+    public function delete($tblName, $needle, $column=null){
 
-        $ids = array();
+        if(empty($column)){
 
-        if(empty($special)){
+            $column = $this->increments($tblName);
 
-            $special = $this->increments($tblname);
-
-            if(empty($special)){
+            if(empty($column)){
                 return false;
             }
 
         }
 
-        if(is_array($id)){
+        if(is_array($needle)){
 
-            foreach ($id as $key => $value) {
-                $ids[] = $value;
+            foreach ($needle as $value) {
+                if(!$this->delete($tblName, $value, $column)){
+                    return false;
+                }
             }
+
+            return true;
 
         } else {
 
-            $ids[] = $id;
+            $sql = 'WHERE '.$column.'=?';
+            try{
+                if($this->do_have($tblName, $needle, $column)){
 
-        }
+                    $query = $this->prepare("DELETE FROM".' '.$tblName.' '.$sql);
+                    $query->execute(array($needle));
+                    return true;
+                } else {
+                    return false;
+                }
 
-        foreach ($ids as $id) {
-
-            $sql = 'DELETE FROM '.$tblname.' WHERE '.$special.'='.$id;
-
-            if(!$this->prepare($sql)){
+            }catch (Exception $e){
                 return false;
             }
-
         }
-
-        return true;
     }
 
     /**
      * Record reading.
      *
-     * @param string   $tblname
-     * @param mixed   $arr
+     * @param $tblName
+     * @param null $options
      * @return  mixed
-     * */
-    public function get($tblname, $arr=null){
+     */
+    public function getData($tblName, $options=null){
 
+        $sql = '';
+        $columns = $this->columnList($tblName);
 
-        $column  = '*';
-        $special = '';
-        $keyword = '';
-        $getdata = array();
+        if(!empty($options['column'])){
 
-
-        $sql = 'SHOW COLUMNS FROM '.$tblname;
-
-        $query = $this->prepare($sql);
-
-        if(!empty($query)){
-            while($row = $query->fetch_assoc()){
-                $columns[] = $row['Field'];
+            if(!is_array($options['column'])){
+                $options['column']= array($options['column']);
             }
 
-            if(!empty($arr['column'])){
+            $options['column'] = array_intersect($options['column'], $columns);
+            $columns = array_values($options['column']);
 
-                if(!is_array($arr['column'])){
-                    $arr['column']= array($arr['column']);
-                }
+            $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
 
-                $arr['column'] = array_intersect($arr['column'], $columns);
-                $column = implode(',', array_values($arr['column']));
+        } else {
+            $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
+        }
 
+        $prepareArray = array();
+        $executeArray = array();
+
+        if(!empty($options['search']['keyword'])){
+
+            if ( !is_array($options['search']['keyword']) ) {
+                $keyword = array($options['search']['keyword']);
+            } else {
+                $keyword = $options['search']['keyword'];
             }
 
-            if(!empty($arr['search']['keyword'])){
+            $searchColumns = $columns;
+            if(!empty($options['search']['column'])){
 
-                $keyword = $arr['search']['keyword'];
-
-                if(!empty($arr['search']['column'])){
-
-                    if(!is_array($arr['search']['column'])){
-                        $arr['search']['column'] = array($arr['search']['column']);
-                    }
-
-                    $columns = array_intersect($arr['search']['column'], $columns);
+                if(!is_array($options['search']['column'])){
+                    $searchColumns = array($options['search']['column']);
                 }
 
-                if(!empty($arr['search']['where']) AND $arr['search']['where']=='all'){
-                    $p = '%';
-                } else {
-                    $p = '';
-                }
-
-                if(is_array($keyword)){
-                    foreach ($keyword as $key => $value) {
-
-                        $xcontent = ' LIKE \''.$p.$value.$p.'\' OR ';
-                        $ycontent = ' LIKE \''.$p.$value.$p.'\'';
-                        $content[] = implode($xcontent, $columns).$ycontent;
-                    }
-
-                    $special = 'WHERE '.implode(' OR ', $content);
-
-                } else {
-
-                    $content = implode(' LIKE \''.$p.$keyword.$p.'\' OR ', $columns);
-                    $special = 'WHERE '.$content.' LIKE \''.$p.$keyword.$p.'\'';
-                }
+                $searchColumns = array_intersect($searchColumns, $columns);
             }
 
-            if(!empty($arr['search']['equal']) AND is_array($arr['search']['equal'])){
-                $special = 'WHERE ';
-                $content = array();
-                foreach ($arr['search']['equal'] as $name => $value) {
+            foreach ( $searchColumns as $column ) {
 
-                    $xcontent   = $name.'=\''.$value.'\'';
-                    $content[]  = $xcontent;
-                }
-                $special   .= implode(' AND ', $content);
-            }
-
-            if(!empty($arr['sort'])){
-
-                list($columname, $sort) = explode(':', $arr['sort']);
-                if(in_array($sort, array('ASC','DESC'))){
-                    $special .= ' ORDER BY '.$columname.' '.$sort;
+                foreach ( $keyword as $value ) {
+                    $prepareArray[] = $column.' LIKE ?';
+                    $executeArray[] = $value;
                 }
 
             }
 
-            if(!empty($arr['limit'])){
+            $sql = 'WHERE '.implode(' OR ', $prepareArray);
+        }
 
-                if(!empty($arr['limit']['start']) AND $arr['limit']['start']>0){
-                    $start = $arr['limit']['start'].',';
-                } else {
-                    $start = '0,';
-                }
 
-                if(!empty($arr['limit']['end']) AND $arr['limit']['end']>0){
-                    $end = $arr['limit']['end'];
-                } else {
+        $searchType = ' OR ';
+        if(!empty($options['search']['or']) AND is_array($options['search']['or'])){
+            $searchType = ' OR ';
+        }
 
-                    $sql     = 'SELECT * FROM '.$tblname;
-                    $query   = $this->prepare($sql);
-                    $end     = $query->num_rows;
-                }
+        if(!empty($options['search']['and']) AND is_array($options['search']['and'])){
+            $searchType = ' AND ';
+        }
 
-                $special .= ' LIMIT '.$start.$end;
+        if(
+            !empty($options['search']['or']) AND is_array($options['search']['or']) OR
+            !empty($options['search']['and']) AND is_array($options['search']['and'])
+        ){
 
+            foreach ($options['search']['and'] as $column => $value) {
+
+                $prepareArray[] = $column.' LIKE ?';
+                $executeArray[] = $value;
             }
 
-            $sql     = 'SELECT '.$column.' FROM '.$tblname.' '.$special;
-            $query   = $this->prepare($sql);
+            $sql = 'WHERE '.implode($searchType, $prepareArray);
+        }
 
-            if(!$query){
-                $query = array();
+        if(!empty($options['sort'])){
+
+            list($columnName, $sort) = explode(':', $options['sort']);
+            if(in_array($sort, array('asc','desc'))){
+                $sql .= ' ORDER BY '.$columnName.' '.strtoupper($sort);
             }
 
-            foreach ($query as $name => $value) {
-                $getdata[$name] = $value;
+        }
+
+        if(!empty($options['limit'])){
+
+            if(!empty($options['limit']['start']) AND $options['limit']['start']>0){
+                $start = $options['limit']['start'].',';
+            } else {
+                $start = '0,';
             }
 
-            if(isset($arr['format'])){
-                switch ($arr['format']) {
+            if(!empty($options['limit']['end']) AND $options['limit']['end']>0){
+                $end = $options['limit']['end'];
+            } else {
+                $end     = $this->newId($tblName)-1;
+            }
+
+            $sql .= ' LIMIT '.$start.$end;
+
+        }
+
+        $result = array();
+        try{
+
+            $query = $this->prepare('SELECT '.$sqlColumns.' FROM '.$tblName.' '.$sql);
+            $query->execute($executeArray);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            if(isset($options['format'])){
+                switch ($options['format']) {
 
                     case 'json':
-                        $getdata = json_encode($getdata);
+                        $result = json_encode($result);
                         break;
                 }
             }
+
+            return $result;
+        
+        }catch (Exception $e){
+            return $result;
         }
 
-        return $getdata;
     }
 
     /**
      * Entity verification.
      *
-     * @param string   $tblname
-     * @param mixed   $str
-     * @param mixed   $column
-     * @return  bool
-     * */
-    public function do_have($tblname, $str, $column=null){
+     * @param $tblName
+     * @param $value
+     * @param null $column
+     * @return bool
+     */
+    public function do_have($tblName, $value, $column=null){
 
-        if(!empty($tblname) AND !empty($str)){
+        if(!empty($tblName) AND !empty($value)){
 
-            if(!is_array($str)){
-                $arr = array(
+            if(!is_array($value)){
+                $options = array(
                     'search'=> array(
-                        'keyword' => $str
+                        'keyword' => $value
                     )
                 );
                 if(!empty($column)){
-                    $arr = array(
+                    $options = array(
                         'search' =>array(
-                            'keyword' => $str,
+                            'keyword' => $value,
                             'column' => $column
                         )
                     );
                 }
             } else {
-                $arr = array(
+                $options = array(
                     'search' =>array(
-                        'equal'=> $str
+                        'and'=> $value
                     )
                 );
             }
 
-            $data = $this->get($tblname, $arr);
+            $data = $this->getData($tblName, $options);
 
             if(!empty($data)){
                 return true;
-            } else {
-                return false;
             }
         }
+        return false;
     }
 
     /**
      * New id parameter.
      *
-     * @param string   $tblname
-     * @return  int
-     * */
-    public function newid($tblname){
+     * @param $tblName
+     * @return int
+     */
+    public function newId($tblName){
 
-        $arr = array(
-            'column'  =>  $this->increments($tblname)
-        );
+        $sql = 'SHOW TABLE STATUS LIKE \''.$tblName.'\'';
 
-        $q = $this->get($tblname, $arr);
+        try{
 
-        if(empty($q)){
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
 
-            $this->cleartable($tblname);
-
-            $id = 1;
-            return $id;
-
-        } else {
-
-            foreach ($q as $id) {
-                $d[] = $id;
+            $result = 0;
+            foreach ( $query as $item ) {
+                $result = $item['Auto_increment'];
             }
-            return implode('', max($d))+1;
 
+            if(empty($result)){
+                return 0;
+            } else {
+                return $result+1;
+            }
+        }catch (Exception $e){
+            return 0;
         }
+
     }
 
     /**
      * Auto increment column.
      *
-     * @param string   $tblname
-     * @return  string
+     * @param string   $tblName
+     * @return string
      * */
-    public function increments($tblname){
+    public function increments($tblName){
 
-        $sql = "SHOW COLUMNS FROM ".$tblname." WHERE EXTRA LIKE '%auto_increment%'";
-        $query = $this->prepare($sql);
-        $row = $query->fetch_assoc();
-        return $row['Field'];
+        $columns = '';
+        $sql = 'SHOW COLUMNS FROM ' . $tblName;
+
+        try{
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
+
+            foreach ( $query as $column ) {
+
+                if($column['Extra'] == 'auto_increment'){
+                    $columns = $column['Field'];
+                }
+            }
+
+            return $columns;
+
+        } catch (Exception $e){
+            return $columns;
+        }
+
     }
 
     /**
      * Database verification.
      *
-     * @param string   $dbname
+     * @param string   $dbName
      * @return  bool
      * */
-    public function is_db($dbname){
+    public function is_db($dbName){
 
-        $sql    = 'SHOW DATABASES LIKE \''.$dbname.'\'';
-        $query  = $this->prepare($sql);
+        $sql     = 'SHOW DATABASES';
 
-        if($query->num_rows){
-            return true;
-        } else {
+        try{
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
+
+            $dbNames = array();
+
+            if ( $query->rowCount() ){
+                foreach ( $query as $item ) {
+                    $dbNames[] = $item['Database'];
+                }
+            }
+
+            return in_array($dbName, $dbNames) ? true : false;
+
+        } catch (Exception $e){
             return false;
         }
 
@@ -845,42 +953,44 @@ class Mind {
     /**
      * Table verification.
      *
-     * @param string   $tblname
+     * @param $tblName
      * @return  bool
-     * */
-    public function is_table($tblname){
+     */
+    public function is_table($tblName){
 
-        $sql     = 'DESCRIBE '.$tblname;
-        $query   = $this->prepare($sql);
+        $sql     = 'DESCRIBE '.$tblName;
 
-        if($query){
-            return true;
-        } else {
+        try{
+            return $this->query($sql, PDO::FETCH_NUM);
+        } catch (Exception $e){
             return false;
         }
+
     }
 
     /**
      * Column verification.
      *
-     * @param string   $tblname
+     * @param string   $tblName
      * @param string   $column
      * @return  bool
      * */
-    public function is_column($tblname, $column){
+    public function is_column($tblName, $column){
 
-        $sql = 'SHOW COLUMNS FROM ' . $tblname;
-        $query = $this->prepare($sql);
+        $sql = 'SHOW COLUMNS FROM ' . $tblName;
 
-        if (!empty($query)) {
-            while ($row = $query->fetch_assoc()) {
-                $columns[] = $row['Field'];
+        try{
+            $query = $this->query($sql, PDO::FETCH_NAMED);
+
+            $columns = array();
+
+            foreach ( $query as $item ) {
+                $columns[] = $item['Field'];
             }
-        }
 
-        if(in_array($column, $columns)){
-            return true;
-        } else {
+            return in_array($column, $columns) ? true : false;
+
+        } catch (Exception $e){
             return false;
         }
     }
@@ -893,40 +1003,33 @@ class Mind {
      * */
     public function is_phone($str){
 
-        if(preg_match('/^\(?\+?([0-9]{1,4})\)?[-\. ]?(\d{3})[-\. ]?([0-9]{7})$/', implode('', explode(' ', $str)))) {
-            return true;
-        } else {
-            return false;
-        }
+        return preg_match('/^\(?\+?([0-9]{1,4})\)?[-\. ]?(\d{3})[-\. ]?([0-9]{7})$/', implode('', explode(' ', $str))) ? true : false;
+
     }
 
     /**
      * Date verification.
      *
-     * @param string   $str
+     * @param string   $date
      * @param string   $format
      * @return  bool
      * */
     public function is_date($date, $format = 'd-m-Y H:i:s'){
 
-        $d = \DateTime::createFromFormat($format, $date);
+        $d = DateTime::createFromFormat($format, $date);
 
-        if($d AND $d->format($format) == $date){
-            return true;
-        } else {
-            return false;
-        }
+        return $d->format($format) == $date AND $d ? true : false;
     }
 
     /**
      * Mail verification.
      *
-     * @param mixed   $str
+     * @param $email
      * @return  bool
-     * */
-    public function is_email($str){
+     */
+    public function is_email($email){
 
-        if(filter_var($str, FILTER_VALIDATE_EMAIL)){
+        if ( filter_var($email, FILTER_VALIDATE_EMAIL) ) {
             return true;
         } else {
             return false;
@@ -936,26 +1039,23 @@ class Mind {
     /**
      * Type verification.
      *
-     * @param mixed   $str
-     * @param mixed   $type
+     * @param $fileName
+     * @param mixed $type
      * @return  bool
-     * */
-    public function is_type($str, $type){
+     */
+    public function is_type($fileName, $type){
 
-        if(!is_array($str) AND !empty($type)){
+        if( !empty($type) AND !is_array($fileName) ){
 
-            $exc = $this->info($str, 'extension');
+            $exc = $this->info($fileName, 'extension');
 
             if(!is_array($type)){
                 $type = array($type);
             }
 
-            if(in_array($exc, $type)){
-                return true;
-            } else {
-                return false;
-            }
+            return in_array($exc, $type) ? true : false;
         }
+        return false;
     }
 
     /**
@@ -970,8 +1070,8 @@ class Mind {
         $byte = 1024;
         $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
 
-        if(!is_array($str) AND ctype_digit($str)){
-            $str = array('size'=>$str);
+        if( ctype_digit($str) AND !is_array($str) ){
+            $str = array("size"=>$str);
         }
 
         if(is_array($str) AND !empty($size) AND strstr($size, ' ')){
@@ -1058,26 +1158,23 @@ class Mind {
             $url = $left.'://www.'.$right;
         }
 
-        if(preg_match( '/^(http|https|www):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}'.'((:[0-9]{1,5})?\\/.*)?$/i' ,$url)){
-            return true;
-        } else {
-            return false;
-        }
+        return preg_match('/^(http|https|www):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
+
     }
 
     /**
      * Json control of a string
      *
-     * @param string $schema
+     * @param $scheme
      * @return bool
-     **/
-    public function is_json($schema){
+     */
+    public function is_json($scheme){
 
-        if(is_null($schema) OR is_array($schema)) {
+        if(is_null($scheme) OR is_array($scheme)) {
             return false;
         }
 
-        if(json_decode($schema)){
+        if(json_decode($scheme)){
             return true;
         }
 
@@ -1087,13 +1184,13 @@ class Mind {
     /**
      * Path information.
      *
-     * @param string   $str
-     * @param string   $type
+     * @param $fileName
+     * @param string $type
      * @return  string
-     * */
-    public function info($str, $type){
+     */
+    public function info($fileName, $type){
 
-        $object = pathinfo($str);
+        $object = pathinfo($fileName);
 
         if($type == 'extension'){
             return strtolower($object[$type]);
@@ -1111,6 +1208,7 @@ class Mind {
     public function filter($str){
 
         if(is_array($str)){
+            $x = array();
             foreach ($str as $key => $value) {
                 $x[] = $this->filter($value);
             }
@@ -1124,13 +1222,10 @@ class Mind {
     }
 
     /**
-     * Request collector.
+     * Request collector
      *
-     * @param mixed   $_GET
-     * @param mixed   $_POST
-     * @param mixed   $_FILES
-     * @return  mixed
-     * */
+     * @return mixed
+     */
     public function request(){
 
         if(isset($_POST) OR isset($_GET) OR isset($_FILES)){
@@ -1154,22 +1249,21 @@ class Mind {
             }
         }
 
-        return true;
+        return $this->post;
     }
 
     /**
-     * Redirect.
+     * Redirect
      *
-     * @param string   $url
-     * @return  mixed
-     * */
+     * @param null $url
+     */
     public function redirect($url=null){
 
         if(empty($url)){
-            $url = $this->baseurl;
+            $url = $this->base_url;
         } else {
             if(!$this->is_url($url)){
-                $url = $this->baseurl.$url;
+                $url = $this->base_url.$url;
             }
         }
 
@@ -1180,36 +1274,47 @@ class Mind {
     /**
      * Layer installer.
      *
-     * @param   mixed $file
-     * @param   mixed $cache
-     * */
-    public function mindload($file, $cache=null){
+     * @param $file
+     * @param null $cache
+     */
+    public function mindLoad($file, $cache=null){
+
+        $fileExt = '.php';
 
         if (!empty($cache) AND !is_array($cache)) {
             $cache = array($cache);
         }
 
         if (!empty($cache)) {
-            foreach ($cache as $cachefile) {
+            foreach ($cache as $cacheFile) {
 
-                $cacheExplode = $this->pGenerator($cachefile);
-                if(!empty($cacheExplode['name'])){
+                $cacheExplode = $this->pGenerator($cacheFile);
+                if (!empty($cacheExplode['name'])){
 
-                    $cachefile = $cacheExplode['name'];
+                    $cacheFile = $cacheExplode['name'];
                     $fileName = basename($cacheExplode['name']);
 
-                    if (file_exists($cachefile . '.php')) {
-                        require_once($cachefile . '.php');
+                    if (empty($cacheFile)){
+                        $cacheFile = '';
+                    }
 
-                        if(class_exists($fileName)){
-                            if(!empty($cacheExplode['params'])){
+                    if (file_exists($cacheFile . $fileExt)) {
+
+                        /*
+                         * PHPSTORM: In Settings search for 'unresolved include' which is under
+                         * Editor > Inspections; PHP > General > Unresolved include and uncheck the box.
+                         * */
+                        require_once($cacheFile . $fileExt);
+
+                        if (class_exists($fileName)){
+                            if (!empty($cacheExplode['params'])){
 
                                 $ClassName = new $fileName();
                                 $funcList = get_class_methods($fileName);
 
                                 foreach ($cacheExplode['params'] as $param) {
 
-                                    if(in_array($param, $funcList)){
+                                    if (in_array($param, $funcList)){
                                         $ClassName->$param();
                                     }
 
@@ -1223,8 +1328,6 @@ class Mind {
 
         if(!empty($file)){
 
-            $files = array();
-
             if(!is_array($file)){
                 $files = array($file);
             } else {
@@ -1233,8 +1336,8 @@ class Mind {
 
             foreach ($files as $file){
 
-                if (file_exists($file . '.php')) {
-                    require_once($file . '.php');
+                if (file_exists($file . $fileExt)) {
+                    require_once($file . $fileExt);
                 }
             }
         }
@@ -1243,10 +1346,10 @@ class Mind {
     /**
      * Permanent connection.
      *
-     * @param string   $str
-     * @param mixed   $option
-     * @return  string
-     * */
+     * @param $str
+     * @param array $options
+     * @return mixed|string|string[]|null
+     */
     public function permalink($str, $options = array()){
 
         $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
@@ -1258,7 +1361,7 @@ class Mind {
             'transliterate' => true
         );
 
-        $char_map = array(
+        $char_map = [
 
             // Latin
             'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE', 'Ç' => 'C',
@@ -1288,8 +1391,8 @@ class Mind {
             'ϊ' => 'i', 'ΰ' => 'y', 'ϋ' => 'y', 'ΐ' => 'i',
 
             // Turkish
-            'Ş' => 'S', 'İ' => 'I', 'Ç' => 'C', 'Ü' => 'U', 'Ö' => 'O', 'Ğ' => 'G',
-            'ş' => 's', 'ı' => 'i', 'ç' => 'c', 'ü' => 'u', 'ö' => 'o', 'ğ' => 'g',
+            'Ş' => 'S', 'İ' => 'I', 'Ğ' => 'G',
+            'ş' => 's', 'ı' => 'i', 'ğ' => 'g',
 
             // Russian
             'А' => 'A', 'Б' => 'B', 'В' => 'V', 'Г' => 'G', 'Д' => 'D', 'Е' => 'E', 'Ё' => 'Yo', 'Ж' => 'Zh',
@@ -1314,17 +1417,15 @@ class Mind {
             'ž' => 'z',
 
             // Polish
-            'Ą' => 'A', 'Ć' => 'C', 'Ę' => 'e', 'Ł' => 'L', 'Ń' => 'N', 'Ó' => 'o', 'Ś' => 'S', 'Ź' => 'Z',
+            'Ą' => 'A', 'Ć' => 'C', 'Ę' => 'e', 'Ł' => 'L', 'Ń' => 'N', 'Ś' => 'S', 'Ź' => 'Z',
             'Ż' => 'Z',
-            'ą' => 'a', 'ć' => 'c', 'ę' => 'e', 'ł' => 'l', 'ń' => 'n', 'ó' => 'o', 'ś' => 's', 'ź' => 'z',
+            'ą' => 'a', 'ć' => 'c', 'ę' => 'e', 'ł' => 'l', 'ń' => 'n', 'ś' => 's', 'ź' => 'z',
             'ż' => 'z',
 
             // Latvian
-            'Ā' => 'A', 'Č' => 'C', 'Ē' => 'E', 'Ģ' => 'G', 'Ī' => 'i', 'Ķ' => 'k', 'Ļ' => 'L', 'Ņ' => 'N',
-            'Š' => 'S', 'Ū' => 'u', 'Ž' => 'Z',
-            'ā' => 'a', 'č' => 'c', 'ē' => 'e', 'ģ' => 'g', 'ī' => 'i', 'ķ' => 'k', 'ļ' => 'l', 'ņ' => 'n',
-            'š' => 's', 'ū' => 'u', 'ž' => 'z'
-        );
+            'Ā' => 'A', 'Ē' => 'E', 'Ģ' => 'G', 'Ī' => 'i', 'Ķ' => 'k', 'Ļ' => 'L', 'Ņ' => 'N', 'Ū' => 'u',
+            'ā' => 'a', 'ē' => 'e', 'ģ' => 'g', 'ī' => 'i', 'ķ' => 'k', 'ļ' => 'l', 'ņ' => 'n', 'ū' => 'u',
+        ];
 
         $replacements = array();
 
@@ -1352,46 +1453,42 @@ class Mind {
         $str = preg_replace('/(' . preg_quote($options['delimiter'], '/') . '){2,}/', '$1', $str);
         $str = mb_substr($str, 0, ($options['limit'] ? $options['limit'] : mb_strlen($str, 'UTF-8')), 'UTF-8');
         $str = trim($str, $options['delimiter']);
-        if($options['lowercase']){
-            return mb_strtolower($str, 'UTF-8');
-        } else {
-            return $str;
-        }
+        return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
 
     }
 
     /**
      * Time zones.
      *
-     * @return  mixed
-     * */
+     * @return array|false
+     */
     public function timezones(){
         return timezone_identifiers_list();
     }
 
     /**
-     * Sessions.
+     * Session checking.
      *
-     * @return  mixed
-     * */
+     * @return bool
+     */
     public function session_check(){
 
-        if($this->sessset['status_session']){
+        if($this->sess_set['status_session']){
 
-            if($this->sessset['path_status']){
+            if($this->sess_set['path_status']){
 
-                if(!is_dir($this->sessset['path'])){
+                if(!is_dir($this->sess_set['path'])){
 
-                    mkdir($this->sessset['path']); chmod($this->sessset['path'], 755);
-                    $this->write('deny from all', $this->sessset['path'].'/.htaccess');
-                    chmod($this->sessset['path'].'/.htaccess', 644);
+                    mkdir($this->sess_set['path']); chmod($this->sess_set['path'], 755);
+                    $this->write('deny from all', $this->sess_set['path'].'/.htaccess');
+                    chmod($this->sess_set['path'].'/.htaccess', 644);
                 }
 
                 ini_set(
                     'session.save_path',
                     realpath(
                         dirname(__FILE__)
-                    ).'/'.$this->sessset['path']
+                    ).'/'.$this->sess_set['path']
                 );
             }
 
@@ -1400,6 +1497,8 @@ class Mind {
             }
 
         }
+
+        return false;
     }
 
     /**
@@ -1444,7 +1543,7 @@ class Mind {
             return false;
         }
 
-        $request = str_replace($this->baseurl, '', $_SERVER['REQUEST_URI']);
+        $request = str_replace($this->base_url, '', $_SERVER['REQUEST_URI']);
         $fields     = array();
 
         if(!empty($uri)){
@@ -1459,7 +1558,7 @@ class Mind {
         }
 
         if($uri == '/'){
-            $uri = $this->baseurl;
+            $uri = $this->base_url;
         }
 
         $params = array();
@@ -1497,43 +1596,44 @@ class Mind {
 
             if($request == $uri OR trim($request, '/') == trim($uri, '/')){
                 $this->error_status = false;
-                $this->mindload($file, $cache);
+                $this->mindLoad($file, $cache);
                 exit();
             }
 
             $this->error_status = true;
 
         } else {
-            if($uri == $this->baseurl) {
+            if($uri == $this->base_url) {
                 $this->error_status = false;
-                $this->mindload($file, $cache);
+                $this->mindLoad($file, $cache);
                 exit();
             }
 
         }
 
+        exit();
     }
 
     /**
      * File writer.
      *
-     * @param   mixed   $str
-     * @param   string   $path
-     * @return  bool
-     * */
-    public function write($str, $path) {
+     * @param $data
+     * @param $filePath
+     * @return bool
+     */
+    public function write($data, $filePath) {
 
-        if(is_array($str)){
-            $content    = implode(':', $str);
+        if(is_array($data)){
+            $content    = implode(':', $data);
         } else {
-            $content    = $str;
+            $content    = $data;
         }
 
         if(isset($content)){
 
-            $writedb        = fopen($path, "a+");
-            fwrite($writedb, $content."\r\n");
-            fclose($writedb);
+            $fileName        = fopen($filePath, "a+");
+            fwrite($fileName, $content."\r\n");
+            fclose($fileName);
 
             return true;
         }
@@ -1579,11 +1679,11 @@ class Mind {
     /**
      * Content researcher.
      *
-     * @param   string   $left
-     * @param   string   $right
-     * @param   string   $url
-     * @return  mixed
-     * */
+     * @param $left
+     * @param $right
+     * @param $url
+     * @return array|null
+     */
     public function get_contents($left, $right, $url){
 
         set_time_limit(0);
@@ -1615,6 +1715,8 @@ class Mind {
                 return $result;
             }
         }
+
+        return null;
     }
 
     /**
@@ -1653,7 +1755,7 @@ class Mind {
                 copy($link, $destination.'/'.$other_path);
             }
 
-            $remote_file = $this->remote_filesize($link);
+            $remote_file = $this->remoteFileSize($link);
             $local_file = filesize($destination.'/'.$other_path);
 
             if(file_exists($destination.'/'.$other_path)){
@@ -1677,7 +1779,7 @@ class Mind {
      * @param $url
      * @return mixed
      */
-    public function remote_filesize($url){
+    public function remoteFileSize($url){
         $ch = curl_init($url);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -1691,12 +1793,115 @@ class Mind {
         return $size;
     }
 
+
+    /**
+     * Column sql syntax creator.
+     *
+     * @param array $scheme
+     * @param string|null $funcName
+     * @return array
+     */
+    public function cGenerator($scheme, $funcName=null){
+
+        $sql = array();
+
+        foreach (array_values($scheme) as $array_value) {
+
+            $colonParse = array();
+            if(strstr($array_value, ':')){
+                $colonParse = array_filter(explode(':', trim($array_value, ':')));
+            }
+
+            $columnValue = null;
+            $columnType = null;
+
+            if(count($colonParse)==3){
+                list($columnName, $columnType, $columnValue) = $colonParse;
+            }elseif (count($colonParse)==2){
+                list($columnName, $columnType) = $colonParse;
+            } else {
+                $columnName = $array_value;
+                $columnType = 'small';
+            }
+
+            if(is_null($columnValue) AND $columnType =='string'){ $columnValue = 255; }
+            if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
+            if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
+
+            $first = '';
+            $prefix = '';
+            if(!is_null($funcName) AND $funcName == 'columnCreate'){
+                $first = 'FIRST';
+                $prefix = 'ADD COLUMN ';
+            }
+
+            switch ($columnType){
+                case 'int':
+                    $sql[] = $prefix.$columnName.' int('.$columnValue.')';
+                    break;
+                case 'decimal':
+                    $sql[] = $prefix.$columnName.' DECIMAL('.$columnValue.')';
+                    break;
+                case 'string':
+                    $sql[] = $prefix.$columnName.' VARCHAR('.$columnValue.')';
+                    break;
+                case 'small':
+                    $sql[] = $prefix.$columnName.' TEXT';
+                    break;
+                case 'medium':
+                    $sql[] = $prefix.$columnName.' MEDIUMTEXT';
+                    break;
+                case 'large':
+                    $sql[] = $prefix.$columnName.' LONGTEXT';
+                    break;
+                case 'increments':
+                    $sql[] = $prefix.$columnName.' int('.$columnValue.') UNSIGNED AUTO_INCREMENT PRIMARY KEY '.$first;
+                    break;
+            }
+        }
+
+        return $sql;
+    }
+
+    /**
+     * Parameter parser.
+     *
+     * @param string $str
+     * @return mixed|bool
+     *
+     */
+    public function pGenerator($str=null){
+
+        $Result = array();
+        if(!is_null($str)){
+
+            if(strstr($str, ':')){
+                $strExplode = array_filter(explode(':', trim($str, ':')));
+                if(count($strExplode) == 2){
+                    list($filePath, $funcPar) = $strExplode;
+                    $Result['name'] = $filePath;
+
+                    if(strstr($funcPar, '@')){
+                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
+                    } else {
+                        $funcExplode = array($funcPar);
+                    }
+                    if(!empty($funcExplode)){
+                        $Result['params'] = $funcExplode;
+                    }
+                }
+            } else {
+                $Result['name'] = $str;
+            }
+        }
+        return $Result;
+    }
+
     public function __destruct()
     {
         if($this->error_status){
-            $this->mindload(dirname($_SERVER['SCRIPT_FILENAME']).'/'.$this->errorfile);
+            $this->mindLoad(dirname($_SERVER['SCRIPT_FILENAME']).'/'.$this->error_file);
             exit();
         }
     }
 }
-?>
