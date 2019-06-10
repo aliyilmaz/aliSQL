@@ -78,6 +78,9 @@ class Mind extends PDO
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
+        set_time_limit(0);
+        ini_set('memory_limit', '-1');
+
         date_default_timezone_set($this->timezone);
         $this->timestamp = date("d-m-Y H:i:s");
         $this->base_url = dirname($_SERVER['SCRIPT_NAME']).'/';
@@ -812,7 +815,7 @@ class Mind extends PDO
             }
 
             return $result;
-        
+
         }catch (Exception $e){
             return $result;
         }
@@ -1685,8 +1688,6 @@ class Mind extends PDO
      * @return array|null
      */
     public function get_contents($left, $right, $url){
-
-        set_time_limit(0);
 
         $result = array();
 
