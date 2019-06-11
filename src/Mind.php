@@ -1507,11 +1507,11 @@ class Mind extends PDO
     /**
      * Routing manager.
      *
-     * @param   string  $uri
-     * @param   mixed  $file
-     * @param   mixed  $cache
-     * @return  mixed
-     * */
+     * @param $uri
+     * @param $file
+     * @param null $cache
+     * @return bool
+     */
     public function route($uri, $file, $cache=null){
 
         $public_htaccess = implode("\n", array(
@@ -1647,10 +1647,10 @@ class Mind extends PDO
     /**
      * File uploader.
      *
-     * @param   mixed   $files
-     * @param   string   $path
-     * @return  mixed
-     * */
+     * @param $files
+     * @param $path
+     * @return array
+     */
     public function upload($files, $path){
 
         $result = array();
@@ -1685,7 +1685,7 @@ class Mind extends PDO
      * @param $left
      * @param $right
      * @param $url
-     * @return array|null
+     * @return array
      */
     public function get_contents($left, $right, $url){
 
@@ -1717,15 +1717,15 @@ class Mind extends PDO
             }
         }
 
-        return null;
+        return $result;
     }
 
     /**
-     * File downloader
+     * File downloader.
      *
      * @param $links
      * @param array $opt
-     * @return array|bool
+     * @return array
      */
     public function download($links, $opt=array('path'=>'download'))
     {
@@ -1735,7 +1735,7 @@ class Mind extends PDO
         $result = array();
 
         if(empty($links)){
-            return false;
+            return $result;
         }
 
         if(!is_array($links)){
@@ -1798,8 +1798,8 @@ class Mind extends PDO
     /**
      * Column sql syntax creator.
      *
-     * @param array $scheme
-     * @param string|null $funcName
+     * @param $scheme
+     * @param null $funcName
      * @return array
      */
     public function cGenerator($scheme, $funcName=null){
@@ -1867,9 +1867,8 @@ class Mind extends PDO
     /**
      * Parameter parser.
      *
-     * @param string $str
-     * @return mixed|bool
-     *
+     * @param null $str
+     * @return array
      */
     public function pGenerator($str=null){
 
