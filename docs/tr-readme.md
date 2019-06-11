@@ -1,9 +1,34 @@
 
 # Mind nedir?
 
-Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfıdır. Yeni tasarım desenleri ve uygulama çatıları oluşturmak için çeşitli araçlar sunar. Büyüyen bir proje için kontrollü ve güvenli bir büyüme sağlar.
+Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
 
+#### Güvenlidir 
 
+*   `$_GET`, `$_POST` ve `$_FILES` isteklerini filtreden geçirerek, `post` sınıf değişkeni yardımıyla geliştiricilerin kullanımına sunar.
+*   `CRUD` işlemleri, `sql injection` gibi istismar yöntemlerine karşı korumalı olarak gerçekleşir. 
+*   `CSS`, `JavaScript` ve `Görsellerin` bulunduğu dizinler dışında ki tüm dizinlere erişim engeller.
+ 
+ #### Kolaydır
+ 
+ *  Adapte olmak için temel PHP bilmek yeterlidir.
+ *  Tek veya çoklu dosya yüklemek çok kolaydır.
+ *  Yerel yada uzak sunucuda erişime açık dizinleri, klasör/dosya hiyerarşisine bağlı kalarak indirmek kolaydır.
+ *  Oyun oynar gibi web sitelerinden veri elde eden bot'lar oluşturmak mümkündür.
+ *  `Mind` gerekli .htaccess dosyalarını kendisi oluşturur, dosyalar yanlışlıkla silinse bile kendisi yeniden oluşturur.
+ *  Projenin herhangi bir rotasını veya o rotaya tanımlanan görevlerin konumunu değiştirmek çok kolaydır.
+ *  Bir çok kontrol metodu bulunur, ayrıca bir pakete ihtiyaç duymadan kontroller gerçekleştirmek mümkündür.
+ 
+
+ #### Hızlıdır
+ 
+ *  Veritabanı işlemleri için PHP'nin PDO sınıfını kullanır.
+ *  SQL sorgularında sütun adlarını kullanmaya özen göstererek hızlı sorgular yapmaya olanak tanır.
+ *  Kullanıcının bulunduğu rota adresine tanımlanan görevleri gerçekleştirir. Bu sayede bir çok modern framework'ün kerneli gibi karışık olmaz.
+ 
+ 
+ 
+ 
 ---------- 
 
 ## İndirmeler
