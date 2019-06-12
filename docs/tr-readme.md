@@ -12,12 +12,12 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfı
  #### Kolaydır
  
  *  Adapte olmak için temel PHP bilmek yeterlidir.
- *  Tek veya çoklu dosya yüklemek çok kolaydır.
+ *  Tek veya çoklu dosya yüklemek kolaydır.
  *  Yerel yada uzak sunucuda erişime açık dizinleri, klasör/dosya hiyerarşisine bağlı kalarak indirmek kolaydır.
- *  Oyun oynar gibi web sitelerinden veri elde eden bot'lar oluşturmak mümkündür.
- *  `Mind` gerekli .htaccess dosyalarını kendisi oluşturur, dosyalar yanlışlıkla silinse bile kendisi yeniden oluşturur.
- *  Projenin herhangi bir rotasını veya o rotaya tanımlanan görevlerin konumunu değiştirmek çok kolaydır.
- *  Bir çok kontrol metodu bulunur, ayrıca bir pakete ihtiyaç duymadan kontroller gerçekleştirmek mümkündür.
+ *  Oyun oynar gibi web sitelerinden veri elde eden bot'lar oluşturmak kolaydır.
+ *  `Mind` gerekli .htaccess dosyalarını kendisi otomatik olarak oluşturur.
+ *  Projenin herhangi bir rotasını veya o rotaya tanımlanan görevlerin konumunu değiştirmek kolaydır.
+ *  Bir çok kontrol metoduna sahip olduğundan ayrıca bir pakete ihtiyaç duymadan kontroller gerçekleştirmek kolaydır.
  
 
  #### Hızlıdır
