@@ -5,9 +5,9 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfı
 
 #### Güvenlik 
 
-*   `$_GET`, `$_POST` ve `$_FILES` isteklerini filtreden geçirerek, `post` sınıf değişkeni yardımıyla geliştiricilerin kullanımına sunar.
-*   `CRUD` işlemleri, `sql injection` gibi istismar yöntemlerine karşı korumalı olarak gerçekleşir. 
-*   Aksi belirtilmedikçe tüm dizinlere erişim engeller.
+*   `$_GET`, `$_POST` ve `$_FILES` isteklerini filtreden geçirerek, **XSS** gibi çeşitli saldırı kodlarını etkisiz hale getirir.
+*   `CRUD` işlemleri, **sql injection** gibi istismar yöntemlerine karşı korumalı olarak gerçekleşir. 
+*   Aksi belirtilmedikçe tüm dizinlere erişim engellenir.
  
  #### Kolaylık
  
