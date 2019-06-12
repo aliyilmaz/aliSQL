@@ -5,7 +5,7 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfı
  
 
 * [Dökümanlar](https://github.com/aliyilmaz/Mind/tree/master/docs) 
-  * [Türkçe (Tamamlandı)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
+  * [Türkçe (3.0.0 sürümü için tam anlamıyla güncel değildir)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
   * [İngilizce (Devam ediyor)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
 * [Testler](https://github.com/aliyilmaz/Mind/tree/master/tests) 
 
@@ -40,7 +40,7 @@ Güvenlikle ilgili herhangi bir sorun tespit ederseniz, herkese açık sorun bil
 
 ## Katkıda bulunanlar
 
-- [Katkıda Bulunanlar](../../contributors)
+- [Katkıda Bulunanlar](https://github.com/aliyilmaz/Mind/graphs/contributors)
 
 ## Lisans
 
