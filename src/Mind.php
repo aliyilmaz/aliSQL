@@ -823,6 +823,40 @@ class Mind extends PDO
     }
 
     /**
+     * Research assistant.
+     *
+     * @param $tblName
+     * @param $map
+     * @param null $column
+     * @return mixed
+     */
+    public function samantha($tblName, $map, $column=null)
+    {
+
+        $scheme['search']['and'] = $map;
+
+        if (!empty($column)) {
+            $scheme['column'] = $column;
+        }
+
+        $output = $this->getData($tblName, $scheme);
+
+        if (count($output) > 1) {
+            return $output;
+        } else {
+            $columns = array_keys($output[0]);
+
+            if(count($columns) > 1){
+                return $output[0];
+            } else {
+                $column = $columns[0];
+                return $output[0][$column];
+            }
+        }
+
+    }
+
+    /**
      * Entity verification.
      *
      * @param $tblName
