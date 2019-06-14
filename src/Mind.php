@@ -1547,7 +1547,6 @@ class Mind extends PDO
      * @return bool
      */
     public function route($uri, $file, $cache=null){
-
         $public_htaccess = implode("\n", array(
             'RewriteEngine On',
             'RewriteCond %{REQUEST_FILENAME} -s [OR]',
@@ -1647,8 +1646,7 @@ class Mind extends PDO
             }
 
         }
-
-        exit();
+        return false;
     }
 
     /**
