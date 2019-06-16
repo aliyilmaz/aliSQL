@@ -751,22 +751,30 @@ class Mind extends PDO
         $searchType = ' OR ';
         if(!empty($options['search']['or']) AND is_array($options['search']['or'])){
             $searchType = ' OR ';
+
+            foreach ($options['search']['or'] as $column => $value) {
+
+                $prepareArray[] = $column.' LIKE ?';
+                $executeArray[] = $value;
+            }
+
         }
 
         if(!empty($options['search']['and']) AND is_array($options['search']['and'])){
             $searchType = ' AND ';
-        }
-
-        if(
-            !empty($options['search']['or']) AND is_array($options['search']['or']) OR
-            !empty($options['search']['and']) AND is_array($options['search']['and'])
-        ){
 
             foreach ($options['search']['and'] as $column => $value) {
 
                 $prepareArray[] = $column.' LIKE ?';
                 $executeArray[] = $value;
             }
+
+        }
+
+        if(
+            !empty($options['search']['or']) AND is_array($options['search']['or']) OR
+            !empty($options['search']['and']) AND is_array($options['search']['and'])
+        ){
 
             $sql = 'WHERE '.implode($searchType, $prepareArray);
         }
