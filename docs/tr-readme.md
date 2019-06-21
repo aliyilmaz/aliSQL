@@ -25,7 +25,6 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfı
  *  Veritabanı işlemleri için PHP'nin PDO sınıfını kullanır.
  *  SQL sorgularında sütun adlarını kullanmaya özen göstererek hızlı sorgular yapmaya olanak tanır.
  *  Kullanıcının bulunduğu rota adresine tanımlanan görevleri gerçekleştirir. Bu sayede bir çok modern framework'ün kerneli gibi karışık olmaz.
- *  **Mind.php** dosyası **49 KB** boyutundadır.
  
  
  
