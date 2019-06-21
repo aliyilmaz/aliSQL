@@ -1662,12 +1662,13 @@ class Mind extends PDO
      *
      * @param $data
      * @param $filePath
+     * @param string $delimiter
      * @return bool
      */
-    public function write($data, $filePath) {
+    public function write($data, $filePath, $delimiter=':') {
 
         if(is_array($data)){
-            $content    = implode(':', $data);
+            $content    = implode($delimiter, $data);
         } else {
             $content    = $data;
         }
@@ -1758,6 +1759,89 @@ class Mind extends PDO
         }
 
         return $result;
+    }
+
+    /**
+     * @param $filePath
+     * @param $options
+     * @return array
+     */
+    public function fileWorm($filePath, $options){
+
+        $data = array();
+        $output = array();
+
+        if(empty($filePath) OR !file_exists($filePath)){
+            return $output;
+        }
+
+        if(
+            !isset($options['separator']) OR
+            !isset($options['start']) OR
+            !isset($options['end']) OR
+            empty($options['names']) OR
+            !is_array($options['names'])
+        ){
+            return $output;
+        }
+
+
+        $handle = fopen($filePath, 'r');
+
+        if ($handle) {
+
+            $i = 0;
+
+            while (($line = fgets($handle)) !== false) {
+
+                if ($options['start'] < $i) {
+
+                    $names = $options['names'];
+                    $fields = explode($options['separator'], $line);
+
+                    if(count($fields) == count($names)){
+                        $data = array_combine($names, $fields);
+                    }
+
+                    if(isset($options['search']) AND is_array($options['search'])){
+
+                        $result = array();
+                        foreach ( $options['search'] as $column => $value ) {
+
+                            if(
+                                in_array($column, $names) AND
+                                strstr($data[$column], $value) OR
+                                strstr($data[$column], strtolower($value)) OR
+                                strstr($data[$column], strtoupper($value))
+                            ){
+                                $result[$column] = $value;
+                            }
+                        }
+
+                        if(count($result) == count($options['search'])){
+                            $output[] = $data;
+                        }
+                    } else {
+                        $output[] = $data;
+                    }
+
+                    if(isset($options['save'])){
+
+                        if($this->is_table($options['save']['tblName'])){
+                            $this->insert($options['save']['tblName'], $data);
+                        }
+
+                    }
+
+                }
+
+                if($options['end'] == $i){
+                    return $output;
+                }
+                $i++;
+            }
+        }
+        return $output;
     }
 
     /**
