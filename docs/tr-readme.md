@@ -1,23 +1,23 @@
 
 # Mind nedir?
 
-Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
+Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
 
-#### Güvenlik 
+#### Güvenlik
 
-*   `$_GET`, `$_POST` ve `$_FILES` isteklerini filtreden geçirerek, **XSS** gibi çeşitli saldırı kodlarını etkisiz hale getirir.
-*   `CRUD` işlemleri, **sql injection** gibi istismar yöntemlerine karşı korumalı olarak gerçekleşir. 
-*   Aksi belirtilmedikçe tüm dizinlere erişim engellenir.
+*   **$_GET**, **$_POST** ve **$_FILES** isteklerini filtreden geçirerek, **XSS** gibi çeşitli saldırı kodlarını etkisiz hale getirir.
+*   **Ekleme**, **Okuma**, **Güncelleme**, **Silme** işlemlerinin **sql injection** gibi istismar yöntemlerine karşı korumalı olarak gerçekleşmesini sağlar. 
+*   Aksi belirtilmedikçe tüm dizinlere erişim engellediği için projeye ait dosya ve klasör hiyerarşisi güvendedir.
  
  #### Kolaylık
  
- *  Adapte olmak için temel PHP bilmek yeterlidir.
- *  Tek veya çoklu dosya yüklemek kolaydır.
- *  Yerel yada uzak sunucuda erişime açık dizinleri, klasör/dosya hiyerarşisine bağlı kalarak indirmek kolaydır.
- *  Oyun oynar gibi web sitelerinden veri elde eden bot'lar oluşturmak kolaydır.
- *  `Mind` gerekli .htaccess dosyalarını kendisi otomatik olarak oluşturur.
+ *  Temel **PHP** bilgisine sahip olmanız yeterlidir.
+ *  Tek veya çoklu dosyaları kolaylıkla yükleyebilirsiniz.
+ *  Sunucunun **erişime açık** varlıklarını, **klasör/dosya** hiyerarşisine bağlı kalarak indirmek kolaydır.
+ *  Oyun oynar gibi web sitelerinden veri elde eden **BOT**'lar, **API** servisleri oluşturmak kolaydır.
+ *  **Mind** gerekli **.htaccess** dosyalarını kendisi otomatik olarak oluşturur.
  *  Projenin herhangi bir rotasını veya o rotaya tanımlanan görevlerin konumunu değiştirmek kolaydır.
- *  Bir çok kontrol metoduna sahip olduğundan ayrıca bir pakete ihtiyaç duymadan kontroller gerçekleştirmek kolaydır.
+ *  Bir çok kontrol metoduna sahip olduğundan, ayrıca bir pakete ihtiyaç duymadan kontrol yapıları oluşturmak kolaydır.
  
 
  #### Hız
@@ -31,14 +31,14 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfı
  
 ---------- 
 
-## İndirmeler
+## Edinme
 Mind sınıfını [GitHub sayfasından](https://github.com/aliyilmaz/Mind/archive/master.zip) indirebilirsiniz.
 
 ---------- 
 
 ## Veritabanı Ayarları
 
-Sınıfı kullanmak için veritabanı bilgilerini `Mind.php` dosyasında veya sınıf çağrılırken tanımlamak gerekir.
+Sınıfı kullanmak için veritabanı bilgilerini **Mind.php** dosyasında veya sınıf çağrılırken tanımlamak gerekir.
 
 #### Örnek
 
@@ -61,7 +61,7 @@ veya
 
 ## Kurulum
 
-`Mind.php` dosyasını projeye `require_once` gibi bir yöntemle dahil ettikten sonra, `extends` veya `new Mind()` komutu yardımıyla sınıfı kullanıma hazır hale getirmek mümkündür.
+**Mind.php** dosyasını projeye **require_once** gibi bir yöntemle dahil ettikten sonra, **extends** veya **new Mind()** komutu yardımıyla sınıfı kullanıma hazır hale getirmek mümkündür.
 
 #### Örnek
 
@@ -79,9 +79,11 @@ veya
 
 ## Oturum Ayarları
 
-Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak için kullanılan kısımdır. Oturumları kapatmak için, `session_status` parametresi `false` açmak içinse `true` olarak ayarlanmalıdır. Oturumların saklandığı klasör yolunu değiştirmek için, `path` parametresinin güncellenmesi gerekmektedir. Oturumları belirtilen yolda tutmak için `path_status` parametresi `true` değerine ayarlanmalıdır. 
+Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak için kullanılan metotdur. Oturumları kapatmak için, `session_status` parametresi `false` olarak, açmak içinse `true` olarak güncellenmelidir. 
 
-**Bilgi:** Oturum Ayarları varsayılan olarak sunucu ayarlarına göre yapılandırılmıştır.
+Oturumların saklandığı klasör yolunu değiştirmek için, `path` parametresinin güncellenmesi gerekir. Belirtilen yolda oturumların tutulması görevini etkinleştirmek için  `path_status` parametresi `true` olarak güncellenmelidir. 
+
+**Bilgi:** Oturum Ayarları **varsayılan olarak** sunucu ayarlarına göre yapılandırılmıştır.
 
 #### Örnek
 
@@ -97,7 +99,7 @@ Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak içi
 
 İçeriğin doğru zaman damgasıyla işaretlenebilmesi için zaman dilimini kişiselleştirmek mümkündür. Varsayılan olarak `Europe/Istanbul` tanımlanmıştır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır. [Desteklenen zaman dilimlerinin listesi](https://secure.php.net/manual/tr/timezones.php) bölümüne bakın.
 
-**Bilgi:** Gerektiği kadar kişiselleştirilmemiş sunucular proje zaman diliminden farklı zaman dilimi kullanabilmektedir, bu kısımda ki yapılan düzenleme farklı sunucularda doğru zaman damgasına sahip olmanızı sağlar. 
+**Bilgi:** Gerektiği kadar kişiselleştirilmemiş sunucular proje zaman diliminden farklı zaman dilimi kullanabilmektedir, bu kısımda ki yapılan düzenleme farklı sunucularda doğru zaman damgasına sahip olmayı sağlar. 
 
 #### Örnek
 
@@ -107,37 +109,41 @@ Kullanıcılar için oluşturulan oturumları özelleştirmek veya kapatmak içi
 
 ## Etkin Metodlar
 
-Oturum yönetimi, veritabanı bağlantısı, `$_GET`, `$_POST` ve `$_FILES` istekleri gibi gereksinimleri karşılayan yöntemler, `Mind.php` dosyasında `__construct()` yöntemi çalıştırılarak etkinleştirilmiştir.
+Oturum yönetimi, **$_GET**, **$_POST** ve **$_FILES** istekleri, hata raporlama, işlem bekleme süresi gibi gereksinimleri karşılayan yöntemler, **Mind.php** dosyası içinde bulunan **__construct()** metodu içinde çalıştırılarak etkinleştirilmiştir.
 
 -   [session_check()](#session_check)
--   [connection()](#connection)
 -   [request()](#request)
-
+-   error_reporting(-1)
+-   error_reporting(E_ALL) 
+-   ini_set('display_errors', 1)   
+-   set_time_limit(0)
+-   ini_set('memory_limit', '-1')
 ----------
 
 ## Etkin Değişkenler
-
-##### private $conn
-
-Veritabanı bağlantısı `$this->conn` değişkeninde tutulur. Sınıf dışından erişimi engellemek için `private` özelliği tanımlanmıştır.
 
 ##### public $post
 
 Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istekleri, `$this->post` değişkeninde tutulur. Sınıf dışından erişime müsaade etmek için `public` özelliği tanımlanmıştır.
 
-##### public $baseurl
+##### public $base_url
 
-`Mind.php` dosyasının içinde bulunduğu klasörün yolu `$this->baseurl` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+**Mind.php** dosyasının içinde bulunduğu klasörün yolu `$this->base_url` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 ##### public $timezone
 
 Projenin zaman dili tutulur, varsayılan olarak `Europe/Istanbul` olarak belirtilmiştir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
+##### public $timestamp
+
+Projenin zaman damgası, **gün-ay-yıl saat:dakika:saniye** biçiminde `$this->timestamp` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+
 ##### public $error_status
 
 Hata durumlarını `true` veya `false` olarak taşıyan değişkendir, varsayılan olarak `false` belirtilmiştir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
-##### public $errorfile
+##### public $error_file
 
 Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsayılan olarak `app/views/errors/404` belirtilmiştir, eğer söz konusu dosya yoksa boş bir sayfa gösterilir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
@@ -147,25 +153,23 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 ##### Veritabanı
 
--   [connection](#connection)
--   [prepare](#prepare)
--   [cGeneration](#cgeneration)
--   [pGeneration](#pgeneration)
--   [createdb](#createdb)
--   [createtable](#createtable)
--   [createcolumn](#createcolumn)
--   [deletedb](#deletedb)
--   [deletetable](#deletetable)
--   [deletecolumn](#deletecolumn)
--   [cleardb](#cleardb)
--   [cleartable](#cleartable)
--   [clearcolumn](#clearcolumn)
+-   [selectDB](#selectDB)
+-   [dbCreate](#dbCreate)
+-   [tableCreate](#tableCreate)
+-   [columnCreate](#columWnCreate)
+-   [dbDelete](#dbDelete)
+-   [tableDelete](#tableDelete)
+-   [columnDelete](#columnDelete)
+-   [dbClear](#dbClear)
+-   [tableClear](#tableClear)
+-   [columnClear](#columnClear)
 -   [insert](#insert)
 -   [update](#update)
 -   [delete](#delete)
--   [get](#get)
+-   [getData](#getData)
+-   [samantha](#samantha)
 -   [do_have](#do_have)
--   [newid](#newid)
+-   [newId](#newId)
 -   [increments](#increments)
 
 ##### Doğrulayıcı
@@ -188,11 +192,13 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [filter](#filter)
 -   [request](#request)
 -   [redirect](#redirect)
--   [mindload](#mindload)
 -   [permalink](#permalink)
 -   [timezones](#timezones)
 -   [session_check](#session_check)
--   [remote_filesize](#remote_filesize)
+-   [remoteFileSize](#remoteFileSize)
+-   [mindLoad](#mindLoad)
+-   [cGeneration](#cGeneration)
+-   [pGeneration](#pGeneration)
 
 ##### Sistem
 
@@ -204,19 +210,9 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 ----------
 
-## connection()
+## __construct()
 
-[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak için kullanılır. `Mind.php` dosyasındaki `__construct()` metodunda çalıştırılmıştır.
-
-----------
-
-## prepare()
-
-SQL sorgularını çalıştırmak amacıyla kullanılır, sınıf dışından `SQL` sorgusunun gönderilmesi için `public` tanımlamasına sahiptir. `string` olarak `SQL` sorgusu gönderilebilir. 
-
-##### Örnek
-
-    $Mind->prepare($sql);
+[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında belirtilen metodların etkinleştirilmesi için kullanılır. 
 
 ----------
 
@@ -1339,7 +1335,7 @@ veya
 
 ## request()
 
-`$_GET`, `$_POST` ve `$_FILES` isteklerini güvenli ve düzenli bir yapıya kavuşturmak amacıyla kullanılır, Verilere `$this->post` dizi değişkeni içinden erişilir,`Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
+`$_GET`, `$_POST` ve `$_FILES` isteklerini güvenli ve düzenli bir yapıya kavuşturmak amacıyla kullanılır, Verilere `$this->post` dizi değişkeni içinden erişilir,**Mind.php** dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
 
 ##### type="text" kullanımı
 
@@ -1385,7 +1381,7 @@ veya
 
 ## redirect()
 
-Belirtilen adrese yönlendirme yapmak amacıyla kullanılır, boş bırakılırsa `Mind.php` dosyasının bulunduğu klasör'e yönlendirme yapar. Adres `string` olarak belirtilmelidir.
+Belirtilen adrese yönlendirme yapmak amacıyla kullanılır, boş bırakılırsa **Mind.php** dosyasının bulunduğu klasör'e yönlendirme yapar. Adres `string` olarak belirtilmelidir.
 
 ##### Örnek
 
@@ -1530,7 +1526,7 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 ## session_check()
 
-`session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır, Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar,`Mind.php` dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
+`session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır, Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar,**Mind.php** dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
 
     $this->session_check();
 
@@ -1660,7 +1656,7 @@ Eğer metod çağırılırsa sınıf adıyla dosya adının aynı olması gerekm
 
 #### .htaccess
 
-`route()` fonksiyonu kullanıldığı zaman, eğer `Mind.php` dosyasının bulunduğu dizinde ve o dizinde ki klasörlerde `.htaccess` dosyası yoksa oluşturulur. Klasörlerin içinde oluşturulan `.htaccess` dosyası direkt erişimi engelleyen komut içerir. `Mind.php` ile aynı dizinde oluşturulan `.htaccess` dosyası ise anlamlı `url` rotalarını elde etmeyi sağlayan aşağıda ki komutları içerir.
+`route()` fonksiyonu kullanıldığı zaman, eğer **Mind.ph**` dosyasının bulunduğu dizinde ve o dizinde ki klasörlerde `.htaccess` dosyası yoksa oluşturulur. Klasörlerin içinde oluşturulan `.htaccess` dosyası direkt erişimi engelleyen komut içerir. **Mind.php** ile aynı dizinde oluşturulan `.htaccess` dosyası ise anlamlı `url` rotalarını elde etmeyi sağlayan aşağıda ki komutları içerir.
 
 ##### Örnek
 
