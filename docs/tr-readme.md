@@ -736,7 +736,7 @@ Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar
 
     $options = array(
     	'search' => array(
-    		'keyword'=> array(
+    		'keyword' => array(
     			'hello world!',
     			'merhaba dünya'
     		)
@@ -748,7 +748,7 @@ veya
 
     $options = array(
     	'search' => array(
-    		'keyword'=> 'merhaba dünya'
+    		'keyword' => 'merhaba dünya'
     	)
     );
     print_r($this->getData('my_table', $options));
@@ -766,7 +766,7 @@ Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle 
 
     $options = array(
     	'search' => array(
-    		'keyword'=> array(
+    		'keyword' => array(
     			'%hello world!%',
     			'%merhaba dünya'
     		)
@@ -778,7 +778,7 @@ veya
 
     $options = array(
     	'search' => array(
-    		'keyword'=> 'merhaba dünya%'
+    		'keyword' => 'merhaba dünya%'
     	)
     );
     print_r($this->getData('my_table', $options));
@@ -792,8 +792,8 @@ Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme 
 
     $options = array(
         'search' => array(
-            'column'=>array('id', 'title', 'content', 'tag'),
-            'keyword'=>array(
+            'column' => array('id', 'title', 'content', 'tag'),
+            'keyword' => array(
                 'hello world!',
                 'merhaba dünya'
             )
@@ -805,8 +805,8 @@ veya
 
     $options = array(
     	'search' => array(
-    		'column'=>'title',
-    		'keyword'=>array(
+    		'column' => 'title',
+    		'keyword' => array(
     			'hello world!',
     			'merhaba dünya'
     		)
@@ -815,26 +815,48 @@ veya
     print_r($this->getData('my_table', $options));
 
 
+#### search:and sütuna özel kelime aramak
 
-#### search:equal Çoklu denklem araması
+Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
 
-Bir kaydın farklı sütunlarındaki verileri sorgulamak için kullanılır. Eğer tümünde veriler varsa veriler dizi olarak geri döndürülür. Bu özelliği, kullanıcı girişi sırasında veya `token` ve `api` gibi verilerin aidiyetlerini sorgulamak gerektiğinde kullanmak mümkündür.
-
-****Bilgi:**** Bu özellik kullanıldığında `search:keyword`, `search:where` ve `search:column` özellikleri gözardı edilir.
+****Bilgi:**** Bu özellik kullanıldığında `search:keyword` ve `search:column` özellikleri gözardı edilir.
 
 ##### Örnek
 
-    $par = array(
-        'username'=>'admin', 
-        'password'=>'root'
+    $params = array(
+        'username' => 'admin', 
+        'password' => 'root'
     );
-    $arr = array(
+    $options = array(
         'search' => array(
-            'equal'=> $par
+            'and' => $params
         )
     );
     $tblname = 'phonebook';
-    print_r($this->get($tblname, $arr));
+    print_r($this->getData($tblname, $options));
+
+
+
+
+#### search:or sütuna özel kelime aramak
+
+Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
+
+****Bilgi:**** Bu özellik kullanıldığında `search:keyword` ve `search:column` özellikleri gözardı edilir.
+
+##### Örnek
+
+    $params = array(
+        'username' => 'admin', 
+        'password' => 'root'
+    );
+    $options = array(
+        'search' => array(
+            'and' => $params
+        )
+    );
+    $tblname = 'phonebook';
+    print_r($this->getData($tblname, $options));
 
 
 #### format: Sonuçların formatı
@@ -843,68 +865,86 @@ Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `dizi
 
 ##### Örnek
 
-    $arr = array(
+    $options = array(
     	'format' => 'json'
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 
 
 #### Özelliklerin bir arada kullanımı
 
-Tüm `get()` özellikleri birlikte kullanılabilir, bu kullanım herhangi bir yük oluşturmaz, ancak yüksek performans gerektiren projeler için hayat kurtarıcıdır.
+`getData()` özelliklerinin bir çoğu birlikte kullanılabilir, bu tür kullanımlar herhangi bir yük oluşturmadığı gibi yüksek performans gerektiren projeler için hayat kurtarıcı olabilirler.
 
 ##### Örnek
 
-    $arr = array(
-    	'search'=>array(
-    		'column'=>array(
+    $options = array(
+    	'search' => array(
+    		'column' => array(
     			'id',
     			'title',
     			'content',
     			'tag'
     		),
-    		'keyword'=>array(
+    		'keyword' => array(
     			'merhaba',
     			'hello'
-    		),
-    		'where'=>'all'
+    		)
     	),
-    	'format'=>'json',
-    	'sort'=>'id:ASC',
-    	'limit'=>array(
-    		'start'=>'1',
-    		'end'=>'5'
+    	'format' => 'json',
+    	'sort' => 'id:ASC',
+    	'limit' => array(
+    		'start' => '1',
+    		'end' => '5'
     	),
-    	'column'=>array(
+    	'column' => array(
     		'id',
     		'title'
     		)
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 veya
 
-    $arr = array(
-    	'search'=>array(
-    		'equal'=>array(
-    		    'username'=>'aliyilmaz',
-    		    'password'=>'123456'
+    $options = array(
+    	'search' => array(
+    		'and' => array(
+    		    'username' => 'aliyilmaz',
+    		    'password' => '123456'
     		)
     	),
-    	'format'=>'json',
-    	'sort'=>'id:ASC',
-    	'limit'=>array(
-    		'start'=>'1',
-    		'end'=>'5'
+    	'format' => 'json',
+    	'sort' => 'id:ASC',
+    	'limit' => array(
+    		'start' => '1',
+    		'end' => '5'
     	),
-    	'column'=>array(
-    		'username',
-    		'password'
+    	'column' => array(
+    		'username'
     		)
     );
-    print_r($this->get('users',$arr));
+    print_r($this->getData('users', $options));
 
+veya
+
+    $options = array(
+    	'search' => array(
+    		'or' => array(
+    		    'username' => 'aliyilmaz',
+    		    'password' => '123456'
+    		)
+    	),
+    	'format' =>'json',
+    	'sort' => 'id:ASC',
+    	'limit' => array(
+    		'start' => '1',
+    		'end' => '5'
+    	),
+    	'column' => array(
+    		'username'
+    		)
+    );
+    print_r($this->getData('users', $options));
 ----------
 
 ## do_have()
