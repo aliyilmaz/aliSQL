@@ -730,11 +730,7 @@ veya
 
 #### search: Arama yapmak
 
-Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını, `keyword` aranan anahtar kelimeleri temsil eder. 
-
-Kelime veya kelimeler, `%kelime%` biçiminde belirtilirse cümle içinde geçen `kelime` aranır, eğer belirtilmezse sadece `kelime` değeriyle birebir örtüşen kayıtlar aranır. 
-
-Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle başlayan içeriği aramak için ise `kelime%`şeklinde bir ifade kullanmak gerekir.  
+Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını, `keyword` aranan anahtar kelimeleri temsil eder.   
 
 ##### Örnek
 
@@ -757,8 +753,18 @@ veya
     );
     print_r($this->getData('my_table', $options));
 
-veya
 
+#### search:where Her yerde aramak
+
+Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `dizi` olarak gönderilebilir. 
+
+Kelime veya kelimeler, `%kelime%` biçiminde belirtilirse cümle içinde geçen `kelime` aranır, eğer belirtilmezse sadece `kelime` değeriyle birebir örtüşen kayıtlar aranır. 
+
+Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle başlayan içeriği aramak için ise `kelime%`şeklinde bir ifade kullanmak gerekir.
+
+##### Örnek
+
+    
 
     $options = array(
     	'search' => array(
@@ -778,36 +784,6 @@ veya
     	)
     );
     print_r($this->getData('my_table', $options));
-
-
-
-#### search:where Her yerde aramak
-
-Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `dizi` olarak gönderilebilir. `where` özelliğin adını temsil eder, `keyword` aranan kelimeleri temsil eder. Bu özelliği kullanmak için `all` parametresi belirtilmelidir.
-
-##### Örnek
-
-    $arr = array(
-    	'search' => array(
-    		'keyword'=>array(
-    			'hello world!',
-    			'merhaba dünya'
-    		),
-    		'where'=>'all'
-    	)
-    );
-    print_r($this->get('my_table',$arr));
-
-veya
-
-    $arr = array(
-    	'search' => array(
-    		'keyword'=>'merhaba dünya',
-    		'where'=>'all'
-    	)
-    );
-    print_r($this->get('my_table',$arr));
-
 
 
 #### search:column Sütunlarda aramak
