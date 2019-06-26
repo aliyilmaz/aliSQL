@@ -764,8 +764,6 @@ Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle 
 
 ##### Örnek
 
-    
-
     $options = array(
     	'search' => array(
     		'keyword'=> array(
@@ -792,20 +790,20 @@ Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme 
 
 ##### Örnek
 
-    $arr = array(
-    	'search' => array(
-    		'column'=>array('id', 'title', 'content', 'tag'),
-    		'keyword'=>array(
-    			'hello world!',
-    			'merhaba dünya'
-    		)
-    	)
+    $options = array(
+        'search' => array(
+            'column'=>array('id', 'title', 'content', 'tag'),
+            'keyword'=>array(
+                'hello world!',
+                'merhaba dünya'
+            )
+        )
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 veya
 
-    $arr = array(
+    $options = array(
     	'search' => array(
     		'column'=>'title',
     		'keyword'=>array(
@@ -814,7 +812,7 @@ veya
     		)
     	)
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 
 
