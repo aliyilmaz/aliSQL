@@ -217,28 +217,28 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 ----------
 
 ## cGeneration()
-Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `createtable` ve `createcolumn` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
+Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `tableCreate` ve `columnCreate` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
 
 ----------
 
 ## pGeneration()
-Bu fonksiyon, `route` ve `mindload` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
+Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
 
 ----------
 
-## createdb()
+## dbCreate()
 
 Yeni bir veya daha fazla veritabanı oluşturmak amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, oluşturulacak veritabanı isimleri `string` veya `dizi` olarak gönderildiğinde veritabanı oluşturma işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->createdb('mydb0');
+    $this->dbCreate('mydb0');
 
 veya
 
-    $this->createdb(array('mydb0','mydb1'));
+    $this->dbCreate(array('mydb0','mydb1'));
 
-## createtable()
+## tableCreate()
 
 Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
 
@@ -265,13 +265,13 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başar
         'title:string:120',
         'age:int'
     );
-    $this->createtable('phonebook', $scheme);
+    $this->tableCreate('phonebook', $scheme);
 
-****Bilgi:**** Bir sütun oluşturma hakkında daha fazla bilgi için [createcolumn](#createcolumn) metoduna bakın.
+****Bilgi:**** Bir sütun oluşturma hakkında daha fazla bilgi için [columnCreate](#columnCreate) metoduna bakın.
 
 ----------
 
-## createcolumn()
+## columnCreate()
 
 Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
 
@@ -297,7 +297,7 @@ Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanı
         'title:string:120',
         'age:int'
     );
-    $this->createcolumn('phonebook', $scheme);
+    $this->columnCreate('phonebook', $scheme);
 
 
 #### int
@@ -309,14 +309,14 @@ Sayıları tutmak için kullanılır. 3 parametre alır. `number`:`int`:`11` ilk
     $scheme = array(
         'number:int:12'
     );
-    $this->createtable('phonebook', $scheme);
+    $this->columnCreate('phonebook', $scheme);
     
 veya
 
     $scheme = array(
         'number:int'
     );
-    $this->createtable('phonebook', $scheme);
+    $this->columnCreate('phonebook', $scheme);
  
  
  #### decimal
@@ -328,7 +328,7 @@ Parasal değerleri tutmak için kullanılır, 3 parametre alır. `amount`:`decim
      $scheme = array(
          'amount:decimal:6,2'
      );
-     $this->createtable('phonebook', $scheme);
+     $this->columnCreate('phonebook', $scheme);
      
 veya
 
@@ -336,7 +336,7 @@ veya
      $scheme = array(
          'amount:decimal'
      );
-     $this->createtable('phonebook', $scheme);
+     $this->columnCreate('phonebook', $scheme);
      
 #### string (varchar)
 
@@ -347,7 +347,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        $scheme = array(
            'title:string:120'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
        
   veya
   
@@ -355,7 +355,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        $scheme = array(
            'title:string'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
      
 #### small (text)
 
@@ -366,7 +366,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        $scheme = array(
            'content:small'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
        
   veya
   
@@ -374,7 +374,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        $scheme = array(
            'content'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
        
 #### medium (mediumtext)
 
@@ -386,7 +386,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        $scheme = array(
            'description:medium'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
   
 #### large (longtext)
 
@@ -397,7 +397,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
        $scheme = array(
            'content:large'
        );
-       $this->createtable('phonebook', $scheme);     
+       $this->columnCreate('phonebook', $scheme);     
 
 #### increments (auto_increment)
 
@@ -408,7 +408,7 @@ Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olma
        $scheme = array(
            'id:increments:12'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
        
   veya
   
@@ -416,91 +416,91 @@ Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olma
        $scheme = array(
            'id:increments'
        );
-       $this->createtable('phonebook', $scheme);
+       $this->columnCreate('phonebook', $scheme);
 
 ----------
 
-## deletedb()
+## dbDelete()
 
 Bir veya daha fazla veritabanını silmek amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, `string` veya `dizi` olarak veritabanı isimleri gönderildiğinde veritabanı silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->deletedb('mydb0');
+    $this->dbDelete('mydb0');
 
 veya
 
-    $this->deletedb(array('mydb0','mydb1'));
+    $this->dbDelete(array('mydb0','mydb1'));
 
 ----------
 
-## deletetable()
+## tableDelete()
 
 Bir veya daha fazla veritabanı tablosunu silmek amacıyla kullanılır, `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir, `string` veya `dizi` olarak tablo isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->deletetable('my_table0');
+    $this->tableDelete('my_table0');
 
 veya
 
-    $this->deletetable(array('my_table0', 'my_table1'));
+    $this->tableDelete(array('my_table0', 'my_table1'));
 
 ----------
 
-## deletecolumn()
+## columnDelete()
 
 Veritabanı tablosunda bulunan bir veya daha fazla sütunu silmek için kullanılır. `users` tablo adını, `username` ve `password` silinmesi istenen sütunları temsil eder. `string` veya `dizi` olarak sütun isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->deletecolumn('users', 'username');
+    $this->columnDelete('users', 'username');
 
 veya
 
-    $this->deletecolumn('users', array('username', 'password'));
+    $this->columnDelete('users', array('username', 'password'));
 
 ----------
 
-## cleardb()
+## dbClear()
 
 Bir veya daha fazla veritabanı içeriğini (auto_increment değerleri dahil) silmek amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir. Veritabanı isimleri `string` veya `dizi` olarak gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->cleardb('mydb0');
+    $this->dbClear('mydb0');
 
 veya
 
-    $this->cleardb(array('mydb0','mydb1'));
+    $this->dbClear(array('mydb0','mydb1'));
 
 ----------
 
-## cleartable()
+## tableClear()
 
 Bir veya daha fazla veritabanı tablosu içindeki kayıtların tamamını(auto_increment değerleri dahil) silmek amacıyla kullanılır. Veritabanı tablo isimleri `string` veya `dizi` olarak gönderilebilir. `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->cleartable('my_table0');
+    $this->tableClear('my_table0');
 
 veya
 
-    $this->cleartable(array('my_table0', 'my_table1'));
+    $this->tableClear(array('my_table0', 'my_table1'));
 
 ----------
 
-## clearcolumn()
+## columnClear()
 
 Bir veritabanı tablosunda bulunan bir veya daha fazla sütuna ait kayıtların tamamını silmek amacıyla kullanılır. `string` veya `dizi` olarak sütun isimleri gönderilebilir. `username` ve `password` sütun isimlerini temsil eder. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    $this->clearcolumn('username');
+    $this->columnClear('username');
 
 veya
 
-    $this->clearcolumn(array('username', 'password'));
+    $this->columnClear(array('username', 'password'));
     
 ----------
 
