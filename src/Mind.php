@@ -87,6 +87,14 @@ class Mind extends PDO
 
     }
 
+    public function __destruct()
+    {
+        if($this->error_status){
+            $this->mindLoad(dirname($_SERVER['SCRIPT_FILENAME']).'/'.$this->error_file);
+            exit();
+        }
+    }
+
     /**
      * Database selector.
      *
@@ -1937,11 +1945,4 @@ class Mind extends PDO
         return $result;
     }
 
-    public function __destruct()
-    {
-        if($this->error_status){
-            $this->mindLoad(dirname($_SERVER['SCRIPT_FILENAME']).'/'.$this->error_file);
-            exit();
-        }
-    }
 }
