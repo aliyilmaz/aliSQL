@@ -730,11 +730,15 @@ veya
 
 #### search: Arama yapmak
 
-Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını, `keyword` aranan anahtar kelimeleri temsil eder.
+Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını, `keyword` aranan anahtar kelimeleri temsil eder. 
+
+Kelime veya kelimeler, `%kelime%` biçiminde belirtilirse cümle içinde geçen `kelime` aranır, eğer belirtilmezse sadece `kelime` değeriyle birebir örtüşen kayıtlar aranır. 
+
+Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle başlayan içeriği aramak için ise `kelime%`şeklinde bir ifade kullanmak gerekir.  
 
 ##### Örnek
 
-    $arr = array(
+    $options = array(
     	'search' => array(
     		'keyword'=> array(
     			'hello world!',
@@ -742,16 +746,38 @@ Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar
     		)
     	)
     );
-    print_r($this->get('my_table0',$arr));
+    print_r($this->getData('my_table', $options));
 
 veya
 
-    $arr = array(
+    $options = array(
     	'search' => array(
     		'keyword'=> 'merhaba dünya'
     	)
     );
-    print_r($this->get('my_table0',$arr));
+    print_r($this->getData('my_table', $options));
+
+veya
+
+
+    $options = array(
+    	'search' => array(
+    		'keyword'=> array(
+    			'%hello world!%',
+    			'%merhaba dünya'
+    		)
+    	)
+    );
+    print_r($this->getData('my_table', $options));
+
+veya
+
+    $options = array(
+    	'search' => array(
+    		'keyword'=> 'merhaba dünya%'
+    	)
+    );
+    print_r($this->getData('my_table', $options));
 
 
 
