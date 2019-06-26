@@ -852,7 +852,7 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde b
     );
     $options = array(
         'search' => array(
-            'and' => $params
+            'or' => $params
         )
     );
     $tblname = 'phonebook';
