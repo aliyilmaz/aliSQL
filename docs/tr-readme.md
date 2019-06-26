@@ -630,9 +630,9 @@ veya
 
 ----------
 
-## get()
+## getData()
 
-Bir veritabanı tablosundaki kayıtları olduğu gibi veya filtreleyerek elde etmek için kullanılır. `my_table0` tablo ismini gösterir, `$arr` parametreleri ve kullanım örneklerine aşağıda yer verilmiştir.
+Bir veritabanı tablosundaki kayıtları olduğu gibi veya filtreleyerek elde etmek için kullanılır. `my_table` tablo ismini temsil etmektedir, `$options` parametreleri ve kullanım örneklerine aşağıda yer verilmiştir.
 
 
 
@@ -642,7 +642,7 @@ Bir veritabanı tablosunun tüm kayıtlarını elde etmek için kullanılır. Ek
 
 ##### Örnek
 
-    print_r($this->get('my_table0'));
+    print_r($this->getData('my_table'));
 
 
 
@@ -652,20 +652,20 @@ Bir veritabanı tablosundaki belirtilen sütun verilerini elde etmek için kulla
 
 ##### Örnek
 
-    $arr = array(
+    $options = array(
     	'column' => array(
     	      'title',
     	      'tag'
     	)
     );
-    print_r($this->get('my_table0',$arr));
+    print_r($this->getData('my_table', $options));
 
 veya
 
-    $arr = array(
+    $options = array(
     	'column' => 'title'
     );
-    print_r($this->get('my_table0',$arr));
+    print_r($this->getData('my_table', $options));
 
 
 
@@ -675,10 +675,10 @@ Veritabanındaki kayıtları belirtilen limitlere göre elde etmek için kullan�
 
 ##### Örnek
 
-    $arr = array(
+    $options = array(
     	'limit' => array('start'=>'1', 'end'=>'10')
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 
 
@@ -688,10 +688,10 @@ Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru b
 
 ##### Örnek
 
-    $arr = array(
-    	'limit' => array('start'=>'2')
+    $options = array(
+    	'limit' => array('start' => '2')
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 
 
@@ -701,10 +701,10 @@ Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kulla
 
 ##### Örnek
 
-    $arr = array(
-    	'limit' => array('end'=>'10')
+    $options = array(
+    	'limit' => array('end' => '10')
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->getData('my_table', $options));
 
 
 
@@ -714,17 +714,17 @@ Veritabanı tablosundaki kayıtları belirtilen sütun içeriğine göre küçü
 
 ##### Örnek
 
-    $arr = array(
+    $options = array(
     	'sort' => 'columnname:ASC'
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->get('my_table', $options));
 
 veya
 
-    $arr = array(
+    $options = array(
     	'sort' => 'columnname:DESC'
     );
-    print_r($this->get('my_table',$arr));
+    print_r($this->get('my_table', $options));
 
 
 
