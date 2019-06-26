@@ -717,14 +717,14 @@ Veritabanı tablosundaki kayıtları belirtilen sütun içeriğine göre küçü
     $options = array(
     	'sort' => 'columnname:ASC'
     );
-    print_r($this->get('my_table', $options));
+    print_r($this->getData('my_table', $options));
 
 veya
 
     $options = array(
     	'sort' => 'columnname:DESC'
     );
-    print_r($this->get('my_table', $options));
+    print_r($this->getData('my_table', $options));
 
 
 
