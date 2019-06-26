@@ -164,7 +164,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [columnList](#columnList)
 -   [dbCreate](#dbCreate)
 -   [tableCreate](#tableCreate)
--   [columnCreate](#columWnCreate)
+-   [columnCreate](#columnCreate)
 -   [dbDelete](#dbDelete)
 -   [tableDelete](#tableDelete)
 -   [columnDelete](#columnDelete)
