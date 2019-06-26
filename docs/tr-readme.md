@@ -154,6 +154,9 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 ##### Veritabanı
 
 -   [selectDB](#selectDB)
+-   [dbList](#dbList)
+-   [tableList](#tableList)
+-   [columnList](#columnList)
 -   [dbCreate](#dbCreate)
 -   [tableCreate](#tableCreate)
 -   [columnCreate](#columWnCreate)
