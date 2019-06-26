@@ -1317,78 +1317,6 @@ class Mind extends PDO
     }
 
     /**
-     * Layer installer.
-     *
-     * @param $file
-     * @param null $cache
-     */
-    public function mindLoad($file, $cache=null){
-
-        $fileExt = '.php';
-
-        if (!empty($cache) AND !is_array($cache)) {
-            $cache = array($cache);
-        }
-
-        if (!empty($cache)) {
-            foreach ($cache as $cacheFile) {
-
-                $cacheExplode = $this->pGenerator($cacheFile);
-                if (!empty($cacheExplode['name'])){
-
-                    $cacheFile = $cacheExplode['name'];
-                    $fileName = basename($cacheExplode['name']);
-
-                    if (empty($cacheFile)){
-                        $cacheFile = '';
-                    }
-
-                    if (file_exists($cacheFile . $fileExt)) {
-
-                        /*
-                         * PHPSTORM: In Settings search for 'unresolved include' which is under
-                         * Editor > Inspections; PHP > General > Unresolved include and uncheck the box.
-                         * */
-                        require_once($cacheFile . $fileExt);
-
-                        if (class_exists($fileName)){
-                            if (!empty($cacheExplode['params'])){
-
-                                $ClassName = new $fileName();
-                                $funcList = get_class_methods($fileName);
-
-                                foreach ($cacheExplode['params'] as $param) {
-
-                                    if (in_array($param, $funcList)){
-                                        $ClassName->$param();
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if(!empty($file)){
-
-            if(!is_array($file)){
-                $files = array($file);
-            } else {
-                $files = $file;
-            }
-
-            foreach ($files as $file){
-
-                if (file_exists($file . $fileExt)) {
-                    require_once($file . $fileExt);
-                }
-            }
-        }
-    }
-
-    /**
      * Permanent connection.
      *
      * @param $str
@@ -1544,6 +1472,200 @@ class Mind extends PDO
         }
 
         return false;
+    }
+
+    /**
+     * Learns the size of the remote file.
+     *
+     * @param $url
+     * @return mixed
+     */
+    public function remoteFileSize($url){
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, TRUE);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+
+        curl_exec($ch);
+        $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+
+        curl_close($ch);
+        return $size;
+    }
+
+    /**
+     * Layer installer.
+     *
+     * @param $file
+     * @param null $cache
+     */
+    public function mindLoad($file, $cache=null){
+
+        $fileExt = '.php';
+
+        if (!empty($cache) AND !is_array($cache)) {
+            $cache = array($cache);
+        }
+
+        if (!empty($cache)) {
+            foreach ($cache as $cacheFile) {
+
+                $cacheExplode = $this->pGenerator($cacheFile);
+                if (!empty($cacheExplode['name'])){
+
+                    $cacheFile = $cacheExplode['name'];
+                    $fileName = basename($cacheExplode['name']);
+
+                    if (empty($cacheFile)){
+                        $cacheFile = '';
+                    }
+
+                    if (file_exists($cacheFile . $fileExt)) {
+
+                        /*
+                         * PHPSTORM: In Settings search for 'unresolved include' which is under
+                         * Editor > Inspections; PHP > General > Unresolved include and uncheck the box.
+                         * */
+                        require_once($cacheFile . $fileExt);
+
+                        if (class_exists($fileName)){
+                            if (!empty($cacheExplode['params'])){
+
+                                $ClassName = new $fileName();
+                                $funcList = get_class_methods($fileName);
+
+                                foreach ($cacheExplode['params'] as $param) {
+
+                                    if (in_array($param, $funcList)){
+                                        $ClassName->$param();
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(!empty($file)){
+
+            if(!is_array($file)){
+                $files = array($file);
+            } else {
+                $files = $file;
+            }
+
+            foreach ($files as $file){
+
+                if (file_exists($file . $fileExt)) {
+                    require_once($file . $fileExt);
+                }
+            }
+        }
+    }
+
+    /**
+     * Column sql syntax creator.
+     *
+     * @param $scheme
+     * @param null $funcName
+     * @return array
+     */
+    public function cGenerator($scheme, $funcName=null){
+
+        $sql = array();
+
+        foreach (array_values($scheme) as $array_value) {
+
+            $colonParse = array();
+            if(strstr($array_value, ':')){
+                $colonParse = array_filter(explode(':', trim($array_value, ':')));
+            }
+
+            $columnValue = null;
+            $columnType = null;
+
+            if(count($colonParse)==3){
+                list($columnName, $columnType, $columnValue) = $colonParse;
+            }elseif (count($colonParse)==2){
+                list($columnName, $columnType) = $colonParse;
+            } else {
+                $columnName = $array_value;
+                $columnType = 'small';
+            }
+
+            if(is_null($columnValue) AND $columnType =='string'){ $columnValue = 255; }
+            if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
+            if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
+
+            $first = '';
+            $prefix = '';
+            if(!is_null($funcName) AND $funcName == 'columnCreate'){
+                $first = 'FIRST';
+                $prefix = 'ADD COLUMN ';
+            }
+
+            switch ($columnType){
+                case 'int':
+                    $sql[] = $prefix.$columnName.' int('.$columnValue.')';
+                    break;
+                case 'decimal':
+                    $sql[] = $prefix.$columnName.' DECIMAL('.$columnValue.')';
+                    break;
+                case 'string':
+                    $sql[] = $prefix.$columnName.' VARCHAR('.$columnValue.')';
+                    break;
+                case 'small':
+                    $sql[] = $prefix.$columnName.' TEXT';
+                    break;
+                case 'medium':
+                    $sql[] = $prefix.$columnName.' MEDIUMTEXT';
+                    break;
+                case 'large':
+                    $sql[] = $prefix.$columnName.' LONGTEXT';
+                    break;
+                case 'increments':
+                    $sql[] = $prefix.$columnName.' int('.$columnValue.') UNSIGNED AUTO_INCREMENT PRIMARY KEY '.$first;
+                    break;
+            }
+        }
+
+        return $sql;
+    }
+
+    /**
+     * Parameter parser.
+     *
+     * @param null $str
+     * @return array
+     */
+    public function pGenerator($str=null){
+
+        $Result = array();
+        if(!is_null($str)){
+
+            if(strstr($str, ':')){
+                $strExplode = array_filter(explode(':', trim($str, ':')));
+                if(count($strExplode) == 2){
+                    list($filePath, $funcPar) = $strExplode;
+                    $Result['name'] = $filePath;
+
+                    if(strstr($funcPar, '@')){
+                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
+                    } else {
+                        $funcExplode = array($funcPar);
+                    }
+                    if(!empty($funcExplode)){
+                        $Result['params'] = $funcExplode;
+                    }
+                }
+            } else {
+                $Result['name'] = $str;
+            }
+        }
+        return $Result;
     }
 
     /**
@@ -1721,47 +1843,6 @@ class Mind extends PDO
     }
 
     /**
-     * Content researcher.
-     *
-     * @param $left
-     * @param $right
-     * @param $url
-     * @return array
-     */
-    public function get_contents($left, $right, $url){
-
-        $result = array();
-
-        if($this->is_url($url)) {
-
-            $arrContextOptions = stream_context_create(array(
-                'ssl' => array(
-                    'verify_peer'       => false,
-                    'verify_peer_name'  => false,
-                )
-            ));
-
-            $data = file_get_contents($url, false, $arrContextOptions);
-        } else {
-
-            $data = $url;
-        }
-
-        $content = str_replace(array("\n", "\r", "\t"), '', $data);
-
-        if(preg_match_all('/'.preg_quote($left, '/').'(.*?)'.preg_quote($right, '/').'/i', $content, $result)){
-
-            if(!empty($result)){
-                return array_unique($result[1]);
-            } else {
-                return $result;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * File downloader.
      *
      * @param $links
@@ -1816,126 +1897,44 @@ class Mind extends PDO
     }
 
     /**
-     * Learns the size of the remote file.
+     * Content researcher.
      *
+     * @param $left
+     * @param $right
      * @param $url
-     * @return mixed
-     */
-    public function remoteFileSize($url){
-        $ch = curl_init($url);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, TRUE);
-        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-
-        curl_exec($ch);
-        $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
-
-        curl_close($ch);
-        return $size;
-    }
-
-
-    /**
-     * Column sql syntax creator.
-     *
-     * @param $scheme
-     * @param null $funcName
      * @return array
      */
-    public function cGenerator($scheme, $funcName=null){
+    public function get_contents($left, $right, $url){
 
-        $sql = array();
+        $result = array();
 
-        foreach (array_values($scheme) as $array_value) {
+        if($this->is_url($url)) {
 
-            $colonParse = array();
-            if(strstr($array_value, ':')){
-                $colonParse = array_filter(explode(':', trim($array_value, ':')));
-            }
+            $arrContextOptions = stream_context_create(array(
+                'ssl' => array(
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                )
+            ));
 
-            $columnValue = null;
-            $columnType = null;
+            $data = file_get_contents($url, false, $arrContextOptions);
+        } else {
 
-            if(count($colonParse)==3){
-                list($columnName, $columnType, $columnValue) = $colonParse;
-            }elseif (count($colonParse)==2){
-                list($columnName, $columnType) = $colonParse;
+            $data = $url;
+        }
+
+        $content = str_replace(array("\n", "\r", "\t"), '', $data);
+
+        if(preg_match_all('/'.preg_quote($left, '/').'(.*?)'.preg_quote($right, '/').'/i', $content, $result)){
+
+            if(!empty($result)){
+                return array_unique($result[1]);
             } else {
-                $columnName = $array_value;
-                $columnType = 'small';
-            }
-
-            if(is_null($columnValue) AND $columnType =='string'){ $columnValue = 255; }
-            if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
-            if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
-
-            $first = '';
-            $prefix = '';
-            if(!is_null($funcName) AND $funcName == 'columnCreate'){
-                $first = 'FIRST';
-                $prefix = 'ADD COLUMN ';
-            }
-
-            switch ($columnType){
-                case 'int':
-                    $sql[] = $prefix.$columnName.' int('.$columnValue.')';
-                    break;
-                case 'decimal':
-                    $sql[] = $prefix.$columnName.' DECIMAL('.$columnValue.')';
-                    break;
-                case 'string':
-                    $sql[] = $prefix.$columnName.' VARCHAR('.$columnValue.')';
-                    break;
-                case 'small':
-                    $sql[] = $prefix.$columnName.' TEXT';
-                    break;
-                case 'medium':
-                    $sql[] = $prefix.$columnName.' MEDIUMTEXT';
-                    break;
-                case 'large':
-                    $sql[] = $prefix.$columnName.' LONGTEXT';
-                    break;
-                case 'increments':
-                    $sql[] = $prefix.$columnName.' int('.$columnValue.') UNSIGNED AUTO_INCREMENT PRIMARY KEY '.$first;
-                    break;
+                return $result;
             }
         }
 
-        return $sql;
-    }
-
-    /**
-     * Parameter parser.
-     *
-     * @param null $str
-     * @return array
-     */
-    public function pGenerator($str=null){
-
-        $Result = array();
-        if(!is_null($str)){
-
-            if(strstr($str, ':')){
-                $strExplode = array_filter(explode(':', trim($str, ':')));
-                if(count($strExplode) == 2){
-                    list($filePath, $funcPar) = $strExplode;
-                    $Result['name'] = $filePath;
-
-                    if(strstr($funcPar, '@')){
-                        $funcExplode = array_filter(explode('@', trim($funcPar, '@')));
-                    } else {
-                        $funcExplode = array($funcPar);
-                    }
-                    if(!empty($funcExplode)){
-                        $Result['params'] = $funcExplode;
-                    }
-                }
-            } else {
-                $Result['name'] = $str;
-            }
-        }
-        return $Result;
+        return $result;
     }
 
     public function __destruct()
