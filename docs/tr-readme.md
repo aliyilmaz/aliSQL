@@ -151,6 +151,11 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 ## Metodlar
 
+##### Temel
+
+-   [__construct](#__construct)
+-   [__destruct](#__destruct)
+
 ##### Veritabanı
 
 -   [selectDB](#selectDB)
@@ -215,17 +220,53 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 ## __construct()
 
-[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında belirtilen metodların etkinleştirilmesi için kullanılır. 
+[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
 
 ----------
 
-## cGeneration()
-Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `tableCreate` ve `columnCreate` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
+## __destruct()
+
+Metodlar içinde değişime uğrayan istek ve durumların kaderinin belirlenmesi için kullanılır. Örneğin herhangi bir kısımda hata durumu varsa hata sayfasının görüntülenmesi gibi.
 
 ----------
 
-## pGeneration()
-Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
+## selectDB()
+
+[Kurulum](#kurulum) aşamasında belirtilen kullanıcının yetkilendirildiği veritabanına bağlanmak amacıyla kullanılır.
+
+##### Örnek
+
+    $this->selectDB('mydb1');
+
+----------
+
+## dbList()
+
+[Kurulum](#kurulum) aşamasında belirtilen kullanıcının yetkilendirildiği veritabanlarını listelemek amacıyla kullanılır.
+
+##### Örnek
+
+    print_r($this->dbList());
+
+----------
+
+## tableList()
+
+Belirtilen veritabanına ait tabloları listelemek amacıyla kullanılır. Veritabanı adı `string` olarak belirtilmelidir.
+
+##### Örnek
+
+    print_r($this->tableList('mydb'));
+
+----------
+
+## columnList()
+
+Belirtilen veritabanı tablosuna ait sütunları listelemek amacıyla kullanılır. Veritabanı tablo adı `string` olarak belirtilmelidir.
+
+##### Örnek
+
+    print_r($this->columnList('users'));
 
 ----------
 
@@ -1439,6 +1480,17 @@ veya
         'app/model/home'
     );
     $this->mindload($file, $cache);
+
+----------
+
+## cGeneration()
+Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `tableCreate` ve `columnCreate` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
+
+----------
+
+## pGeneration()
+Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
+
 ----------
 
 ## permalink()
