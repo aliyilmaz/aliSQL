@@ -1816,15 +1816,21 @@ veya
 
 ## write()
 
-Belirtilen içeriği, belirtilen isimde ki dosyaya yazmak amacıyla kullanılır, eğer işlem başarılıysa `true`, değilse `false`  değeri döndürülür. İki parametre alır;
+Belirtilen içeriği, belirtilen isimde ki dosyaya yazmak amacıyla kullanılır, eğer işlem başarılıysa `true`, değilse `false`  değeri döndürülür. üç parametre alır;
 
-##### ilk parametre
+##### İlk parametre
 
 içeriği temsil etmekte olup `string` veya `dizi` türünde gönderilebilir, dizi olarak gönderilmesi halinde dizi elemanları aralarına `:` sembolü eklenerek `string`'e dönüştürülmüş şekilde dosyaya yazılır.
 
-##### ikinci parametre
+##### İkinci parametre
 
 Dosya yolunu temsil etmektedir, eğer dosya varsa söz konusu veri dosyanın sonuna eklenir, eğer dosya yoksa yolda belirtilen isimde bir dosyayı oluşturulur ve bu dosyaya yazılır.
+
+##### Üçüncü parametre
+
+Dizi olarak belirtilen verileri ayırarmada kullanılacak değeri temsil etmektedir. Belirtilme zorunluluğu yoktur, varsayılan olarak `:` tanımlanmıştır.
+
+##### Örnek
 
     $str = 'Merhaba dünya';
     $this->write($str, 'yeni.txt');
@@ -1833,7 +1839,13 @@ veya
 
     $str = array('Merhaba', 'Dünya');
     $this->write($str, 'yeni.txt');
+    
 
+veya
+
+    $str = array('Merhaba', 'Dünya');
+    $this->write($str, 'yeni.txt', '~');
+    
 ----------
 
 ## upload()
