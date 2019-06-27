@@ -5,14 +5,14 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfı
  
 
 * [Dökümanlar](https://github.com/aliyilmaz/Mind/tree/master/docs) 
-  * [Türkçe (3.0.0 sürümü için tam anlamıyla güncel değildir)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
-  * [İngilizce (Devam ediyor)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
+  * [Türkçe (tamamlandı)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
+  * [İngilizce (katkı bekliyor)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
 * [Testler](https://github.com/aliyilmaz/Mind/tree/master/tests) 
 
 ## Gereksinimler
 
 * PHP 5.6.0 veya üstü
-* Veritabanı (MySQL)
+* Veritabanı (PDO MySQL)
 * Web Server (Apache)
 
 ## Kurulum
