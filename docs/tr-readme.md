@@ -754,7 +754,7 @@ veya
     print_r($this->getData('my_table', $options));
 
 
-#### search:where Her yerde aramak
+#### search: Her yerde aramak
 
 Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `dizi` olarak gönderilebilir. 
 
