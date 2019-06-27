@@ -1828,7 +1828,7 @@ Dosya yolunu temsil etmektedir, eğer dosya varsa söz konusu veri dosyanın son
 
 ##### Üçüncü parametre
 
-Dizi olarak belirtilen verileri ayırarmada kullanılacak değeri temsil etmektedir. Belirtilme zorunluluğu yoktur, varsayılan olarak `:` tanımlanmıştır.
+Dizi olarak belirtilen verileri ayırmada kullanılacak değeri temsil etmektedir. Belirtilme zorunluluğu yoktur, varsayılan olarak `:` tanımlanmıştır.
 
 ##### Örnek
 
