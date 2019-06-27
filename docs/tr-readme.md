@@ -1525,57 +1525,6 @@ veya
 
     $this->redirect('https://www.google.com');
 
-----------
-
-
-## mindload()
-
-Belirtilen dosya veya dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. 
-
-Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
-
-Öncelikle `$cache` dosyaları, ardından `$file` değişkenlerinde bulunan dosyalar projeye dahil edilir. `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
-
-##### Örnek
-
-    $this->mindload('app/views/home');
-
-veya
-
-    $file = array(
-        'app/views/header',
-        'app/views/content',
-        'app/views/footer'
-    );
-    $this->mindload($file);
-
-veya
-
-    $this->mindload('app/views/home', 'app/model/home');
-
-veya
-
-    $file = array(
-        'app/views/layout/header',
-        'app/views/home',
-        'app/views/layout/footer
-    );
-    $cache = array(
-        'app/middleware/auth',
-        'app/database/install',
-        'app/model/home'
-    );
-    $this->mindload($file, $cache);
-
-----------
-
-## cGeneration()
-Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `tableCreate` ve `columnCreate` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
-
-----------
-
-## pGeneration()
-Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
 
 ----------
 
@@ -1673,11 +1622,62 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 ----------
 
-## remote_filesize()
+## remoteFileSize()
 
 Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
 
-    echo $Mind->remote_filesize('https://github.com/fluidicon.png');
+    echo $this->remoteFileSize('https://github.com/fluidicon.png');
+
+----------
+
+## mindLoad()
+
+Belirtilen dosya veya dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. 
+
+Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
+
+Öncelikle `$cache` dosyaları, ardından `$file` değişkenlerinde bulunan dosyalar projeye dahil edilir. `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+##### Örnek
+
+    $this->mindLoad('app/views/home');
+
+veya
+
+    $file = array(
+        'app/views/header',
+        'app/views/content',
+        'app/views/footer'
+    );
+    $this->mindLoad($file);
+
+veya
+
+    $this->mindLoad('app/views/home', 'app/model/home');
+
+veya
+
+    $file = array(
+        'app/views/layout/header',
+        'app/views/home',
+        'app/views/layout/footer
+    );
+    $cache = array(
+        'app/middleware/auth',
+        'app/database/install',
+        'app/model/home'
+    );
+    $this->mindLoad($file, $cache);
+
+----------
+
+## cGeneration()
+Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden `sql` söz dizimini oluşturmak amacıyla kullanılır. `sql` söz dizimi, `tableCreate` ve `columnCreate` metodlarına gönderilen şema'nın yorumlanmasıyla oluşturulur. 
+
+----------
+
+## pGeneration()
+Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
 
 ----------
 
