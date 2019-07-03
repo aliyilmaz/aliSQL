@@ -821,9 +821,6 @@ class Mind extends PDO
             $query->execute($executeArray);
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            if( count($result) == 1 ){
-                $result = $result[0];
-            }
             if(isset($options['format'])){
                 switch ($options['format']) {
 
