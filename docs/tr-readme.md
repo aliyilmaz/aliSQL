@@ -1860,10 +1860,14 @@ Belirtilen dosya veya dosyaları, belirtilen klasöre yüklemek amacıyla kullan
     	<input type="file" name="singlefile"> 
     	<button type="submit">Send!</button>
      </form>
-
-    $path = './upload';
-    $u = $this->upload($this->post['singlefile'], $path);
-    print_r($u);
+    
+    <?php
+    if(!empty($this->post['singlefile'])){
+        $path = './upload';
+        $u = $this->upload($this->post['singlefile'], $path);
+        print_r($u);
+    }
+    ?>
 
 veya 
 
@@ -1874,9 +1878,13 @@ veya
     	<button type="submit">Send!</button>
      </form>
 
-    $path = './upload';
-    $u = $this->upload($this->post['multifile'], $path);
-    print_r($u);
+    <?php
+    if(!empty($this->post['multifile'])){
+        $path = './upload';
+        $u = $this->upload($this->post['multifile'], $path);
+        print_r($u);
+    }
+    ?>
     
 ----------
 
