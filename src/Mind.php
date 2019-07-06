@@ -1486,7 +1486,7 @@ class Mind extends PDO
      * Learns the size of the remote file.
      *
      * @param $url
-     * @return mixed
+     * @return int|mixed
      */
     public function remoteFileSize($url){
         $ch = curl_init($url);
@@ -1496,9 +1496,15 @@ class Mind extends PDO
         curl_setopt($ch, CURLOPT_NOBODY, TRUE);
 
         curl_exec($ch);
+
+        $response_code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
 
         curl_close($ch);
+
+        if(!in_array($response_code, array('200'))){
+            return -1;
+        }
         return $size;
     }
 
@@ -1857,15 +1863,11 @@ class Mind extends PDO
      * @param array $opt
      * @return array
      */
-    public function download($links, $opt = array('path'=>'download'))
+    public function download($links, $opt = array('path' => 'download'))
     {
-
         $path = '';
         $result = array();
-
-        if(!empty($opt['path'])){
-            $path .= $opt['path'];
-        }
+        $nLinks = array();
 
         if(empty($links)){
             return $result;
@@ -1875,9 +1877,40 @@ class Mind extends PDO
             $links = array($links);
         }
 
-        foreach($links as $link){
+        foreach($links as $link) {
 
-            $link_path = parse_url($this->info($link, 'dirname'));
+            if($this->is_url($link)){
+                if($this->remoteFileSize($link)>1){
+                    $nLinks[] = $link;
+                }
+            }
+
+            if(!$this->is_url($link)){
+                if(!strstr($link, '://')){
+
+                    if(file_exists($link)){
+                        $nLinks[] = $link;
+                    }
+
+                }
+            }
+
+        }
+
+        if(count($nLinks) != count($links)){
+            return $result;
+        }
+
+        if(!empty($opt['path'])){
+            $path .= $opt['path'];
+
+            if(!is_dir($path)){
+                mkdir($path, 0777, true);
+            }
+        }
+
+        foreach ($nLinks as $nLink) {
+            $link_path = parse_url($this->info($nLink, 'dirname'));
 
             $destination = $path;
 
@@ -1885,24 +1918,28 @@ class Mind extends PDO
                 $destination .= urldecode($link_path['path']);
             }
 
-            $other_path = urldecode($this->info($link, 'basename'));
+            $other_path = urldecode($this->info($nLink, 'basename'));
 
-            if(!is_dir($destination)){
-                mkdir($destination, 0777, true);
+            if(!is_null($this->remoteFileSize($destination.'/'.$other_path))){
+
+                if(!is_dir($destination)){
+                    mkdir($destination, 0777, true);
+                }
+
+                copy($nLink, $destination.'/'.$other_path);
+
+            } else {
+                return $result;
             }
-
-            if(!file_exists($destination.'/'.$other_path)){
-                copy($link, $destination.'/'.$other_path);
-            }
-
-            $remote_file = $this->remoteFileSize($link);
-            $local_file = filesize($destination.'/'.$other_path);
 
             if(file_exists($destination.'/'.$other_path)){
 
+                $remote_file = $this->remoteFileSize($nLink);
+                $local_file = filesize($destination.'/'.$other_path);
+    
                 if($remote_file != $local_file){
                     unlink($destination.'/'.$other_path);
-                    copy($link, $destination.'/'.$other_path);
+                    copy($nLink, $destination.'/'.$other_path);
 
                 }
             }
@@ -1910,7 +1947,7 @@ class Mind extends PDO
             $result[] = $destination.'/'.$other_path;
         }
 
-        return $result;
+    return $result;
     }
 
     /**
