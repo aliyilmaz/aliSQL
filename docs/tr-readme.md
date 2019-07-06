@@ -1896,7 +1896,7 @@ Yerel ve Uzak sunucuda barınan dosyaları indirmeye yarar. Dosya yolları `stri
 
 ##### Örnek
 
-    print_r($this->download('./contributing.md'));
+    print_r($this->download('./LICENSE.md'));
     
 
 veya 
@@ -1908,7 +1908,7 @@ veya
 
     $links = array(
                 'https://github.com/fluidicon.png',
-                './license.md'
+                './LICENSE.md'
             );
             
     print_r($this->download($links));
@@ -1917,9 +1917,9 @@ veya
 
     $links = array(
                 'https://github.com/fluidicon.png',
-                './license.md'
+                './LICENSE.md'
                 );
-    print_r($this->download($links));
+    print_r($this->download($links, array('path' => 'app/dosyalar')));
     
 ----------
 
