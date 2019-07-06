@@ -1896,34 +1896,30 @@ Yerel ve Uzak sunucuda barınan dosyaları indirmeye yarar. Dosya yolları `stri
 
 ##### Örnek
 
-    print_r($this->download('../contributing.md',array('path'=>'../download')));
+    print_r($this->download('./contributing.md'));
     
 
 veya 
 
-    print_r($Mind->download('https://github.com/fluidicon.png',array('path'=>'../download')));
+    print_r($this->download('https://github.com/fluidicon.png'));
         
 
 veya
 
     $links = array(
-                'https://github.com/aliyilmaz/Mind/archive/master.zip',
-                'https://github.com/aliyilmaz/PhoneBook/archive/master.zip',
-                '../license.md',
-                'https://github.com/aliyilmaz/pure-blog/archive/master.zip'
+                'https://github.com/fluidicon.png',
+                './license.md'
             );
             
-    print_r($Mind->download($links, array('path'=>'../download')));
+    print_r($this->download($links));
     
 veya
 
     $links = array(
-                    'https://github.com/aliyilmaz/Mind/archive/master.zip',
-                    'https://github.com/aliyilmaz/PhoneBook/archive/master.zip',
-                    '../license.md',
-                    'https://github.com/aliyilmaz/pure-blog/archive/master.zip'
+                'https://github.com/fluidicon.png',
+                './license.md'
                 );
-    print_r($Mind->download($links));
+    print_r($this->download($links));
     
 ----------
 
