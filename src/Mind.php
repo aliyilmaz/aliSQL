@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.0.0
+ * @version    Release: 3.0.1
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1857,12 +1857,15 @@ class Mind extends PDO
      * @param array $opt
      * @return array
      */
-    public function download($links, $opt=array('path'=>'download'))
+    public function download($links, $opt = array('path'=>'download'))
     {
 
-        $path = './'.$opt['path'];
-
+        $path = '';
         $result = array();
+
+        if(!empty($opt['path'])){
+            $path .= $opt['path'];
+        }
 
         if(empty($links)){
             return $result;
@@ -1875,7 +1878,13 @@ class Mind extends PDO
         foreach($links as $link){
 
             $link_path = parse_url($this->info($link, 'dirname'));
-            $destination = $path.urldecode($link_path['path']);
+
+            $destination = $path;
+
+            if(isset($link_path['path'])){
+                $destination .= urldecode($link_path['path']);
+            }
+
             $other_path = urldecode($this->info($link, 'basename'));
 
             if(!is_dir($destination)){
