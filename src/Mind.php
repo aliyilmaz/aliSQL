@@ -1860,12 +1860,12 @@ class Mind extends PDO
      * File downloader.
      *
      * @param $links
-     * @param array $opt
+     * @param null $opt
      * @return array
      */
-    public function download($links, $opt = array('path' => 'download'))
+    public function download($links, $opt = null)
     {
-        $path = '';
+
         $result = array();
         $nLinks = array();
 
@@ -1901,12 +1901,15 @@ class Mind extends PDO
             return $result;
         }
 
+        $path = '';
         if(!empty($opt['path'])){
             $path .= $opt['path'];
 
             if(!is_dir($path)){
                 mkdir($path, 0777, true);
             }
+        } else {
+            $path .= './download';
         }
 
         foreach ($nLinks as $nLink) {
