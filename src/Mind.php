@@ -1755,12 +1755,17 @@ class Mind extends PDO
 
             $this->post = array();
 
-            if(!empty($fields)){
+
+            if(!empty($fields) AND !empty($params)){
 
                 foreach ($fields as $key => $field) {
 
-                    if(!empty($params[$key]) OR $params[$key] == '0'){
-                        $this->post[$field] = $params[$key];
+                    if(isset($params[$key])){
+
+                        if(!empty($params[$key]) OR $params[$key] == '0'){
+                            $this->post[$field] = $params[$key];
+                        }
+
                     }
                 }
             } else {
@@ -1913,26 +1918,13 @@ class Mind extends PDO
         }
 
         foreach ($nLinks as $nLink) {
-            $link_path = parse_url($this->info($nLink, 'dirname'));
 
             $destination = $path;
 
-            if(isset($link_path['path'])){
-                $destination .= urldecode($link_path['path']);
-            }
-
             $other_path = urldecode($this->info($nLink, 'basename'));
 
-            if(!is_null($this->remoteFileSize($destination.'/'.$other_path))){
-
-                if(!is_dir($destination)){
-                    mkdir($destination, 0777, true);
-                }
-
-                copy($nLink, $destination.'/'.$other_path);
-
-            } else {
-                return $result;
+            if(!is_dir($destination)){
+                mkdir($destination, 0777, true);
             }
 
             if(file_exists($destination.'/'.$other_path)){
@@ -1945,6 +1937,8 @@ class Mind extends PDO
                     copy($nLink, $destination.'/'.$other_path);
 
                 }
+            } else {
+                copy($nLink, $destination.'/'.$other_path);
             }
 
             $result[] = $destination.'/'.$other_path;
