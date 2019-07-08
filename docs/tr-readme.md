@@ -1558,7 +1558,7 @@ Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüşt�
      $option = array(
          'limit'=>'3'
      );
-     echo $Mind->permalink($str, $option);
+     echo $this->permalink($str, $option);
 
  veya
 
@@ -1566,7 +1566,7 @@ Kendisiyle paylaşılan veriyi arama motoru dostu bir link yapısına dönüşt�
       $option = array(
           'limit'=>3
       );
-      echo $Mind->permalink($str, $option);
+      echo $this->permalink($str, $option);
 
 #### Harf boyutu (lowercase)
 Varsayılan olarak `string` yapıda ki veri tamamıyla küçük harfe dönüştürülür, eğer harflerin yazıldığı boyutta kalması istenirse, `lowercase` özelliği kullanılabilir.
@@ -1577,7 +1577,7 @@ Varsayılan olarak `string` yapıda ki veri tamamıyla küçük harfe dönüşt�
     $option = array(
         'lowercase'=>false
     );
-    echo $Mind->permalink($str, $option); 
+    echo $this->permalink($str, $option); 
 
 #### Kelime değişimi (replacements)
 `string` yapıda ki veri içinde belirtilen kelimeleri değiştirmek mümkündür, 
@@ -1591,7 +1591,7 @@ Varsayılan olarak `string` yapıda ki veri tamamıyla küçük harfe dönüşt�
             'dünya'=>'world'
         )
     );
-    echo $Mind->permalink($str, $option);
+    echo $this->permalink($str, $option);
     
 #### Karakter desteği (transliterate)
 Farklı alfabelere ait harfler varsayılan olarak `SEO` dostu karşılıklarıyla değiştirilir, eğer olduğu gibi yazılmaları istenirse, `false` parametresi belirtilmelidir.
@@ -1602,7 +1602,7 @@ Farklı alfabelere ait harfler varsayılan olarak `SEO` dostu karşılıklarıyl
        $option = array(
            'transliterate'=>false
        );
-       echo $Mind->permalink($str, $option);
+       echo $this->permalink($str, $option);
 
 ----------
 
