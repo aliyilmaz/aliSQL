@@ -1326,10 +1326,10 @@ class Mind extends PDO
 
     /**
      * Permanent connection.
-     *
+     * 
      * @param $str
      * @param array $options
-     * @return mixed|string|string[]|null
+     * @return string
      */
     public function permalink($str, $options = array()){
 
@@ -1414,7 +1414,7 @@ class Mind extends PDO
             $replacements = $options['replacements'];
         }
 
-        if(!empty($options['transliterate']) AND !$options['transliterate']){
+        if(isset($options['transliterate']) AND !$options['transliterate']){
             $char_map = array();
         }
 
@@ -1422,7 +1422,6 @@ class Mind extends PDO
 
         if(!empty($options['replacements']) AND is_array($options['replacements'])){
             foreach ($options['replacements'] as $objName => $val) {
-
                 $str = str_replace($objName, $val, $str);
 
             }
