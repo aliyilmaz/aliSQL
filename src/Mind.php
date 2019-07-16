@@ -1193,26 +1193,16 @@ class Mind extends PDO
     /**
      * URL verification.
      *
-     * @param string   $url
-     * @return  bool
-     * */
-    public function is_url($url){
+     * @param null $url
+     * @return bool
+     */
+    public function is_url($url=null){
 
-        if(!strstr($url, '://') AND !strstr($url, 'www.')){
-            $url = 'http://www.'.$url;
-        }
-
-        if(!strstr($url, '://') AND strstr($url, 'www.')){
-            $url = 'http://'.$url;
-        }
-
-        if(strstr($url, '://') AND !strstr($url, 'www')){
-            list($left, $right) = explode('://', $url);
-            $url = $left.'://www.'.$right;
+        if(!isset($url)){
+            $url = '';
         }
 
         return preg_match('/^(http|https|www):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
-
     }
 
     /**
