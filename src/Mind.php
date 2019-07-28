@@ -83,7 +83,14 @@ class Mind extends PDO
 
         date_default_timezone_set($this->timezone);
         $this->timestamp = date("d-m-Y H:i:s");
-        $this->base_url = dirname($_SERVER['SCRIPT_NAME']).'/';
+
+
+        $baseDir = $this->get_absolute_path(dirname($_SERVER['SCRIPT_NAME']));
+        if(empty($baseDir)){
+            $this->base_url = '/';
+        } else {
+            $this->base_url = '/'.$baseDir.'/';
+        }
 
     }
 
@@ -1977,4 +1984,18 @@ class Mind extends PDO
         return $result;
     }
 
+    public function get_absolute_path($path) {
+        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+        $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
+        $absolutes = array();
+        foreach ($parts as $part) {
+            if ('.' == $part) continue;
+            if ('..' == $part) {
+                array_pop($absolutes);
+            } else {
+                $absolutes[] = $part;
+            }
+        }
+        return implode(DIRECTORY_SEPARATOR, $absolutes);
+    }
 }
