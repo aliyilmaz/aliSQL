@@ -236,8 +236,6 @@ class Mind extends PDO
                 $query = $this->query($sql);
                 if(!$query){
                     return false;
-                } else {
-                    return true;
                 }
             }
 
