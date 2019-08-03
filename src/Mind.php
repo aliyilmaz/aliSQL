@@ -78,7 +78,10 @@ class Mind extends PDO
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
-        set_time_limit(0);
+        if(strpos(ini_get('disable_functions'), 'set_time_limit') === false){
+            set_time_limit(0);
+        }
+
         ini_set('memory_limit', '-1');
 
         date_default_timezone_set($this->timezone);
@@ -1209,7 +1212,7 @@ class Mind extends PDO
             $url = '';
         }
 
-        return preg_match('/^(http|https|www):\\/\\/localhost|[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
+        return preg_match('/^(http|https|www):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
     }
 
     /**
@@ -1989,12 +1992,6 @@ class Mind extends PDO
         return $result;
     }
 
-    /**
-     * Absolute path syntax
-     *
-     * @param $path
-     * @return string
-     */
     public function get_absolute_path($path) {
         $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
         $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
