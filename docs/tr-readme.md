@@ -610,7 +610,7 @@ veya
 
 ## delete()
 
-Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. `my_table` veritabanı tablo adını, `14` değeri silinmesi istenen bir kaydı, `15` ve `16` değerleri silinmesi istenen kayıtların id'sini temsil etmektedir. id'ler `string` veya `dizi` olarak gönderildiğinde kayıtları silme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 3'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. `my_table` veritabanı tablo adını, `14` değeri silinmesi istenen bir kaydı, `15` ve `16` değerleri silinmesi istenen kayıtların id'sini temsil etmektedir. id'ler `string` veya `dizi` olarak gönderildiğinde kayıtları silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -620,13 +620,35 @@ veya
 
     $this->delete('my_table',array(15,16));
 
-veya
+#### Sütun adı belirtmek
+`id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 3'ncü parametrede belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+
+##### Örnek
 
     $this->delete('my_table',14, 'age');
 
 veya
 
     $this->delete('my_table',array(15,16), 'age');
+    
+#### Bağlantılı kayıtlarla birlikte silmek
+Söz konusu `id` parametresini taşıyan başka tablo sütunları varsa bu tablo ve sütun isimlerinin belirtilmesi halinde, eşleşen ilintili kayıtların silinmesi sağlanır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    if($this->delete('users', 1, array('posts'=>'author_id', 'gallery'=>'author_id'))){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
+
+veya 
+
+    if($this->delete('users', array(1,3), array('posts'=>'author_id', 'gallery'=>'author_id'))){
+            echo 'Kayıtlar silindi.';
+        } else {
+            echo 'Kayıtlar silinemedi.';
+        }
 
 ----------
 
