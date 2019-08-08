@@ -674,7 +674,7 @@ class Mind extends PDO
 
         }
 
-        if(is_array($column) AND !is_array($needle)){
+        if(is_array($column) AND !empty($needle)){
 
             $colName = $this->increments($tblName);
 
