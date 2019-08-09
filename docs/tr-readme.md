@@ -13,6 +13,7 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sın�
  
  *  Temel **PHP** bilgisine sahip olmanız yeterlidir.
  *  Tek veya çoklu dosyaları kolaylıkla yükleyebilirsiniz.
+ *  Silinecek kayıtla ilişkili başka veritabanı tablolarındaki kayıtların silinmesi için yada birçok veritabanı işlemi için SQL yazmanıza gerek yoktur.  
  *  Sunucunun **erişime açık** varlıklarını, **klasör/dosya** hiyerarşisine bağlı kalarak indirmek kolaydır.
  *  Oyun oynar gibi web sitelerinden veri elde eden **BOT**'lar, **API** servisleri oluşturmak kolaydır.
  *  **Mind** gerekli **.htaccess** dosyalarını kendisi otomatik olarak oluşturur.
@@ -97,7 +98,7 @@ Oturumların saklandığı klasör yolunu değiştirmek için, `path` parametres
 
 ## Zaman Dilimi Ayarı
 
-İçeriğin doğru zaman damgasıyla işaretlenebilmesi için zaman dilimini kişiselleştirmek mümkündür. Varsayılan olarak `Europe/Istanbul` tanımlanmıştır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır. [Desteklenen zaman dilimlerinin listesi](https://secure.php.net/manual/tr/timezones.php) bölümüne bakın.
+İçeriğin doğru zaman damgasıyla işaretlenebilmesi için zaman dilimini kişiselleştirmek mümkündür. Varsayılan olarak `Europe/Istanbul` tanımlanmıştır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır. Daha fazla bilgi için [Desteklenen zaman dilimlerinin listesi](https://secure.php.net/manual/tr/timezones.php) bölümüne bakabilirsiniz.
 
 **Bilgi:** Gerektiği kadar kişiselleştirilmemiş sunucular proje zaman diliminden farklı zaman dilimi kullanabilmektedir, bu kısımda ki yapılan düzenleme farklı sunucularda doğru zaman damgasına sahip olmayı sağlar. 
 
@@ -232,7 +233,7 @@ Metodlar içinde değişime uğrayan istek ve durumların kaderinin belirlenmesi
 
 ## selectDB()
 
-[Kurulum](#kurulum) aşamasında belirtilen kullanıcının yetkilendirildiği veritabanına bağlanmak amacıyla kullanılır.
+[Kurulum](#kurulum) aşamasında belirtilen kullanıcının yetkilendirildiği veritabanına bağlanmak amacıyla kullanılır. Veritabanı adı `string` olarak belirtilmelidir.
 
 ##### Örnek
 
@@ -284,7 +285,7 @@ veya
 
 ## tableCreate()
 
-Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır,  İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
+Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
 
 
 ##### Özellikler
@@ -445,7 +446,7 @@ Belirtilen karakter uzunluğuna sahip string veri tutmak için kullanılır. 3 p
 
 #### increments (auto_increment)
 
-Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olması amacıyla kullanılır. 3 parametre alır. `id`:`increments`:`11` ilk parametre sütun adıdır. İkinci parametre sütun türüdür. Üçüncü parametreyse artışın maksimum limitini temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
+Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olması amacıyla kullanılır. 3 parametre alır. `id`:`increments`:`11` ilk parametre sütun adıdır. İkinci parametre sütun türüdür. Üçüncü parametreyse artışın basamaksal maksimum limitini temsil etmektedir. Üçüncü parametre zorunlu değildir, eğer belirtilmezse varsayılan olarak `11` değerini alır.
 
  ##### Örnek
    
