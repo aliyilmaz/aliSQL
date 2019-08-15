@@ -193,6 +193,8 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_size](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_size)
 -   [is_color](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_color)
 -   [is_url](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_url)
+-   [is_http](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_http)
+-   [is_https](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_https)
 -   [is_json](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_json)
 
 ##### Yardımcı
