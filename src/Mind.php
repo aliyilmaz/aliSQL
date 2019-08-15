@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.0.3
+ * @version    Release: 3.0.4
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1234,6 +1234,33 @@ class Mind extends PDO
     }
 
     /**
+     * HTTP checking.
+     *
+     * @param $url
+     * @return bool
+     */
+    public function is_http($url){
+        if (substr($url, 0, 7) == "http://"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * HTTPS checking.
+     * @param $url
+     * @return bool
+     */
+    public function is_https($url){
+        if (substr($url, 0, 8) == "https://"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Json control of a string
      *
      * @param $scheme
@@ -1982,15 +2009,13 @@ class Mind extends PDO
         $result = array();
 
         if($this->is_url($url)) {
-
-            $arrContextOptions = stream_context_create(array(
-                'ssl' => array(
-                    'verify_peer'       => false,
-                    'verify_peer_name'  => false,
-                )
-            ));
-
-            $data = file_get_contents($url, false, $arrContextOptions);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->is_https($url));
+            curl_setopt($ch,CURLOPT_URL, $url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+            $data = curl_exec($ch);
+            curl_close($ch);
         } else {
 
             $data = $url;
