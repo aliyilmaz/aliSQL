@@ -1368,6 +1368,16 @@ Kendisiyle paylaşılan verinin bir bağlantı olup olmadığını kontrol etmek
 
 ##### Örnek
 
+    $str = 'http://localhost';
+    if($this->is_url($str)){
+        echo 'Bu bir bağlantıdır.';
+    } else {
+        echo 'Bu bir bağlantı değildir.';
+    }
+    }
+
+veya
+
     $str = 'example.com';
     if($this->is_url($str)){
         echo 'Bu bir bağlantıdır.';
@@ -1404,6 +1414,38 @@ veya
 
 
 ----------
+
+
+## is_http()
+
+Kendisiyle paylaşılan `string` yapıdaki verinin HTTP söz diziminde yazılıp yazılmadığını kontrol etmek amacıyla kullanılır, Eğer söz konusu veri bir HTTP söz dizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
+
+
+    $url = 'http://www.google.com/';
+    if($this->is_http($url)){
+        echo 'Bu bir HTTP bağlantısıdır.';
+    } else {
+        echo 'Bu bir HTTP bağlantısı değildir.';
+    }
+
+----------
+
+
+## is_https()
+
+Kendisiyle paylaşılan `string` yapıdaki verinin HTTPS sözdiziminde yazılıp yazılmadığını kontrol etmek amacıyla kullanılır, Eğer söz konusu veri bir HTTPS sözdizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
+
+
+    $url = 'http://www.google.com/';
+    if($this->is_http($url)){
+        echo 'Bu bir HTTP bağlantısıdır.';
+    } else {
+        echo 'Bu bir HTTP bağlantısı değildir.';
+    }
+
+    
+        
+    
 
 ## is_json()
 
@@ -1961,8 +2003,8 @@ Kendisiyle paylaşılan `string` yapıda ki veri de veya bir  url'nin varış no
 veya
 
     $url 	= 'https://www.cloudflare.com/';
-    $left 	= '<h1 class="header-h1">';
-    $right	= '</h1>';
+    $left 	= '<link rel="alternate" hreflang="';
+    $right	= '"';
     $data 	= $this->get_contents($left, $right, $url);
     print_r($data);
     
