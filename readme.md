@@ -29,10 +29,10 @@ Güvenlikle ilgili herhangi bir sorun tespit ederseniz, herkese açık sorun bil
 ## Ekran görüntüsü
 
 #### Anasayfa
-[![Main](screenshots/main.jpg)](https://github.com/aliyilmaz/Mind)
+[![Main](https://github.com/aliyilmaz/Mind/screenshots/main.png)](https://github.com/aliyilmaz/Mind)
 
 #### Hata Sayfası
-[![Main](screenshots/error.jpg)](https://github.com/aliyilmaz/Mind)
+[![Main](https://github.com/aliyilmaz/Mind/screenshots/error.png)](https://github.com/aliyilmaz/Mind)
 
 ## Yazar
 
