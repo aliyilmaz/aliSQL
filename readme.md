@@ -1,5 +1,8 @@
-﻿﻿
-# Mind
+﻿######  (Sürüm 3.0.6)
+
+# Mind 
+
+
 
 Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir PHP sınıfıdır. Yeni tasarım desenleri ve uygulama çatıları oluşturmak için çeşitli araçlar sunar.
  

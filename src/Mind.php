@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.0.4
+ * @version    Release: 3.0.6
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1792,33 +1792,24 @@ class Mind extends PDO
 
         $params = array();
 
-        if(strstr($request, '/')){
-
-            $step1 = str_replace($uri, '', $request);
-            $step2 = explode('/', trim($step1,'/'));
-            $step3 = array_filter($step2, 'is_string');
-            $params = array_values($step3);
-        }
-
-        if($_SERVER['REQUEST_METHOD'] != 'POST'){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
             $this->post = array();
+            if(isset($this->post)){
 
+                $params = explode('/', rtrim(ltrim(str_replace($this->base_url.$uri, '', $_SERVER['REQUEST_URI']), '/'),'/'));
+                if(!empty($fields)){
 
-            if(!empty($fields) AND !empty($params)){
-
-                foreach ($fields as $key => $field) {
-
-                    if(isset($params[$key])){
-
-                        if(!empty($params[$key]) OR $params[$key] == '0'){
+                    foreach ($fields as $key => $field) {
+                        if(isset($params[$key])){
                             $this->post[$field] = $params[$key];
                         }
-
                     }
+                } else {
+                    $this->post = $params;
                 }
-            } else {
-                $this->post = array_diff($params, array('', ' '));
+                $this->post = array_diff($this->post, array(""," "));
+
             }
         }
 
