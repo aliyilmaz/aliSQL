@@ -1792,34 +1792,47 @@ class Mind extends PDO
 
         $params = array();
 
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+        if($_SERVER['REQUEST_METHOD'] != 'POST'){
+
+            if(strstr($request, '/')){
+                $params = explode('/', $request);
+                $UriParams = explode('/', $uri);
+
+                if(count($params) >= count($UriParams)){
+                    for ($key = 0; count($UriParams) > $key; $key++){
+                        unset($params[$key]);
+                    }
+                }
+
+                $params = array_values($params);
+            }
 
             $this->post = array();
-            if(isset($this->post)){
 
-                $params = explode('/', rtrim(ltrim(str_replace($this->base_url.$uri, '', $_SERVER['REQUEST_URI']), '/'),'/'));
-                if(!empty($fields)){
+            if(!empty($fields) AND !empty($params)){
 
-                    foreach ($fields as $key => $field) {
-                        if(isset($params[$key])){
+                foreach ($fields as $key => $field) {
+
+                    if(isset($params[$key])){
+
+                        if(!empty($params[$key]) OR $params[$key] == '0'){
                             $this->post[$field] = $params[$key];
                         }
-                    }
-                } else {
-                    $this->post = $params;
-                }
-                $this->post = array_diff($this->post, array(""," "));
 
+                    }
+                }
+            } else {
+                $this->post = array_diff($params, array('', ' '));
             }
         }
 
         if(!empty($request)){
 
             if(!empty($params)){
-                $uri .='/'.implode('/', $params);
+                $uri .= '/'.implode('/', $params);
             }
-
-            if($request == $uri OR trim($request, '/') == trim($uri, '/')){
+            
+            if($request == $uri){
                 $this->error_status = false;
                 $this->mindLoad($file, $cache);
                 exit();
