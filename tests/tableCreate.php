@@ -3,8 +3,9 @@ require_once ('../src/Mind.php');
 
 $Mind = new Mind();
 
+
 $scheme = array(
-  'id:increments',
+  'id:increments:14',
   'name_surname',
   'email_address'
 );

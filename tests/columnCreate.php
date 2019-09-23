@@ -17,6 +17,7 @@ if($Mind->columnCreate('yenitablo', $scheme)){
 echo '<br>';
 
 $scheme = array(
+//    'id:increments:14',
     'created_at',
     'updated_at',
     '_token'
