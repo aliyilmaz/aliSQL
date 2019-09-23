@@ -259,10 +259,10 @@ class Mind extends PDO
 
             try{
 
-                $sql = "CREATE TABLE";
-                $sql .= " ".$tblName."( ";
-                $sql .= implode(',', $this->cGenerator($scheme));
-                $sql .= ")";
+                $sql = "CREATE TABLE `".$tblName."` ";
+                $sql .= "(\n\t";
+                $sql .= implode(",\n\t", $this->cGenerator($scheme));
+                $sql .= "\n) ENGINE = INNODB;";
 
                 if(!$this->query($sql)){
                     return false;
@@ -290,9 +290,9 @@ class Mind extends PDO
 
             try{
 
-                $sql = "ALTER TABLE";
-                $sql .= " ".$tblName." ";
-                $sql .= implode(',', $this->cGenerator($scheme, 'columnCreate'));
+                $sql = "ALTER TABLE\n";
+                $sql .= "\t`".$tblName."`\n";
+                $sql .= implode(",\n\t", $this->cGenerator($scheme, 'columnCreate'));
 
                 if(!$this->query($sql)){
                     return false;
@@ -1313,8 +1313,7 @@ class Mind extends PDO
             return $x;
         } else {
 
-            $str = filter_var($str,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            return preg_replace('~[\x00\x0A\x0D\x1A\x22\x27\x5C]~u', '\\\\$0', $str);
+            return filter_var($str,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         }
 
     }
@@ -1371,7 +1370,7 @@ class Mind extends PDO
 
     /**
      * Permanent connection.
-     * 
+     *
      * @param $str
      * @param array $options
      * @return string
@@ -1634,6 +1633,7 @@ class Mind extends PDO
     public function cGenerator($scheme, $funcName=null){
 
         $sql = array();
+        $column = '';
 
         foreach (array_values($scheme) as $array_value) {
 
@@ -1656,40 +1656,88 @@ class Mind extends PDO
 
             if(is_null($columnValue) AND $columnType =='string'){ $columnValue = 255; }
             if(is_null($columnValue) AND $columnType =='decimal') { $columnValue = 6.2; }
-            if(is_null($columnValue) AND $columnType =='int' OR $columnType =='increments'){ $columnValue = 11; }
-
-            $first = '';
-            $prefix = '';
-            if(!is_null($funcName) AND $funcName == 'columnCreate'){
-                $first = 'FIRST';
-                $prefix = 'ADD COLUMN ';
-            }
+            if(is_null($columnValue) AND $columnType =='int'){ $columnValue = 11; }
+            if(is_null($columnValue) AND $columnType =='increments'){ $columnValue= 11;}
 
             switch ($columnType){
                 case 'int':
-                    $sql[] = $prefix.$columnName.' int('.$columnValue.')';
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` INT('.$columnValue.') NULL DEFAULT NULL';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` INT('.$columnValue.') NULL DEFAULT NULL';
+                    }
                     break;
                 case 'decimal':
-                    $sql[] = $prefix.$columnName.' DECIMAL('.$columnValue.')';
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` DECIMAL('.$columnValue.') NULL DEFAULT NULL';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` DECIMAL('.$columnValue.') NULL DEFAULT NULL';
+                    }
                     break;
                 case 'string':
-                    $sql[] = $prefix.$columnName.' VARCHAR('.$columnValue.')';
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` VARCHAR('.$columnValue.') NULL DEFAULT NULL';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` VARCHAR('.$columnValue.') NULL DEFAULT NULL';
+                    }
                     break;
                 case 'small':
-                    $sql[] = $prefix.$columnName.' TEXT';
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` TEXT NULL DEFAULT NULL';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` TEXT NULL DEFAULT NULL';
+                    }
                     break;
                 case 'medium':
-                    $sql[] = $prefix.$columnName.' MEDIUMTEXT';
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` MEDIUMTEXT NULL DEFAULT NULL';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` MEDIUMTEXT NULL DEFAULT NULL';
+                    }
                     break;
                 case 'large':
-                    $sql[] = $prefix.$columnName.' LONGTEXT';
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` LONGTEXT NULL DEFAULT NULL';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` LONGTEXT NULL DEFAULT NULL';
+                    }
                     break;
                 case 'increments':
-                    $sql[] = $prefix.$columnName.' int('.$columnValue.') UNSIGNED AUTO_INCREMENT PRIMARY KEY '.$first;
+
+                    if(!is_null($funcName) AND $funcName == 'columnCreate'){
+
+                        $sql[] = 'ADD `'.$columnName.'` INT('.$columnValue.') NOT NULL AUTO_INCREMENT FIRST';
+                        $column = 'ADD PRIMARY KEY (`'.$columnName.'`)';
+                    } else {
+
+                        $sql[] = '`'.$columnName.'` INT('.$columnValue.') NOT NULL AUTO_INCREMENT';
+                        $column = 'PRIMARY KEY (`'.$columnName.'`)';
+                    }
+
                     break;
             }
         }
-
+        if(!empty($column)){
+            $sql[] = $column;
+        }
         return $sql;
     }
 
@@ -1831,7 +1879,7 @@ class Mind extends PDO
             if(!empty($params)){
                 $uri .= '/'.implode('/', $params);
             }
-            
+
             if($request == $uri){
                 $this->error_status = false;
                 $this->mindLoad($file, $cache);
@@ -1984,7 +2032,7 @@ class Mind extends PDO
 
                 $remote_file = $this->remoteFileSize($nLink);
                 $local_file = filesize($destination.'/'.$other_path);
-    
+
                 if($remote_file != $local_file){
                     unlink($destination.'/'.$other_path);
                     copy($nLink, $destination.'/'.$other_path);
