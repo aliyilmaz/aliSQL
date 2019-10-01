@@ -1,4 +1,4 @@
-######  (Sürüm 3.0.7)
+######  (Sürüm 3.0.8)
 # Mind nedir?
 
 Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
@@ -1513,9 +1513,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 Bu metod özel karakterleri, `sql_injection`, `xss` gibi istismar kodlarını etkisiz hale getirmek amacıyla kullanılır. `string` olarak gönderilen veriyi güvenli hale getirip geri döndürür. İçinde bulunan metodlar aşağıda ki gibidir.
 
 -   `filter_var`
-    -   `FILTER_SANITIZE_FULL_SPECIAL_CHARS`
--   `preg_replace`
-    -   `~[\x00\x0A\x0D\x1A\x22\x27\x5C]~u`
+    -   `FILTER_SANITIZE_STRIPPED`
 
 ##### Örnek
 
