@@ -1378,13 +1378,19 @@ class Mind extends PDO
      */
     public function permalink($str, $options = array()){
 
+        $plainText = $str;
         $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
         $defaults = array(
             'delimiter' => '-',
             'limit' => null,
             'lowercase' => true,
             'replacements' => array(),
-            'transliterate' => true
+            'transliterate' => true,
+            'unique' => array(
+                'delimiter' => '-',
+                'linkColumn' => 'link',
+                'titleColumn' => 'title'
+            )
         );
 
         $char_map = [
@@ -1478,8 +1484,51 @@ class Mind extends PDO
         $str = preg_replace('/(' . preg_quote($options['delimiter'], '/') . '){2,}/', '$1', $str);
         $str = mb_substr($str, 0, ($options['limit'] ? $options['limit'] : mb_strlen($str, 'UTF-8')), 'UTF-8');
         $str = trim($str, $options['delimiter']);
-        return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
+        $link = $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
 
+        if(!empty($options['unique']['tableName'])){
+
+            $tableName = $options['unique']['tableName'];
+            $delimiter = $defaults['unique']['delimiter'];
+            $titleColumn = $defaults['unique']['titleColumn'];
+            $linkColumn = $defaults['unique']['linkColumn'];
+
+            if(!$this->is_table($options['unique']['tableName'])){
+                return $link;
+            } else {
+
+                if(!empty($options['unique']['delimiter'])){
+                    $delimiter = $options['unique']['delimiter'];
+                }
+                if(!empty($options['unique']['titleColumn'])){
+                    $titleColumn = $options['unique']['titleColumn'];
+                }
+                if(!empty($options['unique']['linkColumn'])){
+                    $linkColumn = $options['unique']['linkColumn'];
+                }
+
+                $data = $this->samantha($tableName, array($titleColumn => $plainText));
+
+                if(!empty($data)){
+                    $num = count($data)+1;
+                } else {
+                    $num = 1;
+                }
+
+                for ($i = 1; $i<=$num; $i++){
+
+                    if(!$this->do_have($tableName, $link, $linkColumn)){
+                        return $link;
+                    } else {
+                        if(!$this->do_have($tableName, $link.$delimiter.$i, $linkColumn)){
+                            return $link.$delimiter.$i;
+                        }
+                    }
+                }
+                return $link.$delimiter.$num;
+            }
+        }
+        return $link;
     }
 
     /**
