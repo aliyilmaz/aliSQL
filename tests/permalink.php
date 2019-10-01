@@ -46,11 +46,41 @@ $Mind = new Mind();
 //);
 //echo $Mind->permalink($str, $option);
 
+//$str = 'Merhaba dünya';
+//$option = array(
+//    'replacements'=>array(
+//        'Merhaba' => 'hello'
+//    ),
+//    'transliterate'=>false
+//);
+//echo $Mind->permalink($str, $option);
+
+//$str = 'Merhaba dünya';
+//$option = array(
+//    'unique' => array(
+//        'tableName' => 'pages'
+//    )
+//);
+//echo $Mind->permalink($str, $option);
+//$Mind->insert('pages', array('title'=>$str, 'link'=>$Mind->permalink($str, $option)));
+
+//$str = 'Merhaba dünya';
+//$option = array(
+//    'unique' => array(
+//        'tableName' => 'pages',
+//        'delimiter' => '_'
+//    )
+//);
+//echo $Mind->permalink($str, $option);
+//$Mind->insert('pages', array('title'=>$str, 'link'=>$Mind->permalink($str, $option)));
+
 $str = 'Merhaba dünya';
 $option = array(
-    'replacements'=>array(
-        'Merhaba' => 'hello'
-    ),
-    'transliterate'=>false
+    'unique' => array(
+        'tableName' => 'pages',
+        'titleColumn' => 'title',
+        'linkColumn' => 'link'
+    )
 );
 echo $Mind->permalink($str, $option);
+$Mind->insert('pages', array('title'=>$str, 'link'=>$Mind->permalink($str, $option)));
