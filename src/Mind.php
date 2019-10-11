@@ -40,7 +40,7 @@ class Mind extends PDO
      * @param array $conf
      */
     public function __construct($conf=array()){
-
+        ob_start();
         if(isset($conf['host'])){
             $this->host = $conf['host'];
         }
@@ -885,21 +885,19 @@ class Mind extends PDO
 
         $output = $this->getData($tblName, $scheme);
 
-        if (count($output) > 1) {
-            return $output;
-        } else {
-            if(isset($output[0])){
-                $columns = array_keys($output[0]);
-                if(count($columns) > 1){
-                    return $output[0];
+        if(isset($output[0]) AND count($output)==1){
+            if(!empty($column)){
+                if($this->is_column($tblName, $column)){
+                    $output = $output[0][$column];
                 } else {
-                    $column = $columns[0];
-                    return $output[0][$column];
+                    $output = $output[0];
                 }
+            } else {
+                $output = $output[0];
             }
-
         }
 
+        return $output;
     }
 
     /**
@@ -1282,13 +1280,17 @@ class Mind extends PDO
     }
 
     /**
-     * Path information.
+     * Path information
      *
      * @param $fileName
-     * @param string $type
-     * @return  string
+     * @param $type
+     * @return bool|string
      */
     public function info($fileName, $type){
+
+        if(empty($fileName) AND isset($type)){
+            return false;
+        }
 
         $object = pathinfo($fileName);
 
@@ -1314,7 +1316,7 @@ class Mind extends PDO
             }
             return $x;
         } else {
-            return filter_var($str, FILTER_SANITIZE_STRIPPED);
+            return htmlspecialchars($str);
         }
 
     }
@@ -1366,6 +1368,7 @@ class Mind extends PDO
         }
 
         header('Location: '.$url);
+        ob_end_flush();
         exit();
     }
 
