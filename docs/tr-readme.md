@@ -1666,6 +1666,61 @@ Farklı alfabelere ait harfler varsayılan olarak `SEO` dostu karşılıklarıyl
        );
        echo $this->permalink($str, $option);
 
+#### Benzersiz bağlantı oluşturma (unique)
+`string` yapıdaki veri, veritabanı tablosunun belirtilen sütununda aranır, eğer bir veya daha fazla bulunursa bunların toplam adedi tespit edilir.
+
+Elde edilen bu toplam, bir döngü yardımıyla, `string` yapıdaki verinin sonuna, `delimiter` ayracından yardım alınarak eklenir ve veritabanı tablosunda tek tek varlık kontrolü yapılır.
+ 
+ Eğer söz konusu bağlantı adayı, veritabanı tablosunda bulunmuyorsa o hali geri döndürülür. 
+ 
+ Eğer tüm bulgularda yapılan varlık kontrolü neticesinde bağlantı adayı için uygun bir numaralandırma söz konusu değilse, bulgu toplamı **1** artırılmış şekilde bağlantı güncellenerek geri döndürülür.
+ 
+Varsayılan olarak `delimiter` parametresi için tire **-** değeri, `linkColumn` parametresi için **link** değeri ve `titleColumn` parametresi ise **title** değerine tanımlanmıştır.
+
+##### Örnek
+
+    $str = 'Merhaba dünya';
+    $option = array(
+        'unique' => array(
+            'tableName' => 'pages'
+        )
+    );
+    echo $this->permalink($str, $option);
+
+veya 
+
+    $str = 'Merhaba dünya';
+    $option = array(
+        'unique' => array(
+            'tableName' => 'pages',
+            'delimiter' => '_'
+        )
+    );
+    echo $this->permalink($str, $option);
+    
+veya 
+
+    $str = 'Merhaba dünya';
+    $option = array(
+        'unique' => array(
+            'tableName' => 'pages',
+            'delimiter' => '_'
+        )
+    );
+    echo $this->permalink($str, $option);
+    
+veya
+
+    $str = 'Merhaba dünya';
+    $option = array(
+        'unique' => array(
+            'tableName' => 'pages',
+            'titleColumn' => 'title',
+            'linkColumn' => 'link'
+        )
+    );
+    echo $this->permalink($str, $option);
+    
 ----------
 
 ## timezones()
