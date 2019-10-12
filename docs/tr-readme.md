@@ -1675,7 +1675,7 @@ Elde edilen bu toplam, bir döngü yardımıyla, `string` yapıdaki verinin sonu
  
  Eğer tüm bulgularda yapılan varlık kontrolü neticesinde bağlantı adayı için uygun bir numaralandırma söz konusu değilse, bulgu toplamı **1** artırılmış şekilde bağlantı güncellenerek geri döndürülür.
  
-Varsayılan olarak `delimiter` parametresi için tire **-** değeri, `linkColumn` parametresi için **link** değeri ve `titleColumn` parametresi ise **title** değerine tanımlanmıştır.
+Varsayılan olarak `delimiter` parametresi için tire **-** değeri, `linkColumn` parametresi için **link** değeri ve `titleColumn` parametresi ise **title** değeri tanımlanmıştır.
 
 ##### Örnek
 
