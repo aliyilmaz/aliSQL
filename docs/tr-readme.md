@@ -1698,16 +1698,6 @@ veya
     );
     echo $this->permalink($str, $option);
     
-veya 
-
-    $str = 'Merhaba dünya';
-    $option = array(
-        'unique' => array(
-            'tableName' => 'pages',
-            'delimiter' => '_'
-        )
-    );
-    echo $this->permalink($str, $option);
     
 veya
 
