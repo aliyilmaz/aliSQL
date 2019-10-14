@@ -30,6 +30,8 @@ class Mind extends PDO
 
     public  $post;
     public  $base_url;
+    public  $page_current   =   '';
+    public  $page_previous  =   '';
     public  $timezone       =  'Europe/Istanbul';
     public  $timestamp;
     public  $error_status   =  false;
@@ -95,6 +97,11 @@ class Mind extends PDO
             $this->base_url = '/'.$baseDir.'/';
         }
 
+        if(isset($_SERVER['HTTP_REFERER'])){
+            $this->page_previous = $_SERVER['HTTP_REFERER'];
+        } else {
+            $this->page_previous = $this->page_current;
+        }
     }
 
     public function __destruct()
@@ -1230,7 +1237,7 @@ class Mind extends PDO
             $url = '';
         }
 
-        return preg_match('/^(http|https|www):\\/\\/localhost|[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
+        return preg_match('/^(http|https|www):\\/\\/+[a-z0-9_]|[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
     }
 
     /**
@@ -1935,6 +1942,7 @@ class Mind extends PDO
 
             if($request == $uri){
                 $this->error_status = false;
+                $this->page_current = $uri;
                 $this->mindLoad($file, $cache);
                 exit();
             }
@@ -1944,6 +1952,7 @@ class Mind extends PDO
         } else {
             if($uri == $this->base_url) {
                 $this->error_status = false;
+                $this->page_current = $uri;
                 $this->mindLoad($file, $cache);
                 exit();
             }
