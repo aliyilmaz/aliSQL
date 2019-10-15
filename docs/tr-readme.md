@@ -1,4 +1,4 @@
-######  (Sürüm 3.0.8)
+######  (Sürüm 3.0.9)
 # Mind nedir?
 
 Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
@@ -135,9 +135,9 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 
 İlgili rota yolu `$this->page_current` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
-##### public $page_previous
+##### public $page_back
 
-Önceki rota yolu `$this->page_previous` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+Önceki sayfa yolu `$this->page_back` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 ##### public $timezone
 
