@@ -133,7 +133,7 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 
 ##### public $page_current
 
-İlgili rota yolu `$this->page_current` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+Görüntülenmekte olan sayfa yolu `$this->page_current` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 ##### public $page_back
 
