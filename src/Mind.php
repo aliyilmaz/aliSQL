@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.0.8
+ * @version    Release: 3.0.9
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -31,7 +31,7 @@ class Mind extends PDO
     public  $post;
     public  $base_url;
     public  $page_current   =   '';
-    public  $page_previous  =   '';
+    public  $page_back      =   '';
     public  $timezone       =  'Europe/Istanbul';
     public  $timestamp;
     public  $error_status   =  false;
@@ -98,9 +98,9 @@ class Mind extends PDO
         }
 
         if(isset($_SERVER['HTTP_REFERER'])){
-            $this->page_previous = $_SERVER['HTTP_REFERER'];
+            $this->page_back = $_SERVER['HTTP_REFERER'];
         } else {
-            $this->page_previous = $this->page_current;
+            $this->page_back = $this->page_current;
         }
     }
 
