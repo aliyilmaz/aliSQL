@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.0.9
+ * @version    Release: 3.1.0
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -89,8 +89,8 @@ class Mind extends PDO
         date_default_timezone_set($this->timezone);
         $this->timestamp = date("d-m-Y H:i:s");
 
-
         $baseDir = $this->get_absolute_path(dirname($_SERVER['SCRIPT_NAME']));
+
         if(empty($baseDir)){
             $this->base_url = '/';
         } else {
@@ -2167,6 +2167,10 @@ class Mind extends PDO
                 $absolutes[] = $part;
             }
         }
-        return implode(DIRECTORY_SEPARATOR, $absolutes);
+        $outputdir = implode(DIRECTORY_SEPARATOR, $absolutes);
+        if(strstr($outputdir, '\\')){
+            $outputdir = str_replace('\\', '/', $outputdir);
+        }
+        return $outputdir;
     }
 }
