@@ -1239,7 +1239,7 @@ veya
 
 Bu fonksiyon, dosya dizisinde bulunan `size` değerinin veya `string` yapıda belirtilen `byte` cinsinden  değerin kontrol edilmesi amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$manuelsize` string yapıda ki değeri, `$size` ise müsade edilen boyut bilgisini temsil etmektedir. Eğer dosya veya belirtilen değer müsade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
  
- **Bilgi:** Dosyalarla çalışırken `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir.
+ **Bilgi:** Dosyalarla çalışırken `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir. 
 
 ##### Örnek
 
@@ -1967,6 +1967,7 @@ veya
 
 Belirtilen dosya veya dosyaları, belirtilen klasöre yüklemek amacıyla kullanır, `$this->post['singlefile']` ve `$this->post['multifile']` dosyaların tutulduğu değişkenleri `$path` ise dosyaların yükleneceği klasör yolunu temsil etmektedir.
 
+**Bilgi:** Dosya yükleme işlemi sırasında tek seferde maksimum kaç adet dosyanın yükleneceğini `php.ini` dosyasındaki `max_file_uploads` kısmından güncelleyebilirsiniz.
 ##### Örnek
 
     <form method="post" enctype="multipart/form-data">  

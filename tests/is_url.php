@@ -3,6 +3,14 @@ require_once '../src/Mind.php';
 
 $Mind = new Mind();
 
+echo '<hr>';
+
+$str = $Mind->base_url;
+if($Mind->is_url($str)){
+    echo 'Bu bir bağlantıdır. <strong>'.$str.'</strong>';
+} else {
+    echo 'Bu bir bağlantı değildir.';
+}
 
 echo '<hr>';
 

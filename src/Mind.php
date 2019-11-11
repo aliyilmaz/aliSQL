@@ -1234,10 +1234,19 @@ class Mind extends PDO
     public function is_url($url=null){
 
         if(!isset($url)){
-            $url = '';
+            return false;
         }
 
-        return preg_match('/^(http|https|www):\\/\\/+[a-z0-9_]|[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}' . '((:[0-9]{1,5})?\\/.*)?$/i', $url) ? true : false;
+        $temp_string = (!preg_match('#^(ht|f)tps?://#', $url)) // check if protocol not present
+            ? 'http://' . $url // temporarily add one
+            : $url; // use current
+
+        if ( filter_var($temp_string, FILTER_VALIDATE_URL)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     /**
@@ -2107,7 +2116,7 @@ class Mind extends PDO
             $result[] = $destination.'/'.$other_path;
         }
 
-    return $result;
+        return $result;
     }
 
     /**
@@ -2130,8 +2139,12 @@ class Mind extends PDO
             curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
             $data = curl_exec($ch);
             curl_close($ch);
-        } else {
 
+            if(empty($data)){
+                $data = file_get_contents($url);
+            }
+
+        } else {
             $data = $url;
         }
 
