@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.0
+ * @version    Release: 3.1.1
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2136,13 +2136,9 @@ class Mind extends PDO
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->is_https($url));
             curl_setopt($ch,CURLOPT_URL, $url);
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+            curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
             $data = curl_exec($ch);
             curl_close($ch);
-
-            if(empty($data)){
-                $data = file_get_contents($url);
-            }
 
         } else {
             $data = $url;
