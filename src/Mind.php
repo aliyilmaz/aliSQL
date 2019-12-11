@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.1
+ * @version    Release: 3.1.2
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1372,18 +1372,15 @@ class Mind extends PDO
      * Redirect
      *
      * @param null $url
+     * @param int $delay
      */
-    public function redirect($url=null){
+    public function redirect($url=null, $delay=0){
 
-        if(empty($url)){
-            $url = $this->base_url;
-        } else {
-            if(!$this->is_url($url)){
-                $url = $this->base_url.$url;
-            }
+        if(!$this->is_http($url) AND !$this->is_https($url) OR empty($url)){
+            $url = 'http://'.$_SERVER['SERVER_NAME'].$this->base_url.$url;
         }
 
-        header('Location: '.$url);
+        header('refresh:'.$delay.'; url='.$url);
         ob_end_flush();
         exit();
     }
