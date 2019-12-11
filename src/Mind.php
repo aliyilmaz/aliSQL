@@ -1380,7 +1380,11 @@ class Mind extends PDO
             $url = 'http://'.$_SERVER['SERVER_NAME'].$this->base_url.$url;
         }
 
-        header('refresh:'.$delay.'; url='.$url);
+        if(0 !== $delay){
+            header('refresh:'.$delay.'; url='.$url);
+        } else {
+            header('Location: '.$url);
+        }
         ob_end_flush();
         exit();
     }
