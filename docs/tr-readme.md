@@ -1,4 +1,4 @@
-######  (Sürüm 3.0.9)
+######  (Sürüm 3.1.2)
 # Mind nedir?
 
 Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
@@ -1581,7 +1581,7 @@ veya
 
 ## redirect()
 
-Belirtilen adrese yönlendirme yapmak amacıyla kullanılır, boş bırakılırsa **Mind.php** dosyasının bulunduğu klasör'e yönlendirme yapar. Adres `string` olarak belirtilmelidir.
+Belirtilen adrese doğrudan veya belli bir süre sonra yönlendirme yapmak amacıyla kullanılır, boş bırakılırsa **Mind.php** dosyasının bulunduğu klasör'e yönlendirme yapar. İki parametre alır, ilk parametre yönlenecek adrestir ve `string` olarak belirtilmesi gerekir, ikinci parametre ise kaç saniye sonra yönlenmesi gerektiği bilgisidir ve `integer` olarak belirtilmesi gerekir.
 
 ##### Örnek
 
@@ -1595,7 +1595,17 @@ veya
 
     $this->redirect('https://www.google.com');
 
+veya
 
+    $this->redirect('', 5);
+    
+veya
+
+    $this-redirect('contact', 5);
+
+veya
+
+    $this->redirect('https://www.google.com', 5);
 ----------
 
 ## permalink()
