@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.2
+ * @version    Release: 3.1.3
  * @license    GPLv3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -87,7 +87,7 @@ class Mind extends PDO
         ini_set('memory_limit', '-1');
 
         date_default_timezone_set($this->timezone);
-        $this->timestamp = date("d-m-Y H:i:s");
+        $this->timestamp = date("Y-m-d H:i:s");
 
         $baseDir = $this->get_absolute_path(dirname($_SERVER['SCRIPT_NAME']));
 
@@ -2134,10 +2134,13 @@ class Mind extends PDO
 
         if($this->is_url($url)) {
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->is_https($url));
             curl_setopt($ch,CURLOPT_URL, $url);
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
             $data = curl_exec($ch);
             curl_close($ch);
 
