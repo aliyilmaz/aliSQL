@@ -655,10 +655,18 @@ Söz konusu `id` parametresini taşıyan başka tablo sütunları varsa bu tablo
 veya 
 
     if($this->delete('users', array(1,3), array('posts'=>'author_id', 'gallery'=>'author_id'))){
-            echo 'Kayıtlar silindi.';
-        } else {
-            echo 'Kayıtlar silinemedi.';
-        }
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
+
+veya 
+
+    if($this->delete('users', array('aliyilmaz@example.com', 'ramazan@example.com'), array('subscribers'=>'email', 'messages'=>'email'), 'email')){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
 
 ----------
 
