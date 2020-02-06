@@ -825,7 +825,7 @@ class Mind extends PDO
         if(!empty($options['sort'])){
 
             list($columnName, $sort) = explode(':', $options['sort']);
-            if(in_array($sort, array('asc','desc'))){
+            if(in_array($sort, array('asc', 'ASC', 'desc', 'DESC'))){
                 $sql .= ' ORDER BY '.$columnName.' '.strtoupper($sort);
             }
 
