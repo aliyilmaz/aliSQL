@@ -1388,12 +1388,6 @@ class Mind extends PDO
                             $this->errors[$name][$column] = $message[$column];
                         }
                     break;
-                    // NULL değilse kuralı
-                    case 'nullable':
-                        if(!is_null($data[$name])){
-                            $this->errors[$name][$column] = $message[$column];
-                        }
-                    break;
                     // Geçersiz kural engellendi.
                     default:
                         $this->errors[$name][$column] = 'Invalid rule has been blocked.';
