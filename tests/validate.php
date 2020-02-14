@@ -7,12 +7,13 @@ $Mind = new Mind();
 /**
  * Support Rule;
  * required, email, phone, color, 
- * url, https, http, json, max, min
+ * url, https, http, json, max, min,
+ * numeric
  * 
  */
 
 //  Veriler
- $data = array(
+$data = array(
     'title'             =>  'merhaba dünya',
     'email'             =>  'aliyilmaz.work@gmail.com',
     'phone_number'      =>  '05554248988',
@@ -22,7 +23,9 @@ $Mind = new Mind();
     'http_webpage'      =>  'http://google.com',
     'json_data'         =>  '{ "name":"John", "age":30, "car":null }',
     'content'           =>  'merhaba',
-    'summary'           =>  'merha'
+    'summary'           =>  'merha',
+    'numeric_str'       =>  '12',
+    'birthday'          =>  '1987-02-14'
 
  );
 
@@ -37,7 +40,9 @@ $rule = array(
     'http_webpage'      =>  'http',
     'json_data'         =>  'json',
     'content'           =>  'max:7',
-    'summary'           =>  'min:5'
+    'summary'           =>  'min:5',
+    'numeric_str'       =>  'numeric',
+    'birthday'          =>  'age:34'
 );
 
 // Mesajlar
@@ -51,7 +56,9 @@ $message = array(
     'http'              =>  'Geçerli bir http adresi belirtilmelidir.',
     'json'              =>  'Geçerli bir json verisi belirtilmelidir.',
     'max'               =>  'Maksimum karakter limiti aşılmamalıdır.',
-    'min'               =>  'Minumum karakter limiti belirtilmelidir.'
+    'min'               =>  'Minumum karakter limiti belirtilmelidir.',
+    'numeric'           =>  'Numerik karakter belirtilmelidir.',
+    'age'               =>  'Bu işlem için yaş sınırlaması vardır.'
 
 );
 
@@ -66,3 +73,4 @@ if($Mind->validate($rule, $data, $message)){
     print_r($Mind->errors);
 }
 echo '</pre>';
+

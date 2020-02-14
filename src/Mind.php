@@ -1103,7 +1103,7 @@ class Mind extends PDO
      * @param string   $format
      * @return  bool
      * */
-    public function is_date($date, $format = 'd-m-Y H:i:s'){
+    public function is_date($date, $format = 'Y-m-d'){
 
         $d = DateTime::createFromFormat($format, $date);
 
@@ -1297,6 +1297,24 @@ class Mind extends PDO
     }
 
     /**
+     * is_age
+     * @param $date
+     * @param $age
+     * 
+     */
+    public function is_age($date, $age){
+        
+        $today = date("Y-m-d");
+        $diff = date_diff(date_create($date), date_create($today));
+
+        if($age > $diff->format('%y')){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Validation
      * 
      * @param $rule
@@ -1405,6 +1423,19 @@ class Mind extends PDO
                             $this->errors[$name][$column] = $message[$column];
                         }
                     break;
+                    // Numerik karakter kuralı 
+                    case 'numeric':
+                        if(!is_numeric($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // Yaş sınırlaması kuralı 
+                    case 'age':
+                        if(!is_numeric($extra) OR !$this->is_date($data[$name], 'Y-m-d') OR !$this->is_age($data[$name], $extra)){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    
                     // Geçersiz kural engellendi.
                     default:
                         $this->errors[$name][$column] = 'Invalid rule has been blocked.';
