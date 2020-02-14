@@ -36,6 +36,7 @@ class Mind extends PDO
     public  $timestamp;
     public  $error_status   =  false;
     public  $error_file     =  'app/views/errors/404';
+    public  $errors         =  array();
 
     /**
      * Mind constructor.
@@ -1293,6 +1294,121 @@ class Mind extends PDO
         }
 
         return false;
+    }
+
+    /**
+     * Validation
+     * 
+     * @param $rule
+     * @param $data
+     * @param $message
+     * @return bool
+     */
+    public function validate($rule, $data, $message=array()){
+
+        $rules = array();
+
+        // Kuralların mesajları yoksa kural adları mesaj olarak tanımlanır.
+        if(empty($message)){
+            foreach(array_keys($rule) as $column){
+                $message[$column] = $column;
+            }
+        }
+        
+        foreach($rule as $name => $value){
+            
+            // Tanımsız alanın engellenmesi.
+            if(!isset($data[$name])){
+                $this->errors[$name] = 'There is no such field.';
+                return false;
+            }
+            // Çoklu kuralların atanması.
+            if(strstr($value, '|')){
+                $rules[$name] = explode('|', $value);
+            }
+            // Tekil kuralın atanması
+            if(!strstr($value, '|') AND !empty($value)){
+                $rules[$name][] = $value;
+            }
+
+            // Kuralların uygulamaya konulması
+            foreach($rules[$name] as $column){
+                
+                // İlgili kuralın mesajı yoksa kural adı mesaj olarak belirtilir.
+                if(empty($message[$column])){
+                    $message[$column] = $column;
+                }
+
+                switch ($column) {
+                    // Zorunlu alan kuralı
+                    case 'required':
+                        if(empty($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // E-Posta adresi kuralı
+                    case 'email':
+                        if(!$this->is_email($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // Telefon numarası kuralı
+                    case 'phone':
+                        if(!$this->is_phone($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // Renk kuralı 
+                    case 'color':
+                        if(!$this->is_color($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // URL kuralı 
+                    case 'url':
+                        if(!$this->is_url($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // https kuralı 
+                    case 'https':
+                        if(!$this->is_https($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // http kuralı 
+                    case 'http':
+                        if(!$this->is_http($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // json kuralı 
+                    case 'json':
+                        if(!$this->is_json($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // NULL değilse kuralı
+                    case 'nullable':
+                        if(!is_null($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // Geçersiz kural engellendi.
+                    default:
+                        $this->errors[$name][$column] = 'Invalid rule has been blocked.';
+                    break;
+                }
+                
+            }
+            
+        }
+
+        if(empty($this->errors)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
