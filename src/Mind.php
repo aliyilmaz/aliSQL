@@ -1306,6 +1306,7 @@ class Mind extends PDO
      */
     public function validate($rule, $data, $message=array()){
 
+        $extra = '';
         $rules = array();
 
         // Kuralların mesajları yoksa kural adları mesaj olarak tanımlanır.
@@ -1316,7 +1317,11 @@ class Mind extends PDO
         }
         
         foreach($rule as $name => $value){
-            
+
+            if(strstr($value, ':')){
+                list($val, $extra) = explode(':', $value);
+                $value = $val;
+            }
             // Tanımsız alanın engellenmesi.
             if(!isset($data[$name])){
                 $this->errors[$name] = 'There is no such field.';
@@ -1385,6 +1390,18 @@ class Mind extends PDO
                     // json kuralı 
                     case 'json':
                         if(!$this->is_json($data[$name])){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // maksimum karakter kuralı 
+                    case 'max':
+                        if(strlen($data[$name]) > $extra){
+                            $this->errors[$name][$column] = $message[$column];
+                        }
+                    break;
+                    // minimum karakter kuralı 
+                    case 'min':
+                        if(strlen($data[$name]) < $extra){
                             $this->errors[$name][$column] = $message[$column];
                         }
                     break;
