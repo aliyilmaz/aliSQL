@@ -8,7 +8,7 @@ $Mind = new Mind();
  * Support Rule;
  * required, email, phone, color, 
  * url, https, http, json, max, min,
- * numeric
+ * numeric, age
  * 
  */
 
