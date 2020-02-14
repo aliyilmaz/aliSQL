@@ -1318,9 +1318,9 @@ class Mind extends PDO
         
         foreach($rule as $name => $value){
 
+            // limit ve sütun adı kısmı tanımlandı.
             if(strstr($value, ':')){
-                list($val, $extra) = explode(':', $value);
-                $value = $val;
+                list($value, $extra) = explode(':', $value);
             }
             // Tanımsız alanın engellenmesi.
             if(!isset($data[$name])){
@@ -1395,13 +1395,13 @@ class Mind extends PDO
                     break;
                     // maksimum karakter kuralı 
                     case 'max':
-                        if(strlen($data[$name]) > $extra){
+                        if(strlen($data[$name]) > $extra OR !is_numeric($extra)){
                             $this->errors[$name][$column] = $message[$column];
                         }
                     break;
                     // minimum karakter kuralı 
                     case 'min':
-                        if(strlen($data[$name]) < $extra){
+                        if(strlen($data[$name]) < $extra OR !is_numeric($extra)){
                             $this->errors[$name][$column] = $message[$column];
                         }
                     break;
