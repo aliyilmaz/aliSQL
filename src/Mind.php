@@ -1442,7 +1442,7 @@ class Mind extends PDO
                             $this->errors[$column][$name] = $message[$name];
                         }
                     break;
-                    // Maksimum yaş sınırlaması kuralı 
+                    // Benzersiz parametre kuralı 
                     case 'unique':
                         if($this->do_have($extra, $data[$column], $column)){
                             $this->errors[$column][$name] = $message[$name];
