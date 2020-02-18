@@ -1448,6 +1448,22 @@ class Mind extends PDO
                             $this->errors[$column][$name] = $message[$name];
                         }
                     break;
+                    // Doğrulama kuralı 
+                    case 'bool':
+                        // Geçerlilik kontrolü
+                        $acceptable = array(true, false, 'true', 'false', 0, 1, '0', '1');
+                        if(!in_array($data[$column], $acceptable, true)){
+                            $this->errors[$column][$name] = 'True, false, 0 or 1 must be specified.';
+                        } else {
+                            if(in_array($extra, $acceptable, true)){
+                                // Karşılaştırma kuralı
+                                if(strcmp((string) $data[$column], (string) $extra == 'true')){
+                                    $this->errors[$column][$name] = 'Incompatibility was detected.';
+                                } 
+                            }
+                            
+                        }
+                        break;
                     // Geçersiz kural engellendi.
                     default:
                         $this->errors[$column][$name] = 'Invalid rule has been blocked.';

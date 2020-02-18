@@ -27,7 +27,8 @@ $data = array(
     'summary'           =>  'merhab',
     'numeric_str'       =>  12,
     'birthday'          =>  '1987-02-14',
-    'register_date'     =>  '2020-02-18'
+    'register_date'     =>  '2020-02-18',
+    'status'            =>  1
 
  );
 
@@ -45,7 +46,8 @@ $rule = array(
     'summary'           =>  'min-num:6|max-num:10',
     'numeric_str'       =>  'numeric',
     'birthday'          =>  'min-age:34|max-age:40',
-    'register_date'     =>  'date'
+    'register_date'     =>  'date',
+    'status'            =>  'bool'
 );
 
 // Mesajlar
@@ -64,7 +66,8 @@ $message = array(
     'min-age'           =>  'Minumum yaştan küçük bir yaş belirtemezsiniz.',
     'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtemezsiniz.',
     'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
-    'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.'
+    'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.',
+    'bool'              =>  'Doğrulama başarısız.'
 
 );
 
