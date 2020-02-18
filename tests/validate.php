@@ -8,13 +8,13 @@ $Mind = new Mind();
  * Support Rule;
  * required, email, phone, color, 
  * url, https, http, json, max, min,
- * numeric, age
+ * min-age, max-age, date, numeric
  * 
  */
 
 //  Veriler
 $data = array(
-    'title'             =>  'merhaba dünya',
+    'title'             =>  'Merhaba dünya',
     'email'             =>  'aliyilmaz.work@gmail.com',
     'phone_number'      =>  '05554248988',
     'background_color'  =>  '#ffffff',
@@ -23,9 +23,10 @@ $data = array(
     'http_webpage'      =>  'http://google.com',
     'json_data'         =>  '{ "name":"John", "age":30, "car":null }',
     'content'           =>  'merhaba',
-    'summary'           =>  'merha',
-    'numeric_str'       =>  '12',
-    'birthday'          =>  '1987-02-14'
+    'summary'           =>  'merhab',
+    'numeric_str'       =>  12,
+    'birthday'          =>  '1987-02-14',
+    'register_date'     =>  '2020-02-18'
 
  );
 
@@ -40,9 +41,10 @@ $rule = array(
     'http_webpage'      =>  'http',
     'json_data'         =>  'json',
     'content'           =>  'max:7',
-    'summary'           =>  'min:5',
+    'summary'           =>  'min:6|max:10',
     'numeric_str'       =>  'numeric',
-    'birthday'          =>  'age:34'
+    'birthday'          =>  'min-age:34|max-age:40',
+    'register_date'     =>  'date'
 );
 
 // Mesajlar
@@ -58,7 +60,9 @@ $message = array(
     'max'               =>  'Maksimum karakter limiti aşılmamalıdır.',
     'min'               =>  'Minumum karakter limiti belirtilmelidir.',
     'numeric'           =>  'Numerik karakter belirtilmelidir.',
-    'age'               =>  'Bu işlem için yaş sınırlaması vardır.'
+    'min-age'           =>  'Minumum yaştan küçük bir yaş belirtemezsiniz.',
+    'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtemezsiniz.',
+    'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.'
 
 );
 
