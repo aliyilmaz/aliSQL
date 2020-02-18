@@ -1356,13 +1356,13 @@ class Mind extends PDO
                 }
                 switch ($name) {
                     // minimum karakter kuralı 
-                    case 'min':
+                    case 'min-num':
                         if(strlen($data[$column])<$extra){
                             $this->errors[$column][$name] = $message[$name];
                         }
                     break;
                     // maksimum karakter kuralı 
-                    case 'max':
+                    case 'max-num':
                         if(strlen($data[$column])>$extra){
                             $this->errors[$column][$name] = $message[$name];
                         }
@@ -1439,6 +1439,12 @@ class Mind extends PDO
                     // Maksimum yaş sınırlaması kuralı 
                     case 'max-age':
                         if(!is_numeric($extra) OR !$this->is_date($data[$column], 'Y-m-d') OR !$this->is_age($data[$column], $extra)){
+                            $this->errors[$column][$name] = $message[$name];
+                        }
+                    break;
+                    // Maksimum yaş sınırlaması kuralı 
+                    case 'unique':
+                        if($this->do_have($extra, $data[$column], $column)){
                             $this->errors[$column][$name] = $message[$name];
                         }
                     break;

@@ -8,13 +8,14 @@ $Mind = new Mind();
  * Support Rule;
  * required, email, phone, color, 
  * url, https, http, json, max, min,
- * min-age, max-age, date, numeric
+ * min-age, max-age, date, numeric,
+ * unique
  * 
  */
 
 //  Veriler
 $data = array(
-    'title'             =>  'Merhaba dünya',
+    'title'             =>  'Merhaba dünya1',
     'email'             =>  'aliyilmaz.work@gmail.com',
     'phone_number'      =>  '05554248988',
     'background_color'  =>  '#ffffff',
@@ -32,7 +33,7 @@ $data = array(
 
 // Kurallar
 $rule = array(
-    'title'             =>  'required',
+    'title'             =>  'required|unique:posts',
     'email'             =>  'email',
     'phone_number'      =>  'phone',
     'background_color'  =>  'color',
@@ -40,8 +41,8 @@ $rule = array(
     'https_webpage'     =>  'https',
     'http_webpage'      =>  'http',
     'json_data'         =>  'json',
-    'content'           =>  'max:7',
-    'summary'           =>  'min:6|max:10',
+    'content'           =>  'max-num:7',
+    'summary'           =>  'min-num:6|max-num:10',
     'numeric_str'       =>  'numeric',
     'birthday'          =>  'min-age:34|max-age:40',
     'register_date'     =>  'date'
@@ -57,12 +58,13 @@ $message = array(
     'https'             =>  'Geçerli bir https adresi belirtilmelidir.',
     'http'              =>  'Geçerli bir http adresi belirtilmelidir.',
     'json'              =>  'Geçerli bir json verisi belirtilmelidir.',
-    'max'               =>  'Maksimum karakter limiti aşılmamalıdır.',
-    'min'               =>  'Minumum karakter limiti belirtilmelidir.',
+    'max-num'           =>  'Maksimum karakter limiti aşılmamalıdır.',
+    'min-num'           =>  'Minumum karakter limiti belirtilmelidir.',
     'numeric'           =>  'Numerik karakter belirtilmelidir.',
     'min-age'           =>  'Minumum yaştan küçük bir yaş belirtemezsiniz.',
     'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtemezsiniz.',
-    'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.'
+    'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
+    'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.'
 
 );
 
