@@ -1233,7 +1233,7 @@ class Mind extends PDO
      */
     public function is_url($url=null){
 
-        if(!isset($url)){
+        if(!is_string($url)){
             return false;
         }
 
