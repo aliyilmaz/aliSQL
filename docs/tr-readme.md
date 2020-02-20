@@ -1,6 +1,6 @@
 # Mind nedir?
 
-Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sınıfıdır. Yeni tasarım desenleri, uygulama çatıları ve uygulamalar oluşturmak için çeşitli araçlar sunar. 
+Mind, geliştiriciler için tasarlanmış PHP kod çerçevesidir. Yeni tasarım desenleri ve uygulama çerçeveleri oluşturmak için çeşitli araçlar sunar. 
 
 #### Güvenlik
 
