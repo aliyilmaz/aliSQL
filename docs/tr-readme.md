@@ -63,7 +63,7 @@ veya
 
 ----------
 
-## Kurulum
+## Giriş
 
 **Mind.php** dosyasını projeye **require_once** gibi bir yöntemle dahil ettikten sonra, **extends** veya **new Mind()** komutu yardımıyla sınıfı kullanıma hazır hale getirmek mümkündür.
 
@@ -234,7 +234,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 ## __construct()
 
-[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
+[Kurulum](#Introduction) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
 
 ----------
 

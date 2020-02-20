@@ -63,16 +63,16 @@ or
 
 ----------
 
-## Kurulum
+## Introduction
 
-**Mind.php** dosyasını projeye **require_once** gibi bir yöntemle dahil ettikten sonra, **extends** veya **new Mind()** komutu yardımıyla sınıfı kullanıma hazır hale getirmek mümkündür.
+After including **Mind.php** to the project with a method like **require_once**, it is possible to make the class ready for use with the help of **extends** or **new Mind()** command.
 
-#### Örnek
+#### Example
 
     require_once('./Mind.php');
     $Mind = new Mind();
 
-veya
+or
 
     require_once('./Mind.php');
     class ClassName extends Mind{
@@ -234,7 +234,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 
 ## __construct()
 
-[Kurulum](#kurulum) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
+[Kurulum](#Introduction) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
 
 ----------
 
