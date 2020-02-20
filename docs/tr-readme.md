@@ -4,19 +4,19 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sın�
 
 #### Güvenlik
 
-*   **$_GET**, **$_POST** ve **$_FILES** isteklerini filtreden geçirerek, **XSS** gibi çeşitli saldırı kodlarını etkisiz hale getirir.
-*   **Ekleme**, **Okuma**, **Güncelleme**, **Silme** işlemlerinin **sql injection** gibi istismar yöntemlerine karşı korumalı olarak gerçekleşmesini sağlar. 
-*   Aksi belirtilmedikçe tüm dizinlere erişim engellediği için projeye ait dosya ve klasör hiyerarşisi güvendedir.
+*   **XSS** gibi çeşitli saldırı kodlarını devre dışı bırakarak **$_GET**, **$_POST** ve **$_FILES** isteklerini güvende tutar.
+*   **Ekle**, **Okuma**, **Güncelleme**, **Sil** işlemlerinin **SQL enjeksiyonu** gibi sömürü yöntemlerine karşı korunmasını sağlar. 
+*   Aksi belirtilmedikçe, projenin dosya ve klasör hiyerarşisi güvenlidir, çünkü tüm dizinlere erişimi engeller.
  
- #### Kolaylık
+ #### Basitlik
  
- *  Temel **PHP** bilgisine sahip olmanız yeterlidir.
- *  Tek veya çoklu dosyaları kolaylıkla yükleyebilirsiniz.
+ *  Temel **PHP** bilgisine sahip olmak yeterlidir.
+ *  Tek veya birden fazla dosyayı kolayca yükleyebilirsiniz.
  *  Silinecek kayıtla ilişkili başka veritabanı tablolarındaki kayıtların silinmesi için yada birçok veritabanı işlemi için SQL yazmanıza gerek yoktur.  
  *  Sunucunun **erişime açık** varlıklarını, **klasör/dosya** hiyerarşisine bağlı kalarak indirmek kolaydır.
- *  Oyun oynar gibi web sitelerinden veri elde eden **BOT**'lar, **API** servisleri oluşturmak kolaydır.
- *  **Mind** gerekli **.htaccess** dosyalarını kendisi otomatik olarak oluşturur.
- *  Projenin herhangi bir rotasını veya o rotaya tanımlanan görevlerin konumunu değiştirmek kolaydır.
+ *  **BOT** ve **API** uygulamalarını oluşturmak kolaydır.
+ *  **Mind** otomatik olarak **.htaccess** dosyaları oluşturur.
+ *  Projenin herhangi bir rotasını veya o rotada tanımlanan görevlerin konumunu değiştirmek kolaydır.
  *  Bir çok kontrol metoduna sahip olduğundan, ayrıca bir pakete ihtiyaç duymadan kontrol yapıları oluşturmak kolaydır.
  
 
@@ -32,7 +32,11 @@ Mind, geliştiriciler için tasarlanmış ücretsiz ve özgür bir **PHP** sın�
 ---------- 
 
 ## Edinme
-Mind sınıfını [GitHub sayfasından](https://github.com/aliyilmaz/Mind/archive/master.zip) indirebilirsiniz.
+
+Mind sınıfını edinmenin iki yolu vardır;
+
+- Mind [deposu](https://github.com/aliyilmaz/Mind/archive/master.zip)
+- Project [deposu](https://github.com/aliyilmaz/project/archive/master.zip)
 
 ---------- 
 
