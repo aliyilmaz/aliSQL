@@ -2,7 +2,7 @@
 
 
 
-Mind is a free and free PHP class designed for developers. It offers a variety of tools for creating new design patterns and application frameworks.
+Mind is the PHP code framework designed for developers. It offers a variety of tools for creating new design patterns and application frameworks.
  
 
 * [Documents](https://github.com/aliyilmaz/Mind/tree/master/docs) 
