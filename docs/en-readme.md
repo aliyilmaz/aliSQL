@@ -4,7 +4,7 @@ Mind is a free and free PHP class designed for developers. It offers a variety o
 
 #### Security
 
-*   Keeps requests for **$_ GET**, **$_ POST** and **$_FILES** safe by disabling various attack codes like **XSS**.
+*   Keeps requests for **$_GET**, **$_POST** and **$_FILES** safe by disabling various attack codes like **XSS**.
 *   It ensures that **Add**, **Read**, **Update**, **Delete** operations are protected against exploitation methods such as **SQL injection**. 
 *   Unless otherwise stated, the file and folder hierarchy of the project is safe because it blocks access to all directories.
  
