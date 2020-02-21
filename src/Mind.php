@@ -1356,6 +1356,34 @@ class Mind extends PDO
     }
 
     /**
+     * ipv4 verification
+     *
+     * @params string $ip
+     * @return bool
+     */
+    public function is_ipv4($ip){
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * ipv6 verification
+     *
+     * @params string $ip
+     * @return bool
+     */
+    public function is_ipv6($ip){
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Validation
      * 
      * @param array $rule
@@ -1506,13 +1534,25 @@ class Mind extends PDO
                             }
                             
                         }
-                        break;
+                    break;
                     // IBAN doğrulama kuralı
                     case 'iban':
                         if(!$this->is_iban($data[$column])){
                             $this->errors[$column][$name] = $message[$name];
                         }
-                        break;
+                    break;
+                    // ipv4 doğrulama kuralı
+                    case 'ipv4':
+                        if(!$this->is_ipv4($data[$column])){
+                            $this->errors[$column][$name] = $message[$name];
+                        }
+                    break;
+                    // ipv6 doğrulama kuralı
+                    case 'ipv6':
+                        if(!$this->is_ipv6($data[$column])){
+                            $this->errors[$column][$name] = $message[$name];
+                        }
+                    break;
                     // Geçersiz kural engellendi.
                     default:
                         $this->errors[$column][$name] = 'Invalid rule has been blocked.';
