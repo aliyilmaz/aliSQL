@@ -1,33 +1,6 @@
 # What is Mind?
 
-Mind is the PHP code framework designed for developers. It offers a variety of tools for creating new design patterns and application frameworks. 
-
-#### Security
-
-*   Keeps requests for **$_GET**, **$_POST** and **$_FILES** safe by disabling various attack codes like **XSS**.
-*   It ensures that **Add**, **Read**, **Update**, **Delete** operations are protected against exploitation methods such as **SQL injection**. 
-*   Unless otherwise stated, the file and folder hierarchy of the project is safe because it blocks access to all directories.
- 
- #### Simplicity
- 
- *  It is enough to have basic **PHP** knowledge.
- *  You can easily upload single or multiple files.
- *  You do not need to write SQL to delete records in other database tables associated with the record to be deleted, or for many database operations.  
- *  It is easy to download the server's **accessible** assets based on the **folder/file** hierarchy.
- *  **BOT** and **API** application are easy to create.
- *  **Mind** automatically creates **.htaccess** files itself.
- *  It is easy to change any route of the project or the position of the tasks defined on that route.
- *  Since it has many control methods, it is easy to create control structures without the need for a package.
- 
-
- #### Speed
- 
- *  It uses PHP's PDO class for database operations.
- *  It allows fast queries by taking care to use column names in SQL queries.
- *  Performs tasks defined on the route address of the user. In this way, it is not complicated like the kernel of many modern frameworks.
- 
- 
- 
+Mind is the PHP code framework designed for developers. It offers a variety of solutions for creating design patterns, applications and code frameworks. 
  
 ---------- 
 

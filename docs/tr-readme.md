@@ -1,6 +1,6 @@
 # Mind nedir?
 
-Mind, geliştiriciler için tasarlanmış PHP kod çerçevesidir. Yeni tasarım desenleri ve uygulama çerçeveleri oluşturmak için çeşitli araçlar sunar. 
+Mind, geliştiriciler için tasarlanmış PHP kod çerçevesidir. Tasarım desenleri, uygulamalar ve kod çerçeveleri oluşturmak için çeşitli çözümler sunar. 
 
 #### Güvenlik
 

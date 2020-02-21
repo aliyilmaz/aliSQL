@@ -1,9 +1,7 @@
 ﻿# Mind 
 
 
-
-Mind is the PHP code framework designed for developers. It offers a variety of tools for creating new design patterns and application frameworks.
- 
+Mind is the PHP code framework designed for developers. It offers a variety of solutions for creating design patterns, applications and code frameworks.  
 
 * [Documents](https://github.com/aliyilmaz/Mind/tree/master/docs) 
   * [Turkish (Completed)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
@@ -19,7 +17,7 @@ Mind is the PHP code framework designed for developers. It offers a variety of t
 ## Install
 
   * Download the [repository](https://github.com/aliyilmaz/project/archive/master.zip) and extract it to the server.
-  * Adjust [database settings](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#veritaban%C4%B1-ayarlar%C4%B1)
+  * Adjust [database settings](https://github.com/aliyilmaz/Mind/blob/master/docs/en-readme.md#database-settings)
   * In the address line, type the path to the directory.
 
 
