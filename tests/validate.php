@@ -9,7 +9,7 @@ $Mind = new Mind();
  * required, email, phone, color, 
  * url, https, http, json, max, min,
  * min-age, max-age, date, numeric,
- * unique, bool
+ * unique, bool, IBAN
  * 
  */
 
@@ -28,7 +28,8 @@ $data = array(
     'numeric_str'       =>  12,
     'birthday'          =>  '1987-02-14',
     'register_date'     =>  '2020-02-18',
-    'status'            =>  1
+    'status'            =>  1,
+    'ibanNumber'        =>  'SE35 5000 0000 0549 1000 0003'
 
  );
 
@@ -47,7 +48,8 @@ $rule = array(
     'numeric_str'       =>  'numeric',
     'birthday'          =>  'min-age:34|max-age:40',
     'register_date'     =>  'date',
-    'status'            =>  'bool'
+    'status'            =>  'bool',
+    'ibanNumber'        =>  'iban'
 );
 
 // Mesajlar
@@ -67,7 +69,8 @@ $message = array(
     'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtemezsiniz.',
     'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
     'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.',
-    'bool'              =>  'Doğrulama başarısız.'
+    'bool'              =>  'Doğrulama başarısız.',
+    'iban'              =>  'IBAN hesabı doğrulanamadı.'
 
 );
 
