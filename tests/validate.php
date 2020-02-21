@@ -32,6 +32,7 @@ $data = array(
     'ibanNumber'        =>  'SE35 5000 0000 0549 1000 0003',
     'ipv4Address'       =>  '127.0.0.1',
     'ipv6Address'       =>  '2001:0db8:85a3:08d3:1319:8a2e:0370:7334',
+    'bloodGroup'        =>  '0+'
 
 
  );
@@ -54,7 +55,8 @@ $rule = array(
     'status'            =>  'bool',
     'ibanNumber'        =>  'iban',
     'ipv4Address'       =>  'ipv4',
-    'ipv6Address'       =>  'ipv6'
+    'ipv6Address'       =>  'ipv6',
+    'bloodGroup'        =>  'blood:0+'
 );
 
 // Mesajlar
@@ -77,7 +79,8 @@ $message = array(
     'bool'              =>  'Doğrulama başarısız.',
     'iban'              =>  'IBAN hesabı doğrulanamadı.',
     'ipv4'              =>  'ipv4 söz diziminde bir IP adresi belirtilmelidir.',
-    'ipv6'              =>  'ipv6 söz diziminde bir IP adresi belirtilmelidir.'
+    'ipv6'              =>  'ipv6 söz diziminde bir IP adresi belirtilmelidir.',
+    'blood'             =>  'Yönergelerde bulunan bir kan grubu belirtilmelidir.'
 
 );
 

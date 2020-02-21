@@ -1384,6 +1384,62 @@ class Mind extends PDO
     }
 
     /**
+     * Blood group verification
+     *
+     * @param $blood
+     * @param string $needle
+     * @return bool
+     */
+    public function is_blood($blood, $needle = null){
+
+        $bloods = array(
+            'AB+'=> array(
+                'AB+', 'AB-', 'B+', 'B-', 'A+', 'A-', '0+', '0-'
+            ),
+            'AB-'=> array(
+                'AB-', 'B-', 'A-', '0-'
+            ),
+            'B+'=> array(
+                'B+', 'B2-', '0+', '0-'
+            ),
+            'B-'=> array(
+                'B-', '0-'
+            ),
+            'A+'=> array(
+                'A+', 'A-', '0+', '0-'
+            ),
+            'A-'=> array(
+                'A-', '0-'
+            ),
+            '0+'=> array(
+                '0+', '0-'
+            ),
+            '0-'=> array(
+                '0-'
+            )
+        );
+
+        //  hasta ve donör parametreleri filtreden geçirilir
+        $blood = str_replace(array('RH', ' '), '', mb_strtoupper($blood));
+        $needle = str_replace(array('RH', ' '), '', mb_strtoupper($needle));
+
+        $map = array_keys($bloods);
+
+        // Kan grubu kontrolü
+        if(in_array($blood, $map) AND $needle == null){
+            return true;
+        }
+
+        // Donör uyumu kontrolü
+        if(in_array($blood, $map) AND in_array($needle, $bloods[$blood]) AND $needle != null){
+            return true;
+        }
+
+        return false;
+
+    }
+
+    /**
      * Validation
      * 
      * @param array $rule
@@ -1550,6 +1606,12 @@ class Mind extends PDO
                     // ipv6 doğrulama kuralı
                     case 'ipv6':
                         if(!$this->is_ipv6($data[$column])){
+                            $this->errors[$column][$name] = $message[$name];
+                        }
+                    break;
+                    // kan grubu ve uyumu kuralı
+                    case 'blood':
+                        if(!$this->is_blood($data[$column], $extra)){
                             $this->errors[$column][$name] = $message[$name];
                         }
                     break;
