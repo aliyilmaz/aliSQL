@@ -1312,7 +1312,7 @@ class Mind extends PDO
         $today = date("Y-m-d");
         $diff = date_diff(date_create($date), date_create($today));
 
-        if($age > $diff->format('%y')){
+        if($age >= $diff->format('%y')){
             return true;
         } else {
             return false;
