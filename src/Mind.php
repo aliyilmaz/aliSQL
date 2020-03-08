@@ -1634,7 +1634,7 @@ class Mind extends PDO
                             $this->errors[$column][$name] = $message[$name];
                         }
                     break;
-                    // kan grubu ve uyumu kuralı
+                    // Koordinat kuralı
                     case 'coordinate':
 
                         if(!strstr($data[$column], ',')){
