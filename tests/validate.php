@@ -9,7 +9,7 @@ $Mind = new Mind();
  * required, email, phone, color, 
  * url, https, http, json, max, min,
  * min-age, max-age, date, numeric,
- * unique, bool, IBAN, ipv4,
+ * unique, bool, iban, ipv4,
  * ipv6, blood, coordinate
  * 
  */
