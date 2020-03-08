@@ -1,33 +1,6 @@
 # Mind nedir?
 
 Mind, geliştiriciler için tasarlanmış PHP kod çerçevesidir. Tasarım desenleri, uygulamalar ve kod çerçeveleri oluşturmak için çeşitli çözümler sunar. 
-
-#### Güvenlik
-
-*   **XSS** gibi çeşitli saldırı kodlarını devre dışı bırakarak **$_GET**, **$_POST** ve **$_FILES** isteklerini güvende tutar.
-*   **Ekle**, **Okuma**, **Güncelleme**, **Sil** işlemlerinin **SQL enjeksiyonu** gibi sömürü yöntemlerine karşı korunmasını sağlar. 
-*   Aksi belirtilmedikçe, projenin dosya ve klasör hiyerarşisi güvenlidir, çünkü tüm dizinlere erişimi engeller.
- 
- #### Basitlik
- 
- *  Temel **PHP** bilgisine sahip olmak yeterlidir.
- *  Tek veya birden fazla dosyayı kolayca yükleyebilirsiniz.
- *  Silinecek kayıtla ilişkili başka veritabanı tablolarındaki kayıtların silinmesi için yada birçok veritabanı işlemi için SQL yazmanıza gerek yoktur.  
- *  Sunucunun **erişime açık** varlıklarını, **klasör/dosya** hiyerarşisine bağlı kalarak indirmek kolaydır.
- *  **BOT** ve **API** uygulamalarını oluşturmak kolaydır.
- *  **Mind** otomatik olarak **.htaccess** dosyaları oluşturur.
- *  Projenin herhangi bir rotasını veya o rotada tanımlanan görevlerin konumunu değiştirmek kolaydır.
- *  Bir çok kontrol metoduna sahip olduğundan, ayrıca bir pakete ihtiyaç duymadan kontrol yapıları oluşturmak kolaydır.
- 
-
- #### Hız
- 
- *  Veritabanı işlemleri için PHP'nin PDO sınıfını kullanır.
- *  SQL sorgularında sütun adlarını kullanmaya özen göstererek hızlı sorgular yapmaya olanak tanır.
- *  Kullanıcının bulunduğu rota adresine tanımlanan görevleri gerçekleştirir. Bu sayede bir çok modern framework'ün kerneli gibi karışık olmaz.
- 
- 
- 
  
 ---------- 
 
