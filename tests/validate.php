@@ -9,7 +9,8 @@ $Mind = new Mind();
  * required, email, phone, color, 
  * url, https, http, json, max, min,
  * min-age, max-age, date, numeric,
- * unique, bool, IBAN
+ * unique, bool, IBAN, ipv4,
+ * ipv6, blood, coordinate
  * 
  */
 
@@ -32,7 +33,8 @@ $data = array(
     'ibanNumber'        =>  'SE35 5000 0000 0549 1000 0003',
     'ipv4Address'       =>  '127.0.0.1',
     'ipv6Address'       =>  '2001:0db8:85a3:08d3:1319:8a2e:0370:7334',
-    'bloodGroup'        =>  '0+'
+    'bloodGroup'        =>  '0+',
+    'coordinates'       =>  '41.008610,28.971111'
 
 
  );
@@ -56,7 +58,8 @@ $rule = array(
     'ibanNumber'        =>  'iban',
     'ipv4Address'       =>  'ipv4',
     'ipv6Address'       =>  'ipv6',
-    'bloodGroup'        =>  'blood:0+'
+    'bloodGroup'        =>  'blood:0+',
+    'coordinates'       =>  'required|coordinate'
 );
 
 // Mesajlar
@@ -80,7 +83,8 @@ $message = array(
     'iban'              =>  'IBAN hesabı doğrulanamadı.',
     'ipv4'              =>  'ipv4 söz diziminde bir IP adresi belirtilmelidir.',
     'ipv6'              =>  'ipv6 söz diziminde bir IP adresi belirtilmelidir.',
-    'blood'             =>  'Yönergelerde bulunan bir kan grubu belirtilmelidir.'
+    'blood'             =>  'Yönergelerde bulunan bir kan grubu belirtilmelidir.',
+    'coordinate'        =>  'Geçerli bir koordinat belirtmelisiniz'
 
 );
 

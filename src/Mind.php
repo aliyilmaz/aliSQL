@@ -1447,7 +1447,15 @@ class Mind extends PDO
      * @return bool `true` if the coordinate is valid, `false` if not
      */
     public function is_coordinate($lat, $long) {
-        return preg_match('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?),[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', $lat.','.$long);
+
+        $lat_pattern  = '/\A[+-]?(?:90(?:\.0{1,18})?|\d(?(?<=9)|\d?)\.\d{1,18})\z/x';
+        $long_pattern = '/\A[+-]?(?:180(?:\.0{1,18})?|(?:1[0-7]\d|\d{1,2})\.\d{1,18})\z/x';
+
+        if (preg_match($lat_pattern, $lat) && preg_match($long_pattern, $long)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -1625,6 +1633,27 @@ class Mind extends PDO
                         if(!$this->is_blood($data[$column], $extra)){
                             $this->errors[$column][$name] = $message[$name];
                         }
+                    break;
+                    // kan grubu ve uyumu kuralı
+                    case 'coordinate':
+
+                        if(!strstr($data[$column], ',')){
+                            $this->errors[$column][$name] = $message[$name];
+                        } else {
+
+                            $coordinates = explode(',', $data[$column]);
+                            if(count($coordinates)==2){
+
+                                if(!$this->is_coordinate($coordinates[0], $coordinates[1])){
+                                    $this->errors[$column][$name] = $message[$name];
+                                }
+
+                            } else {
+                                $this->errors[$column][$name] = $message[$name];
+                            }
+
+                        }
+
                     break;
                     // Geçersiz kural engellendi.
                     default:
