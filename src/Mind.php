@@ -1471,7 +1471,6 @@ class Mind extends PDO
 
         $extra = '';
         $rules = array();
-        $result = array();
 
         foreach($rule as $name => $value){
             
@@ -1644,7 +1643,9 @@ class Mind extends PDO
                             $coordinates = explode(',', $data[$column]);
                             if(count($coordinates)==2){
 
-                                if(!$this->is_coordinate($coordinates[0], $coordinates[1])){
+                                list($lat, $long) = $coordinates;
+
+                                if(!$this->is_coordinate($lat, $long)){
                                     $this->errors[$column][$name] = $message[$name];
                                 }
 
