@@ -1583,13 +1583,15 @@ Eğer geçerli bir kan grubu belirtilmiş ise yada uyumlu kan grupları belirtil
         echo 'Hayır, bu bir kan grubu değildir.';
     }
     
-    echo '<br>';
-    
-    if($this->is_blood('0+', '0+')){
-        echo 'Evet, bu uyumlu bir kan grubudur.';
-    } else {
-        echo 'Hayır, bu uyumsuz bir kan grubudur.';
-    }
+veya
+
+        echo '<br>';
+        
+        if($this->is_blood('0+', '0+')){
+            echo 'Evet, bu uyumlu bir kan grubudur.';
+        } else {
+            echo 'Hayır, bu uyumsuz bir kan grubudur.';
+        }
 
 
 ----------
