@@ -180,6 +180,14 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_http](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_http)
 -   [is_https](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_https)
 -   [is_json](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_json)
+-   [is_age](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_age)
+-   [is_iban](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_iban)
+-   [is_ipv4](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv4)
+-   [is_ipv6](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv6)
+-   [is_blood](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_blood)
+-   [is_latitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_latitude)
+-   [is_longitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_longitude)
+-   [is_coordinate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_coordinate)
 
 ##### Yardımcı
 
@@ -202,12 +210,13 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [upload](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#upload)
 -   [download](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#download)
 -   [get_contents](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#get_contents)
+-   [distanceMeter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#distanceMeter)
 
 ----------
 
 ## __construct()
 
-[Kurulum](#Introduction) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
+[Kurulum](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#Introduction) aşamasında belirtilen bilgiler ışığında veri tabanı bağlantısı sağlamak ve [Etkin Metodllar](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#etkin-metodlar) kısmında yeralan metodların etkinleştirilmesi için kullanılır. 
 
 ----------
 
@@ -1162,7 +1171,7 @@ veya
 
 ## is_date()
 
-Bu fonksiyon kendisiyle paylaşılan tarih biçiminin gerçek olup olmadığını kontrol etmek amacıyla kullanılır, tarih ve format `string` olarak gönderilebilir. `$date` ve `01.02.1987` tarihi, `$format` ve `d.m.Y` tarihin hangi formatta kontrol edilmesi gerektiği bilgisini temsil etmektedir. Format parametresinin belirtilmesi isteğe bağlıdır, belirtilmediğinde tarih formatının varsayılan olarak `d-m-Y H:i:s` olduğu varsayılır. Eğer tarih geçerliyse yanıt olarak `true` değeri döndürülür, geçerli değilse `false` değeri döndürülür.
+Bu fonksiyon kendisiyle paylaşılan tarih biçiminin gerçek olup olmadığını kontrol etmek amacıyla kullanılır, tarih ve format `string` olarak gönderilebilir. `$date` ve `01.02.1987` tarihi, `$format` ve `d.m.Y` tarihin hangi formatta kontrol edilmesi gerektiği bilgisini temsil etmektedir. Format parametresinin belirtilmesi isteğe bağlıdır, belirtilmediğinde tarih formatının varsayılan olarak `Y-m-d H:i:s` olduğu varsayılır. Eğer tarih geçerliyse yanıt olarak `true` değeri döndürülür, geçerli değilse `false` değeri döndürülür.
 ##### Örnek
 
     $date = '01.02.1987';
@@ -1290,7 +1299,9 @@ veya
 ## is_color()
 
 Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığını kontrol etmeye yarar, eğer söz konusu değer transparent veya tüm tarayıcılar ile uyumlu olan 148 renk isminden biriyse yada HEX, RGB, RGBA, HSL, HSLA ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. `$color` renk değerini temsil etmektedir.
+
 ##### Örnek
+
 ##### TRANSPARENT
 
       $color = 'transparent';
@@ -1414,6 +1425,7 @@ veya
 
 Kendisiyle paylaşılan `string` yapıdaki verinin HTTP söz diziminde yazılıp yazılmadığını kontrol etmek amacıyla kullanılır, Eğer söz konusu veri bir HTTP söz dizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
 
+##### Örnek
 
     $url = 'http://www.google.com/';
     if($this->is_http($url)){
@@ -1429,6 +1441,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin HTTP söz diziminde yazılıp
 
 Kendisiyle paylaşılan `string` yapıdaki verinin HTTPS sözdiziminde yazılıp yazılmadığını kontrol etmek amacıyla kullanılır, Eğer söz konusu veri bir HTTPS sözdizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
 
+##### Örnek
 
     $url = 'http://www.google.com/';
     if($this->is_http($url)){
@@ -1445,6 +1458,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin HTTPS sözdiziminde yazılıp
 
 Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadığını kontrol etmek amacıyla kullanılır, `$schema` json verisini temsil etmektedir. Eğer söz konusu veri bir json sözdizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
 
+##### Örnek
 
     $schema = array(
         'test'=>'ali'
@@ -1457,6 +1471,188 @@ Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadı
     }
 
     
+        
+    
+
+## is_age()
+
+Yaş sınırlamasına ihtiyaç duyulan yerlerde kullanılır. Kendisiyle paylaşılan doğum tarihini mevcut tarihten çıkarır, elde edilen sonuç eğer belirtilen yaş ile aynı veya o yaştan büyük ise `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    echo '<br>';
+    if($this->is_age('1987-03-17', 35)){
+        echo 'Age is appropriate.';
+    } else {
+        echo 'Age is not appropriate.';
+    }
+    
+veya
+
+    echo '<br>';
+    if($this->is_age('1987-03-17', 32)){
+        echo 'Yaş uygundur.';
+    } else {
+        echo 'Yaş uygun değildir.';
+    }
+
+veya
+
+    echo '<br>';
+    if($this->is_age('1987-03-17', 35)){
+        echo 'Yaş uygundur.';
+    } else {
+        echo 'Yaş uygun değildir.';
+    }
+    
+        
+    
+## is_iban()
+
+Kendisiyle paylaşılan değerin geçerli bir IBAN numarası olup olmadığını kontrol etmek amacıyla kullanılır. Eğer değer bir IBAN numarası söz dizimine sahipse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    if($this->is_iban('SE35 500 0000 0549 1000 0003')){
+        echo 'Bu bir IBAN numarasıdır.';
+    } else {
+        echo 'Bu bir IBAN numarası değildir.';
+    }
+
+
+## is_ipv4()
+
+Kendisiyle paylaşılan değerin `ipv4` söz diziminde olup olmadığını kontrol etmek için kullanılır. Eğer değer `ipv4` söz diziminde ise true yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    echo '<br>';
+    if($this->is_ipv4('208.111.171.236')){
+        echo 'Bu bir ipv4 adresdir.';
+    } else {
+        echo 'Bu bir ipv4 adres değildir.';
+    }
+        
+veya 
+
+
+    echo'<br>';
+    if($this->is_ipv4('256.111.171.236')){
+        echo 'Bu bir ipv4 adresdir.';
+    } else {
+        echo 'Bu bir ipv4 adres değildir.';
+    }
+
+
+## is_ipv6()
+
+Kendisiyle paylaşılan değerin `ipv6` söz diziminde olup olmadığını kontrol etmek için kullanılır. Eğer değer `ipv6` söz diziminde ise true yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    echo '<br>';
+    if($this->is_ipv6('2001:0db8:85a3:08d3:1319:8a2e:0370:7334')){
+        echo 'Bu bir ipv6 adresdir.';
+    } else {
+        echo 'Bu bir ipv6 adres değildir.';
+    }
+        
+veya 
+
+
+    echo'<br>';
+    if($this->is_ipv6('2001:0db8:85a3:08d3:1319:8a2e:0370:7334dsdsd')){
+        echo 'Bu bir ipv6 adresdir.';
+    } else {
+        echo 'Bu bir ipv6 adres değildir.';
+    }
+
+
+## is_blood()
+
+Kendisiyle paylaşılan değerin bir kan grubu olup olmadığını kontrol etmek için kullanıldığı gibi bir  kan grubunun başka bir kan grubu için uygun donör olup olmadığını kontrol etmek amacıyla da kullanılır. 
+
+İki parametre alır, ilk parametre zorunludur, İkinci parametre zorunlu değildir. Sadece ilk parametre belirtilirse o kan grubunun geçerliliği kontrol edilir. İkinci parametre de belirtilirse, ikincisinin ilk kan grubu için uygun donör olup olmadığı kontrol edilir.
+
+Eğer geçerli bir kan grubu belirtilmiş ise yada uyumlu kan grupları belirtilmiş ise `true` yanıtı döndürülür, aksi halde `false` yanıtı döndürülür.
+
+##### Örnek
+
+
+    echo '<br>';
+    
+    if($this->is_blood('0+')){
+        echo 'Evet, bu bir kan grubudur.';
+    } else {
+        echo 'Hayır, bu bir kan grubu değildir.';
+    }
+    
+veya
+
+        echo '<br>';
+        
+        if($this->is_blood('0+', '0+')){
+            echo 'Evet, bu uyumlu bir kan grubudur.';
+        } else {
+            echo 'Hayır, bu uyumsuz bir kan grubudur.';
+        }
+
+## is_latitude()
+
+Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    $latitude = 41.008610;
+    if($this->is_latitude($latitude)){
+        echo 'Geçerli enlem.';
+    } else {
+        echo 'Geçersiz enlem.';
+    }
+
+
+## is_longitude()
+
+Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+    $longitude = 28.971111;
+    if($this->is_longitude($longitude)){
+        echo 'Geçerli boylam.';
+    } else {
+        echo 'Geçersiz boylam.';
+    }
+
+
+## is_coordinate()
+
+Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kullanılır.  `float`, `int` yada `string` yapıda iki parametre alır, bunlar enlem ve boylam bilgisidir ve her ikisinin belirtilmesi zorunludur.
+
+##### Örnek
+
+    $point1 = array(
+        'lat' => 41.008610, 
+        'long' => 28.971111
+    );
+        
+    if($this->is_coordinate($point1['lat'], $point1['long'])){
+        echo 'Geçerli koordinat.';
+    } else {
+        echo 'Geçersiz koordinat.';
+    }
+    
+veya
+
+    $point2 = array(
+        'lat' => 39.925018, 
+        'long' => 32.836956
+    );
+          
+    if($this->is_coordinate($point2['lat'], $point2['long'])){
+        echo 'Geçerli koordinat.';
+    } else {
+        echo 'Geçersiz koordinat.';
+    }
+
 ----------
 
 ## info()
@@ -2062,3 +2258,105 @@ veya
     print_r($data);
 
 
+## distanceMeter()
+
+Kendisiyle paylaşılan iki farklı koordinat noktası arasındaki mesafeyi, kuş uçuşu olarak hesaplamaya yarar. Koordinat bilgileri, `int`, `float` ve `string` yapıda gönderilebilir ve zorunludur.
+
+İki koordinat arasındaki mesafenin ölçü birimi ise `string` veya `array` olarak belirtilebilir, zorunlu değildir, eğer belirtilmezse, `m`, `km`, `mi`, `ft` ve `yd` olarak dizi olarak geri döndürülür. 
+
+Bir veya birden fazla ölçü birimine göre mesafe bilgisi elde etmek mümkündür. Eğer sadece bir ölçü birimi talep edilirse, o ölçü biriminin yanıtı `string` olarak geri döndürülür.
+
+**Bilgi:** 
+
+Ölçü birimleri ve kısaltmaları aşağıdaki gibidir.
+
+*   m (Metre) 
+*   km (Kilometre) 
+*   mi (Mil) 
+*   ft (Feet)
+*   yd (Yard)
+
+##### KOORDİNATLAR
+    /* These are two points in Turkey */
+    $point1 = array('lat' => 41.008610, 'long' => 28.971111); // Istanbul
+    $point2 = array('lat' => 39.925018, 'long' => 32.836956); // Anitkabir
+
+
+##### Örnek
+    
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //    [mi] => 2.6
+    //    [ft] => 13742.1
+    //    [yd] => 4580.64
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long']);
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
+
+veya
+
+    //4188.59
+    
+    $distance = $Mind->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], 'm');
+    echo $distance;
+    
+veya
+
+    //4188.59
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array('m'));
+    echo $distance;
+    
+veya
+
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array('m', 'km'));
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
+    
+veya
+
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //    [mi] => 2.6
+    //    [ft] => 13742.1
+    //    [yd] => 4580.64
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array());
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
+    
+veya
+
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //    [mi] => 2.6
+    //    [ft] => 13742.1
+    //    [yd] => 4580.64
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], '');
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
