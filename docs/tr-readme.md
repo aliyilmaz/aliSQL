@@ -1598,7 +1598,7 @@ veya
 
 ## is_latitude()
 
-Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -1612,7 +1612,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir enlem bilgisi ol
 
 ## is_longitude()
 
-Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
     $longitude = '28.971111';
     if($this->is_longitude($longitude)){
@@ -1624,7 +1624,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir boylam bilgisi o
 
 ## is_coordinate()
 
-Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kullanılır. iki `string` parametre alır, bunlar enlem ve boylam bilgisidir ve her ikisinin belirtilmesi zorunludur.
+Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kullanılır.  `float`, `int` yada `string` yapıda iki parametre alır, bunlar enlem ve boylam bilgisidir ve her ikisinin belirtilmesi zorunludur.
 
 ##### Örnek
 
