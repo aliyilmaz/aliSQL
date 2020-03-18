@@ -187,6 +187,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_blood](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_blood)
 -   [is_latitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_latitude)
 -   [is_longitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_longitude)
+-   [is_coordinate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_coordinate)
 
 ##### Yardımcı
 
@@ -1620,6 +1621,36 @@ Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir boylam bilgisi o
         echo 'Geçersiz boylam.';
     }
 
+
+## is_coordinate()
+
+Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kullanılır. iki `string` parametre alır, bunlar enlem ve boylam bilgisidir ve her ikisinin belirtilmesi zorunludur.
+
+##### Örnek
+
+    $point1 = array(
+        'lat' => '41.008610', 
+        'long' => '28.971111'
+    );
+        
+    if($this->is_coordinate($point1['lat'], $point1['long'])){
+        echo 'Geçerli koordinat.';
+    } else {
+        echo 'Geçersiz koordinat.';
+    }
+    
+veya
+
+    $point1 = array(
+        'lat' => '41.008610', 
+        'long' => '28.971111'
+    );
+          
+    if($this->is_coordinate($point2['lat'], $point2['long'])){
+        echo 'Geçerli koordinat.';
+    } else {
+        echo 'Geçersiz koordinat.';
+    }
 
 ----------
 

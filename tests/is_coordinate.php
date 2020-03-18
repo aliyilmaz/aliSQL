@@ -10,16 +10,16 @@ $point2 = array('lat' => 39.925018, 'long' => 32.836956); // Anitkabir
 
 echo '<br>';
 
-if(!$Mind->is_coordinate($point1['lat'], $point1['long'])){
-    echo 'Invalid coordinate.';
-} else {
+if($Mind->is_coordinate($point1['lat'], $point1['long'])){
     echo 'The current coordinate.';
+} else {
+    echo 'Invalid coordinate.';
 }
 
 echo '<br>';
 
-if(!$Mind->is_coordinate($point2['lat'], $point2['long'])){
-    echo 'Invalid coordinate.';
-} else {
+if($Mind->is_coordinate($point2['lat'], $point2['long'])){
     echo 'The current coordinate.';
+} else {
+    echo 'Invalid coordinate.';
 }
