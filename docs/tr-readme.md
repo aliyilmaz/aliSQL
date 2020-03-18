@@ -184,6 +184,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_iban](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_iban)
 -   [is_ipv4](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv4)
 -   [is_ipv6](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv6)
+-   [is_blood](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_blood)
 
 ##### Yardımcı
 
@@ -1560,6 +1561,34 @@ veya
         echo 'Bu bir ipv6 adresdir.';
     } else {
         echo 'Bu bir ipv6 adres değildir.';
+    }
+
+
+## is_blood()
+
+Kendisiyle paylaşılan değerin bir kan grubu olup olmadığını kontrol etmek için kullanıldığı gibi bir  kan grubunun başka bir kan grubu için uygun donör olup olmadığını kontrol etmek amacıyla da kullanılır. 
+
+İki parametre alır, ilk parametre zorunludur, İkinci parametre zorunlu değildir. Sadece ilk parametre belirtilirse o kan grubunun geçerliliği kontrol edilir. İkinci parametre de belirtilirse, ikincisinin ilk kan grubu için uygun donör olup olmadığı kontrol edilir.
+
+Eğer geçerli bir kan grubu belirtilmiş ise yada uyumlu kan grupları belirtilmiş ise `true` yanıtı döndürülür, aksi halde `false` yanıtı döndürülür.
+
+##### Örnek
+
+
+    echo '<br>';
+    
+    if($this->is_blood('0+')){
+        echo 'Evet, bu bir kan grubudur.';
+    } else {
+        echo 'Hayır, bu bir kan grubu değildir.';
+    }
+    
+    echo '<br>';
+    
+    if($this->is_blood('0+', '0+')){
+        echo 'Evet, bu uyumlu bir kan grubudur.';
+    } else {
+        echo 'Hayır, bu uyumsuz bir kan grubudur.';
     }
 
 
