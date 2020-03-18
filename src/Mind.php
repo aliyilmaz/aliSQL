@@ -1441,7 +1441,7 @@ class Mind extends PDO
 
     /**
      *  Validates a given Latitude
-     * @param string $latitude
+     * @param float|int|string $latitude
      * @return bool
      */
     public function is_latitude($latitude){
@@ -1456,7 +1456,7 @@ class Mind extends PDO
 
     /**
      *  Validates a given longitude
-     * @param string $longitude
+     * @param float|int|string $longitude
      * @return bool
      */
     public function is_longitude($longitude){
