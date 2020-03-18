@@ -185,6 +185,8 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_ipv4](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv4)
 -   [is_ipv6](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv6)
 -   [is_blood](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_blood)
+-   [is_latitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_latitude)
+-   [is_longitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_longitude)
 
 ##### Yardımcı
 
@@ -1592,6 +1594,31 @@ veya
         } else {
             echo 'Hayır, bu uyumsuz bir kan grubudur.';
         }
+
+## is_latitude()
+
+Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    $latitude = '41.008610';
+    if($this->is_latitude($latitude)){
+        echo 'Geçerli enlem.';
+    } else {
+        echo 'Geçersiz enlem.';
+    }
+
+
+## is_longitude()
+
+Kendisiyle paylaşılan `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+    $longitude = '28.971111';
+    if($this->is_longitude($longitude)){
+        echo 'Geçerli boylam.';
+    } else {
+        echo 'Geçersiz boylam.';
+    }
 
 
 ----------

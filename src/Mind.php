@@ -1440,6 +1440,36 @@ class Mind extends PDO
     }
 
     /**
+     *  Validates a given Latitude
+     * @param string $latitude
+     * @return bool
+     */
+    public function is_latitude($latitude){
+        $lat_pattern  = '/\A[+-]?(?:90(?:\.0{1,18})?|\d(?(?<=9)|\d?)\.\d{1,18})\z/x';
+
+        if (preg_match($lat_pattern, $latitude)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     *  Validates a given longitude
+     * @param string $longitude
+     * @return bool
+     */
+    public function is_longitude($longitude){
+        $long_pattern = '/\A[+-]?(?:180(?:\.0{1,18})?|(?:1[0-7]\d|\d{1,2})\.\d{1,18})\z/x';
+
+        if (preg_match($long_pattern, $longitude)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Validates a given coordinate
      *
      * @param float|int|string $lat Latitude
@@ -1448,10 +1478,7 @@ class Mind extends PDO
      */
     public function is_coordinate($lat, $long) {
 
-        $lat_pattern  = '/\A[+-]?(?:90(?:\.0{1,18})?|\d(?(?<=9)|\d?)\.\d{1,18})\z/x';
-        $long_pattern = '/\A[+-]?(?:180(?:\.0{1,18})?|(?:1[0-7]\d|\d{1,2})\.\d{1,18})\z/x';
-
-        if (preg_match($lat_pattern, $lat) && preg_match($long_pattern, $long)) {
+        if ($this->is_latitude($lat) AND $this->is_longitude($long)) {
             return true;
         } else {
             return false;
