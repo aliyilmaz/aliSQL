@@ -1602,7 +1602,7 @@ Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli 
 
 ##### Örnek
 
-    $latitude = '41.008610';
+    $latitude = 41.008610;
     if($this->is_latitude($latitude)){
         echo 'Geçerli enlem.';
     } else {
@@ -1614,7 +1614,7 @@ Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli 
 
 Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
-    $longitude = '28.971111';
+    $longitude = 28.971111;
     if($this->is_longitude($longitude)){
         echo 'Geçerli boylam.';
     } else {
