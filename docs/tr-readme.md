@@ -1456,7 +1456,34 @@ Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadı
         echo 'Bu bir json sözdizimi değildir.';
     }
 
+## is_age()
+
+Yaş sınırlamasına ihtiyaç duyulan yerlerde kullanılır. Kendisiyle paylaşılan doğum tarihini mevcut tarihten çıkarır, elde edilen sonuç eğer belirtilen yaş ile aynı veya o yaştan büyük ise `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+    echo '<br>';
+    if($this->is_age('1987-03-17', 35)){
+        echo 'Age is appropriate.';
+    } else {
+        echo 'Age is not appropriate.';
+    }
     
+veya
+
+    echo '<br>';
+    if($this->is_age('1987-03-17', 32)){
+        echo 'Age is appropriate.';
+    } else {
+        echo 'Age is not appropriate.';
+    }
+
+veya
+
+    echo '<br>';
+    if($this->is_age('1987-03-17', 35)){
+        echo 'Age is appropriate.';
+    } else {
+        echo 'Age is not appropriate.';
+    }
 ----------
 
 ## info()
