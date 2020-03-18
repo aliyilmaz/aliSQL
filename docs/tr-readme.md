@@ -210,6 +210,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [upload](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#upload)
 -   [download](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#download)
 -   [get_contents](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#get_contents)
+-   [distanceMeter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#distanceMeter)
 
 ----------
 
@@ -2257,3 +2258,105 @@ veya
     print_r($data);
 
 
+## distanceMeter()
+
+Kendisiyle paylaşılan iki farklı koordinat noktası arasındaki mesafeyi, kuş uçuşu olarak hesaplamaya yarar. Koordinat bilgileri, `int`, `float` ve `string` yapıda gönderilebilir ve zorunludur.
+
+İki koordinat arasındaki mesafenin ölçü birimi ise `string` veya `array` olarak belirtilebilir, zorunlu değildir, eğer belirtilmezse, `m`, `km`, `mi`, `ft` ve `yd` olarak dizi olarak geri döndürülür. 
+
+Bir veya birden fazla ölçü birimine göre mesafe bilgisi elde etmek mümkündür. Eğer sadece bir ölçü birimi talep edilirse, o ölçü biriminin yanıtı `string` olarak geri döndürülür.
+
+**Bilgi:** 
+
+Ölçü birimleri ve kısaltmaları aşağıdaki gibidir.
+
+*   m (Metre) 
+*   km (Kilometre) 
+*   mi (Mil) 
+*   ft (Feet)
+*   yd (Yard)
+
+##### KOORDİNATLAR
+    /* These are two points in Turkey */
+    $point1 = array('lat' => 41.008610, 'long' => 28.971111); // Istanbul
+    $point2 = array('lat' => 39.925018, 'long' => 32.836956); // Anitkabir
+
+
+##### Örnek
+    
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //    [mi] => 2.6
+    //    [ft] => 13742.1
+    //    [yd] => 4580.64
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long']);
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
+
+veya
+
+    //4188.59
+    
+    $distance = $Mind->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], 'm');
+    echo $distance;
+    
+veya
+
+    //4188.59
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array('m'));
+    echo $distance;
+    
+veya
+
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array('m', 'km'));
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
+    
+veya
+
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //    [mi] => 2.6
+    //    [ft] => 13742.1
+    //    [yd] => 4580.64
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array());
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
+    
+veya
+
+    //Array
+    //(
+    //    [m] => 4188.59
+    //    [km] => 4.19
+    //    [mi] => 2.6
+    //    [ft] => 13742.1
+    //    [yd] => 4580.64
+    //)
+    
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], '');
+    
+    echo '<pre>';
+    print_r($distance);
+    echo '</pre>';
