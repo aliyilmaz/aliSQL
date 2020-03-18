@@ -2303,7 +2303,7 @@ veya
 
     //4188.59
     
-    $distance = $Mind->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], 'm');
+    $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], 'm');
     echo $distance;
     
 veya
