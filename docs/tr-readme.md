@@ -1292,7 +1292,9 @@ veya
 ## is_color()
 
 Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığını kontrol etmeye yarar, eğer söz konusu değer transparent veya tüm tarayıcılar ile uyumlu olan 148 renk isminden biriyse yada HEX, RGB, RGBA, HSL, HSLA ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. `$color` renk değerini temsil etmektedir.
+
 ##### Örnek
+
 ##### TRANSPARENT
 
       $color = 'transparent';
@@ -1416,6 +1418,7 @@ veya
 
 Kendisiyle paylaşılan `string` yapıdaki verinin HTTP söz diziminde yazılıp yazılmadığını kontrol etmek amacıyla kullanılır, Eğer söz konusu veri bir HTTP söz dizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
 
+##### Örnek
 
     $url = 'http://www.google.com/';
     if($this->is_http($url)){
@@ -1431,6 +1434,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin HTTP söz diziminde yazılıp
 
 Kendisiyle paylaşılan `string` yapıdaki verinin HTTPS sözdiziminde yazılıp yazılmadığını kontrol etmek amacıyla kullanılır, Eğer söz konusu veri bir HTTPS sözdizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
 
+##### Örnek
 
     $url = 'http://www.google.com/';
     if($this->is_http($url)){
@@ -1447,6 +1451,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin HTTPS sözdiziminde yazılıp
 
 Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadığını kontrol etmek amacıyla kullanılır, `$schema` json verisini temsil etmektedir. Eğer söz konusu veri bir json sözdizimine sahip ise `true` değeri döndürülür, değilse `false` değeri döndürülür.
 
+##### Örnek
 
     $schema = array(
         'test'=>'ali'
@@ -1465,6 +1470,8 @@ Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadı
 ## is_age()
 
 Yaş sınırlamasına ihtiyaç duyulan yerlerde kullanılır. Kendisiyle paylaşılan doğum tarihini mevcut tarihten çıkarır, elde edilen sonuç eğer belirtilen yaş ile aynı veya o yaştan büyük ise `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
 
     echo '<br>';
     if($this->is_age('1987-03-17', 35)){
