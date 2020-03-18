@@ -183,6 +183,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_age](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_age)
 -   [is_iban](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_iban)
 -   [is_ipv4](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv4)
+-   [is_ipv6](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv6)
 
 ##### Yardımcı
 
@@ -1537,6 +1538,31 @@ veya
     } else {
         echo 'Bu bir ipv4 adres değildir.';
     }
+
+
+## is_ipv6()
+
+Kendisiyle paylaşılan değerin `ipv6` söz diziminde olup olmadığını kontrol etmek için kullanılır. Eğer değer `ipv6` söz diziminde ise true yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    echo '<br>';
+    if($this->is_ipv6('2001:0db8:85a3:08d3:1319:8a2e:0370:7334')){
+        echo 'Bu bir ipv6 adresdir.';
+    } else {
+        echo 'Bu bir ipv6 adres değildir.';
+    }
+        
+veya 
+
+
+    echo'<br>';
+    if($this->is_ipv6('2001:0db8:85a3:08d3:1319:8a2e:0370:7334dsdsd')){
+        echo 'Bu bir ipv6 adresdir.';
+    } else {
+        echo 'Bu bir ipv6 adres değildir.';
+    }
+
 
 ----------
 
