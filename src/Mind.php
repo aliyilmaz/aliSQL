@@ -2597,10 +2597,10 @@ class Mind extends PDO
      * of the most common distance units
      * {m, km, mi, ft, yd}
      *
-     * @param string $lat1 Latitude of the first point
-     * @param string $lon1 Longitude of the first point
-     * @param string $lat2 Latitude of the second point
-     * @param string $lon2 Longitude of the second point
+     * @param float|int|string $lat1 Latitude of the first point
+     * @param float|int|string $lon1 Longitude of the first point
+     * @param float|int|string $lat2 Latitude of the second point
+     * @param float|int|string $lon2 Longitude of the second point
      * @return mixed {bool|array}
      */
     public function distanceMeter($lat1, $lon1, $lat2, $lon2, $type = '') {
