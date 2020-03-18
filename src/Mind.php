@@ -2566,16 +2566,41 @@ class Mind extends PDO
     }
 
     /**
+     * Absolute path syntax
+     *
+     * @param string $path
+     * @return string
+     */
+    public function get_absolute_path($path) {
+        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+        $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
+        $absolutes = array();
+        foreach ($parts as $part) {
+            if ('.' == $part) continue;
+            if ('..' == $part) {
+                array_pop($absolutes);
+            } else {
+                $absolutes[] = $part;
+            }
+        }
+        $outputdir = implode(DIRECTORY_SEPARATOR, $absolutes);
+        if(strstr($outputdir, '\\')){
+            $outputdir = str_replace('\\', '/', $outputdir);
+        }
+        return $outputdir;
+    }
+
+    /**
      *
      * Calculates the distance between two points, given their
      * latitude and longitude, and returns an array of values
      * of the most common distance units
      * {m, km, mi, ft, yd}
      *
-     * @param int|float|string $lat1 Latitude of the first point
-     * @param int|float|string $lon1 Longitude of the first point
-     * @param int|float|string $lat2 Latitude of the second point
-     * @param int|float|string $lon2 Longitude of the second point
+     * @param string $lat1 Latitude of the first point
+     * @param string $lon1 Longitude of the first point
+     * @param string $lat2 Latitude of the second point
+     * @param string $lon2 Longitude of the second point
      * @return mixed {bool|array}
      */
     public function distanceMeter($lat1, $lon1, $lat2, $lon2, $type = '') {
@@ -2650,30 +2675,5 @@ class Mind extends PDO
 
         // birden çok ölçü birimi yanıtları geri döndürülür
         return $output;
-    }
-
-    /**
-     * Absolute path syntax
-     *
-     * @param string $path
-     * @return string
-     */
-    public function get_absolute_path($path) {
-        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
-        $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
-        $absolutes = array();
-        foreach ($parts as $part) {
-            if ('.' == $part) continue;
-            if ('..' == $part) {
-                array_pop($absolutes);
-            } else {
-                $absolutes[] = $part;
-            }
-        }
-        $outputdir = implode(DIRECTORY_SEPARATOR, $absolutes);
-        if(strstr($outputdir, '\\')){
-            $outputdir = str_replace('\\', '/', $outputdir);
-        }
-        return $outputdir;
     }
 }
