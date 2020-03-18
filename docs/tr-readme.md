@@ -182,6 +182,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_json](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_json)
 -   [is_age](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_age)
 -   [is_iban](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_iban)
+-   [is_ipv4](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ipv4)
 
 ##### Yardımcı
 
@@ -1511,6 +1512,30 @@ Kendisiyle paylaşılan değerin geçerli bir IBAN numarası olup olmadığını
         echo 'Bu bir IBAN numarasıdır.';
     } else {
         echo 'Bu bir IBAN numarası değildir.';
+    }
+
+
+## is_ipv4()
+
+Kendisiyle paylaşılan değerin `ipv4` söz diziminde olup olmadığını kontrol etmek için kullanılır. Eğer değer `ipv4` söz diziminde ise true yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    echo '<br>';
+    if($this->is_ipv4('208.111.171.236')){
+        echo 'Bu bir ipv4 adresdir.';
+    } else {
+        echo 'Bu bir ipv4 adres değildir.';
+    }
+        
+veya 
+
+
+    echo'<br>';
+    if($this->is_ipv4('256.111.171.236')){
+        echo 'Bu bir ipv4 adresdir.';
+    } else {
+        echo 'Bu bir ipv4 adres değildir.';
     }
 
 ----------
