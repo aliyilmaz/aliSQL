@@ -181,6 +181,7 @@ Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsay�
 -   [is_https](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_https)
 -   [is_json](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_json)
 -   [is_age](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_age)
+-   [is_iban](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_iban)
 
 ##### Yardımcı
 
@@ -1457,6 +1458,10 @@ Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadı
         echo 'Bu bir json sözdizimi değildir.';
     }
 
+    
+        
+    
+
 ## is_age()
 
 Yaş sınırlamasına ihtiyaç duyulan yerlerde kullanılır. Kendisiyle paylaşılan doğum tarihini mevcut tarihten çıkarır, elde edilen sonuç eğer belirtilen yaş ile aynı veya o yaştan büyük ise `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
@@ -1485,6 +1490,22 @@ veya
     } else {
         echo 'Age is not appropriate.';
     }
+    
+    
+        
+    
+## is_iban()
+
+Kendisiyle paylaşılan değerin geçerli bir IBAN numarası olup olmadığını kontrol etmek amacıyla kullanılır. Eğer değer bir IBAN numarası söz dizimine sahipse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    if($this->is_iban('SE35 500 0000 0549 1000 0003')){
+        echo 'Bu bir IBAN numarasıdır.';
+    } else {
+        echo 'Bu bir IBAN numarası değildir.';
+    }
+
 ----------
 
 ## info()
