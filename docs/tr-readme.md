@@ -1486,20 +1486,19 @@ veya
 
     echo '<br>';
     if($this->is_age('1987-03-17', 32)){
-        echo 'Age is appropriate.';
+        echo 'Yaş uygundur.';
     } else {
-        echo 'Age is not appropriate.';
+        echo 'Yaş uygun değildir.';
     }
 
 veya
 
     echo '<br>';
     if($this->is_age('1987-03-17', 35)){
-        echo 'Age is appropriate.';
+        echo 'Yaş uygundur.';
     } else {
-        echo 'Age is not appropriate.';
+        echo 'Yaş uygun değildir.';
     }
-    
     
         
     
