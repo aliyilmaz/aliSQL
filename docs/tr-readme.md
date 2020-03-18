@@ -1629,8 +1629,8 @@ Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kul
 ##### Örnek
 
     $point1 = array(
-        'lat' => '41.008610', 
-        'long' => '28.971111'
+        'lat' => 41.008610, 
+        'long' => 28.971111
     );
         
     if($this->is_coordinate($point1['lat'], $point1['long'])){
@@ -1641,9 +1641,9 @@ Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kul
     
 veya
 
-    $point1 = array(
-        'lat' => '41.008610', 
-        'long' => '28.971111'
+    $point2 = array(
+        'lat' => 39.925018, 
+        'long' => 32.836956
     );
           
     if($this->is_coordinate($point2['lat'], $point2['long'])){
