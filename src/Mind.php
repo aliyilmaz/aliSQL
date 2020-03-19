@@ -1486,6 +1486,56 @@ class Mind extends PDO
     }
 
     /**
+     * Distance verification
+     */
+    public function is_distance($point1, $point2, $options){
+
+        $symbols = array('m', 'km', 'mi', 'ft', 'yd');
+
+        // Option variable control
+       if(empty($options)){
+           return false;
+       }
+
+       if(!strstr($options, ':')){
+           return false;
+       }
+
+       $options = explode(':', trim($options, ':'));
+
+       if(count($options) != 2){
+           return false;
+       }
+
+       list($range, $symbol) = $options;
+
+       if(!in_array(mb_strtolower($symbol), $symbols)){
+           return false;
+       }
+
+       // Points control
+        if(empty($point1) OR empty($point2)){
+            return false;
+        }
+        if(!is_array($point1) OR !is_array($point2)){
+            return false;
+        }
+
+        if(count($point1) != 2 OR count($point2) != 2){
+            return false;
+        }
+
+        if(isset($point1[0]) AND isset($point1[1]) AND isset($point2[0]) AND isset($point2[1])){
+            $distance_range = $this->distanceMeter($point1[0], $point1[1], $point2[0], $point2[1], $symbol);
+            if($distance_range <= $range){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Validation
      * 
      * @param array $rule
