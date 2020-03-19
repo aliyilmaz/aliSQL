@@ -1672,10 +1672,22 @@ ilk iki parametrede bulunan koordinat verileri `array` olarak, menzil ve menzil 
 
 Eğer menzil içinde bir mesafe söz konusuysa `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
-##### Örnek
+**Bilgi:**
+
+Ölçü birimleri ve kısaltmaları aşağıdaki gibidir.
+
+* m (Metre)
+* km (Kilometre)
+* mi (Mil)
+* ft (Feet)
+* yd (Yard)
+
+##### KOORDİNATLAR
 
     $point1 = array(41.008610,28.971111); 
     $point2 = array(39.925018,32.836956); 
+    
+##### Örnek
 
     if($this->is_distance($point1, $point2, '349:km')){
         echo 'Menzil içindedir.';
@@ -1685,9 +1697,6 @@ Eğer menzil içinde bir mesafe söz konusuysa `true` yanıtı döndürülür, d
 
 veya
 
-    $point1 = array(41.008610,28.971111); 
-    $point2 = array(39.925018,32.836956); 
-    
     if($this->is_distance($point1, $point2, '347:km')){
         echo 'Menzil içindedir.';
     } else {
