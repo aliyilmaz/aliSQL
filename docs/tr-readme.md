@@ -121,7 +121,7 @@ Projenin zaman dili tutulur, varsayılan olarak `Europe/Istanbul` olarak belirti
 
 ##### public $timestamp
 
-Projenin zaman damgası, **gün-ay-yıl saat:dakika:saniye** biçiminde `$this->timestamp` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+Projenin zaman damgası, **yıl-ay-gün saat:dakika:saniye** biçiminde `$this->timestamp` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 
 ##### public $error_status
