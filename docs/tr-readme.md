@@ -132,6 +132,10 @@ Hata durumlarını `true` veya `false` olarak taşıyan değişkendir, varsayıl
 
 Hata durumunda yüklenmesi istenen dosya yolunu taşıyan değişkendir, varsayılan olarak `app/views/errors/404` belirtilmiştir, eğer söz konusu dosya yoksa boş bir sayfa gösterilir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
+#### public  $errors
+
+Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek için `public` özelliği tanımlanmıştır. 
+
 ----------
 
 ## Metodlar
