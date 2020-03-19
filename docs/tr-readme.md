@@ -1668,7 +1668,7 @@ Bir koordinat noktası için, başka bir koordinat noktasının belirtilen menzi
 
 ilk iki parametrede bulunan koordinat verileri `array` olarak, menzil ve menzil ölçü birimini temsil eden 3'ncü parametre ise `string` olarak belirtilmelidir.
 
-`array` olarak belirtilen koordinat bilgisi enlem virgül boylam söz diziminde, `float`, `string` yada `int` türünde belirtilmelidir.
+`array` olarak belirtilen koordinat bilgisi `enlem,boylam` söz diziminde, `float`, `string` yada `int` türünde belirtilmelidir.
 
 Eğer menzil içinde bir mesafe söz konusuysa `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 

@@ -192,6 +192,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [is_latitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_latitude)
 -   [is_longitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_longitude)
 -   [is_coordinate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_coordinate)
+-   [is_distance](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_distance)
 
 ##### Yardımcı
 
@@ -1657,6 +1658,54 @@ veya
         echo 'Geçersiz koordinat.';
     }
 
+
+## is_distance()
+
+Bir koordinat noktası için, başka bir koordinat noktasının belirtilen menzil içinde kalıp kalmadığını sorgulamak amacıyla kullanılır.
+
+3 parametre alır, ilk iki parametre iki farklı koordinat noktasını, 3'ncüsü ise menzil ve mesafe ölçü birimini temsil eder. 
+
+3'ncü parametre iki nokta üst üste `:` işareti ile ikiye ayrılır, ilki menzil ikincisi mesafe ölçü birimini temsil eder. (örneğin: `300:m` )
+
+ilk iki parametrede bulunan koordinat verileri `array` olarak, menzil ve menzil ölçü birimini temsil eden 3'ncü parametre ise `string` olarak belirtilmelidir.
+
+`array` olarak belirtilen koordinat bilgisi `enlem,boylam` söz diziminde, `float`, `string` yada `int` türünde belirtilmelidir.
+
+Eğer menzil içinde bir mesafe söz konusuysa `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+
+**Bilgi:**
+
+Ölçü birimleri ve kısaltmaları aşağıdaki gibidir.
+
+* m (Metre)
+* km (Kilometre)
+* mi (Mil)
+* ft (Feet)
+* yd (Yard)
+
+##### KOORDİNATLAR
+
+    $point1 = array(41.008610,28.971111); 
+    $point2 = array(39.925018,32.836956); 
+    
+##### Örnek
+
+    if($this->is_distance($point1, $point2, '349:km')){
+        echo 'Menzil içindedir.';
+    } else {
+        echo 'Menzil içinde değildir.';
+    }
+
+veya
+
+    if($this->is_distance($point1, $point2, '347:km')){
+        echo 'Menzil içindedir.';
+    } else {
+        echo 'Menzil içinde değildir.';
+    }
+
+
+
 ----------
 
 ## info()
@@ -2364,3 +2413,4 @@ veya
     echo '<pre>';
     print_r($distance);
     echo '</pre>';
+    
