@@ -197,7 +197,6 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 ##### Yardımcı
 
 -   [info](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#info)
--   [filter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#filter)
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
@@ -1745,23 +1744,6 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
     $type = 'filename';
     
     echo $this->info($str, $type);
-
-----------
-
-## filter()
-
-Bu metod özel karakterleri, `sql_injection`, `xss` gibi istismar kodlarını etkisiz hale getirmek amacıyla kullanılır. `string` olarak gönderilen veriyi `htmlspecialchars` metodu yardımıyla güvenli hale getirip geri döndürür. Veriyi eski haline dönüştürmek için `htmlspecialchars_decode` metodu kullanılır.
-
-##### Örnek
-
-    $content = "%&%()' OR 1=1 karakterleri etkisizleştirilmiştir.";
-    echo $this->filter($content);
-
-veya
-
-
-    $content = "<script>alert('XSS Açığı var'); </script>";
-    echo $this->filter($content);
 
 ----------
 
