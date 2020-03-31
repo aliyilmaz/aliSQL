@@ -1773,26 +1773,6 @@ class Mind extends PDO
     }
 
     /**
-     * Protection from pests.
-     *
-     * @param mixed $str
-     * @return mixed
-     * */
-    public function filter($str){
-
-        if(is_array($str)){
-            $x = array();
-            foreach ($str as $key => $value) {
-                $x[] = $this->filter($value);
-            }
-            return $x;
-        } else {
-            return htmlspecialchars($str);
-        }
-
-    }
-
-    /**
      * Request collector
      *
      * @return mixed
@@ -1808,14 +1788,14 @@ class Mind extends PDO
 
                         if(is_array($all)){
                             foreach($all as $i => $val ){
-                                $this->post[$name][$i][$key] = $this->filter($val);
+                                $this->post[$name][$i][$key] = $val;
                             }
                         } else {
-                            $this->post[$name][$key] = $this->filter($all);
+                            $this->post[$name][$key] = $all;
                         }
                     }
                 } else {
-                    $this->post[$name] = $this->filter($value);
+                    $this->post[$name] = $value;
                 }
             }
         }
@@ -2304,6 +2284,7 @@ class Mind extends PDO
      * @param string $uri
      * @param mixed $file
      * @param mixed $cache
+     * @return bool
      */
     public function route($uri, $file, $cache=null){
         $public_htaccess = implode("\n", array(
