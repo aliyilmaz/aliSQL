@@ -84,8 +84,8 @@ echo '<h2>3) Bir kaydın farklı sütunlarında ki verileri çoklu denklem esas�
 $options = array(
     'search'=>array(
         'and'=>array(
-            'password'=>'e10adc3949ba59abbe56e057f20f883e',
-            'created_at'=>'03-06-2019 17:22:37'
+            'username'=>'Eric Ferraiuolo',
+            'password'=>'e10adc3949ba59abbe56e057f20f883e'
         )
     )
 );
