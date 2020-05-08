@@ -13,6 +13,31 @@ Mind sınıfını edinmenin iki yolu vardır;
 
 ---------- 
 
+## Kurulum
+
+##### Mind deposu için:
+* Yerel veya web sunucunuzda bulunan proje ana dizinine, edindiğiniz **Zip** dosyası içindeki **src** yolunda yeralan **Mind.php** dosyasını çıkarın.
+
+* **Mind.php** dosyasını **include** yada **require_once** gibi bir yöntemle projenizin **index.php** dosyasına dahil edin ve **extends** veya **new Mind()** komutu yardımıyla kurulum işlemini tamamlayın. 
+    
+    
+    require_once('./Mind.php');
+        $Mind = new Mind();
+    
+    veya
+    
+        require_once('./Mind.php');
+        class ClassName extends Mind{
+        
+        }
+   
+
+##### Project deposu için:
+* Yerel veya web sunucunuzda bulunan proje ana dizinine, edindiğiniz **Zip** dosyası içeriğini olduğu gibi çıkarın.
+
+
+----------
+
 ## Veritabanı Ayarları
 
 Sınıfı kullanmak için veritabanı bilgilerini **Mind.php** dosyasında veya sınıf çağrılırken tanımlamak gerekir.
@@ -33,24 +58,6 @@ veya
         'password'  =>  ''
     );
     $Mind = new Mind($conf);
-
-----------
-
-## Giriş
-
-**Mind.php** dosyasını projeye **require_once** gibi bir yöntemle dahil ettikten sonra, **extends** veya **new Mind()** komutu yardımıyla sınıfı kullanıma hazır hale getirmek mümkündür.
-
-#### Örnek
-
-    require_once('./Mind.php');
-    $Mind = new Mind();
-
-veya
-
-    require_once('./Mind.php');
-    class ClassName extends Mind{
-    
-    }
 
 ----------
 
@@ -193,6 +200,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [is_longitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_longitude)
 -   [is_coordinate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_coordinate)
 -   [is_distance](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_distance)
+-   [validate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#validate)
 
 ##### Yardımcı
 
@@ -1028,7 +1036,7 @@ Bir veya daha fazla verinin, tam eşleşme prensibiyle veritabanı tablosunda bu
 
 Bu tür bir kontrolü, aynı üye bilgileriyle tekrar kayıt olunmasını istemediğimiz durumlarda veya Select box'dan gönderilen verilerin gerçekten select box'ın edindiği kaynakla aynılığını kontrol etmemiz gereken durumlarda kullanırız. 
 
-`$tblname` tablo adını, `$str` veriyi, `$column` verinin olup olmadığına bakılan sütunu temsil etmektedir, eğer `$column` değişkeni boş bırakılırsa veri, tablo'nun tüm sütunlarında aranır. 
+`$tblname` tablo adını, `$str` veriyi, `$column` verinin olup olmadığına bakılan sütunu temsil etmektedir, eğer `$column` değişkeni boş bırakılırsa veri, tablo'nun tüm sütunlarında aranır. `$str` string olarak belirtilebildiği gibi, sütun adını anahtar olarak kullanan bir dizi yapısıyla da belirtilebilir.
 
 Arama sonucunda eşleşen kayıt bulunursa yanıt olarak `true` değeri döndürülür, bulunmazsa da `false` değeri döndürülür.
 
@@ -1068,6 +1076,15 @@ veya
     } else {
     	echo 'Bu E-Posta adresi kullanılmamaktadır.';
     }
+
+veya
+
+    if($this->do_have('users', array('email'=>'aliyilmaz.work@gmail.com'))){
+    	echo 'Bu E-Posta adresi kullanılmaktadır';
+    } else {
+    	echo 'Bu E-Posta adresi kullanılmamaktadır.';
+    }
+
 
 ----------
 
@@ -1701,6 +1718,203 @@ veya
     } else {
         echo 'Menzil içinde değildir.';
     }
+
+
+## validate()
+
+Farklı türdeki verilerin belirtilen kurallara uygunluğunu tek seferde kontrol etmek amacıyla kullanılır. Kuralları ihlal eden veriler varsa ve hata mesajı belirtilmişse `$this->errors` dizi değişkenine hata mesajları tanımlanır, hata mesajı belirtilmemişse verilerin dizi anahtarları `$this->errors` dizi değişkenine tanımlanır ve `false` yanıtı döndürülür. Herhangi bir kural ihlali yok ise `true` yanıtı döndürülür. 
+
+İstisnai olarak, özel veri tipine ihtiyaç duyan kurallarda uygunsuz veri tipi tespit edilmesi halinde, bir hata mesajı belirtilip belirtilmediğine bakılmaksızın bu durumu ifade eden bir hata mesajı `$this->errors` dizi değişkenine tanımlanarak `false` yanıtı döndürülür.    
+
+Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yardımıyla ayrılmalıdır. Parametrelerde bulunan veri anahtarlarının eşleşmesi gerekmektedir.
+
+#### Kurallar
+
+##### min-num
+
+Minumum belirtilmesi arzu edilen sayı miktarını ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+
+    min-num:5
+
+##### max-num
+
+Maksimum belirtilmesi arzu edilen sayı miktarını ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+
+    max-num:10
+
+##### min-char
+
+Verinin karakter uzunluğunun minumum belirtilen sayı kadar olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+
+    min-char:200
+
+##### max-char
+
+Verinin karakter uzunluğunun maksimum belirtilen sayı kadar olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+
+    max-char:500
+
+##### email
+
+Verinin bir e-email adresi olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `email` yazarak kullanılabilir.
+
+    email
+
+##### required
+
+Veri belirtilmenin zorunlu olduğunu ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `required` yazarak kullanılabilir.
+
+    required
+    
+##### phone
+
+Verinin bir telefon numarası olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `phone` yazarak kullanılabilir.
+ 
+    phone
+
+##### date 
+
+Verinin geçerli bir zaman bilgisi olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametre belirtilmeden kullanıldığında `Y-m-d` biçimini referans alarak veriyi kontrol eder, eğer zaman bilgisinin belirtilen formatta kontrol edilmesi arzu edilirse, kabul edilebilir zaman formatı belirtilmelidir.
+
+    // 2020-02-18
+    date:Y-m-d  
+
+yada
+
+    // 2020-02-18 14
+    date:Y-m-d H 
+yada
+
+    // 2020-02-18 14:34
+    date:Y-m-d H:i 
+
+yada
+
+    // 2020-02-18 14:34:22
+    date:Y-m-d H:i:s 
+
+gibi.
+
+##### json
+
+Veri formatının JSON söz diziminde olduğunu ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `json` yazarak kullanılabilir.
+
+    json
+
+##### color
+
+Belirtilen değerin HEX, RGB, RGBA, HSL, HSLA veya 148 güvenli renkten biri olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `color` yazarak kullanılabilir.
+
+    color
+
+##### url
+
+Belirtilen parametrenin geçerli bir bağlantı olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `url` yazarak kullanılabilir.
+
+    url
+    
+
+##### https
+
+Belirtilen parametrenin SSL bağlantısı olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `https` yazarak kullanılabilir.
+
+    https
+
+##### http
+
+Belirtilen parametrenin HTTP bağlantısı olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `http` yazarak kullanılabilir.
+
+    http
+
+##### numeric
+
+Belirtilen verinin rakam olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `numeric` yazarak kullanılabilir.
+
+    numeric
+
+##### min-age
+
+Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada üstü bir yaşta olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+
+    min-age:18
+
+##### max-age
+
+Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada altında bir yaşta olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+
+    max-age:18
+
+##### unique
+
+Belirtilen verinin veritabanı tablosunda var olması gerektiğini ifade etmek için kullanılır. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
+
+    unique:posts
+
+##### bool
+
+Parametrenin boolean türünde olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametre gönderilmeden kullanıldığında geçerli bir boolean verisi olup olmadığını kontrol eder. Ekstra bir parametre gönderilirse bu parametrenin boolean türüyle aynı olup olmadığını kontrol eder. (Veri şu söz dizimlerinden birinde gönderilebilir. `true`, `false`, `'true'`, `'false'`, `0`, `1`, `'0'` veya `'1'`)
+
+    bool
+    
+yada
+
+    bool:true
+    
+yada
+
+    bool:false
+    
+yada
+
+    bool:1
+    
+yada
+
+    bool:0
+    
+##### iban
+
+Verinin bir IBAN numarası olması gerektiğini ifade etmek için kullanılır.  Ekstra bir parametreye ihtiyaç duymadığından `iban` yazarak kullanılabilir.
+
+    iban
+
+##### ipv4
+
+Verinin `ipv4` söz diziminde olması gerektiğini ifade etmek için kullanılır.  Ekstra bir parametreye ihtiyaç duymadığından `ipv4` yazarak kullanılabilir.
+
+    ipv4
+
+##### ipv6
+
+Verinin `ipv6` söz diziminde olması gerektiğini ifade etmek için kullanılır.  Ekstra bir parametreye ihtiyaç duymadığından `ipv6` yazarak kullanılabilir.
+
+    ipv6
+
+
+##### blood
+
+Belirtilen parametrenin geçerli bir kan grubu olması gerektiğini ifade etmek için kullanılır. Ekstra bir kan grubu parametresi belirtilirse,  ekstra parametrenin ilk parametre için uygun donör olup olmadığı kontrol edilir.
+
+    blood
+    
+yada
+
+    blood:0+ 
+
+
+##### coordinate
+
+Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat noktasını işaret etmesi gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duymadığından `coordinate` yazarak kullanılabilir.
+
+    coordinate
+
+
+##### distance
+
+`@` işareti ile ayrılmış iki farklı koordinat noktası arasındaki mesafenin extra parametrede belirtilen miktar kadar olması gerektiğini ifade etmek için kullanılır. Rakam ve ölçü birimi arasında bir boşluk bırakılmalıdır. 
+
+    distance:349 km
+
 
 
 
