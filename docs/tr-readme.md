@@ -1814,7 +1814,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     );
 
     if($this->validate($rule, $data, $message)){
-        echo 'Everything is OK';
+        echo 'Her şey yolunda!';
     } else {
         echo '<pre>';
         print_r($this->errors);
