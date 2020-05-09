@@ -291,6 +291,8 @@ veya
 
     $this->dbCreate(array('mydb0','mydb1'));
 
+----------
+
 ## tableCreate()
 
 Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
@@ -1473,8 +1475,7 @@ Kendisiyle paylaşılan `string` yapıdaki verinin HTTPS sözdiziminde yazılıp
     }
 
     
-        
-    
+----------
 
 ## is_json()
 
@@ -1494,7 +1495,7 @@ Kendisiyle paylaşılan `string` türde ki verinin json formatında olup olmadı
 
     
         
-    
+----------
 
 ## is_age()
 
@@ -1528,6 +1529,7 @@ veya
     }
     
         
+----------
     
 ## is_iban()
 
@@ -1541,6 +1543,8 @@ Kendisiyle paylaşılan değerin geçerli bir IBAN numarası olup olmadığını
         echo 'Bu bir IBAN numarası değildir.';
     }
 
+
+----------
 
 ## is_ipv4()
 
@@ -1566,6 +1570,9 @@ veya
     }
 
 
+----------
+
+
 ## is_ipv6()
 
 Kendisiyle paylaşılan değerin `ipv6` söz diziminde olup olmadığını kontrol etmek için kullanılır. Eğer değer `ipv6` söz diziminde ise true yanıtı döndürülür, değilse `false` yanıtı döndürülür.
@@ -1588,6 +1595,9 @@ veya
     } else {
         echo 'Bu bir ipv6 adres değildir.';
     }
+
+
+----------
 
 
 ## is_blood()
@@ -1619,6 +1629,10 @@ veya
             echo 'Hayır, bu uyumsuz bir kan grubudur.';
         }
 
+
+----------
+
+
 ## is_latitude()
 
 Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
@@ -1633,6 +1647,9 @@ Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli 
     }
 
 
+----------
+
+
 ## is_longitude()
 
 Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
@@ -1643,6 +1660,9 @@ Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli
     } else {
         echo 'Geçersiz boylam.';
     }
+
+
+----------
 
 
 ## is_coordinate()
@@ -1674,6 +1694,10 @@ veya
     } else {
         echo 'Geçersiz koordinat.';
     }
+
+
+----------
+
 
 ## is_distance()
 
@@ -1719,6 +1743,9 @@ veya
     } else {
         echo 'Menzil içinde değildir.';
     }
+
+
+----------
 
 
 ## validate()
@@ -2618,6 +2645,9 @@ veya
     $right	= '</title>';
     $data 	= $this->get_contents($left, $right, $url);
     print_r($data);
+
+
+----------
 
 
 ## distanceMeter()
