@@ -13,7 +13,7 @@ $Mind = new Mind();
  * 
  */
 
-//  Veriler
+//  Data
 $data = array(
     'title'             =>  'Merhaba dünya1',
     'email'             =>  'aliyilmaz.work@gmail.com',
@@ -40,7 +40,7 @@ $data = array(
 
  );
 
-// Kurallar
+// Rule
 $rule = array(
     'title'             =>  'required|unique:posts',
     'email'             =>  'email',
@@ -65,55 +65,39 @@ $rule = array(
     'distances'         =>  'distance:349 km'
 );
 
-// Mesajlar
+// Message
 $message = array(
-    'required'          =>  'Boş bırakılmamalıdır.',
-    'email'             =>  'Geçerli bir e-mail adresi belirtilmelidir.',
-    'url'               =>  'Geçerli bir URL belirtilmelidir.',
-    'phone'             =>  'Geçerli bir telefon numarası belirtilmelidir.',
-    'color'             =>  'Geçerli bir renk belirtilmelidir.',
-    'https'             =>  'Geçerli bir https adresi belirtilmelidir.',
-    'http'              =>  'Geçerli bir http adresi belirtilmelidir.',
-    'json'              =>  'Geçerli bir json verisi belirtilmelidir.',
-    'max-num'           =>  'Maksimum sayı aşılmamalıdır.',
-    'min-num'           =>  'Minumum sayı belirtilmelidir.',
-    'max-char'          =>  'Maksimum karakter limiti aşılmamalıdır.',
-    'min-char'          =>  'Minumum karakter limiti belirtilmelidir.',
-    'numeric'           =>  'Numerik karakter belirtilmelidir.',
-    'min-age'           =>  'Minumum yaştan küçük bir yaş belirtilmelidir.',
-    'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtilmelidir.',
-    'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
-    'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.',
-    'bool'              =>  'Doğrulama başarısız.',
-    'iban'              =>  'IBAN hesabı doğrulanamadı.',
-    'ipv4'              =>  'ipv4 söz diziminde bir IP adresi belirtilmelidir.',
-    'ipv6'              =>  'ipv6 söz diziminde bir IP adresi belirtilmelidir.',
-    'blood'             =>  'Yönergelerde bulunan bir kan grubu belirtilmelidir.',
-    'coordinate'        =>  'Geçerli bir koordinat belirtilmelidir.',
-    'distance'          =>  'Menzil içinde bulunan koordinat noktası belirtilmelidir.'
+    'required'          =>  'It should not be left blank.',
+    'email'             =>  'A valid e-mail address must be specified.',
+    'url'               =>  'A valid URL must be specified.',
+    'phone'             =>  'A valid phone number must be specified.',
+    'color'             =>  'A valid color must be specified.',
+    'https'             =>  'A valid https address must be specified.',
+    'http'              =>  'A valid http address must be specified.',
+    'json'              =>  'A valid json data must be specified.',
+    'max-num'           =>  'The maximum number should not be exceeded.',
+    'min-num'           =>  'The minimum number must be specified.',
+    'max-char'          =>  'The maximum character limit must not be exceeded.',
+    'min-char'          =>  'Minimum character limit must be specified.',
+    'numeric'           =>  'Numeric character must be specified.',
+    'min-age'           =>  'An age less than the minimum age must be specified.',
+    'max-age'           =>  'An age greater than the maximum age must be specified.',
+    'date'              =>  'Date must be specified in year-month-day format.',
+    'unique'            =>  'A unique record must be specified.',
+    'bool'              =>  'Validation failed.',
+    'iban'              =>  'The IBAN account has not been verified.',
+    'ipv4'              =>  'An IP address must be specified in the ipv4 syntax.',
+    'ipv6'              =>  'An IP address must be specified in the ipv6 syntax.',
+    'blood'             =>  'The blood group according to the instructions should be specified.',
+    'coordinate'        =>  'A valid coordinate must be specified.',
+    'distance'          =>  'The coordinate point within range must be specified.'
 
 );
 
-// Kural isimleri
-echo '<h3>All Rules</h3>';
-echo '<ol><li>'.implode('</li><li>', array_keys($message)).'</li></ol>';
-
 if($Mind->validate($rule, $data, $message)){
-    echo '<h3>Rule</h3>';
-    echo '<pre>';
-    print_r($rule);
-    echo '</pre>';
-
-    echo '<h3>Data</h3>';
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
-
-    echo '<h3>Message</h3>';
-    echo '<pre>';
-    print_r($message);
-    echo '</pre>';
+    echo 'Everything is OK';
 } else {
-    print_r($Mind->errors);
+    echo '<pre>';
+    print_r($this->errors);
+    echo '</pre>';
 }
-echo '</pre>';
