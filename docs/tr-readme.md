@@ -21,14 +21,14 @@ Mind sınıfını edinmenin iki yolu vardır;
 * **Mind.php** dosyasını **include** yada **require_once** gibi bir yöntemle projenizin **index.php** dosyasına dahil edin ve **extends** veya **new Mind()** komutu yardımıyla kurulum işlemini tamamlayın. 
     
     
-    require_once('./Mind.php');
-        $Mind = new Mind();
-    
-    veya
-    
+        require_once('./Mind.php');
+            $Mind = new Mind();
+
+        veya
+
         require_once('./Mind.php');
         class ClassName extends Mind{
-        
+
         }
    
 
@@ -102,6 +102,7 @@ Oturum yönetimi, **$_GET**, **$_POST** ve **$_FILES** istekleri, hata raporlama
 -   ini_set('display_errors', 1)   
 -   set_time_limit(0)
 -   ini_set('memory_limit', '-1')
+
 ----------
 
 ## Etkin Değişkenler
