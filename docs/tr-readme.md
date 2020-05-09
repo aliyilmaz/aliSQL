@@ -19,17 +19,18 @@ Mind sınıfını edinmenin iki yolu vardır;
 * Yerel veya web sunucunuzda bulunan proje ana dizinine, edindiğiniz **Zip** dosyası içindeki **src** yolunda yeralan **Mind.php** dosyasını çıkarın.
 
 * **Mind.php** dosyasını **include** yada **require_once** gibi bir yöntemle projenizin **index.php** dosyasına dahil edin ve **extends** veya **new Mind()** komutu yardımıyla kurulum işlemini tamamlayın. 
-    
-    
-        require_once('./Mind.php');
-            $Mind = new Mind();
 
-        veya
+###### Örnek
+ 
+    require_once('./Mind.php');
+    $Mind = new Mind();
 
-        require_once('./Mind.php');
-        class ClassName extends Mind{
+veya
 
-        }
+    require_once('./Mind.php');
+    class ClassName extends Mind{
+
+    }
    
 
 ##### Project deposu için:
