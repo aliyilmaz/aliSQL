@@ -98,6 +98,6 @@ if($Mind->validate($rule, $data, $message)){
     echo 'Everything is OK';
 } else {
     echo '<pre>';
-    print_r($this->errors);
+    print_r($Mind->errors);
     echo '</pre>';
 }
