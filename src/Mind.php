@@ -48,8 +48,8 @@ class Mind extends PDO
             $this->host = $conf['host'];
         }
 
-        if(isset($conf['dbName'])){
-            $this->dbName = $conf['dbName'];
+        if(isset($conf['dbname'])){
+            $this->dbName = $conf['dbname'];
         }
 
         if(isset($conf['username'])){
