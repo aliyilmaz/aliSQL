@@ -2756,7 +2756,7 @@ class Mind extends PDO
             $type = array($type);
         }
 
-        // eğer ölçü birimi string ise ve müsaade edilen bir ölçü değilse boş dizi geri döndürülür
+        // eğer ölçü birimi dizi değilse ve müsaade edilen bir ölçü değilse boş dizi geri döndürülür
         if(!is_array($type) AND !in_array($type, array_keys($data))){
             return $output;
         }
