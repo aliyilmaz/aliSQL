@@ -2758,7 +2758,7 @@ class Mind extends PDO
 
         // eğer ölçü birimi string ise ve müsaade edilen bir ölçü değilse boş dizi geri döndürülür
         if(!is_array($type) AND !in_array($type, array_keys($data))){
-            return false;
+            return $output;
         }
 
         // gönderilen tüm ölçü birimlerinin doğruluğu kontrol edilir
