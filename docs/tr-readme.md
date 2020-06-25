@@ -1791,7 +1791,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     // Kural
     $rule = array(
         'title'             =>  'required|unique:posts',
-        'email'             =>  'email',
+        'email'             =>  'email|unchanged:users',
         'phone_number'      =>  'phone',
         'background_color'  =>  'color',
         'webpage'           =>  'url',
@@ -1832,6 +1832,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtilmelidir.',
         'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
         'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.',
+        'unchanged'         =>  'Aynı veya farklı veriler belirtilmelidir.',
         'bool'              =>  'Doğrulama başarısız.',
         'iban'              =>  'IBAN hesabı doğrulanamadı.',
         'ipv4'              =>  'ipv4 söz diziminde bir IP adresi belirtilmelidir.',
@@ -1974,6 +1975,12 @@ Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada altında bir
 Belirtilen verinin veritabanı tablosunda var olması gerektiğini ifade etmek için kullanılır. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
 
     unique:posts
+
+##### unchanged
+
+Belirtilen verinin veritabanı tablosunda bir adet olmasının sakıncası bulunmadığını ifade etmek için kullanılır. Bu tür bir kontrole özellikle profil değişikliği sırasında mevcut bilgilerin tekrardan gönderilmesi durumunda ihtiyaç duyulur. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
+
+    unchanged:users
 
 ##### bool
 

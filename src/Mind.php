@@ -1705,6 +1705,27 @@ class Mind extends PDO
                         }
                         
                     break;
+                    // Farklıysa parametre kuralı 
+                    case 'unchanged':
+
+                        if(!$this->is_table($extra)){
+                            $this->errors[$column][$name][] = 'Table not found.';
+                        }
+                        
+                        if(!$this->is_column($extra, $column)){
+                            $this->errors[$column][$name][] = 'Column not found.';
+                        }
+                        
+                        $allData = $this->samantha($extra, array($column => $data[$column]));
+
+                        if(!isset($allData[0])){
+                            $allData = array($allData);
+                        }
+                        
+                        if(count($allData)>1){
+                            $this->errors[$column][$name] = $message[$name];
+                        }
+                    break;
                     // Doğrulama kuralı 
                     case 'bool':
                         // Geçerlilik kontrolü

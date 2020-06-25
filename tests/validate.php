@@ -4,13 +4,14 @@ require_once('../src/Mind.php');
 
 $Mind = new Mind();
 
-/**
- * Support Rule;
- * required, email, url, phone, color, https, http,
- * json, max-num, min-num, max-char, min-char, numeric,
- * min-age, max-age, date, unique, bool, iban, ipv4,
- * ipv6, blood, coordinate, distance
- * 
+/*
+ | Support Rule;
+ | --------------------------------------------------------
+ | required, email, url, phone, color, https, http,
+ | json, max-num, min-num, max-char, min-char, numeric,
+ | min-age, max-age, date, unique, unchanged, bool, iban, 
+ | ipv4, ipv6, blood, coordinate, distance
+ | 
  */
 
 //  Data
@@ -43,7 +44,7 @@ $data = array(
 // Rule
 $rule = array(
     'title'             =>  'required|unique:posts',
-    'email'             =>  'email',
+    'email'             =>  'email|unchanged:users',
     'phone_number'      =>  'phone',
     'background_color'  =>  'color',
     'webpage'           =>  'url',
@@ -84,6 +85,7 @@ $message = array(
     'max-age'           =>  'An age greater than the maximum age must be specified.',
     'date'              =>  'Date must be specified in year-month-day format.',
     'unique'            =>  'A unique record must be specified.',
+    'unchanged'         =>  'The same or different data must be specified.',
     'bool'              =>  'Validation failed.',
     'iban'              =>  'The IBAN account has not been verified.',
     'ipv4'              =>  'An IP address must be specified in the ipv4 syntax.',
