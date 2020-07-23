@@ -44,7 +44,7 @@ $data = array(
 // Rule
 $rule = array(
     'title'             =>  'required|unique:posts',
-    'email'             =>  'email|unchanged:users',
+    'email'             =>  'email|unique:users',
     'phone_number'      =>  'phone',
     'background_color'  =>  'color',
     'webpage'           =>  'url',
@@ -85,7 +85,6 @@ $message = array(
     'max-age'           =>  'An age greater than the maximum age must be specified.',
     'date'              =>  'Date must be specified in year-month-day format.',
     'unique'            =>  'A unique record must be specified.',
-    'unchanged'         =>  'The same or different data must be specified.',
     'bool'              =>  'Validation failed.',
     'iban'              =>  'The IBAN account has not been verified.',
     'ipv4'              =>  'An IP address must be specified in the ipv4 syntax.',

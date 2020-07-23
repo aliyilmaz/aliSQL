@@ -1976,11 +1976,6 @@ Belirtilen verinin veritabanı tablosunda var olması gerektiğini ifade etmek i
 
     unique:posts
 
-##### unchanged
-
-Belirtilen verinin veritabanı tablosunda bir adet olmasının sakıncası bulunmadığını ifade etmek için kullanılır. Bu tür bir kontrole özellikle profil değişikliği sırasında mevcut bilgilerin tekrardan gönderilmesi durumunda ihtiyaç duyulur. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
-
-    unchanged:users
 
 ##### bool
 
