@@ -1542,7 +1542,7 @@ class Mind extends PDO
      * @param array $message
      * @return bool
      */
-    public function validate($rule, $data, $message = array(), $id = array()){
+    public function validate($rule, $data, $message = array()){
 
         $extra = '';
         $rules = array();
