@@ -1972,7 +1972,7 @@ Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada altında bir
 
 ##### unique
 
-Belirtilen verinin veritabanı tablosunda var olması gerektiğini ifade etmek için kullanılır. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
+Belirtilen verinin veritabanı tablosunda var olmaması gerektiğini ifade etmek için kullanılır. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
 
     unique:posts
 
