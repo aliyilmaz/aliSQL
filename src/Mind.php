@@ -1567,6 +1567,9 @@ class Mind extends PDO
                     if(count($ruleData) == 2){
                         list($name, $extra) = $ruleData;
                     }
+                    if(count($ruleData) == 3){
+                        list($name, $extra, $limit) = $ruleData;
+                    }
                     // farklı zaman damgaları kontrolüne müsaade edildi.
                     if(count($ruleData) > 2 AND strstr($name, ' ')){
                         $x = explode(' ', $name);
@@ -1700,9 +1703,21 @@ class Mind extends PDO
                             $this->errors[$column][$name][] = 'Column not found.';
                         }
 
-                        if($this->do_have($extra, $data[$column], $column)){
-                            $this->errors[$column][$name] = $message[$name];
+                        if(isset($limit)){
+                            $xData = $this->samantha($extra, array($column => $data[$column]));
+                            if(!isset($xData[0])){
+                                $xData = array($xData);
+                            }
+                            if(count($xData) !== (int) $limit){
+                                $this->errors[$column][$name] = $message[$name];
+                            }
+                        } else {
+                            if($this->do_have($extra, $data[$column], $column)){
+                                $this->errors[$column][$name] = $message[$name];
+                            }
                         }
+
+                        
                     
                     break;
                     // Doğrulama kuralı 

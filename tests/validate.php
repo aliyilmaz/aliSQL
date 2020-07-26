@@ -44,7 +44,7 @@ $data = array(
 // Rule
 $rule = array(
     'title'             =>  'required|unique:posts',
-    'email'             =>  'email|unique:users',
+    'email'             =>  'email|unique:users:1',
     'phone_number'      =>  'phone',
     'background_color'  =>  'color',
     'webpage'           =>  'url',

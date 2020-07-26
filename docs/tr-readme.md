@@ -1972,7 +1972,18 @@ Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada altında bir
 
 ##### unique
 
-Belirtilen verinin veritabanı tablosunda var olmaması gerektiğini ifade etmek için kullanılır. Verinin bulunduğu tablo adı ekstra bir parametre olarak belirtildiği taktirde veri sorgulanır. (Veriyi taşıyan dizi anahtarı verinin, veritabanı tablosunda tutulduğu sütun adıyla aynı olmalıdır.)
+Veritabanı tablosunda olmayan veya belirtilen sayıya kadar olması gerektiğini ifade etmek için kullanılır. 3 parametre alır ve ilk iki parametrenin belirtilmesi zorunludur. Sadece bu ikisi belirtilirse tabloda olmayan bir veri belirtilmesi gerektiğini ifade eder. 
+
+Eğer 3'ncü parametre  sayı olarak belirtilirse söz konusu verinin veritabanı tablosunda toplam belirtilen sayı kadar'a kadar bulunabilmesine müsaade edildiğini ifade eder.
+
+Örneğin, bir kullanıcı profilini düzenlemek istediğinde, mail adresini güncellememişse ve profil düzenleme sayfasının kod kısmında `unique:users:1` şeklinde kural oluşturulmuşsa, kullanıcının bu mail adresini taşıyan mail adresi görmezden gelinerek güncelleme işlemi bir sorun yoksa başarılı şekilde gerçekleşecektir.
+
+
+
+    unique:posts
+
+veya
+
 
     unique:posts
 
