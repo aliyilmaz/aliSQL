@@ -1708,7 +1708,7 @@ class Mind extends PDO
                             if(!isset($xData[0])){
                                 $xData = array($xData);
                             }
-                            if(count($xData) !== (int) $limit){
+                            if(count($xData) > (int) $limit){
                                 $this->errors[$column][$name] = $message[$name];
                             }
                         } else {
