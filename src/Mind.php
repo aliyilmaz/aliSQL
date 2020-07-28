@@ -20,7 +20,7 @@ class Mind extends PDO
     private $dbName         =  'mydb';
     private $username       =  'root';
     private $password       =  '';
-    private $charset        =  'utf8mb4_general_ci';
+    private $charset        =  'utf8mb4';
 
     private $sess_set       =  array(
         'path'                  =>  './session/',
