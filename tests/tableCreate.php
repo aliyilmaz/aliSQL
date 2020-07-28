@@ -5,11 +5,11 @@ $Mind = new Mind();
 
 
 $scheme = array(
-  'id:increments:14',
-  'name_surname',
-  'email_address'
+  'id:increments',
+  'username',
+  'password'
 );
-if($Mind->tableCreate('yenitablo', $scheme)){
+if($Mind->tableCreate('users', $scheme)){
     echo 'Tablo oluşturuldu.';
 } else {
     echo 'Tablo oluşturulamadı.';
