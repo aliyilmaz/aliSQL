@@ -65,7 +65,10 @@ class Mind extends PDO
         }
 
         try {
-            parent::__construct('mysql:host=' . $this->host . ';dbname=' . $this->dbName, $this->username, $this->password);
+            parent::__construct('mysql:host=' . $this->host, $this->username, $this->password);
+            if($this->is_db($this->dbName)){
+                $this->selectDB($this->dbName);
+            }
             $this->query('SET CHARACTER SET ' . $this->charset);
             $this->query('SET NAMES ' . $this->charset);
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
