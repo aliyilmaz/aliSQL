@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.5
+ * @version    Release: 3.1.6
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -20,7 +20,7 @@ class Mind extends PDO
     private $dbName         =  'mydb';
     private $username       =  'root';
     private $password       =  '';
-    private $charset        =  'utf8';
+    private $charset        =  'utf8mb4_general_ci';
 
     private $sess_set       =  array(
         'path'                  =>  './session/',

@@ -5,7 +5,7 @@ $Mind = new Mind();
 
 echo '<br>';
 $values = array(
-    'username'=>'Ali Yılmaz',
+    'username'=>'Ali Yılmaz1😊',
     'password'=>md5('123456')
 );
 
@@ -14,7 +14,6 @@ if($Mind->update('users', $values, 3)){
 } else {
     echo 'Kayıt güncellenemedi.';
 }
-
 
 
 echo '<br>';
