@@ -17,7 +17,7 @@
 class Mind extends PDO
 {
     private $host           =  'localhost';
-    private $dbName         =  'mydb';
+    private $dbname         =  'mydb';
     private $username       =  'root';
     private $password       =  '';
     private $charset        =  'utf8mb4';
@@ -49,7 +49,7 @@ class Mind extends PDO
         }
 
         if(isset($conf['dbname'])){
-            $this->dbName = $conf['dbname'];
+            $this->dbname = $conf['dbname'];
         }
 
         if(isset($conf['username'])){
@@ -66,8 +66,8 @@ class Mind extends PDO
 
         try {
             parent::__construct('mysql:host=' . $this->host, $this->username, $this->password);
-            if($this->is_db($this->dbName)){
-                $this->selectDB($this->dbName);
+            if($this->is_db($this->dbname)){
+                $this->selectDB($this->dbname);
             }
             $this->query('SET CHARACTER SET ' . $this->charset);
             $this->query('SET NAMES ' . $this->charset);
