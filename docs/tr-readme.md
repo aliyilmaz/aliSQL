@@ -2345,7 +2345,7 @@ Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
 
 ## mindLoad()
 
-Belirtilen dosya veya dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. 
+`.php` uzantıya sahip dosya yada dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. Dosya yolları `.php` uzantısı olmadan belirtilmelidir.
 
 Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
 
