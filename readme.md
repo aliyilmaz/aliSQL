@@ -5,7 +5,7 @@ Mind is the PHP code framework designed for developers. It offers a variety of s
 
 * [Documents](https://github.com/aliyilmaz/Mind/tree/master/docs) 
   * [Turkish (Completed)](https://github.com/aliyilmaz/Mind/tree/master/docs/tr-readme.md) 
-  * [English (Continues)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
+  * [English (Awaiting contribution)](https://github.com/aliyilmaz/Mind/tree/master/docs/en-readme.md) 
 * [Tests](https://github.com/aliyilmaz/Mind/tree/master/tests) 
 
 ## Requirements
