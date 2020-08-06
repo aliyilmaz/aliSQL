@@ -29,6 +29,10 @@ veya
 
     require_once('./Mind.php');
     class ClassName extends Mind{
+        public function __construct($conf = array())
+        {
+            parent::__construct($conf);
+        }
 
     }
    
