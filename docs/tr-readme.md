@@ -2512,11 +2512,11 @@ Eğer metod çağırılırsa sınıf adıyla dosya adının aynı olması gerekm
 
 `route()` fonksiyonu kullanıldığı zaman, eğer **Mind.php** dosyasının bulunduğu dizinde ve o dizinde ki klasörlerde `.htaccess` dosyası yoksa oluşturulur. Klasörlerin içinde oluşturulan `.htaccess` dosyası direkt erişimi engelleyen komut içerir. **Mind.php** ile aynı dizinde oluşturulan `.htaccess` dosyası ise anlamlı `url` rotalarını elde etmeyi sağlayan aşağıda ki komutları içerir.
 
-##### Örnek
+##### Örnek (Erişimi kısıtlanan dizinler için)
 
     Deny from all
 
-veya
+veya (Mind.php dosyasının olduğu dizin için)
 
     RewriteEngine On  
     RewriteCond %{REQUEST_FILENAME} -s [OR]  
