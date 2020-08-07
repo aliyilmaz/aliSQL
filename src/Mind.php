@@ -1727,17 +1727,45 @@ class Mind extends PDO
                     case 'bool':
                         // Geçerlilik kontrolü
                         $acceptable = array(true, false, 'true', 'false', 0, 1, '0', '1');
+                        $wrongTypeMessage = 'True, false, 0 or 1 must be specified.';
 
-                        if(!in_array($data[$column], $acceptable, true) OR !in_array($extra, $acceptable, true)){
-                            $this->errors[$column][$name] = 'True, false, 0 or 1 must be specified.';
-                        } else {
-                            if($data[$column] === 'true'){ $data[$column] = true; }
-                            if($data[$column] === 'false'){ $data[$column] = false; }
-                            if($extra === 'true'){ $extra = true; }
-                            if($extra === 'false'){ $extra = false; }
+                        if(isset($extra)){
 
-                            if($data[$column] != $extra){
+                            if($extra === ''){
+                                unset($extra);
+                            }
+                            
+                        }
+
+                        if(isset($data[$column]) AND isset($extra)){
+                            if($data[$column] === 'true' OR $data[$column] === '1' OR $data[$column] === 1){
+                                $data[$column] = true;
+                            }
+                            if($data[$column] === 'false' OR $data[$column] === '0' OR $data[$column] === 0){
+                                $data[$column] = false;
+                            }
+
+                            if($extra === 'true' OR $extra === '1' OR $extra === 1){
+                                $extra = true;
+                            }
+                            if($extra === 'false' OR $extra === '0' OR $extra === 0){
+                                $extra = false;
+                            }
+
+                            if($data[$column] !== $extra){
                                 $this->errors[$column][$name] = $message[$name];
+                            }
+                        } 
+
+                        if(isset($data[$column]) AND !isset($extra)){
+                            if(!in_array($data[$column], $acceptable)){
+                                $this->errors[$column][$name] = $wrongTypeMessage;
+                            }
+                        }
+
+                        if(isset($data[$column]) AND isset($extra)){
+                            if(!in_array($extra, $acceptable)){
+                                $this->errors[$column][$name] = $wrongTypeMessage;
                             }
                         }
 
