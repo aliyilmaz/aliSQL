@@ -1628,9 +1628,14 @@ class Mind extends PDO
                     break;
                     // Zorunlu alan kuralı
                     case 'required':
-                        if(empty($data[$column])){
+                        if(!isset($data[$column])){
                             $this->errors[$column][$name] = $message[$name];
+                        } else {
+                            if($data[$column] === ''){
+                                $this->errors[$column][$name] = $message[$name];
+                            }
                         }
+                        
                     break;
                     // Telefon numarası kuralı
                     case 'phone':
