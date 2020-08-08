@@ -1743,33 +1743,38 @@ class Mind extends PDO
                         }
 
                         if(isset($data[$column]) AND isset($extra)){
-                            if($data[$column] === 'true' OR $data[$column] === '1' OR $data[$column] === 1){
-                                $data[$column] = true;
-                            }
-                            if($data[$column] === 'false' OR $data[$column] === '0' OR $data[$column] === 0){
-                                $data[$column] = false;
-                            }
-
-                            if($extra === 'true' OR $extra === '1' OR $extra === 1){
-                                $extra = true;
-                            }
-                            if($extra === 'false' OR $extra === '0' OR $extra === 0){
-                                $extra = false;
-                            }
-
-                            if($data[$column] !== $extra){
-                                $this->errors[$column][$name] = $message[$name];
+                            if(in_array($data[$column], $acceptable, true) AND in_array($extra, $acceptable, true)){
+                                if($data[$column] === 'true' OR $data[$column] === '1' OR $data[$column] === 1){
+                                    $data[$column] = true;
+                                }
+                                if($data[$column] === 'false' OR $data[$column] === '0' OR $data[$column] === 0){
+                                    $data[$column] = false;
+                                }
+    
+                                if($extra === 'true' OR $extra === '1' OR $extra === 1){
+                                    $extra = true;
+                                }
+                                if($extra === 'false' OR $extra === '0' OR $extra === 0){
+                                    $extra = false;
+                                }
+    
+                                if($data[$column] !== $extra){
+                                    $this->errors[$column][$name] = $message[$name];
+                                }
+                                
+                            } else {
+                                $this->errors[$column][$name] = $wrongTypeMessage;
                             }
                         } 
 
                         if(isset($data[$column]) AND !isset($extra)){
-                            if(!in_array($data[$column], $acceptable)){
+                            if(!in_array($data[$column], $acceptable, true)){
                                 $this->errors[$column][$name] = $wrongTypeMessage;
                             }
                         }
 
-                        if(isset($data[$column]) AND isset($extra)){
-                            if(!in_array($extra, $acceptable)){
+                        if(!isset($data[$column]) AND isset($extra)){
+                            if(!in_array($extra, $acceptable, true)){
                                 $this->errors[$column][$name] = $wrongTypeMessage;
                             }
                         }
