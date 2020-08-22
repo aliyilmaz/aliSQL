@@ -2708,7 +2708,10 @@ class Mind extends PDO
             curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
             $data = curl_exec($ch);
             curl_close($ch);
-
+            
+            if(empty($data)){
+                $data = file_get_contents($url);
+            }
         } else {
             $data = $url;
         }
