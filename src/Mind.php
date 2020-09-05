@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.6
+ * @version    Release: 3.1.7
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2451,9 +2451,9 @@ class Mind extends PDO
         }
 
         if($this->base_url != '/'){
-            $request = str_replace($this->base_url, '', $_SERVER['REQUEST_URI']);
+            $request = str_replace($this->base_url, '', rawurldecode($_SERVER['REQUEST_URI']));
         } else {
-            $request = trim($_SERVER['REQUEST_URI'], '/');
+            $request = trim(rawurldecode($_SERVER['REQUEST_URI']), '/');
         }
 
         $fields     = array();
