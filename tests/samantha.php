@@ -208,3 +208,10 @@ Array
 // echo '<pre>';
 // print_r($Mind->samantha('permission', array('user_id'=>4), array('group_id')));
 // echo '</pre>';
+
+/* 
+1
+*/
+echo '<pre>';
+print_r($Mind->samantha('permission', array('user_id'=>1)));
+echo '</pre>';

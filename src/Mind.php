@@ -936,6 +936,10 @@ class Mind extends PDO
             $output = $data;
         }
 
+        if(count($data)==1){
+            $output = $output[0];
+        }
+
         return $output;
     }
 
