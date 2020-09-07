@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.7
+ * @version    Release: 3.1.8
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -891,25 +891,49 @@ class Mind extends PDO
      */
     public function samantha($tblName, $map, $column=null)
     {
+        $output = array();
+        $columns = array();
 
         $scheme['search']['and'] = $map;
 
+        // Sütun(lar) belirtilmişse
         if (!empty($column)) {
-            $scheme['column'] = $column;
+
+            // bir sütun belirtilmişse
+            if(!is_array($column)){
+                $columns = array($column);
+            } else {
+                $columns = $column;
+            }
+
+            // tablo sütunları elde ediliyor
+            $getColumns = $this->columnList($tblName);
+
+            // belirtilen sütun(lar) var mı bakılıyor
+            foreach($columns as $column){
+
+                // yoksa boş bir array geri döndürülüyor
+                if(!in_array($column, $getColumns)){
+                    return [];
+                }
+
+            }
+
+            // izin verilen sütun(lar) belirtiliyor
+            $scheme['column'] = $columns;
         }
 
-        $output = $this->getData($tblName, $scheme);
+        $data = $this->getData($tblName, $scheme);
 
-        if(isset($output[0]) AND count($output)==1){
-            if(!empty($column)){
-                if($this->is_column($tblName, $column)){
-                    $output = $output[0][$column];
-                } else {
-                    $output = $output[0];
-                }
-            } else {
-                $output = $output[0];
+        // tek sütun varsa içerikleri dizi olarak derlenir
+        if(count($columns)==1){
+
+            foreach ($data as $row) {
+                $column = implode('', $columns);
+                $output[] = $row[$column];
             }
+        } else {
+            $output = $data;
         }
 
         return $output;
