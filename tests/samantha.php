@@ -61,7 +61,7 @@ $Mind = new Mind();
 
 //$Mind->insert('users', $scheme);
 
-echo '<br>';
+// echo '<br>';
 
 /*
 Array
@@ -76,11 +76,11 @@ Array
     [updated_at] =>
 )
 */
-echo '<pre>';
-print_r($Mind->samantha('users', array('id'=>'1')));
-echo '</pre>';
+// echo '<pre>';
+// print_r($Mind->samantha('users', array('id'=>'1')));
+// echo '</pre>';
 
-echo '<br>';
+// echo '<br>';
 
 /*
 Array
@@ -89,18 +89,18 @@ Array
     [password] => e10adc3949ba59abbe56e057f20f883e
 )
 */
-echo '<pre>';
-print_r($Mind->samantha('users', array('id'=>'1'), array('username', 'password')));
-echo '</pre>';
+// echo '<pre>';
+// print_r($Mind->samantha('users', array('id'=>'1'), array('username', 'password')));
+// echo '</pre>';
 
-echo '<br>';
+// echo '<br>';
 
 /*
     public/img/common/tilo-avatar.png
 */
-echo $Mind->samantha('users', array('id'=>'1'), 'avatar' );
+// echo $Mind->samantha('users', array('id'=>'1'), 'avatar' );
 
-echo '<br>';
+// echo '<br>';
 
 /*
  * Array
@@ -137,6 +137,74 @@ echo '<br>';
 
 )
  */
-echo '<pre>';
-print_r($Mind->samantha('users', array('password'=>'e10adc3949ba59abbe56e057f20f883e'), array('username', 'password')));
-echo '</pre>';
+// echo '<pre>';
+// print_r($Mind->samantha('users', array('password'=>'e10adc3949ba59abbe56e057f20f883e'), array('username', 'password')));
+// echo '</pre>';
+
+
+/* 
+Array
+(
+    [0] => Array
+        (
+            [id] => 4
+            [user_id] => 4
+            [group_id] => 2
+            [_token] => 
+            [status] => 
+            [created_at] => 
+            [updated_at] => 
+        )
+
+    [1] => Array
+        (
+            [id] => 6
+            [user_id] => 4
+            [group_id] => 3
+            [_token] => 
+            [status] => 
+            [created_at] => 
+            [updated_at] => 
+        )
+
+) */
+// echo '<pre>';
+// print_r($Mind->samantha('permission', array('user_id'=>4)));
+// echo '</pre>';
+
+/* Array
+(
+    [0] => Array
+        (
+            [group_id] => 2
+            [user_id] => 4
+        )
+
+    [1] => Array
+        (
+            [group_id] => 3
+            [user_id] => 4
+        )
+
+) */
+// echo '<pre>';
+// print_r($Mind->samantha('permission', array('user_id'=>4), array('group_id', 'user_id')));
+// echo '</pre>';
+
+/* Array
+(
+    [0] => 2
+    [1] => 3
+) */
+// echo '<pre>';
+// print_r($Mind->samantha('permission', array('user_id'=>4), 'group_id'));
+// echo '</pre>';
+
+/* Array
+(
+    [0] => 2
+    [1] => 3
+) */
+// echo '<pre>';
+// print_r($Mind->samantha('permission', array('user_id'=>4), array('group_id')));
+// echo '</pre>';
