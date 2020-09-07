@@ -889,7 +889,7 @@ class Mind extends PDO
      * @param mixed $column
      * @return array
      */
-    public function samantha($tblName, $map, $column=null)
+    public function samantha($tblName, $map, $column=null, $status=false)
     {
         $output = array();
         $columns = array();
@@ -936,10 +936,13 @@ class Mind extends PDO
             $output = $data;
         }
 
-        if(count($data)==1){
+        if(count($data)==1 AND isset($output[0])){
             $output = $output[0];
         }
 
+        if(count($data) == 1 AND $status === true){
+            $output = array($output[0]);
+        }
         return $output;
     }
 
