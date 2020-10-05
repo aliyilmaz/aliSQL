@@ -923,26 +923,105 @@ class Mind extends PDO
             $scheme['column'] = $columns;
         }
 
+        $output = $this->getData($tblName, $scheme);
+
+        return $output;
+    }
+
+    /**
+     * Research assistant.
+     * It serves to obtain a array.
+     * 
+     * @param string $tblName
+     * @param array $map
+     * @param mixed $column
+     * @return array
+     * 
+     */
+    public function theodore($tblName, $map, $column=null){
+
+        $output = array();
+        $columns = array();
+
+        $scheme['search']['and'] = $map;
+
+        // Sütun(lar) belirtilmişse
+        if (!empty($column)) {
+
+            // bir sütun belirtilmişse
+            if(!is_array($column)){
+                $columns = array($column);
+            } else {
+                $columns = $column;
+            }
+
+            // tablo sütunları elde ediliyor
+            $getColumns = $this->columnList($tblName);
+
+            // belirtilen sütun(lar) var mı bakılıyor
+            foreach($columns as $column){
+
+                // yoksa boş bir array geri döndürülüyor
+                if(!in_array($column, $getColumns)){
+                    return [];
+                }
+
+            }
+
+            // izin verilen sütun(lar) belirtiliyor
+            $scheme['column'] = $columns;
+        }
+
         $data = $this->getData($tblName, $scheme);
 
-        // tek sütun varsa içerikleri dizi olarak derlenir
-        if(count($columns)==1){
-
-            foreach ($data as $row) {
-                $column = implode('', $columns);
-                $output[] = $row[$column];
-            }
+        if(count($data)==1 AND isset($data[0])){
+            $output = $data[0];
         } else {
-            $output = $data;
+            $output = [];
         }
 
-        if(count($data)==1 AND isset($output[0])){
-            $output = $output[0];
+        return $output;
+    }
+
+    /**
+     * Research assistant.
+     * Used to obtain an element of an array
+     * 
+     * @param string $tblName
+     * @param array $map
+     * @param string $column
+     * @return string
+     * 
+     */
+    public function amelia($tblName, $map, $column){
+
+        $output = '';
+        $columns = array();
+
+        $scheme['search']['and'] = $map;
+
+        // Sütun string olarak gönderilmemişse
+        if (!is_string($column)) {
+            return $output;
         }
 
-        if(count($data) == 1 AND $status === true){
-            $output = array($output[0]);
+        // tablo sütunları elde ediliyor
+        $getColumns = $this->columnList($tblName);
+
+        // yoksa boş bir array geri döndürülüyor
+        if(!in_array($column, $getColumns)){
+            return $output;
         }
+
+        // izin verilen sütun belirtiliyor
+        $scheme['column'] = $columns;
+
+        $data = $this->getData($tblName, $scheme);
+
+        if(count($data)==1 AND isset($data[0])){
+            $output = $data[0][$column];
+        }
+
         return $output;
     }
 
