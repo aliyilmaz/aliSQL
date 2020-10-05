@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.1.8
+ * @version    Release: 3.2.0
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
