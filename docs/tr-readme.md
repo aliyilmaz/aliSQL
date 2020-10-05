@@ -996,47 +996,69 @@ veya
 
 ## samantha()
 
-Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden esinlenilerek oluşturulmuştur, sütun adı ve o sütunda bakılması istenen veri belirtildiğinde, sonuca ait tüm sütunlar geri döndürülebildiği gibi sonucun geri döndürülmesi istenen sütunları da geri döndürülebilir.  
+Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden esinlenilerek oluşturulmuştur. 
+
+Sütun adları ve o sütunlarda bakılması istenen veri belirtildiğinde, sonuca ait tüm veriler geri döndürülür. 
+
+Bu işlem sırasında belirtilen sütunları sadece elde etmek istenirse, 3'ncü parametre düzenlenmelidir.
+
+3 parametre alır; 
+
+* İlki tablo adıdır ve string olarak belirtilmelidir.
+
+* İkincisi çoklu diziye olanak tanıyan ve dizi biçiminde belirtilmesi gereken kısımdır. 
+
+* Üçüncüsü ise sütun kısmıdır, string veya dizi biçiminde belirtilebilir.
+
 
 ##### Örnek
 
-    /*
-    Array
-    (
-        [id] => 1
-        [username] => Tilo Mitra
-        [password] => e10adc3949ba59abbe56e057f20f883e
-        [email] => tilo.mitra@example.com
-        [avatar] => public/img/common/tilo-avatar.png
-        [_token] => 9e7ba617ad9e69b39bd0c29335b79629
-        [created_at] => 10-06-2019 04:28:51
-        [updated_at] =>
-    )
-    */
+    // Array
+    // (
+    //     [0] => Array
+    //         (
+    //             [group_id] => 10
+    //         )
+    // )
+    
     echo '<pre>';
-    print_r($this->samantha('users', array('id'=>'1')));
+    print_r($Mind->samantha('permission', array('user_id'=>15), 'group_id'));
     echo '</pre>';
-    
-    echo '<br>';
-    
-    /*
-    Array
-    (
-        [username] => Tilo Mitra
-        [password] => e10adc3949ba59abbe56e057f20f883e
-    )
-    */
-    echo '<pre>';
-    print_r($this->samantha('users', array('id'=>'1'), array('username', 'password')));
-    echo '</pre>';
-    
-    echo '<br>';
-    
-    /*
-        public/img/common/tilo-avatar.png
-    */
-    echo $this->samantha('users', array('id'=>'1'), 'avatar' );
 
+veya
+
+    // Array
+    // (
+    //     [0] => Array
+    //         (
+    //             [id] => 208
+    //             [group_id] => 10
+    //         )
+
+    // )
+    // echo '<pre>';
+    // print_r($this->samantha('permission', array('user_id'=>15), array('id', 'group_id')));
+    // echo '</pre>';
+
+veya
+
+    // Array
+    // (
+    //     [0] => Array
+    //         (
+    //             [id] => 208
+    //             [user_id] => 15
+    //             [group_id] => 10
+    //             [_token] => 
+    //             [status] => 
+    //             [created_at] => 
+    //             [updated_at] => 
+    //         )
+
+    // )
+    // echo '<pre>';
+    // print_r($this->samantha('permission', array('user_id'=>15)));
+    // echo '</pre>';
 ----------
 
 ## do_have()
