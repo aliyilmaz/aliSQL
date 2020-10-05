@@ -1569,6 +1569,16 @@ class Mind extends PDO
     }
 
     /**
+     * md5 hash checking method.
+     * 
+     * @param string $md5
+     * @return bool
+     */
+    public function is_md5($md5 = ''){
+        return strlen($md5) == 32 && ctype_xdigit($md5);
+    }
+
+    /**
      * Validation
      * 
      * @param array $rule
@@ -1983,7 +1993,6 @@ class Mind extends PDO
             header('Location: '.$url);
         }
         ob_end_flush();
-        exit();
     }
 
     /**
