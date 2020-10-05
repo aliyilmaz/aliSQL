@@ -1856,7 +1856,7 @@ veya
 
 ## is_md5
 
-Kendisiyle paylaşılan verinin kriptografik özet söz diziminde olup olmadığını kontrol etmek amacıyla kullanılır. Söz konusu veri string olarak belirtilmelidir.
+Kendisiyle paylaşılan verinin kriptografik özet söz diziminde olup olmadığını kontrol etmek amacıyla kullanılır. Söz konusu veri string olarak belirtilmelidir. Eğer veri bir md5 ise `true` değilse `false` yanıtı geri döndürülür.
 
 ##### Örnek
 
