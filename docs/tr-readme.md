@@ -208,6 +208,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [is_longitude](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_longitude)
 -   [is_coordinate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_coordinate)
 -   [is_distance](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_distance)
+-   [is_md5](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_md5)
 -   [validate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#validate)
 
 ##### Yardımcı
@@ -1114,6 +1115,8 @@ veya
     echo '</pre>';
 
 
+----------
+
 ## amelia
 
 samantha ve theodore metodlarında olduğu gibi amelia da Her filminden esinlenerek oluşturulmuştur. Görevi sadece bir adet olduğu bilinen bir kaydın belirtilen sütun verisini elde etmek, şartları sağlamadığında ise boş bir yanıt döndürmektedir.
@@ -1135,6 +1138,7 @@ samantha ve theodore metodlarında olduğu gibi amelia da Her filminden esinlene
     print_r($this->amelia('permission', array('user_id'=>15), 'id'));
     echo '</pre>';
 
+----------
 
 ## do_have()
 
@@ -1847,6 +1851,32 @@ veya
         echo 'Menzil içinde değildir.';
     }
 
+
+----------
+
+## is_md5
+
+Kendisiyle paylaşılan verinin kriptografik özet söz diziminde olup olmadığını kontrol etmek amacıyla kullanılır. Söz konusu veri string olarak belirtilmelidir.
+
+##### Örnek
+
+    $str = '123456';
+
+    if($this->is_md5($str)){
+        echo 'Bu bir md5.';
+    } else {
+        echo 'Bu bir md5 değil.';
+    }
+
+veya
+
+    $str = md5('123456');
+
+    if($Mind->is_md5($str)){
+        echo 'Bu bir md5.';
+    } else {
+        echo 'Bu bir md5 değil.';
+    }
 
 ----------
 
