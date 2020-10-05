@@ -1872,7 +1872,7 @@ veya
 
     $str = md5('123456');
 
-    if($Mind->is_md5($str)){
+    if($this->is_md5($str)){
         echo 'Bu bir md5.';
     } else {
         echo 'Bu bir md5 değil.';
