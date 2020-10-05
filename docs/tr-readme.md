@@ -1018,7 +1018,7 @@ Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden 
     // )
     
     echo '<pre>';
-    print_r($Mind->samantha('permission', array('user_id'=>15), 'group_id'));
+    print_r($this->samantha('permission', array('user_id'=>15), 'group_id'));
     echo '</pre>';
 
 veya
