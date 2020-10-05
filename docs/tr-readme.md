@@ -996,11 +996,7 @@ veya
 
 ## samantha()
 
-Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden esinlenerek oluşturulmuştur. 
-
-Sütun adları ve o sütunlarda bakılması istenen veriler belirtildiğinde, bulunan tüm veriler geri döndürülür. 
-
-Bu işlem sırasında tüm veri kümelerinin hangi sütunları barındırması gerektiği bilgisi, 3'ncü parametre ile belirlenebilir.
+Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden esinlenerek oluşturulmuştur. Sütun adları ve o sütunlarda bakılması istenen veriler belirtildiğinde, bulunan tüm veriler geri döndürülür. Bu işlem sırasında tüm veri kümelerinin hangi sütunları barındırması gerektiği bilgisi, 3'ncü parametre ile belirlenebilir.
 
 #### 3 parametre alır; 
 
