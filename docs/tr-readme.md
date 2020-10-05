@@ -178,6 +178,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [delete](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#delete)
 -   [getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getData)
 -   [samantha](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#samantha)
+-   [theodore](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#theodore)
 -   [do_have](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#do_have)
 -   [newId](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#newId)
 -   [increments](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#increments)
