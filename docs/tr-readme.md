@@ -996,19 +996,19 @@ veya
 
 ## samantha()
 
-Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden esinlenilerek oluşturulmuştur. 
+Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden esinlenerek oluşturulmuştur. 
 
-Sütun adları ve o sütunlarda bakılması istenen veri belirtildiğinde, sonuca ait tüm veriler geri döndürülür. 
+Sütun adları ve o sütunlarda bakılması istenen veriler belirtildiğinde, bulunan tüm veriler geri döndürülür. 
 
-Bu işlem sırasında belirtilen sütunları sadece elde etmek istenirse, 3'ncü parametre düzenlenmelidir.
+Bu işlem sırasında tüm veri kümelerinin hangi sütunları barındırması gerektiği bilgisi, 3'ncü parametre ile belirlenebilir.
 
-3 parametre alır; 
+#### 3 parametre alır; 
 
-* İlki tablo adıdır ve string olarak belirtilmelidir.
+* İlki tablo adının string biçiminde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
 
-* İkincisi çoklu diziye olanak tanıyan ve dizi biçiminde belirtilmesi gereken kısımdır. 
+* İkincisi çoklu şartın bir dizi içinde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
 
-* Üçüncüsü ise sütun kısmıdır, string veya dizi biçiminde belirtilebilir.
+* Üçüncüsü ise görüntülenmesi istenen sütunların string veya dizi biçiminde tanımlanabildiği kısımdır ve belirtilmesi zorunlu değildir.
 
 
 ##### Örnek
