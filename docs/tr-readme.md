@@ -179,6 +179,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getData)
 -   [samantha](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#samantha)
 -   [theodore](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#theodore)
+-   [amelia](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#amelia)
 -   [do_have](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#do_have)
 -   [newId](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#newId)
 -   [increments](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#increments)
@@ -1110,6 +1111,28 @@ veya
 
     echo '<pre>';
     print_r($this->theodore('permission', array('user_id'=>15)));
+    echo '</pre>';
+
+
+## amelia
+
+samantha ve theodore metodlarında olduğu gibi amelia da Her filminden esinlenerek oluşturulmuştur. Görevi sadece bir adet olduğu bilinen bir kaydın belirtilen sütun verisini elde etmek, şartları sağlamadığında ise boş bir yanıt döndürmektedir.
+
+#### 3 parametre alır; 
+
+* İlki tablo adının string biçiminde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
+
+* İkincisi çoklu şartın bir dizi içinde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
+
+* Üçüncüsü ise görüntülenmesi istenen sütunun string biçimde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
+
+
+##### Örnek
+
+    // 208
+
+    echo '<pre>';
+    print_r($this->amelia('permission', array('user_id'=>15), 'id'));
     echo '</pre>';
 
 
