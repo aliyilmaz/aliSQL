@@ -1057,6 +1057,61 @@ veya
     // echo '</pre>';
 ----------
 
+
+## theodore
+
+Tıpkı samantha gibi, bu metod da Her filminde hayat bulmuş Theodore Twombly karakterinden esinlenerek oluşturulmuştur. Kesin olarak bir adet olduğu bilinen bir kaydı  bir dizi olarak elde etmek amacıyla kullanılır.
+
+#### 3 parametre alır; 
+
+* İlki tablo adının string biçiminde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
+
+* İkincisi çoklu şartın bir dizi içinde tanımlanabildiği kısımdır ve belirtilmesi zorunludur.
+
+* Üçüncüsü ise görüntülenmesi istenen sütunların string veya dizi biçiminde tanımlanabildiği kısımdır ve belirtilmesi zorunlu değildir.
+
+
+##### Örnek
+
+    // Array
+    // (
+    //     [group_id] => 10
+    // )
+
+    echo '<pre>';
+    print_r($this->theodore('permission', array('user_id'=>15), 'group_id'));
+    echo '</pre>';
+
+veya
+
+    // Array
+    // (
+    //     [id] => 208
+    //     [group_id] => 10
+    // )
+
+    echo '<pre>';
+    print_r($this->theodore('permission', array('user_id'=>15), array('id', 'group_id')));
+    echo '</pre>';
+
+veya
+
+    // Array
+    // (
+    //     [id] => 208
+    //     [user_id] => 15
+    //     [group_id] => 10
+    //     [_token] => 
+    //     [status] => 
+    //     [created_at] => 
+    //     [updated_at] => 
+    // )
+
+    echo '<pre>';
+    print_r($this->theodore('permission', array('user_id'=>15)));
+    echo '</pre>';
+
+
 ## do_have()
 
 Bir veya daha fazla verinin, tam eşleşme prensibiyle veritabanı tablosunda bulunup bulunmadığını kontrol etmek amacıyla kullanılır. 
