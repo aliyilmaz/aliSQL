@@ -996,7 +996,6 @@ class Mind extends PDO
     public function amelia($tblName, $map, $column){
 
         $output = '';
-        $columns = array();
 
         $scheme['search']['and'] = $map;
 
@@ -1008,13 +1007,13 @@ class Mind extends PDO
         // tablo sütunları elde ediliyor
         $getColumns = $this->columnList($tblName);
 
-        // yoksa boş bir array geri döndürülüyor
+        // yoksa boş bir string geri döndürülüyor
         if(!in_array($column, $getColumns)){
             return $output;
         }
 
         // izin verilen sütun belirtiliyor
-        $scheme['column'] = $columns;
+        $scheme['column'] = $column;
 
         $data = $this->getData($tblName, $scheme);
 
