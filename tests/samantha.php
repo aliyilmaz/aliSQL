@@ -213,5 +213,5 @@ Array
 1
 */
 echo '<pre>';
-print_r($Mind->samantha('permission', array('user_id'=>1), 'user_id', true));
+print_r($Mind->samantha('permission', array('user_id'=>1), 'group_id'));
 echo '</pre>';
