@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.2.0
+ * @version    Release: 3.2.1
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -748,6 +748,8 @@ class Mind extends PDO
     public function getData($tblName, $options=null){
 
         $sql = '';
+        $andSql = '';
+        $orSql = '';
         $columns = $this->columnList($tblName);
 
         if(!empty($options['column'])){
@@ -798,36 +800,85 @@ class Mind extends PDO
             $sql = 'WHERE '.implode(' OR ', $prepareArray);
         }
 
+        $delimiterArray = array('and', 'AND', 'or', 'OR');
+        
+        if(!empty($options['search']['delimiter']['and'])){
+            if(in_array($options['search']['delimiter']['and'], $delimiterArray)){
+                $options['search']['delimiter']['and'] = mb_strtoupper($options['search']['delimiter']['and']);
+            } else {
+                $options['search']['delimiter']['and'] = ' AND ';
+            }
+        } else {
+            $options['search']['delimiter']['and'] = ' AND ';
+        }
 
-        $searchType = ' OR ';
+        if(!empty($options['search']['delimiter']['or'])){
+            if(in_array($options['search']['delimiter']['or'], $delimiterArray)){
+                $options['search']['delimiter']['or'] = mb_strtoupper($options['search']['delimiter']['or']);
+            } else {
+                $options['search']['delimiter']['or'] = ' OR ';
+            }
+        } else {
+            $options['search']['delimiter']['or'] = ' OR ';
+        }
+
         if(!empty($options['search']['or']) AND is_array($options['search']['or'])){
-            $searchType = ' OR ';
 
-            foreach ($options['search']['or'] as $column => $value) {
-
-                $prepareArray[] = $column.' LIKE ?';
-                $executeArray[] = $value;
+            if(!isset($options['search']['or'][0])){
+                $options['search']['or'] = array($options['search']['or']);
             }
 
+            foreach ($options['search']['or'] as $key => $row) {
+
+                foreach ($row as $column => $value) {
+
+                    $x[$key][] = $column.' LIKE ?';
+                    $prepareArray[] = $column.' LIKE ?';
+                    $executeArray[] = $value;
+                }
+                
+                $orSql .= implode(' OR ', $x[$key]);
+
+                if(count($options['search']['or'])>$key+1){
+                    $orSql .= ' '.$options['search']['delimiter']['or']. ' ';
+                }
+            }
         }
 
         if(!empty($options['search']['and']) AND is_array($options['search']['and'])){
-            $searchType = ' AND ';
 
-            foreach ($options['search']['and'] as $column => $value) {
+            if(!isset($options['search']['and'][0])){
+                $options['search']['and'] = array($options['search']['and']);
+            }
 
-                $prepareArray[] = $column.' LIKE ?';
-                $executeArray[] = $value;
+            foreach ($options['search']['and'] as $key => $row) {
+
+                foreach ($row as $column => $value) {
+
+                    $x[$key][] = $column.' LIKE ?';
+                    $prepareArray[] = $column.' LIKE ?';
+                    $executeArray[] = $value;
+                }
+                
+                $andSql .= implode(' AND ', $x[$key]);
+
+                if(count($options['search']['and'])>$key+1){
+                    $andSql .= ' '.$options['search']['delimiter']['and']. ' ';
+                }
             }
 
         }
 
-        if(
-            !empty($options['search']['or']) AND is_array($options['search']['or']) OR
-            !empty($options['search']['and']) AND is_array($options['search']['and'])
-        ){
+        $delimiter = '';
+        if(!empty($andSql) AND !empty($orSql)){
+            $delimiter = ' AND ';
+        }
 
-            $sql = 'WHERE '.implode($searchType, $prepareArray);
+        if(
+            !empty($options['search']['or']) OR
+            !empty($options['search']['and'])
+        ){
+            $sql = 'WHERE '.$andSql.$delimiter.$orSql;
         }
 
         if(!empty($options['sort'])){
