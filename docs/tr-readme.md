@@ -865,7 +865,7 @@ veya
     print_r($this->getData('my_table', $options));
 
 
-#### search:and sütuna özel kelime aramak
+#### search:and Sütuna özel kelime aramak
 
 Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
 
@@ -882,9 +882,29 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu te
             'and' => $params
         )
     );
-    $tblname = 'phonebook';
+    $tblname = 'users';
     print_r($this->getData($tblname, $options));
 
+veya
+
+
+    $params = array(
+        array(
+            'username' => 'admin', 
+            'password' => 'root'
+        ),
+        array(
+            'username' => 'user', 
+            'password' => 'password'
+        )
+    );
+    $options = array(
+        'search' => array(
+            'and' => $params
+        )
+    );
+    $tblname = 'users';
+    print_r($this->getData($tblname, $options));
 
 
 
@@ -907,6 +927,61 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde b
     );
     $tblname = 'phonebook';
     print_r($this->getData($tblname, $options));
+
+veya
+
+    $params = array(
+        array(
+            'username' => 'admin', 
+            'password' => 'root'
+        ),
+        array(
+            'username' => 'user', 
+            'password' => 'password'
+        )
+    );
+    $options = array(
+        'search' => array(
+            'or' => $params
+        )
+    );
+    $tblname = 'phonebook';
+    print_r($this->getData($tblname, $options));
+
+
+#### search:delimiter Sütuna özel kelime dizisi ayracı
+
+Sütuna özel kelime aramak için kullanılan `search:and` ve `search:or` yöntemlerinde kullanılması amacıyla tasarlanmış özelliktir.
+
+
+Örneğin `search:and` alt özelliğine çoklu dizi olarak bir şema gönderildiğini varsayalım, bu şema içinde yer alan her bir dizi kümesinin diğer kardeş kümelerle arasına konulması istenen ifade, delimiter özelliğinde belirtilir.
+
+Örneği daha iyi anlamak için, iki kişi arasındaki yazışmaların elde edilmesi amacıyla yazılması icap eden şemayı inceleyebilirsiniz.
+
+
+
+    $params = array(
+        array(
+            'sender_id' => '3', 
+            'reciver_id' => '15'
+        ),
+        array(
+            'sender_id' => '15', 
+            'reciver_id' => '3'
+        )
+    );
+
+    $options = array(
+        'search' => array(
+            'delimiter'=array(
+                'and'=>'OR' //or, OR, and, AND
+            ),
+            'and' => $params
+        )
+    );
+    $tblname = 'messages';
+    print_r($this->getData($tblname, $options));
+
 
 
 #### format: Sonuçların formatı
