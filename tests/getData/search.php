@@ -80,12 +80,21 @@ echo '</pre>';
 
 echo '<hr>';
 
-echo '<h2>3) Bir kaydın farklı sütunlarında ki verileri çoklu denklem esasına göre aramak (Eric Ferraiuolo, e10adc3949ba59abbe56e057f20f883e)</h2>';
+echo '<h2>3) Bir kaydın farklı sütunlarında ki verileri çoklu denklem esasına göre aramak (15, 3 ise veya 3, 15 ise)</h2>';
 $options = array(
     'search'=>array(
+        'delimiter'=>array(
+            'and'=> 'OR'
+        ),
         'and'=>array(
-            'username'=>'Eric Ferraiuolo',
-            'password'=>'e10adc3949ba59abbe56e057f20f883e'
+            array(
+                'sender_id'=>'15',
+                'reciver_id'=>'3'
+            ),
+            array(
+                'sender_id'=>'3',
+                'reciver_id'=>'15'
+            )
         )
     )
 );
@@ -96,7 +105,38 @@ echo '<h3>Sorgu Şeması</h3>';
 print_r($options);
 
 echo '<h3>Sorgu Sonucu</h3>';
-print_r($Mind->getData('users', $options));
+print_r($Mind->getData('messages', $options));
+echo '</pre>';
+
+echo '<hr>';
+
+
+echo '<h2>4) Bir kaydın farklı sütunlarında ki verileri çoklu denklem esasına göre aramak (15 ise veya 3 ise veya 3 ise veya 15 ise)</h2>';
+$options = array(
+    'search'=>array(
+        'delimiter'=>array(
+            'and'=> 'OR'
+        ),
+        'or'=>array(
+            array(
+                'sender_id'=>'15',
+                'reciver_id'=>'3'
+            ),
+            array(
+                'sender_id'=>'3',
+                'reciver_id'=>'15'
+            )
+        )
+    )
+);
+
+
+echo '<pre>';
+echo '<h3>Sorgu Şeması</h3>';
+print_r($options);
+
+echo '<h3>Sorgu Sonucu</h3>';
+print_r($Mind->getData('messages', $options));
 echo '</pre>';
 
 echo '<hr>';
