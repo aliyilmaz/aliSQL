@@ -1895,8 +1895,6 @@ class Mind extends PDO
                             }
                         }
 
-                        
-                    
                     break;
                     // Doğrulama kuralı 
                     case 'bool':
@@ -2032,7 +2030,6 @@ class Mind extends PDO
                 $extra = '';
             }
         }
-
        
         if(empty($this->errors)){
             return true;
