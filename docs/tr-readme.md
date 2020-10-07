@@ -908,7 +908,7 @@ veya
 
 
 
-#### search:or sütuna özel kelime aramak
+#### search:or Sütuna özel kelime aramak
 
 Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
 
@@ -925,7 +925,7 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde b
             'or' => $params
         )
     );
-    $tblname = 'phonebook';
+    $tblname = 'users';
     print_r($this->getData($tblname, $options));
 
 veya
@@ -945,7 +945,7 @@ veya
             'or' => $params
         )
     );
-    $tblname = 'phonebook';
+    $tblname = 'users';
     print_r($this->getData($tblname, $options));
 
 
@@ -957,7 +957,6 @@ Sütuna özel kelime aramak için kullanılan `search:and` ve `search:or` yönte
 Örneğin `search:and` alt özelliğine çoklu dizi olarak bir şema gönderildiğini varsayalım, bu şema içinde yer alan her bir dizi kümesinin diğer kardeş kümelerle arasına konulması istenen ifade, delimiter özelliğinde belirtilir.
 
 Örneği daha iyi anlamak için, iki kişi arasındaki yazışmaların elde edilmesi amacıyla yazılması icap eden şemayı inceleyebilirsiniz.
-
 
 
     $params = array(
