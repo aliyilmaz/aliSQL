@@ -767,6 +767,23 @@ class Mind extends PDO
             $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
         }
 
+        $prefix = ' BINARY ';
+        $suffix = ' = ?';
+        if(!empty($options['search']['scope'])){
+            $options['search']['scope'] = mb_strtoupper($options['search']['scope']);
+            switch ($options['search']['scope']) {
+                case 'LIKE':
+                    $prefix = '';
+                    $suffix = ' LIKE ?';
+                    break;
+                case 'BINARY':
+                    $prefix = ' BINARY ';
+                    $suffix = ' = ?';
+                    break;
+            }
+        }
+
+
         $prepareArray = array();
         $executeArray = array();
 
@@ -791,13 +808,14 @@ class Mind extends PDO
             foreach ( $searchColumns as $column ) {
 
                 foreach ( $keyword as $value ) {
-                    $prepareArray[] = $column.' LIKE ?';
+                    $prepareArray[] = $prefix.$column.$suffix;
                     $executeArray[] = $value;
                 }
 
             }
 
             $sql = 'WHERE '.implode(' OR ', $prepareArray);
+
         }
 
         $delimiterArray = array('and', 'AND', 'or', 'OR');
@@ -832,8 +850,8 @@ class Mind extends PDO
 
                 foreach ($row as $column => $value) {
 
-                    $x[$key][] = $column.' LIKE ?';
-                    $prepareArray[] = $column.' LIKE ?';
+                    $x[$key][] = $prefix.$column.$suffix;
+                    $prepareArray[] = $prefix.$column.$suffix;
                     $executeArray[] = $value;
                 }
                 
@@ -855,8 +873,8 @@ class Mind extends PDO
 
                 foreach ($row as $column => $value) {
 
-                    $x[$key][] = $column.' LIKE ?';
-                    $prepareArray[] = $column.' LIKE ?';
+                    $x[$key][] = $prefix.$column.$suffix;
+                    $prepareArray[] = $prefix.$column.$suffix;
                     $executeArray[] = $value;
                 }
                 
