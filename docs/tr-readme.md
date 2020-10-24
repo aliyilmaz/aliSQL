@@ -2288,7 +2288,7 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
 
 ##### distance
 
-`@` işareti ile ayrılmış iki farklı koordinat noktası arasındaki mesafenin extra parametrede belirtilen miktar kadar olması gerektiğini ifade etmek için kullanılır. Rakam ve ölçü birimi arasında bir boşluk bırakılmalıdır. 
+`@` işareti ile ayrılmış iki farklı koordinat noktası arasındaki mesafenin extra parametrede belirtilen miktar kadar olması gerektiğini ifade etmek için kullanılır. Rakam ve ölçü birimi arasında bir boşluk bırakılmalıdır. Kullanımına izin verilen ölçü birimleriyle ilgili daha fazla bilgi için [distanceMeter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#distancemeter) metodunu inceleyebilirsiniz.
 
     distance:349 km
 
