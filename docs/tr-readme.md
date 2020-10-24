@@ -2224,7 +2224,7 @@ Eğer 3'ncü parametre  sayı olarak belirtilirse söz konusu verinin veritaban�
 veya
 
 
-    unique:posts
+    unique:users:1
 
 
 ##### bool
