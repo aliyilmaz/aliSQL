@@ -1270,6 +1270,91 @@ class Mind extends PDO
     }
 
     /**
+     * Table structure converter for Mind
+     * 
+     * @param string $tblName
+     * @return array
+     */
+    public function getTableDetail($tblName){
+
+        $result =   array();
+        $sql    =   'SHOW COLUMNS FROM ' . $tblName;
+
+        try{
+
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
+
+            foreach ( $query as $row ) {
+                if(strstr($row['Type'], '(')){
+                    $row['Length'] = implode('', $this->get_contents('(',')', $row['Type']));
+                    $row['Type']   = explode('(', $row['Type'])[0];
+                }
+                switch ($row['Type']) {
+                    case 'int':
+                        if($row['Extra'] == 'auto_increment'){
+                            $row = $row['Field'].':increments:'.$row['Length'];
+                        } else {
+                            $row = $row['Field'].':int:'.$row['Length'];
+                        }
+                        break;
+                    case 'varchar':
+                        $row = $row['Field'].':string:'.$row['Length'];
+                        break;
+                    case 'text':
+                        $row = $row['Field'].':small';
+                        break;
+                    case 'mediumtext':
+                        $row = $row['Field'].':medium';
+                        break;
+                    case 'longtext':
+                        $row = $row['Field'].':large';
+                        break;
+                    case 'decimal':
+                        $row = $row['Field'].':decimal:'.$row['Length'];
+                        break;
+                }
+                $result[] = $row;
+            }
+
+            return $result;
+
+        } catch (Exception $e){
+            return $result;
+        }
+    }
+
+    /**
+     * Database backup method
+     * 
+     * @param string|array $dbNames
+     * @return json
+     */
+    public function backup($dbnames)
+    {
+        $result = array();
+
+        if(is_string($dbnames)){
+            $dbnames = array($dbnames);
+        }
+
+        foreach ($dbnames as $dbname) {
+            
+            // database select
+            $this->selectDB($dbname);
+            // tabular data is obtained
+            foreach ($this->tableList() as $tblName) {
+                $result[$dbname][$tblName]['schema'] = $this->getTableDetail($tblName);
+                $result[$dbname][$tblName]['data'] = $this->getData($tblName);
+            }
+        }
+        
+        header('Access-Control-Allow-Origin: *');
+        header("Content-type: application/json; charset=utf-8");
+        header('Content-Disposition: attachment; filename="backup.json"');
+        echo json_encode($result);
+    }
+
+    /**
      * Phone verification.
      *
      * @param string $str
