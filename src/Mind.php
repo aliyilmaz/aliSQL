@@ -1395,12 +1395,15 @@ class Mind extends PDO
 
                         foreach ($rows as $tblName => $row) {
                             $this->tableCreate($tblName, $row['schema']);
-                            $length = $row['config']['auto_increment']['length'];
-                            $sql = "ALTER TABLE ".$tblName." AUTO_INCREMENT = ".$length;
-                            $this->query($sql);
+                            if(!empty($row['config']['auto_increment']['length'])){
+                                $length = $row['config']['auto_increment']['length'];
+                                $sql = "ALTER TABLE ".$tblName." AUTO_INCREMENT = ".$length;
+                                $this->query($sql);
+                            }
                             if(!empty($row['data'])){
                                 $this->insert($tblName, $row['data']);
                             }
+                            
                             $result[$dbname][$tblName] = $row;
                         }
                         
