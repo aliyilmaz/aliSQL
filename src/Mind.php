@@ -1155,8 +1155,8 @@ class Mind extends PDO
                 $result = $item['Auto_increment'];
             }
 
-            if(empty($result)){
-                return 0;
+            if($result>1){
+                return $result;
             } else {
                 return $result+1;
             }
@@ -1326,15 +1326,22 @@ class Mind extends PDO
     /**
      * Database backup method
      * 
-     * @param string|array $dbNames
-     * @return json
+     * @param string|array $dbnames
+     * @param string $directory
+     * @return json|export
      */
-    public function backup($dbnames)
+    public function backup($dbnames, $directory='')
     {
         $result = array();
 
         if(is_string($dbnames)){
             $dbnames = array($dbnames);
+        }
+
+        if(!empty($directory)){
+            if(!is_dir($directory)){
+                return json_encode($result);
+            }
         }
 
         foreach ($dbnames as $dbname) {
@@ -1343,6 +1350,19 @@ class Mind extends PDO
             $this->selectDB($dbname);
             // tabular data is obtained
             foreach ($this->tableList() as $tblName) {
+                
+                $incrementColumn = $this->increments($tblName);
+                
+                if(!empty($incrementColumn)){
+                    $increments = array(
+                        'auto_increment'=>array(
+                            'column'=>$incrementColumn,
+                            'length'=>$this->newId($tblName)
+                        )
+                    );
+                }
+
+                $result[$dbname][$tblName]['config'] = $increments;
                 $result[$dbname][$tblName]['schema'] = $this->getTableDetail($tblName);
                 $result[$dbname][$tblName]['data'] = $this->getData($tblName);
             }
@@ -1352,6 +1372,50 @@ class Mind extends PDO
         header("Content-type: application/json; charset=utf-8");
         header('Content-Disposition: attachment; filename="backup.json"');
         echo json_encode($result);
+    }
+
+    /**
+     * 
+     */
+    public function restore($paths){
+
+        $result = array();
+        
+        if(is_string($paths)){
+            $paths = array($paths);
+        }
+
+        foreach ($paths as $path) {
+            if(file_exists($path)){
+                foreach (json_decode(file_get_contents($path), true) as $dbname => $rows) {
+                     if(!$this->is_db($dbname)){ 
+
+                        $this->dbCreate($dbname);
+                        $this->selectDB($dbname);
+
+                        foreach ($rows as $tblName => $row) {
+                            $this->tableCreate($tblName, $row['schema']);
+                            $length = $row['config']['auto_increment']['length'];
+                            $sql = "ALTER TABLE ".$tblName." AUTO_INCREMENT = ".$length;
+                            $this->query($sql);
+                            if(!empty($row['data'])){
+                                $this->insert($tblName, $row['data']);
+                            }
+                            $result[$dbname][$tblName] = $row;
+                        }
+                        
+                        
+                    }
+                    
+                }
+
+                
+            }
+        }
+
+        return $result;
+
+
     }
 
     /**
