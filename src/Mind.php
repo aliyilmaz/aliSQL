@@ -1338,12 +1338,6 @@ class Mind extends PDO
             $dbnames = array($dbnames);
         }
 
-        if(!empty($directory)){
-            if(!is_dir($directory)){
-                return json_encode($result);
-            }
-        }
-
         foreach ($dbnames as $dbname) {
             
             // database select
@@ -1356,7 +1350,6 @@ class Mind extends PDO
                 if(!empty($incrementColumn)){
                     $increments = array(
                         'auto_increment'=>array(
-                            'column'=>$incrementColumn,
                             'length'=>$this->newId($tblName)
                         )
                     );
@@ -1368,10 +1361,19 @@ class Mind extends PDO
             }
         }
         
-        header('Access-Control-Allow-Origin: *');
-        header("Content-type: application/json; charset=utf-8");
-        header('Content-Disposition: attachment; filename="backup.json"');
-        echo json_encode($result);
+        $data = json_encode($result);
+        $backupFile = 'backup_'.$this->permalink($this->timestamp, array('delimiter'=>'_')).'.json';
+        if(!empty($directory)){
+            if(is_dir($directory)){
+                $this->write($data, $directory.'/'.$backupFile);
+            } 
+        } else {
+            header('Access-Control-Allow-Origin: *');
+            header("Content-type: application/json; charset=utf-8");
+            header('Content-Disposition: attachment; filename="'.$backupFile.'"');
+            echo $data;
+        }
+        
     }
 
     /**
@@ -1403,7 +1405,7 @@ class Mind extends PDO
                             if(!empty($row['data'])){
                                 $this->insert($tblName, $row['data']);
                             }
-                            
+
                             $result[$dbname][$tblName] = $row;
                         }
                         
