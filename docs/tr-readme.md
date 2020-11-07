@@ -1332,9 +1332,9 @@ Veritabanı tablosunda ki `auto_increment` görevine sahip sütun adını göste
 
 ## tableInterpriter()
 
-Mind ile oluşturulmuş veritabanı tablosunu, Mind'ın veritabanı tablosu oluşturma şemasına dönüştüren yorumlayıcı bir metotdur. `$tblname` veritabanı tablo adını temsil etmekte olup `string` bir yapıda belirtilmelidir.Söz konusu şema dizi yapısında geri döndürülür.
+Mind ile oluşturulmuş veritabanı tablosunu, Mind'ın veritabanı tablosu oluşturma şemasına dönüştüren yorumlayıcı bir metotdur. Veritabanı tablo adı `string` bir yapıda belirtilmelidir. Söz konusu tablo oluşturucu şema, dizi yapısında geri döndürülür. Bu metod'a ihtiyaç duyulmasının nedeni, veritabanı tablolarının yeniden oluşturulması gerekebileceği ihtiyacıdır.
 
-****Not:**** Eğer veritabanı tablosu yoksa veya tablo boş ise boş bir dizi yanıt olarak geri döndürülür.
+****Not:**** Eğer veritabanı tablosu yoksa veya tablo boş ise, boş bir dizi yanıt olarak geri döndürülür.
 
 
 ##### Örnek
