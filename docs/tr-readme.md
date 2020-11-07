@@ -183,6 +183,9 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [do_have](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#do_have)
 -   [newId](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#newId)
 -   [increments](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#increments)
+-   [tableInterpriter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#tableInterpriter)
+-   [backup](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#backup)
+-   [restore](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#restore)
 
 ##### Doğrulayıcı
 
@@ -1319,10 +1322,76 @@ Bir veritabanı tablosuna eklenmesi planlanan kayda tahsis edilecek `auto_increm
 ## increments()
 
 Veritabanı tablosunda ki `auto_increment` görevine sahip sütun adını göstermek amacıyla kullanılır. `$tblname` veritabanı tablo adını temsil etmektedir.
+
 ##### Örnek
 
     $tblname = 'users';
     echo $this->increments($tblname);
+
+----------
+
+## tableInterpriter()
+
+Mind ile oluşturulmuş veritabanı tablosunu, Mind'ın veritabanı tablosu oluşturma şemasına dönüştüren yorumlayıcı bir metotdur. `$tblname` veritabanı tablo adını temsil etmekte olup `string` bir yapıda belirtilmelidir.Söz konusu şema dizi yapısında geri döndürülür.
+
+****Not:**** Eğer veritabanı tablosu yoksa veya tablo boş ise boş bir dizi yanıt olarak geri döndürülür.
+
+
+##### Örnek
+
+    // Array
+    // (
+    //     [0] => id:increments:11
+    //     [1] => username:string:255
+    //     [2] => password:string:255
+    //     [3] => description:medium
+    //     [4] => address:large
+    //     [5] => amount:decimal:10,0
+    //     [6] => age:int:11
+    // )
+
+    echo '<pre>';
+    print_r($this->tableInterpriter('users'));
+    echo '</pre>';
+
+----------
+
+## backup()
+
+Bir veya daha fazla veritabanını yedeklemek için kullanılır. İki parametre alır, ilki veritabanı isimlerini temsil eder ve belirtilmesi zorunludur, bu isimler `string` ve `array` biçiminde gönderilebilir, ikinci parametre ise yedeğin konumlanması istenen dizin yolunu temsil eder ve zorunlu değildir, bu yol `string` olarak belirtilmelidir. 
+
+Yedek `JSON` yapısındadır, tarayıcı üzerinden bilgisayara kaydedilmek istenirse, ikinci parametre gönderilmez.
+
+##### Örnek
+
+    $this->backup('mydb');
+
+veya 
+
+    $this->backup(array('mydb', 'trek'));
+
+veya
+
+    $this->backup('mydb', 'restore/');
+
+veya
+
+    $this->backup(array('mydb', 'trek'), './');
+
+----------
+
+## restore()
+
+Bir veya daha fazla veritabanını yedeğini geri yüklemek için kullanılır. `JSON` dosyalarına ait `string` veya `array` yapısındaki yolları temsil eden bir parametre alır ve zorunludur.
+
+##### Örnek
+
+    
+    $this->restore('backup_2020_11_06_17_40_21.json');
+    
+veya
+
+    $this->restore(array('backup_2020_11_06_17_40_21.json', 'backup_2020_11_06_17_41_22.json'));
 
 ----------
 
