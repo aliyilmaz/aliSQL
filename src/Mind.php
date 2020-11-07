@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 3.2.2
+ * @version    Release: 4.0.0
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1196,80 +1196,6 @@ class Mind extends PDO
     }
 
     /**
-     * Database verification.
-     *
-     * @param string $dbName
-     * @return bool
-     * */
-    public function is_db($dbName){
-
-        $sql     = 'SHOW DATABASES';
-
-        try{
-            $query = $this->query($sql, PDO::FETCH_ASSOC);
-
-            $dbNames = array();
-
-            if ( $query->rowCount() ){
-                foreach ( $query as $item ) {
-                    $dbNames[] = $item['Database'];
-                }
-            }
-
-            return in_array($dbName, $dbNames) ? true : false;
-
-        } catch (Exception $e){
-            return false;
-        }
-
-    }
-
-    /**
-     * Table verification.
-     *
-     * @param string $tblName
-     * @return bool
-     */
-    public function is_table($tblName){
-
-        $sql     = 'DESCRIBE '.$tblName;
-
-        try{
-            return $this->query($sql, PDO::FETCH_NUM);
-        } catch (Exception $e){
-            return false;
-        }
-
-    }
-
-    /**
-     * Column verification.
-     *
-     * @param string $tblName
-     * @param string $column
-     * @return bool
-     * */
-    public function is_column($tblName, $column){
-
-        $sql = 'SHOW COLUMNS FROM ' . $tblName;
-
-        try{
-            $query = $this->query($sql, PDO::FETCH_NAMED);
-
-            $columns = array();
-
-            foreach ( $query as $item ) {
-                $columns[] = $item['Field'];
-            }
-
-            return in_array($column, $columns) ? true : false;
-
-        } catch (Exception $e){
-            return false;
-        }
-    }
-
-    /**
      * Table structure converter for Mind
      * 
      * @param string $tblName
@@ -1377,7 +1303,10 @@ class Mind extends PDO
     }
 
     /**
+     * Method of restoring database backup
      * 
+     * @param string|array $paths
+     * @return array
      */
     public function restore($paths){
 
@@ -1407,8 +1336,7 @@ class Mind extends PDO
                             }
 
                             $result[$dbname][$tblName] = $row;
-                        }
-                        
+                        }   
                         
                     }
                     
@@ -1419,8 +1347,80 @@ class Mind extends PDO
         }
 
         return $result;
+    }
 
+    /**
+     * Database verification.
+     *
+     * @param string $dbName
+     * @return bool
+     * */
+    public function is_db($dbName){
 
+        $sql     = 'SHOW DATABASES';
+
+        try{
+            $query = $this->query($sql, PDO::FETCH_ASSOC);
+
+            $dbNames = array();
+
+            if ( $query->rowCount() ){
+                foreach ( $query as $item ) {
+                    $dbNames[] = $item['Database'];
+                }
+            }
+
+            return in_array($dbName, $dbNames) ? true : false;
+
+        } catch (Exception $e){
+            return false;
+        }
+
+    }
+
+    /**
+     * Table verification.
+     *
+     * @param string $tblName
+     * @return bool
+     */
+    public function is_table($tblName){
+
+        $sql     = 'DESCRIBE '.$tblName;
+
+        try{
+            return $this->query($sql, PDO::FETCH_NUM);
+        } catch (Exception $e){
+            return false;
+        }
+
+    }
+
+    /**
+     * Column verification.
+     *
+     * @param string $tblName
+     * @param string $column
+     * @return bool
+     * */
+    public function is_column($tblName, $column){
+
+        $sql = 'SHOW COLUMNS FROM ' . $tblName;
+
+        try{
+            $query = $this->query($sql, PDO::FETCH_NAMED);
+
+            $columns = array();
+
+            foreach ( $query as $item ) {
+                $columns[] = $item['Field'];
+            }
+
+            return in_array($column, $columns) ? true : false;
+
+        } catch (Exception $e){
+            return false;
+        }
     }
 
     /**
