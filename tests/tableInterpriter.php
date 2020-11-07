@@ -18,5 +18,5 @@ $Mind->selectDB('test1');
 // )
 
 echo '<pre>';
-print_r($Mind->getTableDetail('users'));
+print_r($Mind->tableInterpriter('users'));
 echo '</pre>';

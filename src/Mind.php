@@ -1275,7 +1275,7 @@ class Mind extends PDO
      * @param string $tblName
      * @return array
      */
-    public function getTableDetail($tblName){
+    public function tableInterpriter($tblName){
 
         $result =   array();
         $sql    =   'SHOW COLUMNS FROM ' . $tblName;
@@ -1356,7 +1356,7 @@ class Mind extends PDO
                 }
 
                 $result[$dbname][$tblName]['config'] = $increments;
-                $result[$dbname][$tblName]['schema'] = $this->getTableDetail($tblName);
+                $result[$dbname][$tblName]['schema'] = $this->tableInterpriter($tblName);
                 $result[$dbname][$tblName]['data'] = $this->getData($tblName);
             }
         }
