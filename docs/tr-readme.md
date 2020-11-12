@@ -1015,9 +1015,6 @@ veya
     print_r($this->getData('users', $options));
     echo '</pre>';
 
-veya
-
-
 
 
 #### format: Sonuçların formatı
