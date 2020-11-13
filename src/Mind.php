@@ -760,12 +760,8 @@ class Mind extends PDO
 
             $options['column'] = array_intersect($options['column'], $columns);
             $columns = array_values($options['column']);
-
-            $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
-
-        } else {
-            $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
-        }
+        } 
+        $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
 
         $prefix = ' BINARY ';
         $suffix = ' = ?';
@@ -800,6 +796,8 @@ class Mind extends PDO
 
                 if(!is_array($options['search']['column'])){
                     $searchColumns = array($options['search']['column']);
+                } else {
+                    $searchColumns = $options['search']['column'];
                 }
 
                 $searchColumns = array_intersect($searchColumns, $columns);
