@@ -872,7 +872,8 @@ veya
 
 Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
 
-****Bilgi:**** Bu özellik kullanıldığında `search:keyword` ve `search:column` özellikleri gözardı edilir.
+***Bilgi:*** getData:column kısmında sütun tanımlama yapılmışsa bu sütunların içinde aranması istenen sütunlarında olması zorunludur.
+
 
 ##### Örnek
 
@@ -915,8 +916,6 @@ veya
 
 Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
 
-****Bilgi:**** Bu özellik kullanıldığında `search:keyword` ve `search:column` özellikleri gözardı edilir.
-
 ##### Örnek
 
     $params = array(
@@ -950,6 +949,8 @@ veya
     );
     $tblname = 'users';
     print_r($this->getData($tblname, $options));
+
+***Bilgi:*** getData:column kısmında sütun tanımlama yapılmışsa bu sütunların içinde aranması istenen sütunlarında olması zorunludur.
 
 
 #### search:delimiter Sütuna özel kelime dizisi ayracı
@@ -988,7 +989,7 @@ Sütuna özel kelime aramak için kullanılan `search:and` ve `search:or` yönte
 
 Aramaların, büyük küçük harf fark duyarlılığı bu alt özellik sayesinde belirlenebilir. Bunu yapabilmek için `string` olarak `like`, `LIKE`, `binary`, `BINARY` olarak belirtilebilir. `LIKE` veya `like` büyük küçük harf duyarlılığı gözetmeden yapılan aramalar için kullanılır, bu yöntem tercih edildiğinde `%` gibi kapsam ifade eden işaretler gönderilebilir. `BINARY` veya `binary` ise büyük küçük harf duyarlılığını gözeterek yapılan aramalar için kullanılır, bu yöntemde `%` gibi kapsam ifadeleri gönderilemez. Varsayılan olarak `BINARY` belirtilmiştir.
 
-****Bilgi:**** Bu özellik `search:and`, `search:or`, `search:delimiter` gibi tüm search alt özellikleriyle beraber kullanılabilir.
+****Bilgi:**** Bu özellik `search:and`, `search:or`, `search:delimiter`, `search:keyword` gibi tüm search alt özellikleriyle beraber kullanılabilir.
 
 ##### Örnek
 
