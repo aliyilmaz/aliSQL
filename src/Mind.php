@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.0.0
+ * @version    Release: 4.0.1
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -750,6 +750,7 @@ class Mind extends PDO
         $sql = '';
         $andSql = '';
         $orSql = '';
+        $keywordSql = '';
         $columns = $this->columnList($tblName);
 
         if(!empty($options['column'])){
@@ -778,7 +779,6 @@ class Mind extends PDO
                     break;
             }
         }
-
 
         $prepareArray = array();
         $executeArray = array();
@@ -812,7 +812,7 @@ class Mind extends PDO
 
             }
 
-            $sql = 'WHERE '.implode(' OR ', $prepareArray);
+            $keywordSql .= implode(' OR ', $prepareArray);
 
         }
 
@@ -885,16 +885,30 @@ class Mind extends PDO
 
         }
 
-        $delimiter = '';
+        $delimiter = ' AND ';
+        $sqlBox = array();
+
+        if(!empty($keywordSql)){
+            $sqlBox[] = $keywordSql;
+        }
+
         if(!empty($andSql) AND !empty($orSql)){
-            $delimiter = ' AND ';
+            $sqlBox[] = '('.$andSql.$delimiter.$orSql.')';
+        } else {
+            if(!empty($andSql)){
+                $sqlBox[] = '('.$andSql.')';
+            }
+            if(!empty($orSql)){
+                $sqlBox[] = '('.$orSql.')';
+            }
         }
 
         if(
             !empty($options['search']['or']) OR
-            !empty($options['search']['and'])
+            !empty($options['search']['and']) OR
+            !empty($options['search']['keyword'])
         ){
-            $sql = 'WHERE '.$andSql.$delimiter.$orSql;
+            $sql = 'WHERE '.implode($delimiter, $sqlBox);
         }
 
         if(!empty($options['sort'])){
