@@ -140,3 +140,32 @@ print_r($Mind->getData('messages', $options));
 echo '</pre>';
 
 echo '<hr>';
+
+
+
+echo '<h2>5) OR ve AND kuralı yardımıyla yapılan sorgularda keyword\'un de etkin olmasını sağlamak (1 ve 3 idleri, %sel% kelimeyi temsil eder.)</h2>';
+$options = array(
+    'column'=>array('sender_id', 'text','_token', 'created_at'),
+    'search'=>array(
+        'scope'=>'LIKE',
+        'column'=>array('text'),
+        'keyword'=>'%sel%',
+        'delimiter'=>array(
+            'or'=>'OR'
+        ),
+        'or'=>array(
+            array('sender_id'=>1),
+            array('sender_id'=>3)
+        )
+    )
+);
+
+echo '<pre>';
+echo '<h3>Sorgu Şeması</h3>';
+print_r($options);
+
+echo '<h3>Sorgu Sonucu</h3>';
+print_r($Mind->getData('messages', $options));
+echo '</pre>';
+
+echo '<hr>';
