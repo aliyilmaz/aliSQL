@@ -1401,21 +1401,14 @@ Veritabanı tablosunda bulunan verileri sayfalamak amacıyla kullanılır.
 
 Sayfa ön ekini temsil etmekte olup zorunlu değildir, varsayılan olarak `p` belirtilmiştir. 
 
-###### Kullanım şekilleri
+###### Rotasız url yapısında kullanımı
 
-    pagination.php?p
+`pagination.php`  adında bir dosya olduğunu varsayalım, bu dosyanın tam yoluna ön eki dahil ederek şu şekilde `pagination.php?p` veya şu şekilde`pagination.php?p=1` kullanarak ilk sayfa verileri görüntülenmiş olur.
 
-veya
 
-    pagination.php?p=1
+###### Rotalı url yapısında kullanımı
 
-veya 
-
-    users
-
-veya 
-
-    users/1
+Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosyada rota `users:p` olarak tanımlandığında adres satırına `users/1` yazılırsa ilk sayfa verileri görüntülenmiş olur.
 
 
 #### limit 
