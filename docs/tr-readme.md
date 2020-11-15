@@ -1401,6 +1401,23 @@ Veritabanı tablosunda bulunan verileri sayfalamak amacıyla kullanılır.
 
 Sayfa ön ekini temsil etmekte olup zorunlu değildir, varsayılan olarak `p` belirtilmiştir. 
 
+###### Örnek
+
+    pagination.php?p
+
+veya
+
+    pagination.php?p=1
+
+veya 
+
+    users
+
+veya 
+
+    users/1
+
+
 #### limit 
 
 Her sayfada görüntülenmesi istenen kayıt adedini temsil etmekte olup zorunlu değildir, varsayılan olarak `5` adet belirtilmiştir. 
