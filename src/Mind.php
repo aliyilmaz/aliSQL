@@ -1362,6 +1362,95 @@ class Mind extends PDO
     }
 
     /**
+     * Paging method
+     * 
+     * @param string $tblName
+     * @param array $options
+     * @return json|array
+     */
+    public function pagination($tblName, $options=array()){
+        
+        /* -------------------------------------------------------------------------- */
+        /*                                   FORMAT                                   */
+        /* -------------------------------------------------------------------------- */
+
+        if(!isset($options['format'])){
+            $format = '';
+        } else {
+            $format = $options['format'];
+            unset($options['format']);
+        }
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                                    LIMIT                                   */
+        /* -------------------------------------------------------------------------- */
+        $limit = 5;
+        if(empty($options['limit'])){
+            $options['limit'] = $limit;
+        } else {
+             if(!is_numeric($options['limit'])){
+                $options['limit'] = $limit;
+             }
+        }
+        $end = $options['limit'];
+
+        /* -------------------------------------------------------------------------- */
+        /*                                    PAGE                                    */
+        /* -------------------------------------------------------------------------- */
+
+        $page = 1;
+        $prefix = 'p';
+        if(!empty($options['prefix'])){
+            if(!is_numeric($options['prefix'])){
+                $prefix = $options['prefix'];
+            }
+        }
+
+        if(!empty($this->post[$prefix])){
+            if(is_numeric($this->post[$prefix])){
+                $page = $this->post[$prefix];
+            }
+        } else {
+            $this->post[$prefix] = $page;
+        }
+
+        
+        /* -------------------------------------------------------------------------- */
+        /*                                   SEARCH                                   */
+        /* -------------------------------------------------------------------------- */
+
+        if(!isset($options['search']) OR empty($options['search'])){
+            $options['search'] = array();
+        }
+
+        if(!is_array($options['search'])){
+            $options['search'] = array();
+        }
+
+
+
+        $totalRow = count($this->getData($tblName, $options));
+        $totalPage = ceil($totalRow/$end);
+        $start = ($page*$end)-$end;
+
+        $options = array(
+                'limit'=>array(
+                    'start'=>$start,
+                    'end'=>$end
+                ),
+                'search'=>$options['search']
+            );
+        $result = array('data'=>$this->getData($tblName, $options), 'totalPage'=>$totalPage);
+        switch ($format) {
+            case 'json':
+                return json_encode($result); 
+            break;
+        }
+        return $result;
+    }
+
+    /**
      * Database verification.
      *
      * @param string $dbName
