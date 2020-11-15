@@ -812,7 +812,7 @@ class Mind extends PDO
 
             }
 
-            $keywordSql .= implode(' OR ', $prepareArray);
+            $keywordSql .= '('.implode(' OR ', $prepareArray).')';
 
         }
 
@@ -853,7 +853,7 @@ class Mind extends PDO
                     $executeArray[] = $value;
                 }
                 
-                $orSql .= implode(' OR ', $x[$key]);
+                $orSql .= '('.implode(' OR ', $x[$key]).')';
 
                 if(count($options['search']['or'])>$key+1){
                     $orSql .= ' '.$options['search']['delimiter']['or']. ' ';
@@ -876,7 +876,7 @@ class Mind extends PDO
                     $executeArray[] = $value;
                 }
                 
-                $andSql .= implode(' AND ', $x[$key]);
+                $andSql .= '('.implode(' AND ', $x[$key]).')';
 
                 if(count($options['search']['and'])>$key+1){
                     $andSql .= ' '.$options['search']['delimiter']['and']. ' ';
