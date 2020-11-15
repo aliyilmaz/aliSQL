@@ -1424,7 +1424,7 @@ Her sayfada görüntülenmesi istenen kayıt adedini temsil etmekte olup zorunlu
 
 #### search, column ve format
 
-Bu kurallar hakkında daha fazla bilgi edinmek için, doğrudan [getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md##getData) metoduna göz atabilirsiniz.
+Bu kurallar hakkında daha fazla bilgi edinmek için, doğrudan [#getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md##getData) metoduna göz atabilirsiniz.
 
 ##### Örnek
 
