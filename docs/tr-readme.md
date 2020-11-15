@@ -1401,7 +1401,7 @@ Veritabanı tablosunda bulunan verileri sayfalamak amacıyla kullanılır.
 
 Sayfa ön ekini temsil etmekte olup zorunlu değildir, varsayılan olarak `p` belirtilmiştir. 
 
-###### Örnek
+###### Kullanım şekilleri
 
     pagination.php?p
 
