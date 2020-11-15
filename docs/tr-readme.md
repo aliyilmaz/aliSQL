@@ -186,6 +186,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [tableInterpriter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#tableInterpriter)
 -   [backup](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#backup)
 -   [restore](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#restore)
+-   [pagination](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#pagination)
 
 ##### Doğrulayıcı
 
