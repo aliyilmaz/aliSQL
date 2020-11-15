@@ -24,6 +24,7 @@ $options = array(
             )
         )
     ),
+    'column'=>array('sender_id','reciver_id','text'), // array / string
     'limit'=>2, // Default 5
     'format'=>'json' // json 
 );
