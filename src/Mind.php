@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.0.1
+ * @version    Release: 4.0.2
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1369,6 +1369,8 @@ class Mind extends PDO
      * @return json|array
      */
     public function pagination($tblName, $options=array()){
+
+        $result = array();
         
         /* -------------------------------------------------------------------------- */
         /*                                   FORMAT                                   */
@@ -1407,6 +1409,16 @@ class Mind extends PDO
             }
         }
 
+        if(!isset($this->post[$prefix])){
+           
+            switch ($format) {
+                case 'json':
+                    return json_encode($result, JSON_PRETTY_PRINT); 
+                break;
+            }
+            return $result;
+        }
+
         if(!empty($this->post[$prefix])){
             if(is_numeric($this->post[$prefix])){
                 $page = $this->post[$prefix];
@@ -1428,8 +1440,9 @@ class Mind extends PDO
             $options['search'] = array();
         }
 
-
-
+        /* -------------------------------------------------------------------------- */
+        /*            Finding the total number of pages and starting points           */
+        /* -------------------------------------------------------------------------- */
         $totalRow = count($this->getData($tblName, $options));
         $totalPage = ceil($totalRow/$end);
         $start = ($page*$end)-$end;
@@ -1441,10 +1454,10 @@ class Mind extends PDO
                 ),
                 'search'=>$options['search']
             );
-        $result = array('data'=>$this->getData($tblName, $options), 'totalPage'=>$totalPage);
+        $result = array('data'=>$this->getData($tblName, $options), 'totalPage'=>$totalPage, 'prefix'=>$prefix);
         switch ($format) {
             case 'json':
-                return json_encode($result); 
+                return json_encode($result, JSON_PRETTY_PRINT); 
             break;
         }
         return $result;
