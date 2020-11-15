@@ -986,7 +986,7 @@ Sütuna özel kelime aramak için kullanılan `search:and` ve `search:or` yönte
     $tblname = 'messages';
     print_r($this->getData($tblname, $options));
 
-#### scope: Özelleştirilebilen hassasiyet
+#### search:scope Özelleştirilebilen hassasiyet
 
 Aramaların, büyük küçük harf fark duyarlılığı bu alt özellik sayesinde belirlenebilir. Bunu yapabilmek için `string` olarak `like`, `LIKE`, `binary`, `BINARY` olarak belirtilebilir. `LIKE` veya `like` büyük küçük harf duyarlılığı gözetmeden yapılan aramalar için kullanılır, bu yöntem tercih edildiğinde `%` gibi kapsam ifade eden işaretler gönderilebilir. `BINARY` veya `binary` ise büyük küçük harf duyarlılığını gözeterek yapılan aramalar için kullanılır, bu yöntemde `%` gibi kapsam ifadeleri gönderilemez. Varsayılan olarak `BINARY` belirtilmiştir.
 
