@@ -1427,7 +1427,14 @@ class Mind extends PDO
             $this->post[$prefix] = $page;
         }
 
-        
+        /* -------------------------------------------------------------------------- */
+        /*                                   COLUMN                                   */
+        /* -------------------------------------------------------------------------- */
+
+        if(!isset($options['column']) OR empty($options['column'])){
+            $options['column'] = array();
+        }
+
         /* -------------------------------------------------------------------------- */
         /*                                   SEARCH                                   */
         /* -------------------------------------------------------------------------- */
@@ -1452,7 +1459,8 @@ class Mind extends PDO
                     'start'=>$start,
                     'end'=>$end
                 ),
-                'search'=>$options['search']
+                'search'=>$options['search'],
+                'column'=>$options['column']
             );
         $result = array('data'=>$this->getData($tblName, $options), 'totalPage'=>$totalPage, 'prefix'=>$prefix);
         switch ($format) {
