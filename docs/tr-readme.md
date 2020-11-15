@@ -1391,6 +1391,95 @@ veya
 
     $this->restore(array('backup_2020_11_06_17_40_21.json', 'backup_2020_11_06_17_41_22.json'));
 
+
+## pagination()
+
+Veritabanı tablosunda bulunan verileri sayfalamak amacıyla kullanılır. 
+
+#### prefix
+
+Sayfa ön ekini temsil etmekte olup zorunlu değildir, varsayılan olarak `p` belirtilmiştir. 
+
+#### limit 
+
+Her sayfada görüntülenmesi istenen kayıt adedini temsil etmekte olup zorunlu değildir, varsayılan olarak `5` adet belirtilmiştir. 
+
+#### search, column ve format
+
+Bu kurallar hakkında daha fazla bilgi edinmek için, doğrudan [getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md##getData) metoduna göz atabilirsiniz.
+
+##### Örnek
+
+    $data = $this->pagination('messages');
+
+    echo '<pre>';
+    print_r($data['data']);
+    echo '</pre>';
+
+    echo "\n";
+
+    $prefix = $data['prefix'];
+    for ($i=1; $i <= $data['totalPage']; $i++) { 
+
+        echo "\n<a ";
+
+        if($i == $this->post[$prefix] OR empty($this->post[$prefix])){ 
+            echo 'class="pageSelected" ';
+        }
+        echo 'href="'.$this->base_url.'pagination.php?'.$prefix.'='.$i.'">'.$i.'</a>';
+    }
+
+    echo "\n\n";
+
+veya
+
+
+    $options = array(
+        'prefix'=>'page', // Default p
+        'search'=>array(
+            'scope'=>'like',
+            'keyword'=>'%a%',
+            'column'=>'text',
+            'delimiter'=>array(
+                'or'=>'AND'
+            ),
+            'or'=>array(
+                array(
+                    'sender_id'=>1,
+                    'reciver_id'=>1
+                ),
+                array(
+                    'sender_id'=>3,
+                    'reciver_id'=>3
+                )
+            )
+        ),
+        'column'=>array('sender_id','reciver_id','text'), // array / string
+        'limit'=>2, // Default 5
+        'format'=>'json' // json 
+    );
+    $data = $this->pagination('messages', $options);
+
+    echo '<pre>';
+    print_r($data['data']);
+    echo '</pre>';
+
+    echo "\n";
+
+    $prefix = $data['prefix'];
+    for ($i=1; $i <= $data['totalPage']; $i++) { 
+
+        echo "\n<a ";
+
+        if($i == $this->post[$prefix] OR empty($this->post[$prefix])){ 
+            echo 'class="pageSelected" ';
+        }
+        echo 'href="'.$this->base_url.'pagination.php?'.$prefix.'='.$i.'">'.$i.'</a>';
+    }
+
+    echo "\n\n";
+
+
 ----------
 
 ## is_db()
