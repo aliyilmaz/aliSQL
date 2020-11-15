@@ -4,6 +4,7 @@ require_once ('../src/Mind.php');
 $Mind = new Mind();
 
 // url: pagination.php?page OR pagination.php?page=1
+// url: pagination.php?p OR pagination.php?p=1
 $options = array(
     'prefix'=>'page', // Default p
     'search'=>array(
@@ -28,6 +29,7 @@ $options = array(
     'limit'=>2, // Default 5
     'format'=>'json' // json 
 );
+// $data = $Mind->pagination('messages');
 $data = $Mind->pagination('messages', $options);
 
 
