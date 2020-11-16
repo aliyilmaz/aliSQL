@@ -9,7 +9,7 @@ $options = array(
     'prefix'=>'page', // Default p
     'search'=>array(
         'scope'=>'like',
-        'keyword'=>'%a%',
+        'keyword'=>'%iyi misin%',
         'column'=>'text',
         'delimiter'=>array(
             'or'=>'AND'
@@ -27,7 +27,8 @@ $options = array(
     ),
     'column'=>array('sender_id','reciver_id','text'), // array / string
     'limit'=>2, // Default 5
-    'format'=>'json' // json 
+    'format'=>'json', // json 
+    'sort'=>'id:asc' // asc / ASC / desc / DESC
 );
 // $data = $Mind->pagination('messages');
 $data = $Mind->pagination('messages', $options);
