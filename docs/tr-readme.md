@@ -228,6 +228,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [mindLoad](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#mindLoad)
 -   [cGeneration](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#cGeneration)
 -   [pGeneration](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#pGeneration)
+-   [generateToken](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#generateToken)
 
 ##### Sistem
 
@@ -2794,6 +2795,19 @@ Bu fonksiyon, veritabanı tablo veya sütunu oluştururken yazılması icap eden
 
 ## pGeneration()
 Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin ayrıştırılması amacıyla kullanılır. 
+
+----------
+
+## generateToken()
+Bu fonksiyon, belirtilen karakter uzunluğunda rastgele parametre oluşturmak amacıyla kullanılır, `integer` türünde bir parametre alır, belirtilme zorunluluğu bulunmamaktadır. Varsayılan olarak karakte uzunluğu `100` olarak belirtilmiştir.
+
+##### Örnek
+
+    echo $this->generateToken();
+
+veya
+
+    echo $this->generateToken(30);
 
 ----------
 
