@@ -1456,22 +1456,13 @@ class Mind extends PDO
         /* -------------------------------------------------------------------------- */
         /*            Finding the total number of pages and starting points           */
         /* -------------------------------------------------------------------------- */
-        $totalRow = count($this->getData($tblName, $options));
+        $data = $this->getData($tblName, $options);
+        $totalRow = count($data);
         $totalPage = ceil($totalRow/$end);
         $start = ($page*$end)-$end;
 
-        $options = array(
-                'limit'=>array(
-                    'start'=>$start,
-                    'end'=>$end
-                ),
-                'search'=>$options['search'],
-                'column'=>$options['column'],
-                'sort'=>$options['sort']
-            );
-
         $result = array(
-            'data'=>$this->getData($tblName, $options), 
+            'data'=>array_slice($data, $start, $end), 
             'prefix'=>$prefix,
             'limit'=>$end,
             'totalPage'=>$totalPage,
