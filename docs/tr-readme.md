@@ -1415,7 +1415,7 @@ Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dos
 
 Her sayfada görüntülenmesi istenen kayıt adedini temsil etmekte olup zorunlu değildir, varsayılan olarak `5` adet belirtilmiştir. 
 
-#### search, column ve format
+#### search, column, format, sort
 
 Bu kurallar hakkında daha fazla bilgi edinmek için, doğrudan [getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getData) metoduna göz atabilirsiniz.
 
@@ -1467,7 +1467,8 @@ veya
         ),
         'column'=>array('sender_id','reciver_id','text'), // array / string
         'limit'=>2, // Default 5
-        'format'=>'json' // json 
+        'format'=>'json', // json 
+        'sort'=>'id:asc' // asc / ASC / desc / DESC
     );
     $data = $this->pagination('messages', $options);
 
