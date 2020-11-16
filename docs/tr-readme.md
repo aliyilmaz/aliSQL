@@ -2799,7 +2799,7 @@ Bu fonksiyon, `route` ve `mindLoad` metodlarına gönderilen parametreli adresin
 ----------
 
 ## generateToken()
-Bu fonksiyon, belirtilen karakter uzunluğunda rastgele parametre oluşturmak amacıyla kullanılır, `integer` türünde bir parametre alır, belirtilme zorunluluğu bulunmamaktadır. Varsayılan olarak karakte uzunluğu `100` olarak belirtilmiştir.
+Bu fonksiyon, belirtilen karakter uzunluğunda rastgele parametre oluşturmak amacıyla kullanılır, `integer` türünde bir parametre alır, belirtilme zorunluluğu bulunmamaktadır. Varsayılan olarak karakter uzunluğu `100` olarak belirtilmiştir.
 
 ##### Örnek
 
