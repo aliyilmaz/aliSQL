@@ -1399,16 +1399,16 @@ Veritabanı tablosunda bulunan verileri sayfalamak amacıyla kullanılır.
 
 #### prefix
 
-Sayfa ön ekini temsil etmekte olup zorunlu değildir, varsayılan olarak `p` belirtilmiştir. 
+Sayfa ön eki'ni temsil etmekte olup zorunlu değildir, varsayılan olarak `p` belirtilmiştir. 
 
 ###### Rotasız url yapısında kullanımı
 
-`pagination.php`  adında bir dosya olduğunu varsayalım, bu dosyanın tam yoluna ön eki dahil ederek şu şekilde `pagination.php?p` veya şu şekilde`pagination.php?p=1` kullanarak ilk sayfa verileri görüntülenmiş olur.
+`pagination.php`  adında bir dosya olduğunu varsayalım, bu dosyanın tam yoluna ön eki dahil ederek şu şekilde `pagination.php?p` veya şu şekilde `pagination.php?p=1` kullanarak ilk sayfa verilerini görüntülemiş oluruz.
 
 
 ###### Rotalı url yapısında kullanımı
 
-Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosyada rota `users:p` olarak tanımlandığında adres satırına `users/1` yazılırsa ilk sayfa verileri görüntülenmiş olur.
+Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosyada rota `users:p` olarak tanımlandığında adres satırına `users` veya şekilde `users/1` yazılırsa ilk sayfa verilerini görüntülemiş oluruz.
 
 
 #### limit 
