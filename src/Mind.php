@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.0.4
+ * @version    Release: 4.0.5
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3142,7 +3142,7 @@ class Mind extends PDO
 
             $destination = $path;
 
-            $other_path = urldecode($this->info($nLink, 'basename'));
+            $other_path = $this->permalink($this->info($nLink, 'basename'));
 
             if(!is_dir($destination)){
                 mkdir($destination, 0777, true);
