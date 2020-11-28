@@ -2868,6 +2868,7 @@ Bu fonksiyon, ziyaretçinin GPS konumunun paylaşılmasına izin vermesi halinde
 
 veya
 
+    <?=$this->coordinatesMaker();?>
     <form action="">
 
         <h5>INPUT TEXT</h5>
@@ -2915,10 +2916,9 @@ veya
 
     </form>
 
-    <?=$this->coordinatesMaker();?>
 
 
-*** Bilgi: *** Chrome, Firefox tarayıcılarınında test edilmiştir. Cep telefonu yoluyla paylaşılan konumların doğruluk oranı ortalama 4 ile 12 m2'dir. Eski nesil GPS modüle sahip masaüstü bilgisayar yoluyla paylaşılan konumların doğruluk oranı ise ortalama 7.000 m2'dir.
+****Bilgi:**** Chrome, Firefox tarayıcılarınında test edilmiştir. Cep telefonu yoluyla paylaşılan konumların doğruluk oranı ortalama 4 ile 12 m2'dir. Eski nesil GPS modüle sahip masaüstü bilgisayar yoluyla paylaşılan konumların doğruluk oranı ise ortalama 7.000 m2'dir.
 
 ----------
 
