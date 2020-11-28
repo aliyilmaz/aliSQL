@@ -229,6 +229,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [cGeneration](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#cGeneration)
 -   [pGeneration](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#pGeneration)
 -   [generateToken](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#generateToken)
+-   [coordinatesMaker](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#coordinatesMaker)
 
 ##### Sistem
 
@@ -2808,6 +2809,116 @@ Bu fonksiyon, belirtilen karakter uzunluğunda rastgele parametre oluşturmak am
 veya
 
     echo $this->generateToken(30);
+
+----------
+
+## coordinatesMaker()
+
+Bu fonksiyon, ziyaretçinin GPS konumunun paylaşılmasına izin vermesi halinde, konum bilgisini elde etmek için kullanılır. `string` bir parametre alır ve belirtilmesi zorunlu değildir. Bu parametre javascript'in `querySelectorAll` metoduna gönderildiğinden, javascript'in element'e erişim yaklaşımı referans alınarak belirtilmelidir.(`form.example #my-coordinates` gibi). Eğer parametre belirtilmezse varsayılan olarak id'si `#coordinates` olan elementlere ziyaretçi konumunu ekler.
+
+##### Örnek
+
+    <?=$this->coordinatesMaker('form.example1 #my-coordinates');?>
+    <form class="example1" action="">
+
+        <h5>INPUT TEXT</h5>
+        <input type="text" id="my-coordinates">
+
+        <br>
+
+        <h5>TEXTAREA</h5>
+        <textarea id="my-coordinates"></textarea>
+
+        <br>
+
+        <h5>SPAN</h5>
+        <span id="my-coordinates"></span>
+
+        <br>
+
+        <h5>i</h5>
+        <i id="my-coordinates"></i>
+
+        <br>
+
+        <h5>CHECKBOX</h5>
+        <input type="checkbox" id="my-coordinates">
+        <label for="my-coordinates"> I have a bike</label>
+
+        <br>
+
+        <h5>OPTION</h5>
+        <select>
+            <option id="my-coordinates">My Coordinate</option>
+            <option>Nothing</option>
+        </select>
+
+        <br>
+
+        <h5>MULTI OPTION</h5>
+        <select name="fruit" multiple>
+            <option value ="none">Nothing</option>
+            <option value ="guava" id="my-coordinates">Guava</option>
+            <option value ="lychee">Lychee</option>
+            <option value ="papaya">Papaya</option>
+            <option value ="watermelon">Watermelon</option>
+        </select> 
+
+    </form>
+
+veya
+
+    <form action="">
+
+        <h5>INPUT TEXT</h5>
+        <input type="text" id="coordinates">
+
+        <br>
+
+        <h5>TEXTAREA</h5>
+        <textarea id="coordinates"></textarea>
+
+        <br>
+
+        <h5>SPAN</h5>
+        <span id="coordinates"></span>
+
+        <br>
+
+        <h5>i</h5>
+        <i id="coordinates"></i>
+
+        <br>
+
+        <h5>CHECKBOX</h5>
+        <input type="checkbox" id="coordinates">
+        <label for="coordinates"> I have a bike</label>
+
+        <br>
+
+        <h5>OPTION</h5>
+        <select>
+            <option id="coordinates">My Coordinate</option>
+            <option>Nothing</option>
+        </select>
+
+        <br>
+
+        <h5>MULTI OPTION</h5>
+        <select name="fruit" multiple>
+            <option value ="none">Nothing</option>
+            <option value ="guava" id="coordinates">Guava</option>
+            <option value ="lychee">Lychee</option>
+            <option value ="papaya">Papaya</option>
+            <option value ="watermelon">Watermelon</option>
+        </select> 
+
+    </form>
+
+    <?=$this->coordinatesMaker();?>
+
+
+*** Bilgi: *** Chrome, Firefox tarayıcılarınında test edilmiştir. Cep telefonu yoluyla paylaşılan konumların doğruluk oranı ortalama 4 ile 12 m2'dir. Eski nesil GPS modüle sahip masaüstü bilgisayar yoluyla paylaşılan konumların doğruluk oranı ise ortalama 7.000 m2'dir.
 
 ----------
 
