@@ -2893,6 +2893,53 @@ class Mind extends PDO
     }
 
     /**
+     * Coordinates marker
+     * 
+     * @param string $element
+     * @return string|null It interferes with html elements.
+     */
+    public function coordinatesMaker($element='#coordinates'){
+        $element = $this->filter($element);
+        ?>
+        <script>
+            
+
+            function getLocation() {
+                let = elements = document.querySelectorAll("<?=$element;?>");
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(redirectToPosition);
+                } else { 
+                    console.log("Geolocation is not supported by this browser.");
+                    elements.forEach(function(element) {
+                        element.value = null;
+                    });
+                }
+            }
+
+            function redirectToPosition(position) {
+                let elements = document.querySelectorAll("<?=$element;?>");
+                let coordinates = position.coords.latitude+','+position.coords.longitude;
+                if(elements.length >= 1){
+
+                    elements.forEach(function(element) {
+                        if(element.value === undefined){
+                            element.textContent = coordinates;
+                        } else {
+                            element.value = coordinates;
+                        }
+                    });
+                } else {
+                    console.log("The item was not found.");
+                }
+            }
+            
+            getLocation();
+        </script>
+
+        <?php
+    }
+
+    /**
      * Routing manager.
      *
      * @param string $uri
