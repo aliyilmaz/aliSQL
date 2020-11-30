@@ -1421,6 +1421,11 @@ Her sayfada görüntülenmesi istenen kayıt adedini temsil etmekte olup zorunlu
 
 Bu kurallar hakkında daha fazla bilgi edinmek için, doğrudan [getData](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getData) metoduna göz atabilirsiniz.
 
+
+#### Geriye dönen değerlerin kullanım amaçları
+
+`data` anahtarı yardımıyla elde edilen verilere ulaşılır, `prefix` anahtarı yardımıyla adres ön ekine ulaşılır, `limit` anahtarıyla kaç adet verinin elde edildiği bilgisine ulaşılır, `totalPage` anahtarı yardımıyla toplam sayfa sayısına ulaşılır ve `page` anahtarı yardımıyla hangi sayfada olduğu bilgisine ulaşılır.
+
 ##### Örnek
 
     $data = $this->pagination('messages');
