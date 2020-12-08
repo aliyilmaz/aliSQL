@@ -3172,9 +3172,17 @@ veya
 
 ## get_contents()
 
-Kendisiyle paylaşılan `string` yapıda ki veri de veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. Bir veya birden fazla öğe bulunuyorsa hepsini bir `dizi` olarak sunar. 
+Kendisiyle paylaşılan `string` yapıda ki veride veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. Bir veya birden fazla öğe bulunuyorsa hepsini bir `dizi` olarak sunar. Eğer kendisiyle paylaşılan url'nin kaynak kodu elde edilmek isteniyorsa `$left` ve `$right` değişkenlerinin olduğu ilk iki parametreye boş değer gönderilir ve geriye sayfa kaynağının `string` olarak dönmesi sağlanır.
 
 ##### Örnek
+
+    $url = 'https://www.cloudflare.com/';
+    $left = '';
+    $right = '';
+    $data 	= $this->get_contents($left, $right, $url);
+    print_r($data);
+
+veya
 
     $url 	= 'https://www.cloudflare.com/';
     $left 	= '<title>';
@@ -3195,6 +3203,22 @@ veya
     $url 	= 'Örnek bir içeriktir. <title>Merhaba Dünya!</title>';
     $left 	= '<title>';
     $right	= '</title>';
+    $data 	= $this->get_contents($left, $right, $url);
+    print_r($data);
+
+veya
+
+    $url = 'src=\'-str\'-after src=\'-str\'-after src=\'-str\'-after src=\'-str\'-after';
+    $left = 'src=\'';
+    $right = '\'-after';
+    $data 	= $this->get_contents($left, $right, $url);
+    print_r($data);
+
+veya
+
+    $url = '{"filmler": [  {"imdb": "tt0116231", "url": "&lt;iframe src=&#039;https://example.com&#039; width=&#039;640&#039; height=&#039;360&#039; frameborder=&#039;0&#039; marginwidth=&#039;0&#039; marginheight=&#039;0&#039; scrolling=&#039;NO&#039; allowfullscreen=&#039;allowfullscreen&#039;&gt;&lt;/iframe&gt;"} ]}';
+    $left = 'src=&#039;';
+    $right = '&#039;';
     $data 	= $this->get_contents($left, $right, $url);
     print_r($data);
 
