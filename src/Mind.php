@@ -3246,6 +3246,11 @@ class Mind extends PDO
             $data = $url;
         }
 
+
+        if($left === '' AND $right === ''){
+            return $data;
+        }
+
         $content = str_replace(array("\n", "\r", "\t"), '', $data);
 
         if(preg_match_all('/'.preg_quote($left, '/').'(.*?)'.preg_quote($right, '/').'/i', $content, $result)){
