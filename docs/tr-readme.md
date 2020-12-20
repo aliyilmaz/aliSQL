@@ -2205,7 +2205,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     // Kural
     $rule = array(
         'title'             =>  'required|unique:posts',
-        'email'             =>  'email|unchanged:users',
+        'email'             =>  'email|unique:users:1',
         'phone_number'      =>  'phone',
         'background_color'  =>  'color',
         'webpage'           =>  'url',
@@ -2246,7 +2246,6 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtilmelidir.',
         'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
         'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.',
-        'unchanged'         =>  'Aynı veya farklı veriler belirtilmelidir.',
         'bool'              =>  'Doğrulama başarısız.',
         'iban'              =>  'IBAN hesabı doğrulanamadı.',
         'ipv4'              =>  'ipv4 söz diziminde bir IP adresi belirtilmelidir.',
