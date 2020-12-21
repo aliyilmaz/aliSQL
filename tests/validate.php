@@ -53,7 +53,7 @@ $rule = array(
     'json_data'         =>  'json',
     'content'           =>  'max-char:7',
     'summary'           =>  'min-char:6|max-char:10',
-    'quentity'          =>  'max-num:4|min-num:2',
+    'quentity'          =>  'min-num:2|max-num:4',
     'numeric_str'       =>  'numeric',
     'birthday'          =>  'min-age:33|max-age:40',
     'register_date'     =>  'date:Y-m-d H:i:s',
@@ -68,30 +68,74 @@ $rule = array(
 
 // Message
 $message = array(
-    'required'          =>  'It should not be left blank.',
-    'email'             =>  'A valid e-mail address must be specified.',
-    'url'               =>  'A valid URL must be specified.',
-    'phone'             =>  'A valid phone number must be specified.',
-    'color'             =>  'A valid color must be specified.',
-    'https'             =>  'A valid https address must be specified.',
-    'http'              =>  'A valid http address must be specified.',
-    'json'              =>  'A valid json data must be specified.',
-    'max-num'           =>  'The maximum number should not be exceeded.',
-    'min-num'           =>  'The minimum number must be specified.',
-    'max-char'          =>  'The maximum character limit must not be exceeded.',
-    'min-char'          =>  'Minimum character limit must be specified.',
-    'numeric'           =>  'Numeric character must be specified.',
-    'min-age'           =>  'An age less than the minimum age must be specified.',
-    'max-age'           =>  'An age greater than the maximum age must be specified.',
-    'date'              =>  'Date must be specified in year-month-day format.',
-    'unique'            =>  'A unique record must be specified.',
-    'bool'              =>  'Validation failed.',
-    'iban'              =>  'The IBAN account has not been verified.',
-    'ipv4'              =>  'An IP address must be specified in the ipv4 syntax.',
-    'ipv6'              =>  'An IP address must be specified in the ipv6 syntax.',
-    'blood'             =>  'The blood group according to the instructions should be specified.',
-    'coordinate'        =>  'A valid coordinate must be specified.',
-    'distance'          =>  'The coordinate point within range must be specified.'
+    'title'=>  array(
+        'required'=>'It should not be left blank.',
+        'unique'=>'A unique record must be specified.'
+    ),
+    'email'=>array(
+        'email'=>'A valid e-mail address must be specified.',
+        'unique'=>'A unique record must be specified.'
+    ),
+    'phone_number'=>array(
+        'phone'=>'A valid phone number must be specified.'
+    ),
+    'background_color'=>array(
+        'color'=>'A valid color must be specified.'
+    ),
+    'webpage'=>array(
+        'url'=>'A valid URL must be specified.'
+    ),
+    'https_webpage'=>array(
+        'https'=>'A valid https address must be specified.'
+    ),
+    'http_webpage'=>array(
+        'http'=>'A valid http address must be specified.'
+    ),
+    'json_data'=>array(
+        'json'=>'A valid json data must be specified.'
+    ),
+    'content'=>array(
+        'max-char'=>'The maximum character limit must not be exceeded.'
+    ),
+    'summary'=>array(
+        'min-char'=>'Minimum character limit must be specified.',
+        'max-char'=>'The maximum character limit must not be exceeded.'
+    ),
+    'quentity'=>array(
+        'min-num'=>'The minimum number must be specified.',
+        'max-num'=>'The maximum number should not be exceeded.'
+    ),
+    'numeric_str'=>array(
+        'numeric'=>'Numeric character must be specified.'
+    ),
+    'birthday'=>array(
+        'min-age'=>'An age less than the minimum age must be specified.',
+        'max-age'=>'An age greater than the maximum age must be specified.'
+    ),
+    'register_date'=>array(
+        'date'=>'Date must be specified in year-month-day format.'
+    ),
+    'status'=>array(
+        'bool'=>'Validation failed.'
+    ),
+    'ibanNumber'=>array(
+        'iban'=>'The IBAN account has not been verified.'
+    ),
+    'ipv4Address'=>array(
+        'ipv4'=>'An IP address must be specified in the ipv4 syntax.'
+    ),
+    'ipv6Address'=>array(
+        'ipv6'=>'An IP address must be specified in the ipv6 syntax.'
+    ),
+    'bloodGroup'=>array(
+        'blood'=>'The blood group according to the instructions should be specified.'
+    ),
+    'coordinates'=>array(
+        'coordinate'=>'A valid coordinate must be specified.'
+    ),
+    'distances'=>array(
+        'distance'=>'The coordinate point within range must be specified.'
+    )
 
 );
 
