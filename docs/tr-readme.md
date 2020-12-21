@@ -2229,30 +2229,75 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
 
     // Mesaj
     $message = array(
-        'required'          =>  'Boş bırakılmamalıdır.',
-        'email'             =>  'Geçerli bir e-mail adresi belirtilmelidir.',
-        'url'               =>  'Geçerli bir URL belirtilmelidir.',
-        'phone'             =>  'Geçerli bir telefon numarası belirtilmelidir.',
-        'color'             =>  'Geçerli bir renk belirtilmelidir.',
-        'https'             =>  'Geçerli bir https adresi belirtilmelidir.',
-        'http'              =>  'Geçerli bir http adresi belirtilmelidir.',
-        'json'              =>  'Geçerli bir json verisi belirtilmelidir.',
-        'max-num'           =>  'Maksimum sayı aşılmamalıdır.',
-        'min-num'           =>  'Minumum sayı belirtilmelidir.',
-        'max-char'          =>  'Maksimum karakter limiti aşılmamalıdır.',
-        'min-char'          =>  'Minumum karakter limiti belirtilmelidir.',
-        'numeric'           =>  'Numerik karakter belirtilmelidir.',
-        'min-age'           =>  'Minumum yaştan küçük bir yaş belirtilmelidir.',
-        'max-age'           =>  'Maksimum yaştan büyük bir yaş belirtilmelidir.',
-        'date'              =>  'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.',
-        'unique'            =>  'Benzersiz bir kayıt belirtilmelidir.',
-        'bool'              =>  'Doğrulama başarısız.',
-        'iban'              =>  'IBAN hesabı doğrulanamadı.',
-        'ipv4'              =>  'ipv4 söz diziminde bir IP adresi belirtilmelidir.',
-        'ipv6'              =>  'ipv6 söz diziminde bir IP adresi belirtilmelidir.',
-        'blood'             =>  'Talimatlara göre kan grubu belirtilmelidir.',
-        'coordinate'        =>  'Geçerli bir koordinat belirtilmelidir.',
-        'distance'          =>  'Menzil içinde bulunan koordinat noktası belirtilmelidir.'
+        'title'=>  array(
+            'required'=>'Boş bırakılmamalıdır.',
+            'unique'=>'Benzersiz bir kayıt belirtilmelidir.'
+        ),
+        'email'=>array(
+            'email'=>'Geçerli bir e-mail adresi belirtilmelidir.',
+            'unique'=>'Benzersiz bir kayıt belirtilmelidir.'
+        ),
+        'phone_number'=>array(
+            'phone'=>'Geçerli bir telefon numarası belirtilmelidir.'
+        ),
+        'background_color'=>array(
+            'color'=>'Geçerli bir renk belirtilmelidir.'
+        ),
+        'webpage'=>array(
+            'url'=>'Geçerli bir URL belirtilmelidir.'
+        ),
+        'https_webpage'=>array(
+            'https'=>'Geçerli bir https adresi belirtilmelidir.'
+        ),
+        'http_webpage'=>array(
+            'http'=>'Geçerli bir http adresi belirtilmelidir.'
+        ),
+        'json_data'=>array(
+            'json'=>'Geçerli bir json verisi belirtilmelidir.'
+        ),
+        'content'=>array(
+            'max-char'=>'Maksimum karakter limiti aşılmamalıdır.'
+        ),
+        'summary'=>array(
+            'min-char'=>'Minumum karakter limiti belirtilmelidir.',
+            'max-char'=>'Maksimum karakter limiti aşılmamalıdır.'
+        ),
+        'quentity'=>array(
+            'min-num'=>'Minumum sayı belirtilmelidir.',
+            'max-num'=>'Maksimum sayı aşılmamalıdır.'
+        ),
+        'numeric_str'=>array(
+            'numeric'=>'Numerik karakter belirtilmelidir.'
+        ),
+        'birthday'=>array(
+            'min-age'=>'Minumum yaştan küçük bir yaş belirtilmelidir.',
+            'max-age'=>'Maksimum yaştan büyük bir yaş belirtilmelidir.'
+        ),
+        'register_date'=>array(
+            'date'=>'Yıl-Ay-Gün biçiminde tarih belirtilmelidir.'
+        ),
+        'status'=>array(
+            'bool'=>'Doğrulama başarısız.'
+        ),
+        'ibanNumber'=>array(
+            'iban'=>'IBAN hesabı doğrulanamadı.'
+        ),
+        'ipv4Address'=>array(
+            'ipv4'=>'ipv4 söz diziminde bir IP adresi belirtilmelidir.'
+        ),
+        'ipv6Address'=>array(
+            'ipv6'=>'ipv6 söz diziminde bir IP adresi belirtilmelidir.'
+        ),
+        'bloodGroup'=>array(
+            'blood'=>'Talimatlara göre kan grubu belirtilmelidir.'
+        ),
+        'coordinates'=>array(
+            'coordinate'=>'Geçerli bir koordinat belirtilmelidir.'
+        ),
+        'distances'=>array(
+            'distance'=>'Menzil içinde bulunan koordinat noktası belirtilmelidir.'
+        )
+
 
     );
 
