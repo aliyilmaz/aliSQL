@@ -217,6 +217,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 
 ##### Yardımcı
 
+-   [print_pre](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#print_pre)
 -   [info](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#info)
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
 -   [filter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#filter)
@@ -296,7 +297,7 @@ Belirtilen veritabanı tablosuna ait sütunları listelemek amacıyla kullanıl�
 
 ## dbCreate()
 
-Yeni bir veya daha fazla veritabanı oluşturmak amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, oluşturulacak veritabanı isimleri `string` veya `dizi` olarak gönderildiğinde veritabanı oluşturma işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Yeni bir veya daha fazla veritabanı oluşturmak amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, oluşturulacak veritabanı isimleri `string` veya `array` olarak gönderildiğinde veritabanı oluşturma işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -343,7 +344,7 @@ Yeni bir veritabanı tablosu oluşturmak amacıyla kullanılır. İşlem başar�
 
 ## columnCreate()
 
-Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `dizi` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
+Veritabanı tablosunda bir veya daha fazla sütun oluşturmak amacıyla kullanılır, Sütun adı ve özelliği `array` olarak gönderilebilir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. 
 
 ##### Özellikler
 
@@ -492,7 +493,7 @@ Veritabanı tablosuna her eklenen kaydın otomatik artan bir numaraya sahip olma
 
 ## dbDelete()
 
-Bir veya daha fazla veritabanını silmek amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, `string` veya `dizi` olarak veritabanı isimleri gönderildiğinde veritabanı silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bir veya daha fazla veritabanını silmek amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, `string` veya `array` olarak veritabanı isimleri gönderildiğinde veritabanı silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -506,7 +507,7 @@ veya
 
 ## tableDelete()
 
-Bir veya daha fazla veritabanı tablosunu silmek amacıyla kullanılır, `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir, `string` veya `dizi` olarak tablo isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bir veya daha fazla veritabanı tablosunu silmek amacıyla kullanılır, `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir, `string` veya `array` olarak tablo isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -520,7 +521,7 @@ veya
 
 ## columnDelete()
 
-Veritabanı tablosunda bulunan bir veya daha fazla sütunu silmek için kullanılır. `users` tablo adını, `username` ve `password` silinmesi istenen sütunları temsil eder. `string` veya `dizi` olarak sütun isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir veya daha fazla sütunu silmek için kullanılır. `users` tablo adını, `username` ve `password` silinmesi istenen sütunları temsil eder. `string` veya `array` olarak sütun isimleri gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -534,7 +535,7 @@ veya
 
 ## dbClear()
 
-Bir veya daha fazla veritabanı içeriğini (auto_increment değerleri dahil) silmek amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir. Veritabanı isimleri `string` veya `dizi` olarak gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bir veya daha fazla veritabanı içeriğini (auto_increment değerleri dahil) silmek amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir. Veritabanı isimleri `string` veya `array` olarak gönderildiğinde silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -548,7 +549,7 @@ veya
 
 ## tableClear()
 
-Bir veya daha fazla veritabanı tablosu içindeki kayıtların tamamını(auto_increment değerleri dahil) silmek amacıyla kullanılır. Veritabanı tablo isimleri `string` veya `dizi` olarak gönderilebilir. `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bir veya daha fazla veritabanı tablosu içindeki kayıtların tamamını(auto_increment değerleri dahil) silmek amacıyla kullanılır. Veritabanı tablo isimleri `string` veya `array` olarak gönderilebilir. `my_table0` ve `my_table1` veritabanı tablo isimlerini temsil etmektedir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -562,7 +563,7 @@ veya
 
 ## columnClear()
 
-Bir veritabanı tablosunda bulunan bir veya daha fazla sütuna ait kayıtların tamamını silmek amacıyla kullanılır. `string` veya `dizi` olarak sütun isimleri gönderilebilir. `username` ve `password` sütun isimlerini temsil eder. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bir veritabanı tablosunda bulunan bir veya daha fazla sütuna ait kayıtların tamamını silmek amacıyla kullanılır. `string` veya `array` olarak sütun isimleri gönderilebilir. `username` ve `password` sütun isimlerini temsil eder. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -576,7 +577,7 @@ veya
 
 ## insert()
 
-Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır. `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir. Değerler `dizi` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır. `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir. Değerler `array` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -614,7 +615,7 @@ veya
 
 ## update()
 
-Veritabanı tablosunda bulunan bir kaydı güncellemek amacıyla kullanılır. `my_table` veritabanı tablo adını temsil eder. `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil eder. `17` güncellenmesi istenen kaydın `id`'sini temsil eder. Yeni değerler `dizi` şeklinde gönderildiğinde güncelleme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 4'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir kaydı güncellemek amacıyla kullanılır. `my_table` veritabanı tablo adını temsil eder. `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil eder. `17` güncellenmesi istenen kaydın `id`'sini temsil eder. Yeni değerler `array` şeklinde gönderildiğinde güncelleme işlemi gerçekleşir. `id` parametresini `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 4'ncü parametre de belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -636,7 +637,7 @@ veya
 
 ## delete()
 
-Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. `my_table` veritabanı tablo adını, `14` değeri silinmesi istenen bir kaydı, `15` ve `16` değerleri silinmesi istenen kayıtların id'sini temsil etmektedir. id'ler `string` veya `dizi` olarak gönderildiğinde kayıtları silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. `my_table` veritabanı tablo adını, `14` değeri silinmesi istenen bir kaydı, `15` ve `16` değerleri silinmesi istenen kayıtların id'sini temsil etmektedir. id'ler `string` veya `array` olarak gönderildiğinde kayıtları silme işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -786,7 +787,7 @@ veya
 
 #### search: Arama yapmak
 
-Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `dizi` olarak gönderilebilir. `search`, özelliğin adını, `keyword` aranan anahtar kelimeleri temsil eder.   
+Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar kelimeler `string` veya `array` olarak gönderilebilir. `search`, özelliğin adını, `keyword` aranan anahtar kelimeleri temsil eder.   
 
 ##### Örnek
 
@@ -812,7 +813,7 @@ veya
 
 #### search: Her yerde aramak
 
-Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `dizi` olarak gönderilebilir. 
+Veritabanı tablosundaki anahtar kelimeleri geniş eşlemeli olarak aramak için kullanılır. Kelimeler `string` veya `array` olarak gönderilebilir. 
 
 Kelime veya kelimeler, `%kelime%` biçiminde belirtilirse cümle içinde geçen `kelime` aranır, eğer belirtilmezse sadece `kelime` değeriyle birebir örtüşen kayıtlar aranır. 
 
@@ -842,7 +843,7 @@ veya
 
 #### search:column Sütunlarda aramak
 
-Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme politikası ile aramak için kullanılır, kelimeler ve sütunlar `string` veya `dizi` olarak gönderilebilir. `column` özellik adını,`id`, `title`, `content` ve `tag` sütun adlarını temsil eder.
+Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme politikası ile aramak için kullanılır, kelimeler ve sütunlar `string` veya `array` olarak gönderilebilir. `column` özellik adını,`id`, `title`, `content` ve `tag` sütun adlarını temsil eder.
 
 ##### Örnek
 
@@ -873,7 +874,7 @@ veya
 
 #### search:and Sütuna özel kelime aramak
 
-Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
+Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu tespit edilmesi halinde, bunların `array` olarak geri döndürülmesini sağlar.
 
 ***Bilgi:*** getData:column kısmında sütun tanımlama yapılmışsa bu sütunların içinde aranması istenen sütunlarında olması zorunludur.
 
@@ -917,7 +918,7 @@ veya
 
 #### search:or Sütuna özel kelime aramak
 
-Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde bulgu tespit edilmesi halinde, bunların `dizi` olarak geri döndürülmesini sağlar.
+Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde bulgu tespit edilmesi halinde, bunların `array` olarak geri döndürülmesini sağlar.
 
 ##### Örnek
 
@@ -1023,7 +1024,7 @@ veya
 
 #### format: Sonuçların formatı
 
-Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `dizi` formatı dışında `json` formatını desteklemektedir.
+Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `array` formatı dışında `json` formatını desteklemektedir.
 
 ##### Örnek
 
@@ -1173,7 +1174,7 @@ veya
 ----------
 
 
-## theodore
+## theodore()
 
 Tıpkı samantha gibi, bu metod da Her filminde hayat bulmuş Theodore Twombly karakterinden esinlenerek oluşturulmuştur. Kesin olarak bir adet olduğu bilinen bir kaydı  bir dizi olarak elde etmek amacıyla kullanılır.
 
@@ -1229,7 +1230,7 @@ veya
 
 ----------
 
-## amelia
+## amelia()
 
 samantha ve theodore metodlarında olduğu gibi amelia da Her filminden esinlenerek oluşturulmuştur. Görevi sadece bir adet olduğu bilinen bir kaydın belirtilen sütun verisini elde etmek, şartları sağlamadığında ise boş bir yanıt döndürmektedir.
 
@@ -1621,7 +1622,7 @@ Bu fonksiyon kendisiyle paylaşılan verinin e-mail adresi söz dizimine sahip o
 
 ## is_type()
 
-Bu fonksiyon özellikle dosya yükleme işlemleri sırasında yüklenmek istenen dosyanın formatını kontrol etmek amacıyla kullanılır, Dosya adı `string` olarak belirtilmelidir, Dosya uzantıları ise `string` veya `dizi` olarak belirtilebilir. `$this->post['photo']['name']` dosya adını, `$list` müsade edilen dosya uzantılarını temsil etmektedir. Eğer dosya müsade edilen uzantıya sahip ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
+Bu fonksiyon özellikle dosya yükleme işlemleri sırasında yüklenmek istenen dosyanın formatını kontrol etmek amacıyla kullanılır, Dosya adı `string` olarak belirtilmelidir, Dosya uzantıları ise `string` veya `array` olarak belirtilebilir. `$this->post['photo']['name']` dosya adını, `$list` müsade edilen dosya uzantılarını temsil etmektedir. Eğer dosya müsade edilen uzantıya sahip ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
 ##### Örnek
 
     $list = 'jpg';
@@ -2137,7 +2138,7 @@ veya
 
 ----------
 
-## is_md5
+## is_md5()
 
 Kendisiyle paylaşılan verinin kriptografik özet söz diziminde olup olmadığını kontrol etmek amacıyla kullanılır. Söz konusu veri string olarak belirtilmelidir. Eğer veri bir md5 ise `true` değilse `false` yanıtı geri döndürülür.
 
@@ -2516,6 +2517,35 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
 
 ----------
 
+## print_pre()
+
+Bu fonksiyon `array` ya da `json` biçiminde gönderilen verileri okunabilir hale getirmek amacıyla kullanılır.
+
+##### Örnek
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    ARRAY                                   */
+    /* -------------------------------------------------------------------------- */
+    $data = array(
+            'username'=>'aliyilmaz',
+            'password'=>md5(123456)
+    );
+    $this->print_pre($data);
+
+veya
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    JSON                                    */
+    /* -------------------------------------------------------------------------- */
+    $data = json_encode(array(
+        'username'=>'aliyilmaz',
+        'password'=>md5(123456)
+    ));
+
+    $this->print_pre($data);
+
+----------
+
 ## info()
 
 Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullanılır. Aldığı her iki parametre `string` olarak belirtilmelidir. `$str` yolu, `$type` bilgi türü parametresini temsil etmektedir.
@@ -2801,7 +2831,7 @@ Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
 
 `.php` uzantıya sahip dosya yada dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. Dosya yolları `.php` uzantısı olmadan belirtilmelidir.
 
-Her iki değişkene de `string` veya `dizi` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
+Her iki değişkene de `string` veya `array` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
 
 İki parametre alır, ilk önce ikinci parametre olan `$cache` dosyaları, ardından birinci parametre olan `$file` değişkeninde bulunan dosyalar projeye dahil edilir. `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
@@ -2978,7 +3008,7 @@ Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel z
 
 #### Giriş
 
-`url`, `file` ve `cache` parametreleri alabilen `route()` fonksiyonu, `url` parametresini `string` olarak kabul eder, `file` ve `cache` parametreleriniyse `string` ve `dizi` olarak kabul etmektedir. Bu üç parametreden sadece `cache` parametresinin belirtilme zorunluluğu yoktur. `file` ve `cache` parametreleri, uzantısı belirtilmeyen `php` dosyalarının yollarından meydana gelir. `cache` parametresi aynı zamanda sınıf metodlarını çağırmak için de kullanılabilir.
+`url`, `file` ve `cache` parametreleri alabilen `route()` fonksiyonu, `url` parametresini `string` olarak kabul eder, `file` ve `cache` parametreleriniyse `string` ve `array` olarak kabul etmektedir. Bu üç parametreden sadece `cache` parametresinin belirtilme zorunluluğu yoktur. `file` ve `cache` parametreleri, uzantısı belirtilmeyen `php` dosyalarının yollarından meydana gelir. `cache` parametresi aynı zamanda sınıf metodlarını çağırmak için de kullanılabilir.
 
 #### Url
 
@@ -3110,7 +3140,7 @@ Belirtilen içeriği, belirtilen isimde ki dosyaya yazmak amacıyla kullanılır
 
 ##### İlk parametre
 
-içeriği temsil etmekte olup `string` veya `dizi` türünde gönderilebilir, dizi olarak gönderilmesi halinde dizi elemanları aralarına `:` sembolü eklenerek `string`'e dönüştürülmüş şekilde dosyaya yazılır.
+içeriği temsil etmekte olup `string` veya `array` türünde gönderilebilir, dizi olarak gönderilmesi halinde dizi elemanları aralarına `:` sembolü eklenerek `string`'e dönüştürülmüş şekilde dosyaya yazılır.
 
 ##### İkinci parametre
 
@@ -3181,9 +3211,9 @@ veya
 
 ## download()
 
-Yerel ve Uzak sunucuda barınan dosyaları indirmeye yarar. Dosya yolları `string` veya `dizi` olarak belirtilebilir. İki parametre alır, ilk parametre `string` veya `dizi` türünde belirtilen dosya yollarını, ikinci parametre ise `dizi` olarak tanımlanan `path` yolunu temsil eder. 
+Yerel ve Uzak sunucuda barınan dosyaları indirmeye yarar. Dosya yolları `string` veya `array` olarak belirtilebilir. İki parametre alır, ilk parametre `string` veya `array` türünde belirtilen dosya yollarını, ikinci parametre ise `array` olarak tanımlanan `path` yolunu temsil eder. 
 
-  **Bilgi:** Geliştirmeye açık olduğu için ikinci parametre `dizi` türündedir ve belirtilme zorunluluğu yoktur. Eğer ikinci parametre belirtilmezse varsayılan olarak inecek dosyaların kökdizini `download` olur. 
+  **Bilgi:** Geliştirmeye açık olduğu için ikinci parametre `array` türündedir ve belirtilme zorunluluğu yoktur. Eğer ikinci parametre belirtilmezse varsayılan olarak inecek dosyaların kökdizini `download` olur. 
 
 ##### Örnek
 
@@ -3216,7 +3246,7 @@ veya
 
 ## get_contents()
 
-Kendisiyle paylaşılan `string` yapıda ki veride veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. Bir veya birden fazla öğe bulunuyorsa hepsini bir `dizi` olarak sunar. Eğer kendisiyle paylaşılan url'nin kaynak kodu elde edilmek isteniyorsa `$left` ve `$right` değişkenlerinin olduğu ilk iki parametreye boş değer gönderilir ve geriye sayfa kaynağının `string` olarak dönmesi sağlanır.
+Kendisiyle paylaşılan `string` yapıda ki veride veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. Bir veya birden fazla öğe bulunuyorsa hepsini bir `array` olarak sunar. Eğer kendisiyle paylaşılan url'nin kaynak kodu elde edilmek isteniyorsa `$left` ve `$right` değişkenlerinin olduğu ilk iki parametreye boş değer gönderilir ve geriye sayfa kaynağının `string` olarak dönmesi sağlanır.
 
 ##### Örnek
 
