@@ -2519,7 +2519,7 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
 
 ## print_pre()
 
-Bu fonksiyon `array` ya da `json` biçiminde gönderilen verileri okunabilir hale getirmek amacıyla kullanılır.
+Bu fonksiyon `array` ya da `json` biçiminde gönderilen verileri okunabilir şekilde ekrana yansıtmak amacıyla kullanılır.
 
 ##### Örnek
 
