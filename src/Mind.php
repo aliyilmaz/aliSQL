@@ -2348,6 +2348,11 @@ class Mind extends PDO
      * @return void
      */
     public function print_pre($data){
+        
+        if($this->is_json($data)){
+            $data = json_encode(json_decode($data, true), JSON_PRETTY_PRINT);
+        }
+        
         echo '<pre>';
         print_r($data);
         echo '</pre>';
