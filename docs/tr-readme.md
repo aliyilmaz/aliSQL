@@ -3005,6 +3005,20 @@ veya
 
 Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel zihinler yüklemek için kullanılır. Zihin kelimesi, Model, View, Controller, Middleware gibi çeşitli katmanları tanımlamak amacıyla kullanılmıştır. Böylelikle geliştirici, katmanların hangi rotaya tanımlandığını açıkça görebilir, yönetilebilir ve proje ihtiyacına özel tasarım deseni oluşturabilir.  
   
+Rotalar, `Mind.php` dosyasıyla aynı dizinde bulunan `index.php` dosyası içine tanımlanır, dolayısıyla `new Mind()` çağrısının atandığı değişkeni ön ek kabul ederek çalışır.
+
+##### Örnek
+
+    <?php
+
+    require_once '../src/Mind.php';
+
+    $Mind = new Mind();
+
+    $Mind->route('/', 'app/views/welcome');
+
+    ?>
+
 
 #### Giriş
 
@@ -3014,7 +3028,7 @@ Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel z
 
 `/` slaş sembolü dışında ki rotalara parametre isimleri tanımlamak mümkündür, eğer adres satırına `edit/users/1` yazılırsa ve `users` parametresini `table` ismiyle, `1` parametresini ise `id` ismiyle isimlendirmek istenirse, aşağıda ki yolu izlemek gerekir.
 
-    $this->route('edit:table@id', 'app/view/edit');
+    $Mind->route('edit:table@id', 'app/view/edit');
 
 Kontrolü sağlamak için `app/view/edit` yolunda ki `edit.php` dosyası içine
 
@@ -3029,7 +3043,7 @@ kodu eklendikten sonra, adres satırına `edit/users/1` yazarak, parametre isiml
 
 Ayrıca adres satırına `edit/users/1/2/diger` gibi rota da isimlendirilmemiş parametreler yazılırsa bunlar görmezden gelinir. Eğer `url` parametresine aşağıda ki gibi parametre isimleri tanımlanmamışsa
 
-    $this->route('edit', 'app/view/edit');
+    $Mind->route('edit', 'app/view/edit');
 
 ve ulaşılmak istenen rota adresi `edit/users/1` ise, `app/view/edit` yolunda ki `edit.php` dosyası içine
 
@@ -3048,7 +3062,7 @@ kodu eklendiğinde, isimlendirilmemiş parametreler aşağıda ki şekilde gör�
 
 ##### Örnek
 
-    $this->route('/', 'app/view/home');
+    $Mind->route('/', 'app/view/home');
 
 veya
 
@@ -3057,7 +3071,7 @@ veya
         'app/view/home',
         'app/view/layout/footer'
         );
-    $this->route('/', $arr);
+    $Mind->route('/', $arr);
 
 #### Cache
 
@@ -3065,7 +3079,7 @@ Eğer `cache` parametresi belirtilirse, belirtilen `cache` dosyaları, `file` pa
 
 ##### Örnek
 
-    $this->route('/', 'app/view/home', 'database/CreateTable');
+    $Mind->route('/', 'app/view/home', 'database/CreateTable');
 
 veya
 
@@ -3073,7 +3087,7 @@ veya
         'database/CreateTable,
         'model/home'
     );
-    $this->route('/', 'view/home', $arr);
+    $Mind->route('/', 'view/home', $arr);
     
 veya
 
@@ -3106,7 +3120,7 @@ veya
 daha sonra aşağıda ki rotayı tanımlayın ve kontrol edin.
 
     
-    $this->route('home', 'app/views/home', 'app/controller/HomeController:index@create');
+    $Mind->route('home', 'app/views/home', 'app/controller/HomeController:index@create');
 
 Sınıf içinde ki `index` ve `create` metodlarının çalıştığını görebilirsiniz. Bir veya daha fazla metodu bir rotaya tanımlamak mümkündür. 
 
