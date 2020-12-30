@@ -2653,7 +2653,7 @@ veya
 
 ## redirect()
 
-Belirtilen adrese doğrudan veya belli bir süre sonra yönlendirme yapmak amacıyla kullanılır, boş bırakılırsa **Mind.php** dosyasının bulunduğu klasör'e yönlendirme yapar. İki parametre alır, ilk parametre yönlenecek adrestir ve `string` olarak belirtilmesi gerekir, ikinci parametre ise kaç saniye sonra yönlenmesi gerektiği bilgisidir ve `integer` olarak belirtilmesi gerekir.
+Belirtilen adrese doğrudan veya belli bir süre sonra yönlendirme yapmak amacıyla kullanılır, boş bırakılırsa **Mind.php** dosyasının bulunduğu klasör'e yönlendirme yapar. İki parametre alır, ilk parametre yönlenecek adrestir ve `string` olarak belirtilmesi gerekir, ikinci parametre kaç saniye sonra yönlenmesi gerektiği bilgisidir ve `integer` olarak belirtilmesi gerekir. Üçüncü parametre ise yönlendirmeye kalan sürenin atanacağı element adı bilgisidir. Bu parametre javascript'in `querySelectorAll` metoduna gönderildiğinden, javascript'in element'e erişim yaklaşımı referans alınarak belirtilmelidir.
 
 ##### Örnek
 
@@ -2678,6 +2678,62 @@ veya
 veya
 
     $this->redirect('https://www.google.com', 5);
+
+veya
+
+    /* -------------------------------------------------------------------------- */
+    /*                        GERİ SAYIM SAYAÇLI KULLANIMI                        */
+    /* -------------------------------------------------------------------------- */
+    <?=$this->redirect('https://www.google.com', 20, '.example2 #redirect-time');?>
+
+    <form class="example1" action="">
+        
+        <h5>INPUT TEXT</h5>
+        <input type="text" id="redirect-time">
+        
+        <br>
+        
+        <h5>TEXTAREA</h5>
+        <textarea id="redirect-time"></textarea>
+        
+        <br>
+        
+        <h5>SPAN</h5>
+        <span id="redirect-time"></span>
+        
+        <br>
+        
+        <h5>i</h5>
+        <i id="redirect-time"></i>
+        
+        <br>
+        
+        <h5>CHECKBOX</h5>
+        <input type="checkbox" id="redirect-time">
+        <label for="redirect-time"> I have a bike</label>
+        
+        <br>
+
+        <h5>OPTION</h5>
+        <select>
+            <option id="redirect-time">Redirect time</option>
+            <option>Nothing</option>
+        </select>
+        
+        <br>
+
+        <h5>MULTI OPTION</h5>
+        <select name="fruit" multiple>
+            <option value ="none">Nothing</option>
+            <option value ="guava" id="redirect-time">Guava</option>
+            <option value ="lychee">Lychee</option>
+            <option value ="papaya">Papaya</option>
+            <option value ="watermelon">Watermelon</option>
+        </select> 
+
+    </form>
+
+
 ----------
 
 ## permalink()
