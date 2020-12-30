@@ -2673,7 +2673,7 @@ veya
     
 veya
 
-    $this-redirect('contact', 5);
+    $this->redirect('contact', 5);
 
 veya
 
