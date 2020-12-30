@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.1.0
+ * @version    Release: 4.1.1
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2425,15 +2425,46 @@ class Mind extends PDO
      * Redirect
      *
      * @param string $url
-     * @param int $delay
+     * @param int $delay,
+     * @param string $element
      */
-    public function redirect($url = '', $delay = 0){
+    public function redirect($url = '', $delay = 0, $element=''){
 
         if(!$this->is_http($url) AND !$this->is_https($url) OR empty($url)){
             $url = $this->base_url.$url;
         }
 
         if(0 !== $delay){
+            if(!empty($element)){
+        ?>
+            <script>
+                var si = <?=$delay;?>;
+                var inter = null;
+                function r() {
+                    if (si == 0) {
+                        clearInterval(inter);
+                    } else {
+                        let elements = document.querySelectorAll("<?=$element;?>");
+                        if(elements.length >= 1){
+
+                            elements.forEach(function(element) {
+                                if(element.value === undefined){
+                                    element.textContent = si;
+                                } else {
+                                    element.value = si;
+                                }
+                            });
+                        } else {
+                            console.log("The item was not found.");
+                        }
+                    }
+                    si--;
+                }
+                inter = setInterval("r()", 1000);
+
+            </script>
+        <?php
+                }
             header('refresh:'.$delay.'; url='.$url);
         } else {
             header('Location: '.$url);
