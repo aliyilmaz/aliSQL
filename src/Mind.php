@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.1.2
+ * @version    Release: 4.1.3
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3293,8 +3293,15 @@ class Mind extends PDO
                 if(!$this->sess_set['path_status']){
                     $this->sess_set['path'] = sys_get_temp_dir().'/';
                 }
-                curl_setopt($ch, CURLOPT_COOKIEJAR, $this->sess_set['path'].'cookie.txt');
-                curl_setopt($ch, CURLOPT_COOKIEFILE, $this->sess_set['path'].'cookie.txt');
+
+                if(strstr(dirname(__FILE__),'\\')){
+                    curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__). '/'.$this->sess_set['path'].'cookie.txt');
+                    curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__). '/'.$this->sess_set['path'].'cookie.txt');
+                }else{
+                    curl_setopt($ch, CURLOPT_COOKIEJAR, $this->sess_set['path'].'cookie.txt');
+                    curl_setopt($ch, CURLOPT_COOKIEFILE, $this->sess_set['path'].'cookie.txt');
+                }
+
             }
             if(!empty($options['post'])){
                 curl_setopt($ch, CURLOPT_POST, true);
