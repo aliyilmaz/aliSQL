@@ -3316,7 +3316,12 @@ veya
 
 ## get_contents()
 
-Kendisiyle paylaşılan `string` yapıda ki veride veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. Bir veya birden fazla öğe bulunuyorsa hepsini bir `array` olarak sunar. Eğer kendisiyle paylaşılan url'nin kaynak kodu elde edilmek isteniyorsa `$left` ve `$right` değişkenlerinin olduğu ilk iki parametreye boş değer gönderilir ve geriye sayfa kaynağının `string` olarak dönmesi sağlanır.
+Kendisiyle paylaşılan `string` yapıda ki veride veya bir  url'nin varış noktasında bulunan sayfanın kaynak kodunda, `$left` ve `$right` değişkenlerinde belirtilen değerlerin arasında ki içeriği elde etmeye yarar. `$left` sol tarafta ki, `$right` sağ tarafta ki kapsayıcı parametresini temsil etmektedir. 
+
+Bir veya birden fazla öğe bulunuyorsa hepsini bir `array` olarak sunar. Eğer kendisiyle paylaşılan url'nin kaynak kodu elde edilmek isteniyorsa `$left` ve `$right` değişkenlerinin olduğu ilk iki parametreye boş değer gönderilir ve geriye sayfa kaynağının `string` olarak dönmesi sağlanır.
+
+İsteğe bağlı olan dördüncü parametre,varış adresine POST, Referer bilgisi göndermeye ve varsa erişim sırasında kullanılabilir oturum bilgisini elde etmeye yarar.
+
 
 ##### Örnek
 
@@ -3365,6 +3370,30 @@ veya
     $right = '&#039;';
     $data 	= $this->get_contents($left, $right, $url);
     print_r($data);
+
+
+veya
+
+    $url = 'https://www.example.com/login';
+    $left = '';
+    $right = '';
+    $options = array(
+    //    'referer'=>$url,
+        'post'=>array(
+            'username'=>'aliyilmaz',
+            'password'=>'123456'
+        )
+    );
+
+    // Start connection.
+    $this->get_contents($left, $right, $url, $options);
+
+    // Session access.
+    $url = 'https://www.example.com/admin/users';
+    $left = '<title>';
+    $right = '</title>';
+    $data = $this->get_contents($left, $right, $url);
+    $this->print_pre($data);
 
 
 ----------
