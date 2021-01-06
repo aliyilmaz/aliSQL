@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.1.1
+ * @version    Release: 4.1.2
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2655,18 +2655,20 @@ class Mind extends PDO
             if($this->sess_set['path_status']){
 
                 if(!is_dir($this->sess_set['path'])){
-
                     mkdir($this->sess_set['path']); chmod($this->sess_set['path'], 755);
                     $this->write('deny from all', $this->sess_set['path'].'/.htaccess');
                     chmod($this->sess_set['path'].'/.htaccess', 644);
                 }
 
-                ini_set(
-                    'session.save_path',
-                    realpath(
-                        dirname(__FILE__)
-                    ).'/'.$this->sess_set['path']
-                );
+                if(is_dir($this->sess_set['path'])){
+                    ini_set(
+                        'session.save_path',
+                        realpath(
+                            dirname(__FILE__)
+                        ).'/'.$this->sess_set['path']
+                    );
+                }
+
             }
 
             if(!isset($_SESSION)){
@@ -3272,9 +3274,10 @@ class Mind extends PDO
      * @param string $left
      * @param string $right
      * @param string $url
+     * @param array $options
      * @return array
      */
-    public function get_contents($left, $right, $url){
+    public function get_contents($left, $right, $url, $options=array()){
 
         $result = array();
 
@@ -3286,6 +3289,20 @@ class Mind extends PDO
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            if($this->sess_set['status_session']){
+                if(!$this->sess_set['path_status']){
+                    $this->sess_set['path'] = sys_get_temp_dir().'/';
+                }
+                curl_setopt($ch, CURLOPT_COOKIEJAR, $this->sess_set['path'].'cookie.txt');
+                curl_setopt($ch, CURLOPT_COOKIEFILE, $this->sess_set['path'].'cookie.txt');
+            }
+            if(!empty($options['post'])){
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($options['post']));
+            }
+            if(!empty($options['referer'])){
+                curl_setopt($ch, CURLOPT_REFERER, $options['referer']);
+            }
             curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
             $data = curl_exec($ch);
             curl_close($ch);
