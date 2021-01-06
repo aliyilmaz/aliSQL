@@ -3,7 +3,7 @@ require_once '../src/Mind.php';
 
 $Mind = new Mind();
 
-$url = 'https://www.cloudflare.com/';
+/*$url = 'https://www.cloudflare.com/';
 $left = '';
 $right = '';
 $data 	= $Mind->get_contents($left, $right, $url);
@@ -49,4 +49,25 @@ $url = '{"filmler": [  {"imdb": "tt0116231", "url": "&lt;iframe src=&#039;https:
 $left = 'src=&#039;';
 $right = '&#039;';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);
+print_r($data);*/
+
+$url = 'https://www.example.com/login';
+$left = '';
+$right = '';
+$options = array(
+//    'referer'=>$url,
+    'post'=>array(
+        'username'=>'aliyilmaz',
+        'password'=>'123456'
+    )
+);
+
+// Start connection.
+$Mind->get_contents($left, $right, $url, $options);
+
+// Session access.
+$url = 'https://www.example.com/admin/users';
+$left = '<title>';
+$right = '</title>';
+$data = $Mind->get_contents($left, $right, $url);
+$Mind->print_pre($data);
