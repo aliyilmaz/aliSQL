@@ -235,7 +235,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 ##### Sistem
 
 -   [getOS](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getOS)
--   [getSoftware](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getSoftware())
+-   [getSoftware](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getsoftware)
 -   [route](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#route)
 -   [write](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#write)
 -   [upload](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#upload)
