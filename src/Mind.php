@@ -2993,6 +2993,20 @@ class Mind extends PDO
     }
 
     /**
+     * Detecting an operating system
+     * @return string
+     */
+    public function getOS(){
+        $os = PHP_OS;
+        switch (true) {
+            case stristr($os, 'dar'): return 'Darwin';
+            case stristr($os, 'win'): return 'Windows';
+            case stristr($os, 'lin'): return 'Linux';
+            default : return 'Unknown';
+        }
+    }
+
+    /**
      * Routing manager.
      *
      * @param string $uri

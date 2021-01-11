@@ -234,6 +234,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 
 ##### Sistem
 
+-   [getOS](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getOS)
 -   [route](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#route)
 -   [write](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#write)
 -   [upload](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#upload)
@@ -3054,6 +3055,16 @@ veya
 
 
 ****Bilgi:**** Chrome, Firefox tarayıcılarınında test edilmiştir. Cep telefonu yoluyla paylaşılan konumların doğruluk oranı ortalama 4 ile 12 m2'dir. Eski nesil GPS modüle sahip masaüstü bilgisayar yoluyla paylaşılan konumların doğruluk oranı ise ortalama 7.000 m2'dir.
+
+----------
+
+## getOS()
+
+Projenin çalıştığı sunucu işletim sistemi ismini elde etmek için kullanılır. `Darwin`, `Windows`, `Linux` işletim sistemlerini desteklemektedir, bunlar dışındaki işletim sistemlerini `Unknown` olarak isimlendirir.
+
+##### Örnek
+
+    echo $this->getOS();
 
 ----------
 
