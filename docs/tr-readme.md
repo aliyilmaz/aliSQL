@@ -3061,7 +3061,7 @@ veya
 
 ## getOS()
 
-Projenin çalıştığı sunucu işletim sistemi ismini elde etmek için kullanılır. `Darwin`, `Windows`, `Linux` işletim sistemlerini desteklemektedir, bunlar dışındaki işletim sistemlerini `Unknown` olarak isimlendirir.
+Projenin çalıştığı sunucu işletim sistemi ismini elde etmek için kullanılır. `Darwin`, `Windows`, `Linux` işletim sistemlerini desteklemektedir, bunlar dışındaki işletim sistemleri `Unknown` olarak isimlendirilir.
 
 ##### Örnek
 
@@ -3071,7 +3071,7 @@ Projenin çalıştığı sunucu işletim sistemi ismini elde etmek için kullan�
 
 ## getSoftware()
 
-Projenin çalıştığı işletim sistemi üzerindeki sunucu yazılımı ismini elde etmek için kullanılır. `Apache`, `Microsoft ISS` yazılımları desteklemektedir, bunlar dışındaki sunucu yazılımları `Unknown` olarak isimlendirir.
+Projenin çalıştığı işletim sistemi üzerindeki sunucu yazılımı ismini elde etmek için kullanılır. `Apache`, `Microsoft ISS` yazılımları desteklemektedir, bunlar dışındaki sunucu yazılımları `Unknown` olarak isimlendirilir.
 
 ##### Örnek
 
