@@ -3007,6 +3007,19 @@ class Mind extends PDO
     }
 
     /**
+     * Detecting an server software
+     * @return string
+     */
+    public function getSoftware(){
+        $software = $_SERVER['SERVER_SOFTWARE'];
+        switch (true) {
+            case stristr($software, 'apac'): return 'Apache';
+            case stristr($software, 'micr'): return 'Microsoft-IIS';
+            default : return 'Unknown';
+        }
+    }
+
+    /**
      * Routing manager.
      *
      * @param string $uri

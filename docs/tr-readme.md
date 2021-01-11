@@ -235,6 +235,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 ##### Sistem
 
 -   [getOS](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getOS)
+-   [getSoftware](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getSoftware())
 -   [route](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#route)
 -   [write](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#write)
 -   [upload](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#upload)
@@ -3065,6 +3066,16 @@ Projenin çalıştığı sunucu işletim sistemi ismini elde etmek için kullan�
 ##### Örnek
 
     echo $this->getOS();
+
+----------
+
+## getSoftware()
+
+Projenin çalıştığı işletim sistemi üzerindeki sunucu yazılımı ismini elde etmek için kullanılır. `Apache`, `Microsoft ISS` yazılımları desteklemektedir, bunlar dışındaki sunucu yazılımları `Unknown` olarak isimlendirir.
+
+##### Örnek
+
+    echo $this->getSoftware();
 
 ----------
 
