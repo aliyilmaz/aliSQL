@@ -217,6 +217,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 
 ##### Yardımcı
 
+-   [accessGenerate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#accessgenerate)
 -   [print_pre](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#print_pre)
 -   [info](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#info)
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
@@ -2515,6 +2516,18 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
     distance:349 km
 
 
+
+
+----------
+
+
+## accessGenerate()
+
+Bu fonksiyon sunucu yazılımına özgü erişim yönetmelik dosyaları(.htaccess, web.config) oluşturmeya yarar. Rotalar kullanıldığında tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir.
+
+##### Örnek
+
+    $this->accessGenerate()
 
 
 ----------
