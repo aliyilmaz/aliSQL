@@ -18,7 +18,7 @@ Mind sınıfını edinmenin iki yolu vardır;
 ##### Mind deposu için:
 * Yerel veya web sunucunuzda bulunan proje ana dizinine, edindiğiniz **Zip** dosyası içindeki **src** yolunda yeralan **Mind.php** dosyasını çıkarın.
 
-* **Mind.php** dosyasını **include** yada **require_once** gibi bir yöntemle projenizin **index.php** dosyasına dahil edin ve **extends** veya **new Mind()** komutu yardımıyla kurulum işlemini tamamlayın. 
+* **Mind.php** dosyasını **include** ya da **require_once** gibi bir yöntemle projenizin **index.php** dosyasına dahil edin ve **extends** veya **new Mind()** komutu yardımıyla kurulum işlemini tamamlayın. 
 
 ###### Örnek
  
@@ -1473,7 +1473,7 @@ Sayfa ön eki'ni temsil etmekte olup zorunlu değildir, varsayılan olarak `p` b
 
 ###### Rotalı url yapısında kullanımı
 
-Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosyada rota `users:p` olarak tanımlandığında adres satırına `users` veya şekilde `users/1` yazılırsa ilk sayfa verilerini görüntülemiş oluruz.
+Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosya da rota `users:p` olarak tanımlandığında adres satırına `users` veya şekilde `users/1` yazılırsa ilk sayfa verilerini görüntülemiş oluruz.
 
 
 #### limit 
@@ -1684,30 +1684,30 @@ Bu fonksiyon kendisiyle paylaşılan verinin e-mail adresi söz dizimine sahip o
 
 ## is_type()
 
-Bu fonksiyon özellikle dosya yükleme işlemleri sırasında yüklenmek istenen dosyanın formatını kontrol etmek amacıyla kullanılır, Dosya adı `string` olarak belirtilmelidir, Dosya uzantıları ise `string` veya `array` olarak belirtilebilir. `$this->post['photo']['name']` dosya adını, `$list` müsade edilen dosya uzantılarını temsil etmektedir. Eğer dosya müsade edilen uzantıya sahip ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
+Bu fonksiyon özellikle dosya yükleme işlemleri sırasında yüklenmek istenen dosyanın formatını kontrol etmek amacıyla kullanılır, Dosya adı `string` olarak belirtilmelidir, Dosya uzantıları ise `string` veya `array` olarak belirtilebilir. `$this->post['photo']['name']` dosya adını, `$list` müsaade edilen dosya uzantılarını temsil etmektedir. Eğer dosya müsaade edilen uzantıya sahip ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
 ##### Örnek
 
     $list = 'jpg';
     if($this->is_type($this->post['photo']['name'], $list)){
-    	echo 'Yüklemek istediğiniz dosya müsade edilen bir uzantıya sahiptir.';
+    	echo 'Yüklemek istediğiniz dosya müsaade edilen bir uzantıya sahiptir.';
     } else {
-    	echo 'Yüklemek istediğiniz dosya müsade edilen bir uzantıya sahip değildir.';
+    	echo 'Yüklemek istediğiniz dosya müsaade edilen bir uzantıya sahip değildir.';
     }
 
 veya
 
     $list = array('jpg', 'jpeg', 'png', 'gif');
     if($this->is_type($this->post['photo']['name'], $list)){
-    	echo 'Yüklemek istediğiniz dosya müsade edilen bir uzantıya sahiptir.';
+    	echo 'Yüklemek istediğiniz dosya müsaade edilen bir uzantıya sahiptir.';
     } else {
-    	echo 'Yüklemek istediğiniz dosya müsade edilen bir uzantıya sahip değildir.';
+    	echo 'Yüklemek istediğiniz dosya müsaade edilen bir uzantıya sahip değildir.';
     }
 
 ----------
 
 ## is_size()
 
-Bu fonksiyon, dosya dizisinde bulunan `size` değerinin veya `string` yapıda belirtilen `byte` cinsinden  değerin kontrol edilmesi amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$manuelsize` string yapıda ki değeri, `$size` ise müsade edilen boyut bilgisini temsil etmektedir. Eğer dosya veya belirtilen değer müsade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
+Bu fonksiyon, dosya dizisinde bulunan `size` değerinin veya `string` yapıda belirtilen `byte` cinsinden  değerin kontrol edilmesi amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$manuelsize` string yapıda ki değeri, `$size` ise müsaade edilen boyut bilgisini temsil etmektedir. Eğer dosya veya belirtilen değer müsaade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
  
  **Bilgi:** Dosyalarla çalışırken `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir. 
 
@@ -1775,7 +1775,7 @@ veya
 
 ## is_color()
 
-Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığını kontrol etmeye yarar, eğer söz konusu değer transparent veya tüm tarayıcılar ile uyumlu olan 148 renk isminden biriyse yada HEX, RGB, RGBA, HSL, HSLA ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. `$color` renk değerini temsil etmektedir.
+Bu fonksiyon kendisiyle paylaşılan değerin geçerli bir renk olup olmadığını kontrol etmeye yarar, eğer söz konusu değer transparent veya tüm tarayıcılar ile uyumlu olan 148 renk isminden biriyse ya da HEX, RGB, RGBA, HSL, HSLA ise yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. `$color` renk değerini temsil etmektedir.
 
 ##### Örnek
 
@@ -2059,7 +2059,7 @@ Kendisiyle paylaşılan değerin bir kan grubu olup olmadığını kontrol etmek
 
 İki parametre alır, ilk parametre zorunludur, İkinci parametre zorunlu değildir. Sadece ilk parametre belirtilirse o kan grubunun geçerliliği kontrol edilir. İkinci parametre de belirtilirse, ikincisinin ilk kan grubu için uygun donör olup olmadığı kontrol edilir.
 
-Eğer geçerli bir kan grubu belirtilmiş ise yada uyumlu kan grupları belirtilmiş ise `true` yanıtı döndürülür, aksi halde `false` yanıtı döndürülür.
+Eğer geçerli bir kan grubu belirtilmiş ise ya da uyumlu kan grupları belirtilmiş ise `true` yanıtı döndürülür, aksi halde `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -2088,7 +2088,7 @@ veya
 
 ## is_latitude()
 
-Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+Kendisiyle paylaşılan `float`, `int` ya da `string` yapıdaki verinin geçerli bir enlem bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir enlem bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -2105,7 +2105,7 @@ Kendisiyle paylaşılan `float`, `int` yada `string` yapıdaki verinin geçerli 
 
 ## is_longitude()
 
-Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
+Kendisiyle paylaşılan  `float`, `int` ya da `string` yapıdaki verinin geçerli bir boylam bilgisi olup olmadığını kontrol etmek amacıyla kullanılır. Eğer kendisiyle paylaşılan veri geçerli bir boylam bilgisiyse `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
     $longitude = 28.971111;
     if($this->is_longitude($longitude)){
@@ -2120,7 +2120,7 @@ Kendisiyle paylaşılan  `float`, `int` yada `string` yapıdaki verinin geçerli
 
 ## is_coordinate()
 
-Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kullanılır.  `float`, `int` yada `string` yapıda iki parametre alır, bunlar enlem ve boylam bilgisidir ve her ikisinin belirtilmesi zorunludur.
+Kendisiyle paylaşılan koordinatın geçerliliğini kontrol etmek amacıyla kullanılır.  `float`, `int` ya da `string` yapıda iki parametre alır, bunlar enlem ve boylam bilgisidir ve her ikisinin belirtilmesi zorunludur.
 
 ##### Örnek
 
@@ -2162,7 +2162,7 @@ Bir koordinat noktası için, başka bir koordinat noktasının belirtilen menzi
 
 ilk iki parametrede bulunan koordinat verileri `array` olarak, menzil ve menzil ölçü birimini temsil eden 3'ncü parametre ise `string` olarak belirtilmelidir.
 
-`array` olarak belirtilen koordinat bilgisi `enlem,boylam` söz diziminde, `float`, `string` yada `int` türünde belirtilmelidir.
+`array` olarak belirtilen koordinat bilgisi `enlem,boylam` söz diziminde, `float`, `string` ya da `int` türünde belirtilmelidir.
 
 Eğer menzil içinde bir mesafe söz konusuysa `true` yanıtı döndürülür, değilse `false` yanıtı döndürülür.
 
@@ -2379,25 +2379,25 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
 
 ##### min-num
 
-Minumum belirtilmesi arzu edilen sayı miktarını ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+Minumum belirtilmesi arzu edilen sayı miktarını ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında ya da olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
 
     min-num:5
 
 ##### max-num
 
-Maksimum belirtilmesi arzu edilen sayı miktarını ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+Maksimum belirtilmesi arzu edilen sayı miktarını ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında ya da olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
 
     max-num:10
 
 ##### min-char
 
-Verinin karakter uzunluğunun minumum belirtilen sayı kadar olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+Verinin karakter uzunluğunun minumum belirtilen sayı kadar olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında ya da olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
 
     min-char:200
 
 ##### max-char
 
-Verinin karakter uzunluğunun maksimum belirtilen sayı kadar olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+Verinin karakter uzunluğunun maksimum belirtilen sayı kadar olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında ya da olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
 
     max-char:500
 
@@ -2426,16 +2426,16 @@ Verinin geçerli bir zaman bilgisi olması gerektiğini ifade etmek için kullan
     // 2020-02-18
     date:Y-m-d  
 
-yada
+veya
 
     // 2020-02-18 14
     date:Y-m-d H 
-yada
+veya
 
     // 2020-02-18 14:34
     date:Y-m-d H:i 
 
-yada
+veya
 
     // 2020-02-18 14:34:22
     date:Y-m-d H:i:s 
@@ -2481,13 +2481,13 @@ Belirtilen verinin rakam olması gerektiğini ifade etmek için kullanılır. Ek
 
 ##### min-age
 
-Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada üstü bir yaşta olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş ya da üstü bir yaşta olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında ya da olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
 
     min-age:18
 
 ##### max-age
 
-Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş yada altında bir yaşta olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında yada olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
+Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş ya da altında bir yaşta olması gerektiğini ifade etmek için kullanılır. Ekstra bir parametreye ihtiyaç duyar ve bu parametre integer bir değer olmak zorundadır, bu değerin tırnak işaretleri arasında ya da olduğu gibi yazılması bu kuralın doğru çalışmasını engellemez.
 
     max-age:18
 
@@ -2515,19 +2515,19 @@ Parametrenin boolean türünde olması gerektiğini ifade etmek için kullanıl�
 
     bool
     
-yada
+veya
 
     bool:true
     
-yada
+veya
 
     bool:false
     
-yada
+veya
 
     bool:1
     
-yada
+veya
 
     bool:0
     
@@ -2556,7 +2556,7 @@ Belirtilen parametrenin geçerli bir kan grubu olması gerektiğini ifade etmek 
 
     blood
     
-yada
+veya
 
     blood:0+ 
 
@@ -2999,7 +2999,7 @@ Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
 
 ## mindLoad()
 
-`.php` uzantıya sahip dosya yada dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. Dosya yolları `.php` uzantısı olmadan belirtilmelidir.
+`.php` uzantıya sahip dosya ya da dosyaları projeye dahil etmek amacıyla kullanılır. `$file` ve `$cache`, dosyalara ait yollarının tutulduğu değişkenleri temsil etmektedir. Dosya yolları `.php` uzantısı olmadan belirtilmelidir.
 
 Her iki değişkene de `string` veya `array` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
 
