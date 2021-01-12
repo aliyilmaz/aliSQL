@@ -30,6 +30,7 @@ class Mind extends PDO
 
     public  $post;
     public  $base_url;
+    public  $allow_folders  =   'public';
     public  $page_current   =   '';
     public  $page_back      =   '';
     public  $timezone       =  'Europe/Istanbul';
@@ -62,6 +63,10 @@ class Mind extends PDO
 
         if(isset($conf['charset'])){
             $this->charset = $conf['charset'];
+        }
+
+        if(isset($conf['allow_folders'])){
+            $this->allow_folders = $conf['allow_folders'];
         }
 
         try {
@@ -2345,16 +2350,16 @@ class Mind extends PDO
      * Method of determining the access 
      * directive.
      */
-    public function accessGenerate($allowDir='public'){
+    public function accessGenerate(){
 
         $filename = '';
         $public_content = '';
         $deny_content = '';
         $allow_content = '';
         
-        if(!empty($allowDir)){
-            if(!is_array($allowDir)){
-                $allowDir = array($allowDir);
+        if(!empty($this->allow_folders)){
+            if(!is_array($this->allow_folders)){
+                $allow_folders = array($this->allow_folders);
             }
         }
 
@@ -2422,9 +2427,9 @@ class Mind extends PDO
         if(!empty($dirs)){
             foreach ($dirs as $dir){
 
-                if(!empty($allowDir)){
-                    foreach ($allowDir as $allowdir) {
-                        if($allowdir == $dir AND !file_exists($dir.'/'.$filename)){
+                if(!empty($allow_folders)){
+                    foreach ($allow_folders as $allow_folder) {
+                        if($allow_folder == $dir AND !file_exists($dir.'/'.$filename)){
                             $this->write($allow_content, $dir.'/'.$filename);
                         }
                     }
@@ -3127,7 +3132,7 @@ class Mind extends PDO
     public function route($uri, $file, $cache=null){
         
         // Access directives are being created.
-        $this->accessGenerate(array('public', 'public2'));
+        $this->accessGenerate();
 
         if(empty($file)){
             return false;
