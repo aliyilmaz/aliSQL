@@ -2352,6 +2352,12 @@ class Mind extends PDO
         $deny_content = '';
         $allow_content = '';
         
+        if(!empty($allowDir)){
+            if(!is_array($allowDir)){
+                $allowDir = array($allowDir);
+            }
+        }
+
         switch ($this->getSoftware()) {
             case 'Apache':
                 $public_content = implode("\n", array(
@@ -2417,8 +2423,10 @@ class Mind extends PDO
             foreach ($dirs as $dir){
 
                 if(!empty($allowDir)){
-                    if($allowDir == $dir AND !file_exists($dir.'/'.$filename)){
-                        $this->write($allow_content, $dir.'/'.$filename);
+                    foreach ($allowDir as $allowdir) {
+                        if($allowdir == $dir AND !file_exists($dir.'/'.$filename)){
+                            $this->write($allow_content, $dir.'/'.$filename);
+                        }
                     }
                 }
                 
@@ -3119,7 +3127,7 @@ class Mind extends PDO
     public function route($uri, $file, $cache=null){
         
         // Access directives are being created.
-        $this->accessGenerate();
+        $this->accessGenerate(array('public', 'public2'));
 
         if(empty($file)){
             return false;
