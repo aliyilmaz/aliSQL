@@ -2757,9 +2757,9 @@ class Mind extends PDO
             if($this->sess_set['path_status']){
 
                 if(!is_dir($this->sess_set['path'])){
-                    mkdir($this->sess_set['path']); chmod($this->sess_set['path'], 755);
-                    $this->write('deny from all', $this->sess_set['path'].'/.htaccess');
-                    chmod($this->sess_set['path'].'/.htaccess', 644);
+                    mkdir($this->sess_set['path']); 
+                    chmod($this->sess_set['path'], 755);
+                    $this->accessGenerate();
                 }
 
                 if(is_dir($this->sess_set['path'])){
@@ -3399,7 +3399,7 @@ class Mind extends PDO
                     $this->sess_set['path'] = sys_get_temp_dir().'/';
                 }
 
-                if(strstr(dirname(__FILE__),'\\')){
+                if(!stristr($this->getSoftware(), 'mic') AND strstr(dirname(__FILE__),'\\')){
                     curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__). '/'.$this->sess_set['path'].'cookie.txt');
                     curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__). '/'.$this->sess_set['path'].'cookie.txt');
                 }else{
