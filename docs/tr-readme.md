@@ -96,6 +96,60 @@ Oturumların saklandığı klasör yolunu değiştirmek için, `path` parametres
 
 ----------
 
+## Herkese açık dizin ayarları
+
+**Mind.php** dosyasıyla aynı dizinde bulunan ve herkesin erişimine açık olması istenen klasör isimleri bu ayar yardımıyla tanımlanır. Varsayılan olarak `public` değeri tanımlandığı için belirtilme zorunluluğu yoktur. Sınıf dışından erişime müsaade etmek için `public` özelliği tanımlanmıştır.
+
+İki farklı kullanım şekli vardır. 
+
+##### Sınıfı çağırdığımız **index.php** içinde tanımlama yapmak
+
+
+#### Örnek
+
+    $conf = array(
+        'host'              =>  'localhost',
+        'dbname'            =>  'mydb',
+        'username'          =>  'root',
+        'password'          =>  '',
+        'allow_folders'     =>  'public'
+    );
+    $Mind = new Mind($conf);
+
+veya 
+
+    $conf = array(
+        'host'              =>  'localhost',
+        'dbname'            =>  'mydb',
+        'username'          =>  'root',
+        'password'          =>  '',
+        'allow_folders'     =>  array(
+            'public',
+            'public1'
+        )
+    );
+    $Mind = new Mind($conf);
+
+
+##### **Mind.php** dosyası içinde tanımlama yapmak
+
+#### Örnek
+
+    public $allow_folders = 'public';
+    
+veya
+
+    public $allow_folders = array(
+        'public',
+        'public1'
+    );
+    
+
+**Bilgi:** Herkesin erişimine açık dizinler, image, js, css gibi çeşitli arayüz varlıklarının çalışabilmesi için gerekli alanlardır. Özel dosyalarınızı bu alanlarda barındırmayınız.
+
+----------
+
+
 ## Etkin Metodlar
 
 Oturum yönetimi, **$_GET**, **$_POST** ve **$_FILES** istekleri, hata raporlama, işlem bekleme süresi gibi gereksinimleri karşılayan yöntemler, **Mind.php** dosyası içinde bulunan **__construct()** metodu içinde çalıştırılarak etkinleştirilmiştir.
@@ -119,6 +173,11 @@ Sınıfın dahil edildiği projede yapılan `$_GET`, `$_POST` ve `$_FILES` istek
 ##### public $base_url
 
 **Mind.php** dosyasının içinde bulunduğu klasörün yolu `$this->base_url` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+##### public $allow_folders
+
+**Mind.php** dosyasının bulunduğu dizinde, herkese açık olması istenen klasör isimleri `$this->allow_folders`  değişkeninde tutulur. `string` ya da `array` türünde klasör isimleri belirtilebilir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
 
 ##### public $page_current
 
@@ -2523,7 +2582,10 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
 
 ## accessGenerate()
 
-Bu fonksiyon sunucu yazılımına özgü erişim yönetmelik dosyalarını (.htaccess, web.config) oluşturmaya yarar ve rotalar kullanıldığında tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir.
+Bu fonksiyon sunucu yazılımına özgü erişim yönetmeliği dosyalarını (.htaccess, web.config) oluşturmaya yarar. 
+
+`/` rotası bir defa kullanıldığında fonksiyon tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir. Bu fonksiyon, `route()` metodu içinde çalıştırılarak etkinleştirilmiştir.
+
 
 #### Apache için .htaccess (public)
 
@@ -2538,7 +2600,6 @@ Bu fonksiyon sunucu yazılımına özgü erişim yönetmelik dosyalarını (.hta
 
     Deny from all
 
-veya
 
 #### Microsoft IIS için web.config (public)
 
