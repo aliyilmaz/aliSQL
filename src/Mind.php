@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.1.6
+ * @version    Release: 4.1.7
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2345,11 +2345,12 @@ class Mind extends PDO
      * Method of determining the access 
      * directive.
      */
-    public function accessGenerate(){
+    public function accessGenerate($allowDir='public'){
 
         $filename = '';
         $public_content = '';
-        $private_content = '';
+        $deny_content = '';
+        $allow_content = '';
         
         switch ($this->getSoftware()) {
             case 'Apache':
@@ -2361,7 +2362,8 @@ class Mind extends PDO
                     'RewriteRule ^.*$ - [NC,L]',
                     'RewriteRule ^.*$ index.php [NC,L]'
                 ));
-                $private_content = 'Deny from all';
+                $deny_content = 'Deny from all';
+                $allow_content = 'Allow from all';
                 $filename = '.htaccess';
             break;
             case 'Microsoft-IIS':
@@ -2385,10 +2387,17 @@ class Mind extends PDO
                 '</configuration>'
             ));
             
-            $private_content = implode("\n", array(
-                "\n<authorization>",
+            $deny_content = implode("\n", array(
+                "<authorization>",
                 "\t<deny users=\"?\"/>",
                 "</authorization>"
+            ));
+            $allow_content = implode("\n", array(
+                "<configuration>",
+                "\t<system.webServer>",
+                "\t\t<directoryBrowse enabled=\"true\" showFlags=\"Date,Time,Extension,Size\" />",
+                "\t\t\t</system.webServer>",
+                "</configuration>"
             ));
             $filename = 'web.config';
             break;
@@ -2407,8 +2416,14 @@ class Mind extends PDO
         if(!empty($dirs)){
             foreach ($dirs as $dir){
 
+                if(!empty($allowDir)){
+                    if($allowDir == $dir AND !file_exists($dir.'/'.$filename)){
+                        $this->write($allow_content, $dir.'/'.$filename);
+                    }
+                }
+                
                 if(!file_exists($dir.'/'.$filename)){
-                    $this->write($private_content, $dir.'/'.$filename);
+                    $this->write($deny_content, $dir.'/'.$filename);
                 }
 
             }
