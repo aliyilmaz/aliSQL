@@ -2523,11 +2523,49 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
 
 ## accessGenerate()
 
-Bu fonksiyon sunucu yazılımına özgü erişim yönetmelik dosyaları(.htaccess, web.config) oluşturmeya yarar. Rotalar kullanıldığında tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir.
+Bu fonksiyon sunucu yazılımına özgü erişim yönetmelik dosyalarını (.htaccess, web.config) oluşturmaya yarar ve rotalar kullanıldığında tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir.
 
-##### Örnek
+#### Apache için .htaccess (public)
 
-    $this->accessGenerate()
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [NC,L]
+    RewriteRule ^.*$ index.php [NC,L]
+
+#### Apache için .htaccess (private)
+
+    Deny from all
+
+veya
+
+#### Microsoft IIS için web.config (public)
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+        <system.webServer>
+            <rewrite>
+                <rules>
+                    <rule name="Imported Rule 1" stopProcessing="true">
+                        <match url="^(.*)$" ignoreCase="false" />
+                        <conditions>
+                            <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+                            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+                        </conditions>
+                        <action type="Rewrite" url="index.php?{R:1}" appendQueryString="true" />
+                    </rule>
+                </rules>
+            </rewrite>
+        </system.webServer>
+    </configuration>
+
+
+#### Microsoft IIS için web.config (private)
+
+    <authorization>
+        <deny users="?"/>
+    </authorization>
 
 
 ----------
