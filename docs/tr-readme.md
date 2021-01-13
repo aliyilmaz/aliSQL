@@ -76,7 +76,7 @@ Oturumların saklandığı klasör yolunu değiştirmek için, `path` parametres
 
 #### Örnek
 
-    private $sessset    = array(
+    private $sess_set    = array(
         'path'              =>  './session/',
         'path_status'       =>  false,
         'status_session'    =>  true
