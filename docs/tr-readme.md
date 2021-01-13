@@ -45,16 +45,9 @@ veya
 
 ## Veritabanı Ayarları
 
-Sınıfı kullanmak için veritabanı bilgilerini **Mind.php** dosyasında veya sınıf çağrılırken tanımlamak gerekir.
+Sınıfı kullanmak için veritabanı bilgilerini sınıf çağrılırken veya **Mind.php** dosyasında tanımlamak gerekir.
 
 #### Örnek
-
-    private $host        = 'localhost';
-    private $dbname      = 'mydb';
-    private $username    = 'root';
-    private $password    = '';
-    
-veya
 
     $conf = array(
         'host'      =>  'localhost',
@@ -64,6 +57,13 @@ veya
     );
     $Mind = new Mind($conf);
 
+veya
+
+    private $host        = 'localhost';
+    private $dbname      = 'mydb';
+    private $username    = 'root';
+    private $password    = '';
+    
 ----------
 
 ## Oturum Ayarları
@@ -1473,7 +1473,7 @@ Sayfa ön eki'ni temsil etmekte olup zorunlu değildir, varsayılan olarak `p` b
 
 ###### Rotalı url yapısında kullanımı
 
-Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosya da rota `users:p` olarak tanımlandığında adres satırına `users` veya şekilde `users/1` yazılırsa ilk sayfa verilerini görüntülemiş oluruz.
+Parametreli rota gerektiren bu kullanım şekli, rotaların tanımlandığı dosyada rota `users:p` olarak tanımlandığında adres satırına `users` veya şekilde `users/1` yazılırsa ilk sayfa verilerini görüntülemiş oluruz.
 
 
 #### limit 
@@ -2587,7 +2587,9 @@ Bu fonksiyon sunucu yazılımına özgü erişim yönetmeliği dosyalarını (.h
 `/` rotası bir defa kullanıldığında fonksiyon tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir. Bu fonksiyon, `route()` metodu içinde çalıştırılarak etkinleştirilmiştir.
 
 
-#### Apache için .htaccess (public)
+#### Apache için (.htaccess) 
+
+###### Ana dizin
 
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} -s [OR]
@@ -2596,12 +2598,20 @@ Bu fonksiyon sunucu yazılımına özgü erişim yönetmeliği dosyalarını (.h
     RewriteRule ^.*$ - [NC,L]
     RewriteRule ^.*$ index.php [NC,L]
 
-#### Apache için .htaccess (private)
+
+###### Herkese kapalı dizin
 
     Deny from all
 
+###### Herkese açık dizin
 
-#### Microsoft IIS için web.config (public)
+    Allow from all
+
+---
+
+#### Microsoft IIS için (web.config)
+
+###### Ana dizin 
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
@@ -2622,11 +2632,19 @@ Bu fonksiyon sunucu yazılımına özgü erişim yönetmeliği dosyalarını (.h
     </configuration>
 
 
-#### Microsoft IIS için web.config (private)
+###### Herkese kapalı dizin
 
     <authorization>
         <deny users="?"/>
     </authorization>
+
+###### Herkese açık dizin
+
+    <configuration>
+        <system.webServer>
+            <directoryBrowse enabled="true" showFlags="Date,Time,Extension,Size" />
+        </system.webServer>
+    </configuration>
 
 
 ----------
