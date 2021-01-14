@@ -3195,6 +3195,8 @@ class Mind extends PDO
             } else {
                 $this->post = array_diff($params, array('', ' '));
             }
+        } else {
+            unset($this->post[$uriData['name']]);
         }
 
         if(!empty($request)){
