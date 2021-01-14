@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.1.9
+ * @version    Release: 4.2.0
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3196,7 +3196,9 @@ class Mind extends PDO
                 $this->post = array_diff($params, array('', ' '));
             }
         } else {
-            unset($this->post[$uriData['name']]);
+            if(isset($_GET[$uriData['name']]) AND !isset($_POST[$uriData['name']]) AND !isset($_FILES[$uriData['name']])){
+                unset($this->post[$uriData['name']]);
+            }
         }
 
         if(!empty($request)){
