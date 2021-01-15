@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.2.0
+ * @version    Release: 4.1.9
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2390,7 +2390,7 @@ class Mind extends PDO
                             "\t\t\t\t\t\t<add input=\"{REQUEST_FILENAME}\" matchType=\"IsFile\" ignoreCase=\"false\" negate=\"true\" />",
                             "\t\t\t\t\t\t<add input=\"{REQUEST_FILENAME}\" matchType=\"IsDirectory\" ignoreCase=\"false\" negate=\"true\" />",
                             "\t\t\t\t\t</conditions>",
-                            "\t\t\t\t\t<action type=\"Rewrite\" url=\"index.php?{R:1}\" appendQueryString=\"true\" />",
+                            "\t\t\t\t\t<action type=\"Rewrite\" url=\"index.php\" appendQueryString=\"true\" />",
                         "\t\t\t\t</rule>",
                         "\t\t\t</rules>",
                         "\t\t</rewrite>",
@@ -3195,11 +3195,7 @@ class Mind extends PDO
             } else {
                 $this->post = array_diff($params, array('', ' '));
             }
-        } else {
-            if(isset($_GET[$uriData['name']]) AND !isset($_POST[$uriData['name']]) AND !isset($_FILES[$uriData['name']])){
-                unset($this->post[$uriData['name']]);
-            }
-        }
+        } 
 
         if(!empty($request)){
 
