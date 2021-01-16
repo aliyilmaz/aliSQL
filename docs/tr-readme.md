@@ -2786,9 +2786,7 @@ veya
 
 ## firewall()
 
-Bu fonksiyon, Clickjacking, XSS ve MIME Sniffing davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur.
-
-***Bilgi:*** Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
+Bu fonksiyon, Clickjacking, XSS ve MIME Sniffing davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
 
 #### noiframe
 
