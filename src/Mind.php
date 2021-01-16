@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.1.9
+ * @version    Release: 4.2.0
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -68,6 +68,8 @@ class Mind extends PDO
         if(isset($conf['allow_folders'])){
             $this->allow_folders = $conf['allow_folders'];
         }
+
+        $this->firewall($conf);
 
         try {
             parent::__construct('mysql:host=' . $this->host, $this->username, $this->password);
@@ -2521,6 +2523,49 @@ class Mind extends PDO
      */
     public function filter($str){
         return htmlspecialchars($str);
+    }
+
+    /**
+     * Firewall
+     * 
+     * @param array $conf
+     * @return string header()
+     */
+    public function firewall($conf=array()){
+
+        $noiframe = "X-Frame-Options: SAMEORIGIN";
+        $noxss = "X-XSS-Protection: 1; mode=block";
+        $nosniff = "X-Content-Type-Options: nosniff";
+        $ssl = "Set-Cookie: user=t=".$this->generateToken()."; path=/; Secure";
+
+        if(isset($conf['firewall']['noiframe'])){
+            if($conf['firewall']['noiframe']){
+                header($noiframe);
+            }
+        } else {
+            header($noiframe);
+        }
+        if(isset($conf['firewall']['noxss'])){
+            if($conf['firewall']['noxss']){
+                header($noxss);
+            }
+        } else {
+            header($noxss);
+        }
+        if(isset($conf['firewall']['nosniff'])){
+            if($conf['firewall']['nosniff']){
+                header($nosniff);
+            }
+        } else {
+            header($nosniff);
+        }
+        if(isset($conf['firewall']['ssl'])){
+            if($conf['firewall']['ssl']){
+                header($ssl);
+            }
+        } else {
+            header($ssl);
+        }
     }
 
     /**

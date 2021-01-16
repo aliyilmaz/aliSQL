@@ -281,6 +281,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [info](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#info)
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
 -   [filter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#filter)
+-   [firewall](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#firewall)
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
@@ -2779,6 +2780,52 @@ veya
 
     $content = "<script>alert('XSS Açığı var'); </script>";
     echo $this->filter($content);
+
+
+----------
+
+## firewall()
+
+Bu fonksiyon, Clickjacking, XSS ve MIME Sniffing davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur.
+
+***Bilgi:*** Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
+
+#### noiframe
+
+Projenin iframe yoluyla kullanılmasını engellemek için kullanılır, `boolean` türünde belirtilmelidir. Varsayılan olarak `true` belirtilmiştir.
+
+
+#### nosniff
+
+Projeyi görüntüleyen kullanıcının tarayıcısının, proje içeriğini analiz etmesini engellemek için kullanılır, `boolean` türünde belirtilmelidir. Varsayılan olarak `true` belirtilmiştir.
+
+
+#### noxss
+
+Mind, XSS kodlarını etkisiz hale getirmektedir, buna rağmen proje adreslemesine kod enjekte etme girişimlerini durdurmak için bu alt ayar kullanılır, `boolean` türünde belirtilmelidir. Varsayılan olarak `true` belirtilmiştir.
+
+#### ssl
+
+SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek için kullanılır, bu sayede kullanıcıların username & password bilgileri başta olmak üzere, kredi kartı vb kritik bilgilerin de güvenliği sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
+
+##### Örnek
+
+    $conf = array(
+        'host'      =>  'localhost',
+        'dbname'    =>  'mydb',
+        'username'  =>  'root',
+        'password'  =>  '',
+        'firewall'  =>  array(
+            'noiframe'  =>  false,
+            'nosniff'   =>  false,
+            'noxss'     =>  false,
+            'ssl'       =>  false
+        )
+    );
+
+    $Mind = new Mind($conf);
+
+    echo 'Uzaktan erişime açıktır';
 
 
 ----------
