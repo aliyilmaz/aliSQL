@@ -2804,7 +2804,7 @@ Mind, XSS kodlarını etkisiz hale getirmektedir, buna rağmen proje adreslemesi
 
 #### ssl
 
-SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek için kullanılır, bu sayede kullanıcıların username & password bilgileri başta olmak üzere, kredi kartı vb kritik bilgilerin de güvenliği sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
+SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek için kullanılır, bu sayede kullanıcıların username & password bilgileri başta olmak üzere, kredi kartı vb kritik bilgilerinin de güvenliği sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
 
 ##### Örnek
 
