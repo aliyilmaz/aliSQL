@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.2.0
+ * @version    Release: 4.2.1
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2016,6 +2016,25 @@ class Mind extends PDO
     }
 
     /**
+	 * Determines if SSL is used.	 
+	 * @return bool True if SSL, otherwise false.
+	 */
+    public function is_ssl() {
+        if ( isset( $_SERVER['HTTPS'] ) ) {
+            if ( 'on' === strtolower( $_SERVER['HTTPS'] ) ) {
+                return true;
+            }
+     
+            if ( '1' == $_SERVER['HTTPS'] ) {
+                return true;
+            }
+        } elseif ( isset( $_SERVER['SERVER_PORT'] ) && ( '443' == $_SERVER['SERVER_PORT'] ) ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Validation
      * 
      * @param array $rule
@@ -2537,6 +2556,7 @@ class Mind extends PDO
         $noxss = "X-XSS-Protection: 1; mode=block";
         $nosniff = "X-Content-Type-Options: nosniff";
         $ssl = "Set-Cookie: user=t=".$this->generateToken()."; path=/; Secure";
+        $hsts = "Strict-Transport-Security: max-age=16070400; includeSubDomains; preload";
 
         if(isset($conf['firewall']['noiframe'])){
             if($conf['firewall']['noiframe']){
@@ -2559,12 +2579,24 @@ class Mind extends PDO
         } else {
             header($nosniff);
         }
-        if(isset($conf['firewall']['ssl'])){
-            if($conf['firewall']['ssl']){
+
+        if($this->is_ssl()){
+
+            if(isset($conf['firewall']['ssl'])){
+                if($conf['firewall']['ssl']){
+                    header($ssl);
+                }
+            } else {
                 header($ssl);
             }
-        } else {
-            header($ssl);
+            if(isset($conf['firewall']['hsts'])){
+                if($conf['firewall']['hsts']){
+                    header($hsts);
+                }
+            } else {
+                header($hsts);
+            }
+
         }
     }
 

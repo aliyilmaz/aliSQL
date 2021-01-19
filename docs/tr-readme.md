@@ -272,6 +272,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [is_coordinate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_coordinate)
 -   [is_distance](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_distance)
 -   [is_md5](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_md5)
+-   [is_ssl](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ssl)
 -   [validate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#validate)
 
 ##### Yardımcı
@@ -2224,6 +2225,22 @@ veya
     } else {
         echo 'Bu bir md5 değil.';
     }
+
+----------
+
+## is_ssl()
+
+Bu fonksiyon, projeye ait SSL Sertifikasının varlığını sorgulamak amacıyla kullanılır. Eğer SSL bağlantısı etkinse `true` değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+
+    if($this->is_ssl($str)){
+        echo 'SSL bağlantısı var.';
+    } else {
+        echo 'SSL bağlantısı yok.';
+    }
+
 
 ----------
 
