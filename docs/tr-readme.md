@@ -2823,6 +2823,10 @@ Mind, XSS kodlarını etkisiz hale getirmektedir, buna rağmen proje adreslemesi
 
 SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek için kullanılır, bu sayede kullanıcıların username & password bilgileri başta olmak üzere, kredi kartı vb kritik bilgilerinin de güvenliği sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
 
+#### hsts
+
+SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için kullanılır, bu sayede kullanıcıyla sunucu arasındaki haberleşmenin SSL ile korunması sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
+
 ##### Örnek
 
     $conf = array(
@@ -2834,7 +2838,8 @@ SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek içi
             'noiframe'  =>  false,
             'nosniff'   =>  false,
             'noxss'     =>  false,
-            'ssl'       =>  false
+            'ssl'       =>  false,
+            'hsts'      =>  false
         )
     );
 
