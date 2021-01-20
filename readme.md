@@ -17,7 +17,7 @@ Mind is the PHP code framework designed for developers. It offers a variety of s
 ## Install
 
   * Download the [repository](https://github.com/aliyilmaz/project/archive/master.zip) and extract it to the server.
-  * Adjust [database settings](https://github.com/aliyilmaz/Mind/blob/master/docs/en-readme.md#database-settings)
+  * Adjust [database settings (TR)](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#database-settings)
   * In the address line, type the path to the directory.
 
 
