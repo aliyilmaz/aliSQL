@@ -2043,18 +2043,7 @@ class Mind extends PDO
      * @return bool
      */
     public function validate($rule, $data, $message = array()){
-
-        $dataColumns = array_keys($data);
-        $ruleColumns = array_keys($rule);
-        foreach ($dataColumns as $column) {
-            if(!in_array($column, $ruleColumns)){
-                $this->errors[$column] = 'Not allowed column name.';
-            }
-        }
-        if(!empty($this->errors)){
-            return false;
-        }
-
+      
         $extra = '';
         $rules = array();
 
@@ -2090,6 +2079,9 @@ class Mind extends PDO
                     }
                 }
 
+                if(!isset($data[$column])){
+                    $data[$column] = @$data[$column];
+                }
 
                 // İlgili kuralın mesajı yoksa kural adı mesaj olarak belirtilir.
                 if(empty($message[$column][$name])){
