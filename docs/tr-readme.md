@@ -2253,6 +2253,8 @@ Farklı türdeki verilerin belirtilen kurallara uygunluğunu tek seferde kontrol
 
 Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yardımıyla ayrılmalıdır. Parametrelerde bulunan veri anahtarlarının eşleşmesi gerekmektedir.
 
+Kural olarak tanımlanmamış sütun isimleri engellenerek hata olarak geri döndürülür, bu sayede `$this->post` dizi değişkeninin doğrudan kullanılmasına olanak tanınmış olur.
+
 ##### Örnek
 
 
