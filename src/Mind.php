@@ -2044,6 +2044,17 @@ class Mind extends PDO
      */
     public function validate($rule, $data, $message = array()){
 
+        $dataColumns = array_keys($data);
+        $ruleColumns = array_keys($rule);
+        foreach ($dataColumns as $column) {
+            if(!in_array($column, $ruleColumns)){
+                $this->errors[$column] = 'Not allowed column name.';
+            }
+        }
+        if(!empty($this->errors)){
+            return false;
+        }
+
         $extra = '';
         $rules = array();
 
