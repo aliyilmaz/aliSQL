@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.2.1
+ * @version    Release: 4.2.2
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2069,7 +2069,6 @@ class Mind extends PDO
             }
 
         }
-
 
         foreach($rules as $column => $rule){
             foreach($rule as $name){
