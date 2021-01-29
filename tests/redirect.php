@@ -13,6 +13,7 @@ $Mind = new Mind();
 $Mind->redirect('https://www.google.com', 20, '.example1 #redirect-time');
 
 ?>
+<link rel="shortcut icon" href="#">
 
 <form class="example1" action="">
     
