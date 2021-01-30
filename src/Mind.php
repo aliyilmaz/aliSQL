@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.2.3
+ * @version    Release: 4.2.4
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1422,24 +1422,17 @@ class Mind extends PDO
                 $prefix = $options['prefix'];
             }
         }
-
-        if(!isset($this->post[$prefix])){
-           
-            switch ($format) {
-                case 'json':
-                    return json_encode($result, JSON_PRETTY_PRINT); 
-                break;
-            }
-            return $result;
-        }
-
-        if(!empty($this->post[$prefix])){
+        
+        if(empty($this->post[$prefix])){
+            $this->post[$prefix] = $page;
+        } else {
             if(is_numeric($this->post[$prefix])){
                 $page = $this->post[$prefix];
+            } else {
+                $this->post[$prefix] = $page;
             }
-        } else {
-            $this->post[$prefix] = $page;
         }
+
 
         /* -------------------------------------------------------------------------- */
         /*                                   COLUMN                                   */
