@@ -3066,6 +3066,12 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 ----------
 
+## countries()
+
+Bu fonksiyon, 239 adet ülkenin isim ve kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Github Gist](https://gist.github.com/djaiss/2938259) sayfasını inceleyebilirsiniz.
+
+----------
+
 ## session_check()
 
 `session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır, Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar,**Mind.php** dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
