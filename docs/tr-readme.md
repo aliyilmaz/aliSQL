@@ -286,6 +286,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
+-   [countries](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#countries)
 -   [session_check](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#session_check)
 -   [remoteFileSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#remoteFileSize)
 -   [mindLoad](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#mindLoad)
