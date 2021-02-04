@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.2.5
+ * @version    Release: 4.2.6
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -572,51 +572,36 @@ class Mind extends PDO
      * @return bool
      */
     public function insert($tblName, $values){
-
-        if(!is_array($values)){
-            return false;
-        }
-
+        
         if(!empty($values[0])){
-            foreach ($values as $key => $row){
-                if(!$this->insert($tblName, $row)){
-                    return false;
+            $values = array($values);
+        } 
+        
+        try {
+            $this->beginTransaction();
+            foreach ($values as $rows) {
+                foreach ($rows as $key => $row) {
+                    $sql = '';
+                    $columns = [];
+                    $sql .= 'INSERT INTO '.$tblName.' SET ';
+                    foreach (array_keys($row) as $col) {
+                        $columns[] = $col.' = ?';
+                    }
+                    $sql .= implode(', ', $columns);
+
+                    $query = $this->prepare($sql);
+                    $query->execute(array_values($row));
                 }
             }
-        } else {
+            $this->commit();
 
-            $xColumns = array_keys($values);
+            return true;
 
-            $columns = $this->columnList($tblName);
-
-            $prepareArray = array();
-            foreach ( $xColumns as $col ) {
-
-                if(!in_array($col, $columns)){
-                    return false;
-                }
-
-                $prepareArray[] = $col.'=?';
-            }
-
-            $values = array_values($values);
-
-            $sql = implode(',', $prepareArray);
-
-            try{
-
-                $query = $this->prepare("INSERT INTO".' '.$tblName.' SET '.$sql);
-                $query->execute($values);
-                return true;
-
-            }catch (Exception $e){
-                echo $e->getMessage();
-                return false;
-            }
-
+        } catch (Exception $e) {
+            $this->rollback();
+            echo $e->getMessage();
         }
-
-        return true;
+        return false;
     }
 
     /**
