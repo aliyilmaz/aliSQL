@@ -573,25 +573,23 @@ class Mind extends PDO
      */
     public function insert($tblName, $values){
         
-        if(!empty($values[0])){
+        if(!isset($values[0])){
             $values = array($values);
         } 
         
         try {
             $this->beginTransaction();
             foreach ($values as $rows) {
-                foreach ($rows as $key => $row) {
-                    $sql = '';
-                    $columns = [];
-                    $sql .= 'INSERT INTO '.$tblName.' SET ';
-                    foreach (array_keys($row) as $col) {
-                        $columns[] = $col.' = ?';
-                    }
-                    $sql .= implode(', ', $columns);
-
-                    $query = $this->prepare($sql);
-                    $query->execute(array_values($row));
+                $sql = '';
+                $columns = [];
+                $sql .= 'INSERT INTO '.$tblName.' SET ';
+                foreach (array_keys($rows) as $col) {
+                    $columns[] = $col.' = ?';
                 }
+                $sql .= implode(', ', $columns);
+
+                $query = $this->prepare($sql);
+                $query->execute(array_values($rows));
             }
             $this->commit();
 
