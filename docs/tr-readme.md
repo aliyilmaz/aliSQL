@@ -287,6 +287,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
 -   [countries](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#countries)
+-   [currencies](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#currencies)
 -   [session_check](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#session_check)
 -   [remoteFileSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#remoteFileSize)
 -   [mindLoad](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#mindLoad)
@@ -336,7 +337,7 @@ Metodlar içinde değişime uğrayan istek ve durumların kaderinin belirlenmesi
 
 ##### Örnek
 
-    print_r($this->dbList());
+    $this->print_pre($this->dbList());
 
 ----------
 
@@ -346,7 +347,7 @@ Belirtilen veritabanına ait tabloları listelemek amacıyla kullanılır. Verit
 
 ##### Örnek
 
-    print_r($this->tableList('mydb'));
+    $this->print_pre($this->tableList('mydb'));
 
 ----------
 
@@ -356,7 +357,7 @@ Belirtilen veritabanı tablosuna ait sütunları listelemek amacıyla kullanıl�
 
 ##### Örnek
 
-    print_r($this->columnList('users'));
+    $this->print_pre($this->columnList('users'));
 
 ----------
 
@@ -764,7 +765,7 @@ Bir veritabanı tablosunun tüm kayıtlarını elde etmek için kullanılır. Ek
 
 ##### Örnek
 
-    print_r($this->getData('my_table'));
+    $this->print_pre$this->getData('my_table'));
 
 
 
@@ -780,14 +781,14 @@ Bir veritabanı tablosundaki belirtilen sütun verilerini elde etmek için kulla
     	      'tag'
     	)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 veya
 
     $options = array(
     	'column' => 'title'
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 
@@ -800,7 +801,7 @@ Veritabanındaki kayıtları belirtilen limitlere göre elde etmek için kullan�
     $options = array(
     	'limit' => array('start'=>'1', 'end'=>'10')
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 
@@ -813,7 +814,7 @@ Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru b
     $options = array(
     	'limit' => array('start' => '2')
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 
@@ -826,7 +827,7 @@ Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kulla
     $options = array(
     	'limit' => array('end' => '10')
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 
@@ -839,14 +840,14 @@ Veritabanı tablosundaki kayıtları belirtilen sütun içeriğine göre küçü
     $options = array(
     	'sort' => 'columnname:ASC'
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 veya
 
     $options = array(
     	'sort' => 'columnname:DESC'
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 
@@ -864,7 +865,7 @@ Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar
     		)
     	)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 veya
 
@@ -873,7 +874,7 @@ veya
     		'keyword' => 'merhaba dünya'
     	)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 #### search: Her yerde aramak
@@ -894,7 +895,7 @@ Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle 
     		)
     	)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 veya
 
@@ -903,7 +904,7 @@ veya
     		'keyword' => 'merhaba dünya%'
     	)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 #### search:column Sütunlarda aramak
@@ -921,7 +922,7 @@ Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme 
             )
         )
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 veya
 
@@ -934,7 +935,7 @@ veya
     		)
     	)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre$this->getData('my_table', $options));
 
 
 #### search:and Sütuna özel kelime aramak
@@ -956,7 +957,7 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu te
         )
     );
     $tblname = 'users';
-    print_r($this->getData($tblname, $options));
+    $this->print_pre$this->getData($tblname, $options));
 
 veya
 
@@ -977,7 +978,7 @@ veya
         )
     );
     $tblname = 'users';
-    print_r($this->getData($tblname, $options));
+    $this->print_pre$this->getData($tblname, $options));
 
 
 
@@ -997,7 +998,7 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde b
         )
     );
     $tblname = 'users';
-    print_r($this->getData($tblname, $options));
+    $this->print_pre$this->getData($tblname, $options));
 
 veya
 
@@ -1017,7 +1018,7 @@ veya
         )
     );
     $tblname = 'users';
-    print_r($this->getData($tblname, $options));
+    $this->print_pre$this->getData($tblname, $options));
 
 ***Bilgi:*** getData:column kısmında sütun tanımlama yapılmışsa bu sütunların içinde aranması istenen sütunlarında olması zorunludur.
 
@@ -1052,7 +1053,7 @@ Sütuna özel kelime aramak için kullanılan `search:and` ve `search:or` yönte
         )
     );
     $tblname = 'messages';
-    print_r($this->getData($tblname, $options));
+    $this->print_pre$this->getData($tblname, $options));
 
 #### search:scope Özelleştirilebilen hassasiyet
 
@@ -1069,8 +1070,7 @@ Aramaların, büyük küçük harf fark duyarlılığı bu alt özellik sayesind
         )
     );
 
-    print_r($this->getData('users', $options));
-    echo '</pre>';
+    $this->print_pre$this->getData('users', $options));
 
 veya 
 
@@ -1082,8 +1082,7 @@ veya
         )
     );
 
-    print_r($this->getData('users', $options));
-    echo '</pre>';
+    $this->print_pre($this->getData('users', $options));
 
 
 
@@ -1096,7 +1095,7 @@ Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `arra
     $options = array(
     	'format' => 'json'
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 
@@ -1130,7 +1129,8 @@ Sonuç çıktı formatlarını belirlemek için kullanılır. Şu an için `arra
     		'title'
     		)
     );
-    print_r($this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
+
 
 veya
 
@@ -1151,7 +1151,8 @@ veya
     		'username'
     		)
     );
-    print_r($this->getData('users', $options));
+    $this->print_pre($this->getData('users', $options));
+
 
 veya
 
@@ -1172,7 +1173,8 @@ veya
     		'username'
     		)
     );
-    print_r($this->getData('users', $options));
+    $this->print_pre($this->getData('users', $options));
+
 ----------
 
 ## samantha()
@@ -1198,9 +1200,7 @@ Spike Jonze imzası taşıyan **Her** filminde bulunan `samantha` karakterinden 
     //         )
     // )
     
-    echo '<pre>';
-    print_r($this->samantha('permission', array('user_id'=>15), 'group_id'));
-    echo '</pre>';
+    $this->print_pre($this->samantha('permission', array('user_id'=>15), 'group_id'));
 
 veya
 
@@ -1213,9 +1213,7 @@ veya
     //         )
 
     // )
-    // echo '<pre>';
-    // print_r($this->samantha('permission', array('user_id'=>15), array('id', 'group_id')));
-    // echo '</pre>';
+    // $this->print_pre($this->samantha('permission', array('user_id'=>15), array('id', 'group_id')));
 
 veya
 
@@ -1233,9 +1231,9 @@ veya
     //         )
 
     // )
-    // echo '<pre>';
-    // print_r($this->samantha('permission', array('user_id'=>15)));
-    // echo '</pre>';
+
+    // $this->print_pre($this->samantha('permission', array('user_id'=>15)));
+    
 ----------
 
 
@@ -1259,9 +1257,7 @@ Tıpkı samantha gibi, bu metod da Her filminde hayat bulmuş Theodore Twombly k
     //     [group_id] => 10
     // )
 
-    echo '<pre>';
-    print_r($this->theodore('permission', array('user_id'=>15), 'group_id'));
-    echo '</pre>';
+    $this->print_pre($this->theodore('permission', array('user_id'=>15), 'group_id'));
 
 veya
 
@@ -1271,9 +1267,7 @@ veya
     //     [group_id] => 10
     // )
 
-    echo '<pre>';
-    print_r($this->theodore('permission', array('user_id'=>15), array('id', 'group_id')));
-    echo '</pre>';
+    $this->print_pre($this->theodore('permission', array('user_id'=>15), array('id', 'group_id')));
 
 veya
 
@@ -1288,9 +1282,7 @@ veya
     //     [updated_at] => 
     // )
 
-    echo '<pre>';
-    print_r($this->theodore('permission', array('user_id'=>15)));
-    echo '</pre>';
+    $this->print_pre($this->theodore('permission', array('user_id'=>15)));
 
 
 ----------
@@ -1312,9 +1304,7 @@ samantha ve theodore metodlarında olduğu gibi amelia da Her filminden esinlene
 
     // 208
 
-    echo '<pre>';
-    print_r($this->amelia('permission', array('user_id'=>15), 'id'));
-    echo '</pre>';
+    $this->print_pre($this->amelia('permission', array('user_id'=>15), 'id'));
 
 ----------
 
@@ -1417,9 +1407,7 @@ Mind ile oluşturulmuş veritabanı tablosunu, Mind'ın veritabanı tablosu olu�
     //     [6] => age:int:11
     // )
 
-    echo '<pre>';
-    print_r($this->tableInterpriter('users'));
-    echo '</pre>';
+    $this->print_pre($this->tableInterpriter('users'));
 
 ----------
 
@@ -1496,9 +1484,7 @@ Bu kurallar hakkında daha fazla bilgi edinmek için, doğrudan [getData](https:
 
     $data = $this->pagination('messages');
 
-    echo '<pre>';
-    print_r($data['data']);
-    echo '</pre>';
+    $this->print_pre($data['data']);
 
     echo "\n";
 
@@ -1545,9 +1531,7 @@ veya
     );
     $data = $this->pagination('messages', $options);
 
-    echo '<pre>';
-    print_r($data['data']);
-    echo '</pre>';
+    $this->print_pre($data['data']);
 
     echo "\n";
 
@@ -2386,9 +2370,8 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     if($this->validate($rule, $data, $message)){
         echo 'Her şey yolunda!';
     } else {
-        echo '<pre>';
-        print_r($this->errors);
-        echo '</pre>';
+        $this->print_pre($this->errors);
+
     }
 
 
@@ -2750,7 +2733,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 	    <button type="submit">Send!</button>
      </form>
 
-    print_r($this->post);
+    $this->print_pre($this->post);
     echo $this->post['username'];
     echo $this->post['password'];
 
@@ -2763,7 +2746,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
     	<button type="submit">Send!</button>
      </form>
 
-    print_r($this->post);
+    $this->print_pre($this->post);
     echo $this->post['username'];
     echo $this->post['password'];
     echo $this->post['singlefile']['name'];
@@ -2777,10 +2760,10 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
     	<button type="submit">Send!</button>
      </form>
 
-    print_r($this->post);
+    $this->print_pre($this->post);
     echo $this->post['username'];
     echo $this->post['password'];
-    print_r($this->post['multifile']);
+    $this->print_pre($this->post['multifile']);
 
 ----------
 
@@ -3063,13 +3046,23 @@ veya
 
 Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_default_timezone_set()` fonksiyonunda kullanılabilen bölge kodlarını dizi halinde sunar. Daha fazla bilgi için [Desteklenen Zaman Dilimlerinin Listesi](https://secure.php.net/manual/tr/timezones.php) sayfasını inceleyebilirsiniz.
 
-    print_r($this->timezones());
+    $this->print_pre($this->timezones());
 
 ----------
 
 ## countries()
 
 Bu fonksiyon, 239 adet ülkenin isim ve kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Github Gist](https://gist.github.com/djaiss/2938259) sayfasını inceleyebilirsiniz.
+
+    $this->print_pre($this->countries());
+
+----------
+
+## currencies()
+
+Bu fonksiyon, 162 adet para birimi isim ve kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Github Gist](https://gist.github.com/champsupertramp/95493faa7ba12b61bf6e#gistcomment-2085024) sayfasını inceleyebilirsiniz.
+
+    $this->print_pre($this->currencies());
 
 ----------
 
@@ -3314,7 +3307,7 @@ Rotalar, `Mind.php` dosyasıyla aynı dizinde bulunan `index.php` dosyası için
 
 Kontrolü sağlamak için `app/view/edit` yolunda ki `edit.php` dosyası içine
 
-    print_r($this->post);
+    $this->print_pre($this->post);
 
 kodu eklendikten sonra, adres satırına `edit/users/1` yazarak, parametre isimlerinin `url` de tanımlanan parametre isimlerine pay edildiği görülebilir.
 
@@ -3329,7 +3322,7 @@ Ayrıca adres satırına `edit/users/1/2/diger` gibi rota da isimlendirilmemiş 
 
 ve ulaşılmak istenen rota adresi `edit/users/1` ise, `app/view/edit` yolunda ki `edit.php` dosyası içine
 
-    print_r($this->post);
+    $this->print_pre($this->post);
 
 kodu eklendiğinde, isimlendirilmemiş parametreler aşağıda ki şekilde görünecektir.
 
@@ -3482,7 +3475,7 @@ Belirtilen dosya veya dosyaları, belirtilen klasöre yüklemek amacıyla kullan
     if(!empty($this->post['singlefile'])){
         $path = './upload';
         $u = $this->upload($this->post['singlefile'], $path);
-        print_r($u);
+        $this->print_pre($u);
     }
     ?>
 
@@ -3499,7 +3492,7 @@ veya
     if(!empty($this->post['multifile'])){
         $path = './upload';
         $u = $this->upload($this->post['multifile'], $path);
-        print_r($u);
+        $this->print_pre($u);
     }
     ?>
     
@@ -3513,12 +3506,12 @@ Yerel ve Uzak sunucuda barınan dosyaları indirmeye yarar. Dosya yolları `stri
 
 ##### Örnek
 
-    print_r($this->download('./LICENSE.md'));
+    $this->print_pre($this->download('./LICENSE.md'));
     
 
 veya 
 
-    print_r($this->download('https://github.com/fluidicon.png'));
+    $this->print_pre($this->download('https://github.com/fluidicon.png'));
         
 
 veya
@@ -3528,7 +3521,7 @@ veya
                 './LICENSE.md'
             );
             
-    print_r($this->download($links));
+    $this->print_pre($this->download($links));
     
 veya
 
@@ -3536,7 +3529,7 @@ veya
                 'https://github.com/fluidicon.png',
                 './LICENSE.md'
                 );
-    print_r($this->download($links, array('path' => 'app/dosyalar')));
+    $this->print_pre($this->download($links, array('path' => 'app/dosyalar')));
     
 ----------
 
@@ -3555,7 +3548,7 @@ Bir veya birden fazla öğe bulunuyorsa hepsini bir `array` olarak sunar. Eğer 
     $left = '';
     $right = '';
     $data 	= $this->get_contents($left, $right, $url);
-    print_r($data);
+    $this->print_pre($data);
 
 veya
 
@@ -3563,7 +3556,7 @@ veya
     $left 	= '<title>';
     $right	= '</title>';
     $data 	= $this->get_contents($left, $right, $url);
-    print_r($data);
+    $this->print_pre($data);
 
 veya
 
@@ -3571,7 +3564,7 @@ veya
     $left 	= '<link rel="alternate" hreflang="';
     $right	= '"';
     $data 	= $this->get_contents($left, $right, $url);
-    print_r($data);
+    $this->print_pre($data);
     
 veya
 
@@ -3579,7 +3572,7 @@ veya
     $left 	= '<title>';
     $right	= '</title>';
     $data 	= $this->get_contents($left, $right, $url);
-    print_r($data);
+    $this->print_pre($data);
 
 veya
 
@@ -3587,7 +3580,7 @@ veya
     $left = 'src=\'';
     $right = '\'-after';
     $data 	= $this->get_contents($left, $right, $url);
-    print_r($data);
+    $this->print_pre($data);
 
 veya
 
@@ -3595,7 +3588,7 @@ veya
     $left = 'src=&#039;';
     $right = '&#039;';
     $data 	= $this->get_contents($left, $right, $url);
-    print_r($data);
+    $this->print_pre($data);
 
 
 veya
@@ -3662,9 +3655,7 @@ Bir veya birden fazla ölçü birimine göre mesafe bilgisi elde etmek mümkünd
     
     $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long']);
     
-    echo '<pre>';
-    print_r($distance);
-    echo '</pre>';
+    $this->print_pre($distance);
 
 veya
 
@@ -3690,9 +3681,7 @@ veya
     
     $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array('m', 'km'));
     
-    echo '<pre>';
-    print_r($distance);
-    echo '</pre>';
+    $this->print_pre($distance);
     
 veya
 
@@ -3707,9 +3696,7 @@ veya
     
     $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], array());
     
-    echo '<pre>';
-    print_r($distance);
-    echo '</pre>';
+    $this->print_pre($distance);
     
 veya
 
@@ -3724,6 +3711,4 @@ veya
     
     $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], '');
     
-    echo '<pre>';
-    print_r($distance);
-    echo '</pre>';
+    $this->print_pre($distance);
