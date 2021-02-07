@@ -1493,6 +1493,10 @@ class Mind extends PDO
 
     /**
      * Translate
+     * 
+     * @param string $needle
+     * @param string|null $lang
+     * @return string
      */
     public function translate($needle, $lang=''){
         if(!in_array($lang, array_keys($this->countries()))){
