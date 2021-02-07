@@ -195,6 +195,9 @@ Projenin zaman dili tutulur, varsayılan olarak `Europe/Istanbul` olarak belirti
 
 Projenin zaman damgası, **yıl-ay-gün saat:dakika:saniye** biçiminde `$this->timestamp` değişkeninde tutulur. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
+##### public $lang
+
+Çoklu dil desteği için ayarların tutulduğu değişkendir, Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
 ##### public $error_status
 
@@ -246,6 +249,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [backup](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#backup)
 -   [restore](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#restore)
 -   [pagination](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#pagination)
+-   [translate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#translate)
 
 ##### Doğrulayıcı
 
@@ -1547,6 +1551,100 @@ veya
     }
 
     echo "\n\n";
+
+
+----------
+
+## translate()
+
+Bu fonksiyon, veritabanı altyapısına dayanan çoklu dil desteğini sağlamayı amaçlar. Kullanıma hazır hale gelmesi için veritabanı tablosunun oluşturulması ve Mind'a tanımlanması gerekir. 
+
+### Veritabanı tablosunun tasarlanması
+
+    $scheme = array(
+        'id:increments',
+        'name:small',
+        'text:small',
+        'lang:small',
+        'user_id:small',
+        '_token:small',
+        'status:string',
+        'created_at:string',
+        'updated_at:string'
+    );
+
+### Veritabanı tablosunun ve içeriğinin oluşturulması
+
+    if($this->tableCreate('languages', $scheme)){
+        $data = array(
+                array(
+                    "name" => "dashboard",
+                    "text" => "Dashboard",
+                    "lang" => "GB",
+                    "user_id" => 1,
+                    "_token" => $this->generateToken(),
+                    "status" => 1,
+                    "created_at" => $this->timestamp
+                ),
+                array(
+                    "name" => "profile-signout",
+                    "text" => "Sign out",
+                    "lang" => "GB",
+                    "user_id" => 1,
+                    "_token" => $this->generateToken(),
+                    "status" => 1,
+                    "created_at" => $this->timestamp
+                ),
+                array(
+                    "name" => "dashboard",
+                    "text" => "Başlangıç",
+                    "lang" => "TR",
+                    "user_id" => 1,
+                    "_token" => $this->generateToken(),
+                    "status" => 1,
+                    "created_at" => $this->timestamp
+                ),
+                array(
+                    "name" => "profile-signout",
+                    "text" => "Oturumu kapat",
+                    "lang" => "TR",
+                    "user_id" => 1,
+                    "_token" => $this->generateToken(),
+                    "status" => 1,
+                    "created_at" => $this->timestamp
+                )
+            );
+            
+        $this->insert('languages', $data);
+    }
+
+### Çoklu dil desteğinin kullanımı
+
+İki parametre alan `translate()` metodunun ilk parametresi, çevirisi istenen kaydın anahtarının belirtildiği kısımdır, ikinci parametresi ise Mind içinde bulunan countries() metodundaki kısaltmalardan birinin belirtildiği kısımdır. İkinci parametrenin belirtilme zorunluluğu yoktur, eğer belirtilmez ise varsayılan olarak tanımlanan Dil kısaltmasının çevirisini geri döndürür.
+
+    echo $this->translate('dashboard'); // Varsayılan olarak TR belirtildiği için Başlangıç geri döndürülür.
+    echo '<br />';
+    echo $this->translate('dashboard', 'TR'); // Başlangıç
+    echo '<br />';
+    echo $this->translate('dashboard', 'GB'); // Dashboard
+
+### Çoklu dil özelliğinin Mind'a tanımlanması
+
+`table` tablo adının, `column` dil kısaltmalarının tutulduğu sütun adının, `haystack` çevirisi istenen kaydın benzersiz isminin tutulduğu sütun adının, `return` geri döndürülmesi istenen verinin sütun adının ve `country` varsayılan dilin kısaltmasının tutulduğu sütun adının belirtildiği kısımlardır. 
+
+Varsayılan olarak aşağıdaki tanımlama yapılmıştır, eğer bu dökümanda belirtilen kullanım yönergesinden başka bir algoritma belirlemeyi düşünüyorsanız aşağıdaki kısmı Mind'ı çağırırken ya da Mind.php dosyası içinden güncellemeniz yeterlidir.
+
+    $conf = array(
+        'lang'=>array(
+            'table'                 =>  'languages',
+            'column'                =>  'lang',
+            'haystack'              =>  'name',
+            'return'                =>  'text',
+            'country'               =>  'GB'
+        )
+    );
+
+    $Mind = new Mind($conf);
 
 
 ----------

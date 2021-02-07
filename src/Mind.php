@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.2.7
+ * @version    Release: 4.2.8
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -35,6 +35,13 @@ class Mind extends PDO
     public  $page_back      =   '';
     public  $timezone       =  'Europe/Istanbul';
     public  $timestamp;
+    public  $lang           =  array(
+        'table'                 =>  'languages',
+        'column'                =>  'lang',
+        'haystack'              =>  'name',
+        'return'                =>  'text',
+        'country'               =>  'TR'
+    );
     public  $error_status   =  false;
     public  $error_file     =  'app/views/errors/404';
     public  $errors         =  array();
@@ -100,6 +107,29 @@ class Mind extends PDO
 
         date_default_timezone_set($this->timezone);
         $this->timestamp = date("Y-m-d H:i:s");
+
+        if(isset($conf['lang'])){
+            if(isset($conf['lang']['table'])){
+                $this->lang['table'] = $conf['lang']['table'];
+            }
+
+            if(isset($conf['lang']['column'])){
+                $this->lang['column'] = $conf['lang']['column'];
+            }
+
+            if(isset($conf['lang']['haystack'])){
+                $this->lang['haystack'] = $conf['lang']['haystack'];
+            }
+
+            if(isset($conf['lang']['return'])){
+                $this->lang['return'] = $conf['lang']['return'];
+            }
+
+            if(isset($conf['lang']['country'])){
+                $this->lang['country'] = $conf['lang']['country'];
+            }
+
+        }
 
         $baseDir = $this->get_absolute_path(dirname($_SERVER['SCRIPT_NAME']));
 
@@ -1459,6 +1489,21 @@ class Mind extends PDO
             break;
         }
         return $result;
+    }
+
+    /**
+     * Translate
+     */
+    public function translate($needle, $lang=''){
+        if(!in_array($lang, array_keys($this->countries()))){
+            $lang = $this->lang['country'];
+        }
+
+        $params = array(
+            $this->lang['column']=>$lang, 
+            $this->lang['haystack']=>$needle
+        );
+        return $this->amelia($this->lang['table'], $params, $this->lang['return']);
     }
 
     /**
