@@ -36,7 +36,7 @@ class Mind extends PDO
     public  $timezone       =  'Europe/Istanbul';
     public  $timestamp;
     public  $lang           =  array(
-        'table'                 =>  'languages',
+        'table'                 =>  'translations',
         'column'                =>  'lang',
         'haystack'              =>  'name',
         'return'                =>  'text',
