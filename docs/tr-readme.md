@@ -1557,7 +1557,7 @@ veya
 
 ## translate()
 
-Bu fonksiyon, veritabanı altyapısına dayanan çoklu dil desteğini sağlamayı amaçlar. Kullanıma hazır hale gelmesi için veritabanı tablosunun oluşturulması ve Mind'a tanımlanması gerekir. 
+Bu fonksiyon, veritabanı altyapısına dayanan çoklu çeviri desteğini sağlamayı amaçlar. Kullanıma hazır hale gelmesi için veritabanı tablosunun oluşturulması ve Mind'a tanımlanması gerekir. 
 
 ### Veritabanı tablosunun tasarlanması
 
@@ -1575,7 +1575,7 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu dil desteğini sağlamay�
 
 ### Veritabanı tablosunun ve içeriğinin oluşturulması
 
-    if($this->tableCreate('languages', $scheme)){
+    if($this->tableCreate('translations', $scheme)){
         $data = array(
                 array(
                     "name" => "dashboard",
@@ -1615,10 +1615,10 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu dil desteğini sağlamay�
                 )
             );
             
-        $this->insert('languages', $data);
+        $this->insert('translations', $data);
     }
 
-### Çoklu dil desteğinin kullanımı
+### Çeviri kullanımı
 
 İki parametre alan `translate()` metodunun ilk parametresi, çevirisi istenen kaydın anahtarının belirtildiği kısımdır, ikinci parametresi ise Mind içinde bulunan countries() metodundaki kısaltmalardan birinin belirtildiği kısımdır. İkinci parametrenin belirtilme zorunluluğu yoktur, eğer belirtilmez ise varsayılan olarak tanımlanan Dil kısaltmasının çevirisini geri döndürür.
 
@@ -1628,15 +1628,15 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu dil desteğini sağlamay�
     echo '<br />';
     echo $this->translate('dashboard', 'GB'); // Dashboard
 
-### Çoklu dil özelliğinin Mind'a tanımlanması
+### Çeviri ayarlarının Mind'a tanımlanması
 
-`table` tablo adının, `column` dil kısaltmalarının tutulduğu sütun adının, `haystack` çevirisi istenen kaydın benzersiz isminin tutulduğu sütun adının, `return` geri döndürülmesi istenen verinin sütun adının ve `country` varsayılan dilin kısaltmasının tutulduğu sütun adının belirtildiği kısımlardır. 
+`table` tablo adını, `column` dil kısaltmalarının tutulduğu sütun adını, `haystack` çevirisi istenen kaydın benzersiz isminin tutulduğu sütun adını, `return` geri döndürülmesi istenen verinin sütun adını ve `country` varsayılan dilin kısaltmasının tutulduğu sütun adını temsil eder.
 
-Varsayılan olarak aşağıdaki tanımlama yapılmıştır, eğer bu dökümanda belirtilen kullanım yönergesinden başka bir algoritma belirlemeyi düşünüyorsanız aşağıdaki kısmı Mind'ı çağırırken ya da Mind.php dosyası içinden güncellemeniz yeterlidir.
+Varsayılan olarak aşağıdaki tanımlamalar yapılmıştır, eğer bu dökümanda belirtilen kullanım yönergesinden başka isimlendirmeler belirlemeyi düşünürseniz aşağıdaki kısmı Mind'ı çağırırken ya da Mind.php dosyası içinden güncellemeniz yeterlidir.
 
     $conf = array(
         'lang'=>array(
-            'table'                 =>  'languages',
+            'table'                 =>  'translations',
             'column'                =>  'lang',
             'haystack'              =>  'name',
             'return'                =>  'text',

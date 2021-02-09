@@ -3,7 +3,7 @@
 require_once '../src/Mind.php';
 $conf = array(
     // 'lang'=>array(
-    //     'table'                 =>  'languages',
+    //     'table'                 =>  'translations',
     //     'column'                =>  'lang',
     //     'haystack'              =>  'name',
     //     'return'                =>  'text',
@@ -25,7 +25,7 @@ $scheme = array(
     'updated_at:string'
 );
 
-if($Mind->tableCreate('languages', $scheme)){
+if($Mind->tableCreate('translations', $scheme)){
     $data = array(
             array(
                 "name" => "dashboard",
@@ -65,7 +65,7 @@ if($Mind->tableCreate('languages', $scheme)){
             )
         );
         
-    $Mind->insert('languages', $data);
+    $Mind->insert('translations', $data);
 }
 
 echo $Mind->translate('dashboard'); // Varsayılan olarak TR belirtildiği için Başlangıç geri döndürülür.
