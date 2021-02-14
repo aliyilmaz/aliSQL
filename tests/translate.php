@@ -7,7 +7,7 @@ $conf = array(
     //     'column'                =>  'lang',
     //     'haystack'              =>  'name',
     //     'return'                =>  'text',
-    //     'lang'                   =>  'GB'
+    //     'lang'                   =>  'EN'
     // )
 );
 
@@ -30,7 +30,7 @@ if($Mind->tableCreate('translations', $scheme)){
             array(
                 "name" => "dashboard",
                 "text" => "Dashboard",
-                "lang" => "GB",
+                "lang" => "EN",
                 "user_id" => 1,
                 "_token" => $Mind->generateToken(),
                 "status" => 1,
@@ -39,7 +39,7 @@ if($Mind->tableCreate('translations', $scheme)){
             array(
                 "name" => "profile-signout",
                 "text" => "Sign out",
-                "lang" => "GB",
+                "lang" => "EN",
                 "user_id" => 1,
                 "_token" => $Mind->generateToken(),
                 "status" => 1,
@@ -72,4 +72,4 @@ echo $Mind->translate('dashboard'); // Varsayılan olarak TR belirtildiği için
 echo '<br />';
 echo $Mind->translate('dashboard', 'TR'); // Başlangıç
 echo '<br />';
-echo $Mind->translate('dashboard', 'GB'); // Dashboard
+echo $Mind->translate('dashboard', 'EN'); // Dashboard
