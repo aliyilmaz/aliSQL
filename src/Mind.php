@@ -40,7 +40,7 @@ class Mind extends PDO
         'column'                =>  'lang',
         'haystack'              =>  'name',
         'return'                =>  'text',
-        'country'               =>  'TR'
+        'lang'                  =>  'TR'
     );
     public  $error_status   =  false;
     public  $error_file     =  'app/views/errors/404';
@@ -108,25 +108,25 @@ class Mind extends PDO
         date_default_timezone_set($this->timezone);
         $this->timestamp = date("Y-m-d H:i:s");
 
-        if(isset($conf['lang'])){
-            if(isset($conf['lang']['table'])){
-                $this->lang['table'] = $conf['lang']['table'];
+        if(isset($conf['translate'])){
+            if(isset($conf['translate']['table'])){
+                $this->lang['table'] = $conf['translate']['table'];
             }
 
-            if(isset($conf['lang']['column'])){
-                $this->lang['column'] = $conf['lang']['column'];
+            if(isset($conf['translate']['column'])){
+                $this->lang['column'] = $conf['translate']['column'];
             }
 
-            if(isset($conf['lang']['haystack'])){
-                $this->lang['haystack'] = $conf['lang']['haystack'];
+            if(isset($conf['translate']['haystack'])){
+                $this->lang['haystack'] = $conf['translate']['haystack'];
             }
 
-            if(isset($conf['lang']['return'])){
-                $this->lang['return'] = $conf['lang']['return'];
+            if(isset($conf['translate']['return'])){
+                $this->lang['return'] = $conf['translate']['return'];
             }
 
-            if(isset($conf['lang']['country'])){
-                $this->lang['country'] = $conf['lang']['country'];
+            if(isset($conf['translate']['country'])){
+                $this->lang['country'] = $conf['translate']['country'];
             }
 
         }
