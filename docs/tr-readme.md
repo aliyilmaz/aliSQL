@@ -290,7 +290,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
--   [countries](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#countries)
+-   [languages](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#languages)
 -   [currencies](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#currencies)
 -   [session_check](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#session_check)
 -   [remoteFileSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#remoteFileSize)
@@ -1620,7 +1620,7 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu çeviri desteğini sağla
 
 ### Çeviri kullanımı
 
-İki parametre alan `translate()` metodunun ilk parametresi, çevirisi istenen kaydın anahtarının belirtildiği kısımdır, ikinci parametresi ise Mind içinde bulunan countries() metodundaki kısaltmalardan birinin belirtildiği kısımdır. İkinci parametrenin belirtilme zorunluluğu yoktur, eğer belirtilmez ise varsayılan olarak tanımlanan Dil kısaltmasının çevirisini geri döndürür.
+İki parametre alan `translate()` metodunun ilk parametresi, çevirisi istenen kaydın anahtarının belirtildiği kısımdır, ikinci parametresi ise Mind içinde bulunan languages() metodundaki kısaltmalardan birinin belirtildiği kısımdır. İkinci parametrenin belirtilme zorunluluğu yoktur, eğer belirtilmez ise varsayılan olarak tanımlanan Dil kısaltmasının çevirisini geri döndürür.
 
     echo $this->translate('dashboard'); // Varsayılan olarak TR belirtildiği için Başlangıç geri döndürülür.
     echo '<br />';
@@ -1630,17 +1630,17 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu çeviri desteğini sağla
 
 ### Çeviri ayarlarının Mind'a tanımlanması
 
-`table` tablo adını, `column` dil kısaltmalarının tutulduğu sütun adını, `haystack` çevirisi istenen kaydın benzersiz isminin tutulduğu sütun adını, `return` geri döndürülmesi istenen verinin sütun adını ve `country` varsayılan dilin kısaltmasının tutulduğu sütun adını temsil eder.
+`table` tablo adını, `column` dil kısaltmalarının tutulduğu sütun adını, `haystack` çevirisi istenen kaydın benzersiz isminin tutulduğu sütun adını, `return` geri döndürülmesi istenen verinin sütun adını ve `lang` varsayılan dilin kısaltmasının tutulduğu sütun adını temsil eder.
 
 Varsayılan olarak aşağıdaki tanımlamalar yapılmıştır, eğer bu dökümanda belirtilen kullanım yönergesinden başka isimlendirmeler belirlemeyi düşünürseniz aşağıdaki kısmı Mind'ı çağırırken ya da Mind.php dosyası içinden güncellemeniz yeterlidir.
 
     $conf = array(
-        'lang'=>array(
+        'translate'=>array(
             'table'                 =>  'translations',
             'column'                =>  'lang',
             'haystack'              =>  'name',
             'return'                =>  'text',
-            'country'               =>  'GB'
+            'lang'                  =>  'GB'
         )
     );
 
@@ -3148,11 +3148,11 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 ----------
 
-## countries()
+## languages()
 
-Bu fonksiyon, 239 adet ülkenin isim ve kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Github Gist](https://gist.github.com/djaiss/2938259) sayfasını inceleyebilirsiniz.
+Bu fonksiyon, 182 adet dilin evrensel ve yerel ismi ile kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Stackoverflow](https://stackoverflow.com/a/4900304) sayfasını inceleyebilirsiniz.
 
-    $this->print_pre($this->countries());
+    $this->print_pre($this->languages());
 
 ----------
 

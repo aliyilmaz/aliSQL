@@ -2,12 +2,12 @@
 
 require_once '../src/Mind.php';
 $conf = array(
-    // 'lang'=>array(
+    // 'translate'=>array(
     //     'table'                 =>  'translations',
     //     'column'                =>  'lang',
     //     'haystack'              =>  'name',
     //     'return'                =>  'text',
-    //     'country'               =>  'GB'
+    //     'lang'                   =>  'GB'
     // )
 );
 
