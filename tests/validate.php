@@ -10,7 +10,7 @@ $Mind = new Mind();
  | required, email, url, phone, color, https, http,
  | json, max-num, min-num, max-char, min-char, numeric,
  | min-age, max-age, date, unique, unchanged, bool, iban, 
- | ipv4, ipv6, blood, coordinate, distance
+ | ipv4, ipv6, blood, coordinate, distance, languages
  | 
  */
 
@@ -36,7 +36,8 @@ $data = array(
     'ipv6Address'       =>  '2001:0db8:85a3:08d3:1319:8a2e:0370:7334',
     'bloodGroup'        =>  '0+',
     'coordinates'       =>  '41.008610,28.971111',
-    'distances'         =>  '41.008610,28.971111@39.925018,32.836956'
+    'distances'         =>  '41.008610,28.971111@39.925018,32.836956',
+    'language'          =>  'TR'
 
 
  );
@@ -63,7 +64,8 @@ $rule = array(
     'ipv6Address'       =>  'ipv6',
     'bloodGroup'        =>  'blood:0+',
     'coordinates'       =>  'required|coordinate',
-    'distances'         =>  'distance:349 km'
+    'distances'         =>  'distance:349 km',
+    'language'          =>  'languages'
 );
 
 // Message
@@ -135,6 +137,9 @@ $message = array(
     ),
     'distances'=>array(
         'distance'=>'The coordinate point within range must be specified.'
+    ),
+    'language'=>array(
+        'languages'=>'Language selection should be made.'
     )
 
 );

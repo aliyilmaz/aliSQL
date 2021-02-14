@@ -2361,7 +2361,8 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         'ipv6Address'       =>  '2001:0db8:85a3:08d3:1319:8a2e:0370:7334',
         'bloodGroup'        =>  '0+',
         'coordinates'       =>  '41.008610,28.971111',
-        'distances'         =>  '41.008610,28.971111@39.925018,32.836956'
+        'distances'         =>  '41.008610,28.971111@39.925018,32.836956',
+        'language'          =>  'TR'
 
 
     );
@@ -2388,7 +2389,8 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         'ipv6Address'       =>  'ipv6',
         'bloodGroup'        =>  'blood:0+',
         'coordinates'       =>  'required|coordinate',
-        'distances'         =>  'distance:349 km'
+        'distances'         =>  'distance:349 km',
+        'language'          =>  'languages'
     );
 
     // Mesaj
@@ -2460,6 +2462,9 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         ),
         'distances'=>array(
             'distance'=>'Menzil içinde bulunan koordinat noktası belirtilmelidir.'
+        ),
+        'language'=>array(
+            'languages'=>'Dil seçimi yapılmalıdır.'
         )
 
 
@@ -2675,7 +2680,11 @@ Virgül ile ayrılmış Enlem ve Boylam parametresinin geçerli bir koordinat no
     distance:349 km
 
 
+##### languages
 
+Verinin `languages()` metodunda bulunan dil kısaltmalarından biri olması gerektiğini ifade etmek için kullanılır.  Ekstra bir parametreye ihtiyaç duymadığından `languages` yazarak kullanılabilir.
+
+    languages
 
 ----------
 
