@@ -290,6 +290,10 @@ class Mind extends PDO
                 if(!$query){
                     return false;
                 }
+
+                if($dbName === $this->dbname){
+                    $this->selectDB($dbName);
+                }
             }
 
         }catch (Exception $e){
