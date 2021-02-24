@@ -1365,7 +1365,7 @@ class Mind extends PDO
                             $this->tableCreate($tblName, $row['schema']);
                             if(!empty($row['config']['auto_increment']['length'])){
                                 $length = $row['config']['auto_increment']['length'];
-                                $sql = "ALTER TABLE ".$tblName." AUTO_INCREMENT = ".$length;
+                                $sql = "ALTER TABLE `".$tblName."` AUTO_INCREMENT = ".$length;
                                 $this->query($sql);
                             }
                             if(!empty($row['data'])){
