@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.3
+ * @version    Release: 4.3.4
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1177,24 +1177,24 @@ class Mind extends PDO
      */
     public function newId($tblName){
 
-        $sql = 'SHOW TABLE STATUS LIKE `'.$tblName.'`';
+        $IDs = [1];
+        $needle = $this->increments($tblName);
 
-        try{
-
-            $query = $this->query($sql, PDO::FETCH_ASSOC);
-
-            $result = 0;
-            foreach ( $query as $item ) {
-                $result = $item['Auto_increment'];
+        foreach ($this->getData($tblName, array('column'=>$needle)) as $row) {
+            if(!in_array($row[$needle], $IDs)){
+                $IDs[] = $row[$needle];
             }
+        }
 
-            if($result>1){
-                return $result;
-            } else {
-                return $result+1;
-            }
-        }catch (Exception $e){
-            return 0;
+        $length = max($IDs);
+
+        if($length>1){
+            return $length+1;
+        } else {
+            $scheme = $this->tableInterpriter($tblName);
+            $this->tableDelete($tblName);
+            $this->tableCreate($tblName, $scheme);
+            return $length;
         }
 
     }
@@ -1251,7 +1251,11 @@ class Mind extends PDO
                 switch ($row['Type']) {
                     case 'int':
                         if($row['Extra'] == 'auto_increment'){
-                            $row = $row['Field'].':increments:'.$row['Length'];
+                            if(isset($row['Length'])){
+                                $row = $row['Field'].':increments:'.$row['Length'];
+                            } else {
+                                $row = $row['Field'].':increments';
+                            }
                         } else {
                             $row = $row['Field'].':int:'.$row['Length'];
                         }
