@@ -367,7 +367,7 @@ Belirtilen veritabanı tablosuna ait sütunları listelemek amacıyla kullanıl�
 
 ## dbCreate()
 
-Yeni bir veya daha fazla veritabanı oluşturmak amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, oluşturulacak veritabanı isimleri `string` veya `array` olarak gönderildiğinde veritabanı oluşturma işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Yeni bir veya daha fazla veritabanı oluşturmak amacıyla kullanılır, `mydb0` ve `mydb1` veritabanı adlarını temsil etmektedir, oluşturulacak veritabanı isimleri `string` veya `array` olarak gönderildiğinde veritabanı oluşturma işlemi gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür. Eğer projeye tanımlanan veritabanı adı `dbCreate()` metoduna gönderilmişse, oluşturulduktan sonra o veritabanı seçilir.
 
 ##### Örnek
 
