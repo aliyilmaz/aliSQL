@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.2
+ * @version    Release: 4.3.3
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -234,7 +234,7 @@ class Mind extends PDO
     public function columnList($tblName){
 
         $columns = array();
-        $sql = 'SHOW COLUMNS FROM ' . $tblName;
+        $sql = 'SHOW COLUMNS FROM `' . $tblName.'`';
 
         try{
             $query = $this->query($sql, PDO::FETCH_ASSOC);
@@ -435,7 +435,7 @@ class Mind extends PDO
             try{
 
                 $sql = "DROP TABLE";
-                $sql .=" ".$tblName;
+                $sql .=" `".$tblName.'`';
 
                 $query = $this->query($sql);
                 if(!$query){
@@ -477,7 +477,7 @@ class Mind extends PDO
             try{
 
                 $sql = "ALTER TABLE";
-                $sql .= " ".$tblName." DROP COLUMN ".$column;
+                $sql .= " `".$tblName."` DROP COLUMN ".$column;
 
                 $query = $this->query($sql);
                 if(!$query){
@@ -540,7 +540,7 @@ class Mind extends PDO
 
         foreach ($tblNames as $tblName) {
 
-            $sql = 'TRUNCATE '.$tblName;
+            $sql = 'TRUNCATE `'.$tblName.'`';
 
             try{
                 if($this->query($sql)){
@@ -616,7 +616,7 @@ class Mind extends PDO
             foreach ($values as $rows) {
                 $sql = '';
                 $columns = [];
-                $sql .= 'INSERT INTO '.$tblName.' SET ';
+                $sql .= 'INSERT INTO `'.$tblName.'` SET ';
                 foreach (array_keys($rows) as $col) {
                     $columns[] = $col.' = ?';
                 }
@@ -678,20 +678,16 @@ class Mind extends PDO
         $sql = implode(',', $prepareArray);
         $sql .= ' WHERE '.$column.'=?';
         try{
-            if($this->do_have($tblName, $needle, $column)){
-
-                $query = $this->prepare("UPDATE".' '.$tblName.' SET '.$sql);
-                $query->execute($values);
-                return true;
-            } else {
-                return false;
-            }
-
+            $this->beginTransaction();
+            $query = $this->prepare("UPDATE".' `'.$tblName.'` SET '.$sql);
+            $query->execute($values);
+            $this->commit();
+            return true;
         }catch (Exception $e){
+            $this->rollback();
             echo $e->getMessage();
-            return false;
         }
-
+        return false;
     }
 
     /**
@@ -750,7 +746,7 @@ class Mind extends PDO
             try{
                 if($this->do_have($tblName, $needle, $column)){
 
-                    $query = $this->prepare("DELETE FROM".' '.$tblName.' '.$sql);
+                    $query = $this->prepare("DELETE FROM".' `'.$tblName.'` '.$sql);
                     $query->execute(array($needle));
                     return true;
                 } else {
@@ -966,7 +962,7 @@ class Mind extends PDO
         $result = array();
         try{
 
-            $query = $this->prepare('SELECT '.$sqlColumns.' FROM '.$tblName.' '.$sql);
+            $query = $this->prepare('SELECT '.$sqlColumns.' FROM `'.$tblName.'` '.$sql);
             $query->execute($executeArray);
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -1181,7 +1177,7 @@ class Mind extends PDO
      */
     public function newId($tblName){
 
-        $sql = 'SHOW TABLE STATUS LIKE \''.$tblName.'\'';
+        $sql = 'SHOW TABLE STATUS LIKE `'.$tblName.'`';
 
         try{
 
@@ -1212,7 +1208,7 @@ class Mind extends PDO
     public function increments($tblName){
 
         $columns = '';
-        $sql = 'SHOW COLUMNS FROM ' . $tblName;
+        $sql = 'SHOW COLUMNS FROM `' . $tblName. '`';
 
         try{
             $query = $this->query($sql, PDO::FETCH_ASSOC);
@@ -1241,7 +1237,7 @@ class Mind extends PDO
     public function tableInterpriter($tblName){
 
         $result =   array();
-        $sql    =   'SHOW COLUMNS FROM ' . $tblName;
+        $sql    =   'SHOW COLUMNS FROM `' . $tblName. '`';
 
         try{
 
@@ -1551,7 +1547,7 @@ class Mind extends PDO
      */
     public function is_table($tblName){
 
-        $sql     = 'DESCRIBE '.$tblName;
+        $sql     = 'DESCRIBE `'.$tblName.'`';
 
         try{
             return $this->query($sql, PDO::FETCH_NUM);
@@ -1570,7 +1566,7 @@ class Mind extends PDO
      * */
     public function is_column($tblName, $column){
 
-        $sql = 'SHOW COLUMNS FROM ' . $tblName;
+        $sql = 'SHOW COLUMNS FROM `' . $tblName.'`';
 
         try{
             $query = $this->query($sql, PDO::FETCH_NAMED);
