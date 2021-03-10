@@ -3214,7 +3214,7 @@ class Mind extends PDO
 
     /**
      * Encode size
-     * @param mixed $size
+     * @param string|int $size
      * @return int|bool
      */
     public function decodeSize($size)
@@ -3236,7 +3236,8 @@ class Mind extends PDO
 
     /**
      * Encode size
-     * @param mixed $size
+     * @param string|int $size
+     * @param string|int $precision
      * @return string|bool
      */
     public function encodeSize($size, $precision = 2)
