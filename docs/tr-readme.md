@@ -299,6 +299,8 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [pGeneration](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#pGeneration)
 -   [generateToken](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#generateToken)
 -   [coordinatesMaker](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#coordinatesMaker)
+-   [encodeSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#encodeSize)
+-   [decodeSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#decodeSize)
 
 ##### Sistem
 
@@ -3360,6 +3362,96 @@ veya
 
 
 ****Bilgi:**** Chrome, Firefox tarayıcılarınında test edilmiştir. Cep telefonu yoluyla paylaşılan konumların doğruluk oranı ortalama 4 ile 12 m2'dir. Eski nesil GPS modüle sahip masaüstü bilgisayar yoluyla paylaşılan konumların doğruluk oranı ise ortalama 7.000 m2'dir.
+
+----------
+
+## encodeSize()
+
+Belirtilen byte değerini, dönüştürebileceği en büyük boyut türüne dönüştürmeye yarar. Sadece byte türünde bir değer veya bir size anahtarı barındıran dizi(dosya dizisi gibi) gönderilebilir. 
+
+**Desteklenen Boyutlar**
+`KB`, `MB`, `GB`, `TB`, `PB`, `EB`
+
+##### Örnek
+
+
+    // 1 KB
+    echo $this->encodeSize(1024);
+
+veya
+
+    // 1 MB
+    echo $this->encodeSize(1048576);
+
+veya
+
+    // 1 GB
+    echo $this->encodeSize(1073741824);
+
+veya
+
+    // 1 TB
+    echo $this->encodeSize(1099511627776);
+
+veya
+
+    // 1 PB
+    echo $this->encodeSize(1125899906842624);
+
+veya
+
+    // 1 EB
+    echo $this->encodeSize(1152921504606850000);
+
+veya
+
+    // 1 MB
+    $file = array('size'=>1048576);
+    echo $this->encodeSize($file);
+
+----------
+
+## decodeSize()
+
+Belirtilen türdeki boyutu, byte'a dönüştürmek amacıyla kullanılır. Boyut ve boyut kısaltması arada bir boşluk bırakılarak belirtilmelidir.
+
+**Desteklenen Boyutlar**
+`KB`, `MB`, `GB`, `TB`, `PB`, `EB`
+
+
+    // 1024
+    echo $this->decodeSize('1 KB');
+
+veya
+
+
+    // 1048576
+    echo $this->decodeSize('1 MB');
+
+veya
+
+
+    // 1073741824
+    echo $this->decodeSize('1 GB');
+
+veya
+
+
+    // 1099511627776
+    echo $this->decodeSize('1 TB');
+
+veya
+
+
+    // 1125899906842624
+    echo $this->decodeSize('1 PB');
+
+veya
+
+
+    // 1152921504606846976
+    echo $this->decodeSize('1 EB');
+
 
 ----------
 
