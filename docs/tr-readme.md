@@ -1794,67 +1794,94 @@ veya
 
 ## is_size()
 
-Bu fonksiyon, dosya dizisinde bulunan `size` değerinin veya `string` yapıda belirtilen `byte` cinsinden  değerin kontrol edilmesi amacıyla kullanılır, `$this->post['photo']` dosya dizisini, `$manuelsize` string yapıda ki değeri, `$size` ise müsaade edilen boyut bilgisini temsil etmektedir. Eğer dosya veya belirtilen değer müsaade edilen boyutun altındaysa yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür.
+Bu fonksiyon, dosya dizisinde bulunan `size` değerinin ya da `string` veya `integer` yapısında belirtilen `byte` cinsinden değerin kontrol edilmesi amacıyla kullanılır. İlk parametre kontrol edilmesi istenen boyut bilgisini, ikici parametre ise kontrol edilmesi istenen boyutu temsil etmektedir. Eğer dosya veya belirtilen değer müsaade edilen boyutun altında veya eşitse yanıt olarak `true` değeri döndürülür, değilse `false` değeri döndürülür. Daha iyi anlamak için aşağıdaki örnekleri inceleyebilirsiniz.
  
  **Bilgi:** Dosyalarla çalışırken `php.ini` ayarlarında bulunan `upload_max_filesize` parametresine en az `$size` değişkeninde belirtilen miktar kadar boyutun belirtilmesi gereklidir. 
 
 ##### Örnek
 
-    $size = '35 KB';
-    if($this->is_size($this->post['photo'], $size)){
-    	echo 'Dosya belirtilen boyuttan küçüktür';
+    $second_size = '35 KB';
+    $this->post['photo'] = array(
+        'size'=>35840
+    );
+    if($this->is_size($this->post['photo'], $second_size)){
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
     } else {
-    	echo 'Dosya belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
 
 veya
 
+    $this->post['photo'] = array(
+        'size'=>36700160
+    );
     if($this->is_size($this->post['photo'], '35 MB')){
-    	echo 'Dosya belirtilen boyuttan küçüktür';
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
     } else {
-    	echo 'Dosya belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
 
 veya
 
+    $this->post['photo'] = array(
+        'size'=>37580963840
+    );
     if($this->is_size($this->post['photo'], '35 GB')){
-    	echo 'Dosya belirtilen boyuttan küçüktür';
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
     } else {
-    	echo 'Dosya belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
 
 veya
 
+    $this->post['photo'] = array(
+        'size'=>1099511627776
+    );
     if($this->is_size($this->post['photo'], '1 TB')){
-    	echo 'Dosya belirtilen boyuttan küçüktür';
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
     } else {
-    	echo 'Dosya belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
 
 veya
 
+    $this->post['photo'] = array(
+        'size'=>1125899906842624
+    );
     if($this->is_size($this->post['photo'], '1 PB')){
-    	echo 'Dosya belirtilen boyuttan küçüktür';
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
     } else {
-    	echo 'Dosya belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
+
 veya
 
-    $size = '35 KB';
-    $manuelsize = '35839';
-    if($this->is_size($manuelsize, $size)){
-    	echo 'Değer belirtilen boyuttan küçüktür';
+    $second_size = 35839;
+    $first_size = 35839;
+    if($this->is_size($first_size, $second_size)){
+        echo 'Değer belirtilen boyuttan küçüktür';
     } else {
-    	echo 'Değer belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
+
 veya
 
-    $size = '35 KB';
-    $manuelsize = '35840';
-    if($this->is_size($manuelsize, $size)){
-    	echo 'Değer belirtilen boyuttan küçüktür';
+    $second_size = '35 KB';
+    $first_size = '35840';
+    if($this->is_size($first_size, $second_size)){
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
     } else {
-    	echo 'Değer belirtilen boyuttan büyüktür.';
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
+    }
+
+veya
+
+    $second_size = '1024 KB';
+    $first_size = '1023 KB';
+    if($this->is_size($first_size, $second_size)){
+        echo 'ilk boyut belirtilen ikinci boyuttan küçük veya eşittir.';
+    } else {
+        echo 'ilk boyut belirtilen ikinci boyuttan büyüktür.';
     }
 
 
