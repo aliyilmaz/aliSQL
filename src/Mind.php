@@ -1651,50 +1651,6 @@ class Mind extends PDO
     }
 
     /**
-     * Encode size
-     * @param mixed $size
-     * @return int|bool
-     */
-    public function decodeSize($size)
-    {
-        $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
-
-        if(strstr($size, ' ')){
-
-            if(count(explode(' ', $size)) === 2){
-                list($number, $format) = explode(' ', $size);
-                $id = array_search($format, $sizeLibrary);
-                return $number*pow(1024, $id);
-            } 
-        }
-
-        return false;
-
-    }
-
-    /**
-     * Encode size
-     * @param mixed $size
-     * @return string|bool
-     */
-    public function encodeSize($size, $precision = 2)
-    {
-        $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
-
-        if(isset($size['size'])){
-            $size = $size['size'];
-        }
-
-        if(!strstr($size, ' ')){
-            $exp = floor(log($size, 1024)) | 0;
-            $exp = min($exp, count($sizeLibrary) - 1);
-            return round($size / (pow(1024, $exp)), $precision).' '.$sizeLibrary[$exp];
-        }
-
-        return false;
-    }
-
-    /**
      * Size verification.
      *
      * @param mixed $first_size
@@ -3256,6 +3212,50 @@ class Mind extends PDO
         <?php
     }
 
+    /**
+     * Encode size
+     * @param mixed $size
+     * @return int|bool
+     */
+    public function decodeSize($size)
+    {
+        $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
+
+        if(strstr($size, ' ')){
+
+            if(count(explode(' ', $size)) === 2){
+                list($number, $format) = explode(' ', $size);
+                $id = array_search($format, $sizeLibrary);
+                return $number*pow(1024, $id);
+            } 
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Encode size
+     * @param mixed $size
+     * @return string|bool
+     */
+    public function encodeSize($size, $precision = 2)
+    {
+        $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
+
+        if(isset($size['size'])){
+            $size = $size['size'];
+        }
+
+        if(!strstr($size, ' ')){
+            $exp = floor(log($size, 1024)) | 0;
+            $exp = min($exp, count($sizeLibrary) - 1);
+            return round($size / (pow(1024, $exp)), $precision).' '.$sizeLibrary[$exp];
+        }
+
+        return false;
+    }
+    
     /**
      * Detecting an operating system
      * @return string
