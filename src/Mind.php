@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.5
+ * @version    Release: 4.3.6
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -1177,7 +1177,8 @@ class Mind extends PDO
      */
     public function newId($tblName){
 
-        $IDs = [1];
+        $IDs = [];
+        $length = 1;
         $needle = $this->increments($tblName);
 
         foreach ($this->getData($tblName, array('column'=>$needle)) as $row) {
@@ -1185,18 +1186,14 @@ class Mind extends PDO
                 $IDs[] = $row[$needle];
             }
         }
-
-        $length = max($IDs);
-
-        if($length>1){
-            return $length+1;
+        
+        if(!empty($IDs)){
+            $length = max($IDs)+1;
         } else {
-            $scheme = $this->tableInterpriter($tblName);
-            $this->tableDelete($tblName);
-            $this->tableCreate($tblName, $scheme);
-            return $length;
+            $this->tableClear($tblName);
         }
-
+        
+        return $length;
     }
 
     /**
@@ -1336,6 +1333,7 @@ class Mind extends PDO
             header('Content-Disposition: attachment; filename="'.$backupFile.'"');
             echo $data;
         }
+        return $result;
         
     }
 
