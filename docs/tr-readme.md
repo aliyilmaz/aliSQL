@@ -771,7 +771,7 @@ Bir veritabanı tablosunun tüm kayıtlarını elde etmek için kullanılır. Ek
 
 ##### Örnek
 
-    $this->print_pre$this->getData('my_table'));
+    $this->print_pre($this->getData('my_table'));
 
 
 
@@ -787,14 +787,14 @@ Bir veritabanı tablosundaki belirtilen sütun verilerini elde etmek için kulla
     	      'tag'
     	)
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 veya
 
     $options = array(
     	'column' => 'title'
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 
@@ -807,7 +807,7 @@ Veritabanındaki kayıtları belirtilen limitlere göre elde etmek için kullan�
     $options = array(
     	'limit' => array('start'=>'1', 'end'=>'10')
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 
@@ -820,7 +820,7 @@ Veritabanı tablosunda bulunan kayıtların ilk eklenenden son eklenene doğru b
     $options = array(
     	'limit' => array('start' => '2')
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 
@@ -833,7 +833,7 @@ Veritabanı tablosunda, belirtilen sayı kadar kaydı elde etmek amacıyla kulla
     $options = array(
     	'limit' => array('end' => '10')
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 
@@ -846,14 +846,14 @@ Veritabanı tablosundaki kayıtları belirtilen sütun içeriğine göre küçü
     $options = array(
     	'sort' => 'columnname:ASC'
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 veya
 
     $options = array(
     	'sort' => 'columnname:DESC'
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 
@@ -871,7 +871,7 @@ Anahtar kelimeleri bir veritabanı tablosunda aramak için kullanılır. Anahtar
     		)
     	)
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 veya
 
@@ -880,7 +880,7 @@ veya
     		'keyword' => 'merhaba dünya'
     	)
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 #### search: Her yerde aramak
@@ -901,7 +901,7 @@ Sonu **kelime**yle biten içeriği aramak için `%kelime`, başı **kelime**yle 
     		)
     	)
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 veya
 
@@ -910,7 +910,7 @@ veya
     		'keyword' => 'merhaba dünya%'
     	)
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 #### search:column Sütunlarda aramak
@@ -928,7 +928,7 @@ Bir veritabanı tablosunun belirtilen sütunlarını tam veya genel bir eşleme 
             )
         )
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 veya
 
@@ -941,7 +941,7 @@ veya
     		)
     	)
     );
-    $this->print_pre$this->getData('my_table', $options));
+    $this->print_pre($this->getData('my_table', $options));
 
 
 #### search:and Sütuna özel kelime aramak
@@ -963,7 +963,7 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının tümünde bulgu te
         )
     );
     $tblname = 'users';
-    $this->print_pre$this->getData($tblname, $options));
+    $this->print_pre($this->getData($tblname, $options));
 
 veya
 
@@ -984,7 +984,7 @@ veya
         )
     );
     $tblname = 'users';
-    $this->print_pre$this->getData($tblname, $options));
+    $this->print_pre($this->getData($tblname, $options));
 
 
 
@@ -1004,7 +1004,7 @@ Kayda ait birden çok sütunda yapılan arama sonuçlarının herhangi birinde b
         )
     );
     $tblname = 'users';
-    $this->print_pre$this->getData($tblname, $options));
+    $this->print_pre($this->getData($tblname, $options));
 
 veya
 
@@ -1024,7 +1024,7 @@ veya
         )
     );
     $tblname = 'users';
-    $this->print_pre$this->getData($tblname, $options));
+    $this->print_pre($this->getData($tblname, $options));
 
 ***Bilgi:*** getData:column kısmında sütun tanımlama yapılmışsa bu sütunların içinde aranması istenen sütunlarında olması zorunludur.
 
@@ -1059,7 +1059,7 @@ Sütuna özel kelime aramak için kullanılan `search:and` ve `search:or` yönte
         )
     );
     $tblname = 'messages';
-    $this->print_pre$this->getData($tblname, $options));
+    $this->print_pre($this->getData($tblname, $options));
 
 #### search:scope Özelleştirilebilen hassasiyet
 
@@ -1076,7 +1076,7 @@ Aramaların, büyük küçük harf fark duyarlılığı bu alt özellik sayesind
         )
     );
 
-    $this->print_pre$this->getData('users', $options));
+    $this->print_pre($this->getData('users', $options));
 
 veya 
 
