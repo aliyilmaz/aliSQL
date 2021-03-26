@@ -2513,11 +2513,13 @@ class Mind extends PDO
      * @param array $data
      * @param string $sort
      * @param string|int $column
-     * @return array
+     * @return array|json
      */
     public function arraySort(&$data, $sort, $key='')
     {
+        $is_json = FALSE;
         if($this->is_json($data)){
+            $is_json = TRUE;
             $data = json_decode($data, TRUE);
         }
 
@@ -2532,6 +2534,11 @@ class Mind extends PDO
         }
         
         array_multisort($keys, $sort_name, SORT_STRING, $data);
+
+        if($is_json === TRUE){
+            $data = json_encode($data);
+        }
+
         return $data;
 
     }
