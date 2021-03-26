@@ -283,6 +283,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 
 -   [accessGenerate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#accessgenerate)
 -   [print_pre](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#print_pre)
+-   [arraySort](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#arraySort)
 -   [info](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#info)
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
 -   [filter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#filter)
@@ -2816,6 +2817,123 @@ veya
 
 ----------
 
+## arraySort()
+
+Bu fonksiyon Dizi veya JSON biçiminde tutulan veri kümelerini sıralamak amacıyla kullanılır. 3 parametre alır, sadece ilk iki parametrenin belirtilmesi zorunludur. İlk parametre, `ARRAY` ya da `JSON` türünde belirtilen veri kümesi içindir, ikinci parametre, veri türü `string` olan `asc`,`desc`,`ASC` veya `DESC` sıralama tiplerinden birini belirtmek içindir. Üçüncü parametreyse anahtarlı veri kümelerinde anahtar değerlerine göre sıralama yapmak içindir. Eğer Üçüncü parametre belirtilmezse varsayılan olarak php'nin `asort` komutu işletilir.
+
+
+##### Örnek
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    ARRAY                                   */
+    /* -------------------------------------------------------------------------- */
+    echo '<h1>ARRAY</h1>';
+    echo '<hr>';
+
+    // 1 KADEMELİ DİZİLERDE SIRALAMA YAPMAK
+    $data = array(
+        2021,
+        2020,
+        2019
+    );
+    echo '<h4>2021 üstte</h4>';
+    $this->print_pre($this->arraySort($data, 'DESC'));
+
+
+    // 2 KADEMELİ DİZİLERDE ANAHTAR BELİRTEREK SIRALAMA YAPMAK
+    $data = array(
+        array(
+            'username'=>'aliyilmaz',
+            'age'=>33
+        ),
+        array(
+            'username'=>'eylül',
+            'age'=>30
+        )
+    );
+    echo '<hr>';
+    echo '<h4>eylül üstte</h4>';
+    $this->print_pre($this->arraySort($data, 'ASC', 'age'));
+
+
+    // 2 KADEMELİ DİZİLERDE ANAHTAR BELİRTMEDEN SIRALAMA YAPMAK
+    // İLK ANAHTAR DEĞERİNİ REFERANS ALIR
+    $data = array(
+        array(
+            'username'=>'aliyilmaz',
+            'age'=>33
+        ),
+        array(
+            'username'=>'aliyilmaz1',
+            'age'=>29
+        ),
+        array(
+            'username'=>'eylül',
+            'age'=>30
+        )
+    );
+    echo '<hr>';
+    echo '<h4>aliyilmaz üstte</h4>';
+    $this->print_pre($this->arraySort($data, 'ASC'));
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    JSON                                    */
+    /* -------------------------------------------------------------------------- */
+    echo '<h1>JSON</h1>';
+    echo '<hr>';
+
+    // 1 KADEMELİ DİZİLERDE SIRALAMA YAPMAK
+    $data = json_encode(array(
+        2021,
+        2020,
+        2019
+    ));
+    echo '<h4>2021 üstte</h4>';
+    $this->print_pre($this->arraySort($data, 'DESC'));
+
+
+    // 2 KADEMELİ DİZİLERDE ANAHTAR BELİRTEREK SIRALAMA YAPMAK
+    $data = json_encode(array(
+        array(
+            'username'=>'aliyilmaz',
+            'age'=>33
+        ),
+        array(
+            'username'=>'eylül',
+            'age'=>30
+        )
+    ));
+    echo '<hr>';
+    echo '<h4>eylül üstte</h4>';
+    $this->print_pre($this->arraySort($data, 'ASC', 'age'));
+
+
+    // 2 KADEMELİ DİZİLERDE ANAHTAR BELİRTMEDEN SIRALAMA YAPMAK
+    // İLK ANAHTAR DEĞERİNİ REFERANS ALIR
+    $data = json_encode(array(
+        array(
+            'username'=>'aliyilmaz',
+            'age'=>33
+        ),
+        array(
+            'username'=>'aliyilmaz1',
+            'age'=>29
+        ),
+        array(
+            'username'=>'eylül',
+            'age'=>30
+        )
+    ));
+    echo '<hr>';
+    echo '<h4>aliyilmaz üstte</h4>';
+    $this->print_pre($this->arraySort($data, 'ASC'));
+
+
+
+----------
+
 ## info()
 
 Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullanılır. Aldığı her iki parametre `string` olarak belirtilmelidir. `$str` yolu, `$type` bilgi türü parametresini temsil etmektedir.
@@ -3504,7 +3622,7 @@ Projenin çalıştığı işletim sistemi üzerindeki sunucu yazılımı ismini 
 
 ## route()
 
-Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel zihinler yüklemek için kullanılır. Zihin kelimesi, Model, View, Controller, Middleware gibi çeşitli katmanları tanımlamak amacıyla kullanılmıştır. Böylelikle geliştirici, katmanların hangi rotaya tanımlandığını açıkça görebilir, yönetilebilir ve proje ihtiyacına özel tasarım deseni oluşturabilir.  
+Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel zihinler yüklemek için kullanılır. Zihin kelimesi, Model, View, Controller, Middleware gibi çeşitli katmanları tanımlamak amacıyla kullanılmıştır. Böylelikle geliştirici, katmanların hangi rotaya tanımlandığını açıkça görebilir, yönetebilir ve proje ihtiyacına özel tasarım deseni oluşturabilir.  
   
 Rotalar, `Mind.php` dosyasıyla aynı dizinde bulunan `index.php` dosyası içine tanımlanır, dolayısıyla `new Mind()` çağrısının atandığı değişkeni ön ek kabul ederek çalışır.
 

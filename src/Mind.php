@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.6
+ * @version    Release: 4.3.7
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2505,6 +2505,35 @@ class Mind extends PDO
         echo '<pre>';
         print_r($data);
         echo '</pre>';
+    }
+
+    /**
+     * Array sorting function
+     * 
+     * @param array $data
+     * @param string $sort
+     * @param string|int $column
+     * @return array
+     */
+    public function arraySort(&$data, $sort, $key='')
+    {
+        if($this->is_json($data)){
+            $data = json_decode($data, TRUE);
+        }
+
+        $sort_name = SORT_DESC;
+        if('ASC' === mb_strtoupper($sort, 'utf8')) $sort_name = SORT_ASC;
+
+        if(!empty($key)){
+            $keys = array_column($data, $key);
+        } else {
+            $keys = array_keys($data);
+            asort($data);
+        }
+        
+        array_multisort($keys, $sort_name, SORT_STRING, $data);
+        return $data;
+
     }
 
     /**
