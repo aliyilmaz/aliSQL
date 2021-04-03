@@ -2402,7 +2402,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     $rule = array(
         'username'          =>  'available:users',
         'title'             =>  'required|unique:posts',
-        'email'             =>  'email|unique:users:1',
+        'email'             =>  'email|unique:users',
         'phone_number'      =>  'phone',
         'background_color'  =>  'color',
         'webpage'           =>  'url',
