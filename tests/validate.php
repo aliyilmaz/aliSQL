@@ -9,13 +9,14 @@ $Mind = new Mind();
  | --------------------------------------------------------
  | required, email, url, phone, color, https, http,
  | json, max-num, min-num, max-char, min-char, numeric,
- | min-age, max-age, date, unique, unchanged, bool, iban, 
- | ipv4, ipv6, blood, coordinate, distance, languages
+ | min-age, max-age, date, unique, available, unchanged, bool, 
+ | iban, ipv4, ipv6, blood, coordinate, distance, languages
  | 
  */
 
 //  Data
 $data = array(
+    'username'          =>  'aliyilmaz',
     'title'             =>  'Merhaba dünya1',
     'email'             =>  'aliyilmaz.work@gmail.com',
     'phone_number'      =>  '05554248988',
@@ -44,8 +45,9 @@ $data = array(
 
 // Rule
 $rule = array(
+    'username'          =>  'available:users',
     'title'             =>  'required|unique:posts',
-    'email'             =>  'email|unique:users:1',
+    'email'             =>  'email|unique:users',
     'phone_number'      =>  'phone',
     'background_color'  =>  'color',
     'webpage'           =>  'url',
@@ -70,6 +72,9 @@ $rule = array(
 
 // Message
 $message = array(
+    'username'=>array(
+        'available'=>'This user name does not exist.'
+    ),
     'title'=>  array(
         'required'=>'It should not be left blank.',
         'unique'=>'A unique record must be specified.'

@@ -2371,6 +2371,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
 
     //  Veri
     $data = array(
+        'username'          =>  'aliyilmaz',
         'title'             =>  'Merhaba dünya1',
         'email'             =>  'aliyilmaz.work@gmail.com',
         'phone_number'      =>  '05554248988',
@@ -2399,6 +2400,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
 
     // Kural
     $rule = array(
+        'username'          =>  'available:users',
         'title'             =>  'required|unique:posts',
         'email'             =>  'email|unique:users:1',
         'phone_number'      =>  'phone',
@@ -2425,6 +2427,9 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
 
     // Mesaj
     $message = array(
+        'username'=>array(
+            'available'=>'Bu kullanıcı adı bulunmamaktadır'
+        ),
         'title'=>  array(
             'required'=>'Boş bırakılmamalıdır.',
             'unique'=>'Benzersiz bir kayıt belirtilmelidir.'
@@ -2628,20 +2633,30 @@ Belirtilen doğum tarihine sahip kimsenin yine belirtilen yaş ya da altında bi
 
 ##### unique
 
-Veritabanı tablosunda olmayan veya belirtilen sayıya kadar olması gerektiğini ifade etmek için kullanılır. 3 parametre alır ve ilk iki parametrenin belirtilmesi zorunludur. Sadece bu ikisi belirtilirse tabloda olmayan bir veri belirtilmesi gerektiğini ifade eder. 
-
-Eğer 3'ncü parametre  sayı olarak belirtilirse söz konusu verinin veritabanı tablosunda toplam belirtilen sayı kadar'a kadar bulunabilmesine müsaade edildiğini ifade eder.
-
-Örneğin, bir kullanıcı profilini düzenlemek istediğinde, mail adresini güncellememişse ve profil düzenleme sayfasının kod kısmında `unique:users:1` şeklinde kural oluşturulmuşsa, kullanıcının bu mail adresini taşıyan mail adresi görmezden gelinerek güncelleme işlemi bir sorun yoksa başarılı şekilde gerçekleşecektir.
+Veritabanı tablosunda olmayan bir verinin belirtilmesi gerektiğini ifade eder. 
 
 
 
-    unique:posts
+    unique:users
 
 veya
 
 
-    unique:users:1
+    unique:posts
+
+##### available
+
+Veritabanı tablosunda olan bir verinin belirtilmesi gerektiğini ifade eder. 
+
+
+
+    unique:users
+
+veya
+
+
+    unique:products
+
 
 
 ##### bool

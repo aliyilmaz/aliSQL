@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.7
+ * @version    Release: 4.3.8
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2064,6 +2064,7 @@ class Mind extends PDO
     public function validate($rule, $data, $message = array()){
       
         $extra = '';
+        $limit = '';
         $rules = array();
 
         foreach($rule as $name => $value){
@@ -2231,20 +2232,24 @@ class Mind extends PDO
                             $this->errors[$column][$name][] = 'Column not found.';
                         }
 
-                        if(isset($limit)){
-                            $xData = $this->samantha($extra, array($column => $data[$column]));
-                            if(!isset($xData[0])){
-                                $xData = array($xData);
-                            }
-                            if(count($xData) > (int) $limit){
-                                $this->errors[$column][$name] = $message[$column][$name];
-                            }
-                        } else {
-                            if($this->do_have($extra, $data[$column], $column)){
-                                $this->errors[$column][$name] = $message[$column][$name];
-                            }
+                        if($this->do_have($extra, $data[$column], $column)){
+                            $this->errors[$column][$name] = $message[$column][$name];
+                        } 
+
+                    break;
+                    // Benzeri olan parametre kuralı
+                    case 'available':
+                        if(!$this->is_table($extra)){
+                            $this->errors[$column][$name][] = 'Table not found.';
+                        }
+                        
+                        if(!$this->is_column($extra, $column)){
+                            $this->errors[$column][$name][] = 'Column not found.';
                         }
 
+                        if(!$this->do_have($extra, $data[$column], $column)){
+                            $this->errors[$column][$name] = $message[$column][$name];
+                        } 
                     break;
                     // Doğrulama kuralı 
                     case 'bool':
