@@ -1643,7 +1643,7 @@ Varsayılan olarak aşağıdaki tanımlamalar yapılmıştır, eğer bu döküma
             'column'                =>  'lang',
             'haystack'              =>  'name',
             'return'                =>  'text',
-            'lang'                  =>  'GB'
+            'lang'                  =>  'TR'
         )
     );
 
