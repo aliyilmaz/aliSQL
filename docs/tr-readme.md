@@ -277,6 +277,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [is_distance](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_distance)
 -   [is_md5](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_md5)
 -   [is_ssl](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_ssl)
+-   [is_htmlspecialchars](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#is_htmlspecialchars)
 -   [validate](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#validate)
 
 ##### Yardımcı
@@ -2357,6 +2358,22 @@ Bu fonksiyon, projeye ait SSL Sertifikasının varlığını sorgulamak amacıyl
 
 ----------
 
+## is_htmlspecialchars()
+
+Bu fonksiyon kendisiyle paylaşılan verinin HTML özel karakterleri içerip içermediğini kontrol etmeye yarar. Veri `string` türünde belirtilmelidir. Eğer HTML özel karakterleri içeriyorsa `true` değilse `false` yanıtı döndürülür.
+
+##### Örnek
+
+    $code = 'merhaba &lt;?=$this-&gt;timestamp;?&gt;';
+
+    if($this->is_htmlspecialchars($code)){
+        echo 'HTML özel karakterleri içeriyor.';
+    } else {
+        echo 'HTML özel karakterleri içermiyor.';
+    }
+
+----------
+
 
 ## validate()
 
@@ -2402,7 +2419,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     $rule = array(
         'username'          =>  'available:users',
         'title'             =>  'required|unique:posts',
-        'email'             =>  'email|unique:users',
+        'email'             =>  'email|unique:users:1',
         'phone_number'      =>  'phone',
         'background_color'  =>  'color',
         'webpage'           =>  'url',
@@ -4071,3 +4088,31 @@ veya
     $distance = $this->distanceMeter($point1['lat'], $point1['long'], $point2['lat'], $point2['long'], '');
     
     $this->print_pre($distance);
+
+
+----------
+
+
+## evalContainer()
+
+Bu fonksiyon, `string` türündeki veriyi, içindeki `PHP` kodlarıyla birlikte kullanıldığı kısma eklemeye yarar. HTML özel karakterine dönüştürülmüş `PHP` kodları varsa onları da `PHP` koduna dönüştürerek kullanır.
+
+
+###### Örnek
+
+    $code = 'merhaba &lt;?=$this-&gt;timestamp;?&gt;';
+    $this->evalContainer($code);
+
+veya
+
+    $code = 'merhaba &lt;?=$this-&gt;timestamp;?&gt;
+
+    &lt;?php
+
+    $array = array(
+    \'username\'=&gt;\'aliyilmaz\',
+    \'password\'=&gt;\'123456\'
+    );
+
+    $this-&gt;print_pre($array);';
+    $this->evalContainer($code);
