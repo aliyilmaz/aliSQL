@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.8
+ * @version    Release: 4.3.9
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2053,6 +2053,13 @@ class Mind extends PDO
         return false;
     }
 
+    public function is_htmlspecialchars($code){
+        if(strpos($code, '&lt;') OR strpos($code, '&gt;') OR strpos($code, '&quot;') OR strpos($code, '&#39;') OR strpos($code, '&amp;')){
+            return true;    
+        }
+        return false;
+    }
+
     /**
      * Validation
      * 
@@ -3758,4 +3765,24 @@ class Mind extends PDO
         // birden çok ölçü birimi yanıtları geri döndürülür
         return $output;
     }
+
+    /**
+     * It is used to run Php codes.
+     * 
+     * @param string $code
+     * @return void
+     */
+    public function evalContainer($code){
+
+        if($this->is_htmlspecialchars($code)){
+            $code = htmlspecialchars_decode($code);
+        }
+        
+        ob_start();
+        eval('?>'. $code);
+        $output = ob_get_contents();
+        ob_end_clean();
+        echo $output;
+    }
 }
+
