@@ -314,6 +314,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [download](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#download)
 -   [get_contents](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#get_contents)
 -   [distanceMeter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#distanceMeter)
+-   [evalContainer](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#evalContainer)
 
 ----------
 
