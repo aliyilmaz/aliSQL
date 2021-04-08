@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.3.9
+ * @version    Release: 4.4.0
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -125,8 +125,8 @@ class Mind extends PDO
                 $this->lang['return'] = $conf['translate']['return'];
             }
 
-            if(isset($conf['translate']['country'])){
-                $this->lang['country'] = $conf['translate']['country'];
+            if(isset($conf['translate']['lang'])){
+                $this->lang['lang'] = $conf['translate']['lang'];
             }
 
         }
@@ -1502,7 +1502,7 @@ class Mind extends PDO
      */
     public function translate($needle, $lang=''){
         if(!in_array($lang, array_keys($this->languages()))){
-            $lang = $this->lang['country'];
+            $lang = $this->lang['lang'];
         }
 
         $params = array(
