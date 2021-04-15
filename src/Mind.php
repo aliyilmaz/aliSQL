@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.0
+ * @version    Release: 4.4.1
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -759,6 +759,14 @@ class Mind extends PDO
         }
     }
 
+    public function getMultiData($scheme){
+        $result = [];
+       foreach($scheme as $tblName => $options){
+           $result[$tblName] = $this->getData($tblName, $options);
+       }
+       return $result;
+    }
+
     /**
      * Record reading.
      *
@@ -768,219 +776,234 @@ class Mind extends PDO
      */
     public function getData($tblName, $options=null){
 
-        $sql = '';
-        $andSql = '';
-        $orSql = '';
-        $keywordSql = '';
-        $columns = $this->columnList($tblName);
-
-        if(!empty($options['column'])){
-
-            if(!is_array($options['column'])){
-                $options['column']= array($options['column']);
-            }
-
-            $options['column'] = array_intersect($options['column'], $columns);
-            $columns = array_values($options['column']);
-        } 
-        $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
-
-        $prefix = ' BINARY ';
-        $suffix = ' = ?';
-        if(!empty($options['search']['scope'])){
-            $options['search']['scope'] = mb_strtoupper($options['search']['scope']);
-            switch ($options['search']['scope']) {
-                case 'LIKE':
-                    $prefix = '';
-                    $suffix = ' LIKE ?';
-                    break;
-                case 'BINARY':
-                    $prefix = ' BINARY ';
-                    $suffix = ' = ?';
-                    break;
-            }
-        }
-
-        $prepareArray = array();
-        $executeArray = array();
-
-        if(!empty($options['search']['keyword'])){
-
-            if ( !is_array($options['search']['keyword']) ) {
-                $keyword = array($options['search']['keyword']);
-            } else {
-                $keyword = $options['search']['keyword'];
-            }
-
-            $searchColumns = $columns;
-            if(!empty($options['search']['column'])){
-
-                if(!is_array($options['search']['column'])){
-                    $searchColumns = array($options['search']['column']);
-                } else {
-                    $searchColumns = $options['search']['column'];
+        if(is_array($tblName)){ // To get data from many tables.
+            
+            foreach ($tblName as $table => $options) {
+                if(!is_array($options)){
+                    $table = $options;
+                    $options = [];
                 }
-
-                $searchColumns = array_intersect($searchColumns, $columns);
+                $result[$table] = $this->getData($table, $options);
             }
 
-            foreach ( $searchColumns as $column ) {
+            return $result;
+        } else { // Just to get data from a table.
 
-                foreach ( $keyword as $value ) {
-                    $prepareArray[] = $prefix.$column.$suffix;
-                    $executeArray[] = $value;
+            $sql = '';
+            $andSql = '';
+            $orSql = '';
+            $keywordSql = '';
+            $columns = $this->columnList($tblName);
+    
+            if(!empty($options['column'])){
+    
+                if(!is_array($options['column'])){
+                    $options['column']= array($options['column']);
                 }
-
-            }
-
-            $keywordSql .= '('.implode(' OR ', $prepareArray).')';
-
-        }
-
-        $delimiterArray = array('and', 'AND', 'or', 'OR');
-        
-        if(!empty($options['search']['delimiter']['and'])){
-            if(in_array($options['search']['delimiter']['and'], $delimiterArray)){
-                $options['search']['delimiter']['and'] = mb_strtoupper($options['search']['delimiter']['and']);
-            } else {
-                $options['search']['delimiter']['and'] = ' AND ';
-            }
-        } else {
-            $options['search']['delimiter']['and'] = ' AND ';
-        }
-
-        if(!empty($options['search']['delimiter']['or'])){
-            if(in_array($options['search']['delimiter']['or'], $delimiterArray)){
-                $options['search']['delimiter']['or'] = mb_strtoupper($options['search']['delimiter']['or']);
-            } else {
-                $options['search']['delimiter']['or'] = ' OR ';
-            }
-        } else {
-            $options['search']['delimiter']['or'] = ' OR ';
-        }
-
-        if(!empty($options['search']['or']) AND is_array($options['search']['or'])){
-
-            if(!isset($options['search']['or'][0])){
-                $options['search']['or'] = array($options['search']['or']);
-            }
-
-            foreach ($options['search']['or'] as $key => $row) {
-
-                foreach ($row as $column => $value) {
-
-                    $x[$key][] = $prefix.$column.$suffix;
-                    $prepareArray[] = $prefix.$column.$suffix;
-                    $executeArray[] = $value;
-                }
-                
-                $orSql .= '('.implode(' OR ', $x[$key]).')';
-
-                if(count($options['search']['or'])>$key+1){
-                    $orSql .= ' '.$options['search']['delimiter']['or']. ' ';
-                }
-            }
-        }
-
-        if(!empty($options['search']['and']) AND is_array($options['search']['and'])){
-
-            if(!isset($options['search']['and'][0])){
-                $options['search']['and'] = array($options['search']['and']);
-            }
-
-            foreach ($options['search']['and'] as $key => $row) {
-
-                foreach ($row as $column => $value) {
-
-                    $x[$key][] = $prefix.$column.$suffix;
-                    $prepareArray[] = $prefix.$column.$suffix;
-                    $executeArray[] = $value;
-                }
-                
-                $andSql .= '('.implode(' AND ', $x[$key]).')';
-
-                if(count($options['search']['and'])>$key+1){
-                    $andSql .= ' '.$options['search']['delimiter']['and']. ' ';
-                }
-            }
-
-        }
-
-        $delimiter = ' AND ';
-        $sqlBox = array();
-
-        if(!empty($keywordSql)){
-            $sqlBox[] = $keywordSql;
-        }
-
-        if(!empty($andSql) AND !empty($orSql)){
-            $sqlBox[] = '('.$andSql.$delimiter.$orSql.')';
-        } else {
-            if(!empty($andSql)){
-                $sqlBox[] = '('.$andSql.')';
-            }
-            if(!empty($orSql)){
-                $sqlBox[] = '('.$orSql.')';
-            }
-        }
-
-        if(
-            !empty($options['search']['or']) OR
-            !empty($options['search']['and']) OR
-            !empty($options['search']['keyword'])
-        ){
-            $sql = 'WHERE '.implode($delimiter, $sqlBox);
-        }
-
-        if(!empty($options['sort'])){
-
-            list($columnName, $sort) = explode(':', $options['sort']);
-            if(in_array($sort, array('asc', 'ASC', 'desc', 'DESC'))){
-                $sql .= ' ORDER BY '.$columnName.' '.strtoupper($sort);
-            }
-
-        }
-
-        if(!empty($options['limit'])){
-
-            if(!empty($options['limit']['start']) AND $options['limit']['start']>0){
-                $start = $options['limit']['start'].',';
-            } else {
-                $start = '0,';
-            }
-
-            if(!empty($options['limit']['end']) AND $options['limit']['end']>0){
-                $end = $options['limit']['end'];
-            } else {
-                $end     = $this->newId($tblName)-1;
-            }
-
-            $sql .= ' LIMIT '.$start.$end;
-
-        }
-
-        $result = array();
-        try{
-
-            $query = $this->prepare('SELECT '.$sqlColumns.' FROM `'.$tblName.'` '.$sql);
-            $query->execute($executeArray);
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-            if(isset($options['format'])){
-                switch ($options['format']) {
-
-                    case 'json':
-                        $result = json_encode($result);
+    
+                $options['column'] = array_intersect($options['column'], $columns);
+                $columns = array_values($options['column']);
+            } 
+            $sqlColumns = $tblName.'.'.implode(', '.$tblName.'.', $columns);
+    
+            $prefix = ' BINARY ';
+            $suffix = ' = ?';
+            if(!empty($options['search']['scope'])){
+                $options['search']['scope'] = mb_strtoupper($options['search']['scope']);
+                switch ($options['search']['scope']) {
+                    case 'LIKE':
+                        $prefix = '';
+                        $suffix = ' LIKE ?';
+                        break;
+                    case 'BINARY':
+                        $prefix = ' BINARY ';
+                        $suffix = ' = ?';
                         break;
                 }
             }
+    
+            $prepareArray = array();
+            $executeArray = array();
+    
+            if(!empty($options['search']['keyword'])){
+    
+                if ( !is_array($options['search']['keyword']) ) {
+                    $keyword = array($options['search']['keyword']);
+                } else {
+                    $keyword = $options['search']['keyword'];
+                }
+    
+                $searchColumns = $columns;
+                if(!empty($options['search']['column'])){
+    
+                    if(!is_array($options['search']['column'])){
+                        $searchColumns = array($options['search']['column']);
+                    } else {
+                        $searchColumns = $options['search']['column'];
+                    }
+    
+                    $searchColumns = array_intersect($searchColumns, $columns);
+                }
+    
+                foreach ( $searchColumns as $column ) {
+    
+                    foreach ( $keyword as $value ) {
+                        $prepareArray[] = $prefix.$column.$suffix;
+                        $executeArray[] = $value;
+                    }
+    
+                }
+    
+                $keywordSql .= '('.implode(' OR ', $prepareArray).')';
+    
+            }
+    
+            $delimiterArray = array('and', 'AND', 'or', 'OR');
+            
+            if(!empty($options['search']['delimiter']['and'])){
+                if(in_array($options['search']['delimiter']['and'], $delimiterArray)){
+                    $options['search']['delimiter']['and'] = mb_strtoupper($options['search']['delimiter']['and']);
+                } else {
+                    $options['search']['delimiter']['and'] = ' AND ';
+                }
+            } else {
+                $options['search']['delimiter']['and'] = ' AND ';
+            }
+    
+            if(!empty($options['search']['delimiter']['or'])){
+                if(in_array($options['search']['delimiter']['or'], $delimiterArray)){
+                    $options['search']['delimiter']['or'] = mb_strtoupper($options['search']['delimiter']['or']);
+                } else {
+                    $options['search']['delimiter']['or'] = ' OR ';
+                }
+            } else {
+                $options['search']['delimiter']['or'] = ' OR ';
+            }
+    
+            if(!empty($options['search']['or']) AND is_array($options['search']['or'])){
+    
+                if(!isset($options['search']['or'][0])){
+                    $options['search']['or'] = array($options['search']['or']);
+                }
+    
+                foreach ($options['search']['or'] as $key => $row) {
+    
+                    foreach ($row as $column => $value) {
+    
+                        $x[$key][] = $prefix.$column.$suffix;
+                        $prepareArray[] = $prefix.$column.$suffix;
+                        $executeArray[] = $value;
+                    }
+                    
+                    $orSql .= '('.implode(' OR ', $x[$key]).')';
+    
+                    if(count($options['search']['or'])>$key+1){
+                        $orSql .= ' '.$options['search']['delimiter']['or']. ' ';
+                    }
+                }
+            }
+    
+            if(!empty($options['search']['and']) AND is_array($options['search']['and'])){
+    
+                if(!isset($options['search']['and'][0])){
+                    $options['search']['and'] = array($options['search']['and']);
+                }
+    
+                foreach ($options['search']['and'] as $key => $row) {
+    
+                    foreach ($row as $column => $value) {
+    
+                        $x[$key][] = $prefix.$column.$suffix;
+                        $prepareArray[] = $prefix.$column.$suffix;
+                        $executeArray[] = $value;
+                    }
+                    
+                    $andSql .= '('.implode(' AND ', $x[$key]).')';
+    
+                    if(count($options['search']['and'])>$key+1){
+                        $andSql .= ' '.$options['search']['delimiter']['and']. ' ';
+                    }
+                }
+    
+            }
+    
+            $delimiter = ' AND ';
+            $sqlBox = array();
+    
+            if(!empty($keywordSql)){
+                $sqlBox[] = $keywordSql;
+            }
+    
+            if(!empty($andSql) AND !empty($orSql)){
+                $sqlBox[] = '('.$andSql.$delimiter.$orSql.')';
+            } else {
+                if(!empty($andSql)){
+                    $sqlBox[] = '('.$andSql.')';
+                }
+                if(!empty($orSql)){
+                    $sqlBox[] = '('.$orSql.')';
+                }
+            }
+    
+            if(
+                !empty($options['search']['or']) OR
+                !empty($options['search']['and']) OR
+                !empty($options['search']['keyword'])
+            ){
+                $sql = 'WHERE '.implode($delimiter, $sqlBox);
+            }
+    
+            if(!empty($options['sort'])){
+    
+                list($columnName, $sort) = explode(':', $options['sort']);
+                if(in_array($sort, array('asc', 'ASC', 'desc', 'DESC'))){
+                    $sql .= ' ORDER BY '.$columnName.' '.strtoupper($sort);
+                }
+    
+            }
+    
+            if(!empty($options['limit'])){
+    
+                if(!empty($options['limit']['start']) AND $options['limit']['start']>0){
+                    $start = $options['limit']['start'].',';
+                } else {
+                    $start = '0,';
+                }
+    
+                if(!empty($options['limit']['end']) AND $options['limit']['end']>0){
+                    $end = $options['limit']['end'];
+                } else {
+                    $end     = $this->newId($tblName)-1;
+                }
+    
+                $sql .= ' LIMIT '.$start.$end;
+    
+            }
+    
+            $result = array();
+            try{
+    
+                $query = $this->prepare('SELECT '.$sqlColumns.' FROM `'.$tblName.'` '.$sql);
+                $query->execute($executeArray);
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    
+                if(isset($options['format'])){
+                    switch ($options['format']) {
+    
+                        case 'json':
+                            $result = json_encode($result);
+                            break;
+                    }
+                }
+    
+                return $result;
+    
+            }catch (Exception $e){
+                return $result;
+            }
 
-            return $result;
-
-        }catch (Exception $e){
-            return $result;
         }
-
+        
     }
 
     /**

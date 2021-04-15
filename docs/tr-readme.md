@@ -1184,6 +1184,36 @@ veya
     );
     $this->print_pre($this->getData('users', $options));
 
+#### Çoklu tablolardan veri elde etmek
+
+    $scheme = array(
+        'users','groups'
+    );
+    $this->print_pre($this->getData($scheme));
+
+veya 
+
+    $scheme = array(
+        'users',
+        'groups'=>array(
+            'column'=>'name'
+        )
+    );
+    $this->print_pre($this->getData($scheme));
+
+veya
+
+    $scheme = array(
+        'users'=>array(
+            'column'=>array('username', 'password')
+        ),
+        'groups'=>array(
+            'column'=>array('name')
+        )
+    );
+
+    $this->print_pre($this->getData($scheme));
+
 ----------
 
 ## samantha()
