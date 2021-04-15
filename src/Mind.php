@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.1
+ * @version    Release: 4.4.2
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3276,6 +3276,29 @@ class Mind extends PDO
     /**
      * Encode size
      * @param string|int $size
+     * @param string|int $precision
+     * @return string|bool
+     */
+    public function encodeSize($size, $precision = 2)
+    {
+        $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
+
+        if(isset($size['size'])){
+            $size = $size['size'];
+        }
+
+        if(!strstr($size, ' ')){
+            $exp = floor(log($size, 1024)) | 0;
+            $exp = min($exp, count($sizeLibrary) - 1);
+            return round($size / (pow(1024, $exp)), $precision).' '.$sizeLibrary[$exp];
+        }
+
+        return false;
+    }
+
+    /**
+     * Encode size
+     * @param string|int $size
      * @return int|bool
      */
     public function decodeSize($size)
@@ -3296,26 +3319,13 @@ class Mind extends PDO
     }
 
     /**
-     * Encode size
-     * @param string|int $size
-     * @param string|int $precision
-     * @return string|bool
+     * @return string
      */
-    public function encodeSize($size, $precision = 2)
-    {
-        $sizeLibrary = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
-
-        if(isset($size['size'])){
-            $size = $size['size'];
+    public function getIPAddress(){
+        if($_SERVER['REMOTE_ADDR'] === '::1'){
+            $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         }
-
-        if(!strstr($size, ' ')){
-            $exp = floor(log($size, 1024)) | 0;
-            $exp = min($exp, count($sizeLibrary) - 1);
-            return round($size / (pow(1024, $exp)), $precision).' '.$sizeLibrary[$exp];
-        }
-
-        return false;
+        return $_SERVER['REMOTE_ADDR'];
     }
     
     /**

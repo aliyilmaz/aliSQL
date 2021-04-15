@@ -303,6 +303,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [coordinatesMaker](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#coordinatesMaker)
 -   [encodeSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#encodeSize)
 -   [decodeSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#decodeSize)
+-   [getIPAddress](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getIPAddress)
 
 ##### Sistem
 
@@ -3659,6 +3660,20 @@ veya
 
     // 1152921504606846976
     echo $this->decodeSize('1 EB');
+
+
+
+----------
+
+## getIPAddress()
+
+Projeyi görüntüleyen kullanıcının ip adresini elde etmeye yarar.
+
+##### Örnek
+
+
+    echo $this->getIPAddress();
+
 
 
 ----------
