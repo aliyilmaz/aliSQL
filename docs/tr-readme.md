@@ -303,7 +303,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [coordinatesMaker](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#coordinatesMaker)
 -   [encodeSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#encodeSize)
 -   [decodeSize](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#decodeSize)
--   [getIPAddress](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getIPAddress)
+-   [getIPAddress](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getipaddress)
 
 ##### Sistem
 
