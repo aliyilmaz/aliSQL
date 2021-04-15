@@ -759,14 +759,6 @@ class Mind extends PDO
         }
     }
 
-    public function getMultiData($scheme){
-        $result = [];
-       foreach($scheme as $tblName => $options){
-           $result[$tblName] = $this->getData($tblName, $options);
-       }
-       return $result;
-    }
-
     /**
      * Record reading.
      *
