@@ -2542,7 +2542,7 @@ class Mind extends PDO
      * @param string|int $column
      * @return array|json
      */
-    public function arraySort(&$data, $sort, $key='')
+    public function arraySort($data, $sort='ASC', $key='')
     {
         $is_json = FALSE;
         if($this->is_json($data)){
