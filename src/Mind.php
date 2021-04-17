@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.2
+ * @version    Release: 4.4.3
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -605,10 +605,13 @@ class Mind extends PDO
      * @param array $values
      * @return bool
      */
-    public function insert($tblName, $values){
+    public function insert($tblName, $values, $trigger=null){
         
         if(!isset($values[0])){
             $values = array($values);
+        } 
+        if(!isset($trigger[0])){
+            $trigger = array($trigger);
         } 
         
         try {
@@ -625,6 +628,29 @@ class Mind extends PDO
                 $query = $this->prepare($sql);
                 $query->execute(array_values($rows));
             }
+
+            foreach ($trigger as $row) {
+                foreach ($row as $table => $data) {
+                    if(!isset($data[0])){
+                        $data = array($data);
+                    } 
+                    foreach ($data as $values) {
+                        $sql = '';
+                        $columns = [];
+                        $sql .= 'INSERT INTO `'.$table.'` SET ';
+                        foreach (array_keys($values) as $col) {
+                            $columns[] = $col.' = ?';
+                        }
+                        $sql .= implode(', ', $columns);
+
+                        $query = $this->prepare($sql);
+                        $query->execute(array_values($values));
+                    }
+                    
+                }
+                
+            }
+
             $this->commit();
 
             return true;
@@ -1184,6 +1210,16 @@ class Mind extends PDO
         return false;
     }
 
+    /**
+     * Provides the number of the current record.
+     * 
+     * @param string $tblName
+     * @param array $needle
+     * @return int
+     */
+    public function getId($tblName, $needle){
+        return $this->amelia($tblName, $needle, $this->increments($tblName));
+    }
     /**
      * New id parameter.
      *

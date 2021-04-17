@@ -243,6 +243,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [theodore](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#theodore)
 -   [amelia](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#amelia)
 -   [do_have](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#do_have)
+-   [getId](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#getId)
 -   [newId](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#newId)
 -   [increments](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#increments)
 -   [tableInterpriter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#tableInterpriter)
@@ -653,7 +654,7 @@ veya
 
 ## insert()
 
-Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır. `my_table` veritabanı tablo adını, `title`, `content` ve `tag` ise `my_table` tablosu içinde ki sütunları temsil etmektedir. Değerler `array` şeklinde gönderildiğinde kayıt gerçekleşir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosuna bir veya daha fazla kayıt eklemek amacıyla kullanılır. 3 parametre alır, ilk parametre veritabanı tablo adı, ikincisi verilerin bulunduğu `array` veya `array`'ler içindir. 3'ncü parametre ise `trigger` yani tetikleyici görevleri içindir ve kullanım şekli aşağıda bilgilerinize sunulmuştur. Tüm işlem(ler) başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -686,6 +687,54 @@ veya
             )
         )
     );
+
+veya
+
+    $values = array(
+        'username'=>'aliyilmaz1',
+        'password'=>'1111111111'
+    );
+    $trigger = array(
+        'users'=>array(
+            'username'=>'aliyilmaz2',
+            'password'=>'2222222222'
+        ),
+        'log'=>array(
+            'data'=>'test'
+        )
+    );
+    if($this->insert('users', $values, $trigger)){
+        echo 'Kayıt eklendi.';
+    } else {
+        echo 'Kayıt eklenemedi.';
+    }
+
+veya 
+
+    $values = array(
+        'username'=>'aliyilmaz1',
+        'password'=>'1111111111'
+    );
+    $trigger = array(
+        'users'=>array(
+            array(
+                'username'=>'ali1',
+                'password'=>'pass1'
+            ),
+            array(
+                'username'=>'ali2',
+                'password'=>'pass2'
+            )
+        ),
+        'log'=>array(
+            'data'=>'test'
+        )
+    );
+    if($this->insert('users', $values, $trigger)){
+        echo 'Kayıt eklendi.';
+    } else {
+        echo 'Kayıt eklenemedi.';
+    }
 
 ----------
 
@@ -1403,6 +1452,24 @@ veya
     	echo 'Bu E-Posta adresi kullanılmamaktadır.';
     }
 
+
+----------
+
+## getId()
+
+Bir veritabanı tablosunda belirtilen koşulları sağlayan ve sadece bir adet bulunan kaydın `auto_increment` özelliği tanımlanmış sütununda bulunan değeri göstermeye yarar. `$tblname` tablo adını, `$needle` koşulları temsil etmektedir.
+
+##### Örnek
+
+    $needle = array(
+        'username'=>'burcu',
+        'password'=>md5(123123)
+    );
+
+    echo $this->getId('users', $needle);
+
+
+**Bilgi:** `insert` metodunun `boolean` türünde bir yanıt döndürüyor olması, amelia metodunun auto_increment özelliğini kendiliğinden hedeflememesi ve daha anlamlı bir metot adıyla ihtiyacın karşılanması için bu metot oluşturulmuştur.
 
 ----------
 
