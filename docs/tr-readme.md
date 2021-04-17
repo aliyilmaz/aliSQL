@@ -2950,7 +2950,7 @@ veya
 
 ## arraySort()
 
-Bu fonksiyon Dizi veya JSON biçiminde tutulan veri kümelerini sıralamak amacıyla kullanılır. 3 parametre alır, sadece ilk iki parametrenin belirtilmesi zorunludur. İlk parametre, `ARRAY` ya da `JSON` türünde belirtilen veri kümesi içindir, ikinci parametre, veri türü `string` olan `asc`,`desc`,`ASC` veya `DESC` sıralama tiplerinden birini belirtmek içindir. Üçüncü parametreyse anahtarlı veri kümelerinde anahtar değerlerine göre sıralama yapmak içindir. Eğer Üçüncü parametre belirtilmezse varsayılan olarak php'nin `asort` komutu işletilir.
+Bu fonksiyon Dizi veya JSON biçiminde tutulan veri kümelerini sıralamak amacıyla kullanılır. 3 parametre alır, sadece ilk iki parametrenin belirtilmesi zorunludur. İlk parametre, `ARRAY` ya da `JSON` türünde belirtilen veri kümesi içindir, ikinci parametre, veri türü `string` olan `asc`,`desc`,`ASC` veya `DESC` sıralama tiplerinden birini belirtmek içindir. Üçüncü parametreyse anahtarlı veri kümelerinde anahtar değerlerine göre sıralama yapmak içindir. Eğer Üçüncü parametre belirtilmezse sıralama varsayılan olarak `ASC` tipiyle küçükten büyüğe doğru gerçekleşir.
 
 
 ##### Örnek
