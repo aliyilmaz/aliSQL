@@ -1469,7 +1469,7 @@ Bir veritabanı tablosunda belirtilen koşulları sağlayan ve sadece bir adet b
     echo $this->getId('users', $needle);
 
 
-**Bilgi:** `insert` metodunun `boolean` türünde bir yanıt döndürüyor olması, `amelia` metodunun `auto_increment` özelliği tanımlanmış sütunu kendiliğinden hedeflememesi ve daha anlamlı isme sahip `id` temin edici bir metot ihtiyacı bu metodun oluşmasını gerekli kılmıştır.
+**Bilgi:** `insert` metodunun `boolean` türünde bir yanıt döndürüyor olması, `amelia` metodunun `auto_increment` özelliği tanımlanmış sütunu kendiliğinden hedeflememesi ve daha anlamlı isme sahip `id` temin edici bir metot ihtiyacı bu metodun oluşmasını sağlamıştır.
 
 ----------
 
