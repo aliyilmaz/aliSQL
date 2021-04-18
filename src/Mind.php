@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.3
+ * @version    Release: 4.4.4
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -610,7 +610,7 @@ class Mind extends PDO
         if(!isset($values[0])){
             $values = array($values);
         } 
-        if(!isset($trigger[0])){
+        if(!isset($trigger[0]) AND !is_null($trigger)){
             $trigger = array($trigger);
         } 
         
@@ -629,26 +629,28 @@ class Mind extends PDO
                 $query->execute(array_values($rows));
             }
 
-            foreach ($trigger as $row) {
-                foreach ($row as $table => $data) {
-                    if(!isset($data[0])){
-                        $data = array($data);
-                    } 
-                    foreach ($data as $values) {
-                        $sql = '';
-                        $columns = [];
-                        $sql .= 'INSERT INTO `'.$table.'` SET ';
-                        foreach (array_keys($values) as $col) {
-                            $columns[] = $col.' = ?';
+            if(!is_null($trigger)){
+                foreach ($trigger as $row) {
+                    foreach ($row as $table => $data) {
+                        if(!isset($data[0])){
+                            $data = array($data);
+                        } 
+                        foreach ($data as $values) {
+                            $sql = '';
+                            $columns = [];
+                            $sql .= 'INSERT INTO `'.$table.'` SET ';
+                            foreach (array_keys($values) as $col) {
+                                $columns[] = $col.' = ?';
+                            }
+                            $sql .= implode(', ', $columns);
+    
+                            $query = $this->prepare($sql);
+                            $query->execute(array_values($values));
                         }
-                        $sql .= implode(', ', $columns);
-
-                        $query = $this->prepare($sql);
-                        $query->execute(array_values($values));
+                        
                     }
                     
                 }
-                
             }
 
             $this->commit();
