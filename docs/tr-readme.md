@@ -3251,7 +3251,7 @@ veya
     /* -------------------------------------------------------------------------- */
     /*                        GERİ SAYIM SAYAÇLI KULLANIMI                        */
     /* -------------------------------------------------------------------------- */
-    <?=$this->redirect('https://www.google.com', 20, '.example2 #redirect-time');?>
+    <?=$this->redirect('https://www.google.com', 20, '.example1 #redirect-time');?>
 
     <form class="example1" action="">
         
