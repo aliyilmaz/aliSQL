@@ -2951,10 +2951,10 @@ Verinin `languages()` metodunda bulunan dil kısaltmalarından biri olması gere
 
 Bu fonksiyon sunucu yazılımına özgü erişim yönetmeliği dosyalarını (.htaccess, web.config) oluşturmaya yarar. 
 
-`/` rotası bir defa kullanıldığında fonksiyon tetiklenir. `Apache` ve `Microsoft IIS` sunucu yazılımları desteklenmektedir. Bu fonksiyon, `route()` metodu içinde çalıştırılarak etkinleştirilmiştir.
+`/` rotası bir defa kullanıldığında fonksiyon tetiklenir. `Apache`, `Microsoft IIS` ve `LiteSpeed` sunucu yazılımları desteklenmektedir. Bu fonksiyon, `route()` metodu içinde çalıştırılarak etkinleştirilmiştir.
 
 
-#### Apache için (.htaccess) 
+#### Apache ve LiteSpeed için (.htaccess) 
 
 ###### Ana dizin
 
@@ -3853,7 +3853,7 @@ Projenin çalıştığı sunucu işletim sistemi ismini elde etmek için kullan�
 
 ## getSoftware()
 
-Projenin çalıştığı işletim sistemi üzerindeki sunucu yazılımı ismini elde etmek için kullanılır. `Apache`, `Microsoft ISS` yazılımları desteklemektedir, bunlar dışındaki sunucu yazılımları `Unknown` olarak isimlendirilir.
+Projenin çalıştığı işletim sistemi üzerindeki sunucu yazılımı ismini elde etmek için kullanılır. `Apache`, `Microsoft ISS` ve `LiteSpeed` yazılımları desteklemektedir, bunlar dışındaki sunucu yazılımları `Unknown` olarak isimlendirilir.
 
 ##### Örnek
 

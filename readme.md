@@ -12,7 +12,7 @@ Mind is the PHP code framework designed for developers. It offers a variety of s
 
 * PHP 5.6.0 or High
 * Database (PDO MySQL)
-* Web Server (Apache or Microsoft IIS)
+* Web Server (Apache, Microsoft IIS, LiteSpeed)
 
 ## Install
 

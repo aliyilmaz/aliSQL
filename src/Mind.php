@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.6
+ * @version    Release: 4.4.7
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3419,6 +3419,7 @@ class Mind extends PDO
         switch (true) {
             case stristr($software, 'apac'): return 'Apache';
             case stristr($software, 'micr'): return 'Microsoft-IIS';
+            case stristr($software, 'lites'): return 'LiteSpeed';
             default : return 'Unknown';
         }
     }
@@ -3543,10 +3544,12 @@ class Mind extends PDO
         }
 
         if(isset($content)){
-
-            $fileName        = fopen($filePath, "a+");
-            fwrite($fileName, $content."\r\n");
-            fclose($fileName);
+            if(!file_exists($filePath)){ touch($filePath); }
+            if(file_exists($filePath)){ 
+                $fileName        = fopen($filePath, "a+");
+                fwrite($fileName, $content."\r\n");
+                fclose($fileName);
+            }
 
             return true;
         }
