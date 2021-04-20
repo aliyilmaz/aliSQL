@@ -766,7 +766,7 @@ Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kulla
 
 #### auto_increment değer(ler)i göndererek kayıt(ları) silmek
 
-Bu kullanım şeklinde, auto_increment özelliği tanımlanmış bir sütunda belirtilen parametre(ler) aranır ve bulunan kayıtlar silinir, tablo adı ve parametre(ler) belirtmek zorunludur. 3'ncü parametre parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bu kullanım şeklinde, auto_increment özelliği tanımlanmış bir sütunda belirtilen parametre(ler) aranır ve bulunan kayıtlar silinir, tablo adı ve parametre(ler) belirtmek zorunludur. 3'ncü parametrede belirtilen `boolean` türündeki değer, parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -804,7 +804,7 @@ veya
 
 
 #### Sütun adı belirterek kayıt(ları) silmek
-Bu kullanım şeklinde, `auto_increment` özelliği tanımlanmayan bir sütunda parametre(ler) aranır, bulunan kayıt(lar) silinir. Sütun adını 3'ncü parametrede belirtmek gerekir. 4'ncü parametre parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Bu kullanım şeklinde, `auto_increment` özelliği tanımlanmayan bir sütunda parametre(ler) aranır, bulunan kayıt(lar) silinir. Sütun adını 3'ncü parametrede belirtmek gerekir. 4'ncü parametrede belirtilen `boolean` türündeki değer, parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -840,7 +840,7 @@ veya
 
 
 #### Bağlantılı kayıtlarla birlikte silmek
-Söz konusu parametreyi taşıyan başka tablo sütunları varsa bu tablo ve sütun isimlerinin belirtilmesi halinde, eşleşen ilintili kayıtların silinmesi sağlanır. 4'ncü parametre parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Söz konusu parametreyi taşıyan başka tablo sütunları varsa bu tablo ve sütun isimlerinin belirtilmesi halinde, eşleşen ilintili kayıtların silinmesi sağlanır. Aşağıdaki kullanım şekline göre 4 ve 5'nci parametrede belirtilen `boolean` türündeki değer, parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
