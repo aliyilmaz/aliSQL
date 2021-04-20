@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.4
+ * @version    Release: 4.4.5
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -726,64 +726,65 @@ class Mind extends PDO
      * @param mixed $column
      * @return bool
      */
-    public function delete($tblName, $needle, $column=null){
+    public function delete($tblName, $needle, $column=null, $trigger=null){
 
         if(empty($column)){
 
             $column = $this->increments($tblName);
-
-            if(empty($column)){
-                return false;
-            }
+            if(empty($column)) return false;
 
         }
 
-        if(is_array($column) AND !empty($needle)){
-
-            $colName = $this->increments($tblName);
-
-            if(empty($colName)){
-                return false;
-            }
-
-            if(!$this->delete($tblName, $needle, $colName)){
-                return false;
-            }
-
-            foreach ($column as $table => $item) {
-                if(!$this->delete($table, $needle, $item)){
-                    return false;
-                }
-            }
-            return true;
+        if(is_null($trigger) AND is_array($column)){
+            $trigger = $column;
+            $column = $this->increments($tblName);
+            if(empty($column)) return false;
         }
 
-        if(is_array($needle)){
+        if(!is_array($needle)){
+            $needle = array($needle);
+        }
 
-            foreach ($needle as $value) {
-                if(!$this->delete($tblName, $value, $column)){
-                    return false;
-                }
-            }
+        $sql = 'WHERE '.$column.'=?';
+        try{
+            $this->beginTransaction();
 
-            return true;
-
-        } else {
-
-            $sql = 'WHERE '.$column.'=?';
-            try{
-                if($this->do_have($tblName, $needle, $column)){
-
+            // tetikleyicisiz kayıt(ları) silme
+            if(is_null($trigger)){
+                foreach ($needle as $value) {
+                    if(!$this->do_have($tblName, $value, $column)){
+                        return false;
+                    }
                     $query = $this->prepare("DELETE FROM".' `'.$tblName.'` '.$sql);
-                    $query->execute(array($needle));
-                    return true;
-                } else {
-                    return false;
+                    $query->execute(array($value));
+                }
+            }
+
+            // tetikleyicili kayıt(ları) silme
+            if(!is_null($trigger)){
+                foreach ($needle as $value) {
+                    if(!$this->do_have($tblName, $value, $column)){
+                        return false;
+                    }
+                    $sql = 'WHERE '.$column.'=?';
+                    $query = $this->prepare("DELETE FROM".' `'.$tblName.'` '.$sql);
+                    $query->execute(array($value));
+
+                    foreach ($trigger as $table => $col) {
+                        $sql = 'WHERE '.$col.'=?';
+                        $query = $this->prepare("DELETE FROM".' `'.$table.'` '.$sql);
+                        $query->execute(array($value));
+                    }
                 }
 
-            }catch (Exception $e){
-                return false;
+                
             }
+
+            $this->commit();
+            return true;
+        }catch (Exception $e){
+            $this->rollBack();
+            return false;
         }
     }
 
