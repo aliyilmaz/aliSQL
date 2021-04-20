@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.5
+ * @version    Release: 4.4.6
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -726,7 +726,16 @@ class Mind extends PDO
      * @param mixed $column
      * @return bool
      */
-    public function delete($tblName, $needle, $column=null, $trigger=null){
+    public function delete($tblName, $needle, $column=null, $trigger=null, $force=null){
+
+        $status = false;
+
+        // status
+        if(is_bool($column)){
+            $status = $column;
+            $column = $this->increments($tblName);
+            if(empty($column)) return false;
+        }
 
         if(empty($column)){
 
@@ -735,10 +744,25 @@ class Mind extends PDO
 
         }
 
+        if(is_bool($trigger) AND is_array($column)){ 
+            $status = $trigger; 
+            $trigger = $column;
+            $column = $this->increments($tblName);
+            if(empty($column)) return false;
+        }
+
+        if(is_bool($trigger) AND is_string($column)){ 
+            $status = $trigger; 
+        }
+
         if(is_null($trigger) AND is_array($column)){
             $trigger = $column;
             $column = $this->increments($tblName);
             if(empty($column)) return false;
+        }
+
+        if(is_bool($force)){
+            $status = $force;
         }
 
         if(!is_array($needle)){
@@ -749,12 +773,17 @@ class Mind extends PDO
         try{
             $this->beginTransaction();
 
-            // tetikleyicisiz kayıt(ları) silme
-            if(is_null($trigger)){
+            if(!$status){
                 foreach ($needle as $value) {
                     if(!$this->do_have($tblName, $value, $column)){
                         return false;
                     }
+                }
+            }
+
+            // tetikleyicisiz kayıt(ları) silme
+            if(is_null($trigger)){
+                foreach ($needle as $value) {
                     $query = $this->prepare("DELETE FROM".' `'.$tblName.'` '.$sql);
                     $query->execute(array($value));
                 }
@@ -763,20 +792,20 @@ class Mind extends PDO
             // tetikleyicili kayıt(ları) silme
             if(!is_null($trigger)){
                 foreach ($needle as $value) {
-                    if(!$this->do_have($tblName, $value, $column)){
-                        return false;
-                    }
                     $sql = 'WHERE '.$column.'=?';
                     $query = $this->prepare("DELETE FROM".' `'.$tblName.'` '.$sql);
                     $query->execute(array($value));
 
-                    foreach ($trigger as $table => $col) {
-                        $sql = 'WHERE '.$col.'=?';
-                        $query = $this->prepare("DELETE FROM".' `'.$table.'` '.$sql);
-                        $query->execute(array($value));
+                    if(is_array($trigger)){
+
+                        foreach ($trigger as $table => $col) {
+                            $sql = 'WHERE '.$col.'=?';
+                            $query = $this->prepare("DELETE FROM".' `'.$table.'` '.$sql);
+                            $query->execute(array($value));
+                        }
+
                     }
                 }
-
                 
             }
 

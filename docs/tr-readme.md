@@ -762,12 +762,16 @@ veya
 
 ## delete()
 
-Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. Bu silme işlemini yaparken başka tablolarda da kayıt silmeye olanak tanır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kullanılır. Bu silme işlemini yaparken başka tablolarda kayıt silmesi de mümkündür. Geliştirici alışkanlıklarına göre çeşitli kullanım şekiller sunar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+
+#### auto_increment değer(ler)i göndererek kayıt(ları) silmek
+
+Bu kullanım şeklinde, auto_increment özelliği tanımlanmış bir sütunda belirtilen parametre(ler) aranır ve bulunan kayıtlar silinir, tablo adı ve parametre(ler) belirtmek zorunludur. 3'ncü parametre parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
 
-    if($this->delete('users', 49)){
+    if($this->delete('users', 73)){
         echo 'Kayıt silindi.';
     } else {
         echo 'Kayıt silinemedi.';
@@ -775,15 +779,32 @@ Veritabanı tablosunda bulunan bir veya daha fazla kaydı silmek amacıyla kulla
 
 veya
 
-    if($this->delete('users', array(50,51))){
+    if($this->delete('users', 66, true)){
+        echo 'Kayıt silindi.';
+    } else {
+        echo 'Kayıt silinemedi.';
+    }
+
+veya
+
+
+    if($this->delete('users', array(74,75))){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
+
+veya 
+
+    if($this->delete('users', array(76,77), true)){
         echo 'Kayıtlar silindi.';
     } else {
         echo 'Kayıtlar silinemedi.';
     }
 
 
-#### Sütun adı belirtmek
-Parametreyi `auto_increment` özelliği tanımlanmayan bir sütunda aramak için sütun adını 3'ncü parametrede belirtmek gerekir. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+#### Sütun adı belirterek kayıt(ları) silmek
+Bu kullanım şeklinde, `auto_increment` özelliği tanımlanmayan bir sütunda parametre(ler) aranır, bulunan kayıt(lar) silinir. Sütun adını 3'ncü parametrede belirtmek gerekir. 4'ncü parametre parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
@@ -795,19 +816,35 @@ Parametreyi `auto_increment` özelliği tanımlanmayan bir sütunda aramak için
 
 veya 
 
-    if($this->delete('users', array('julide', 'Fatih'), 'username')){
+    if($this->delete('users', 'fikret', 'username', true)){
         echo 'Kayıt silindi.';
     } else {
         echo 'Kayıt silinemedi.';
     }
 
+veya
+
+    if($this->delete('users', array('julide', 'Fatih'), 'username')){
+        echo 'Kayıt silindi.';
+    } else {
+        echo 'Kayıt silinemedi.';
+    }
   
+veya
+
+    if($this->delete('users', array('julide', 'Fatih'), 'username', true)){
+        echo 'Kayıt silindi.';
+    } else {
+        echo 'Kayıt silinemedi.';
+    }
+
+
 #### Bağlantılı kayıtlarla birlikte silmek
-Söz konusu parametreyi taşıyan başka tablo sütunları varsa bu tablo ve sütun isimlerinin belirtilmesi halinde, eşleşen ilintili kayıtların silinmesi sağlanır. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
+Söz konusu parametreyi taşıyan başka tablo sütunları varsa bu tablo ve sütun isimlerinin belirtilmesi halinde, eşleşen ilintili kayıtların silinmesi sağlanır. 4'ncü parametre parametrenin varlığına bakmaksızın silmeye zorlar. İşlem başarılıysa `true`, değilse `false` yanıtı döndürülür.
 
 ##### Örnek
 
-    if($this->delete('users', 56, array('log'=>'user_id'))){
+    if($this->delete('users', 1, array('log'=>'user_id'))){
         echo 'Kayıtlar silindi.';
     } else {
         echo 'Kayıtlar silinemedi.';
@@ -815,7 +852,7 @@ Söz konusu parametreyi taşıyan başka tablo sütunları varsa bu tablo ve sü
 
 veya 
 
-    if($this->delete('users', array(57,58), array('log'=>'user_id'))){
+    if($this->delete('users', 1, array('log'=>'user_id'), true)){
         echo 'Kayıtlar silindi.';
     } else {
         echo 'Kayıtlar silinemedi.';
@@ -823,6 +860,22 @@ veya
 
 
 veya 
+
+    if($this->delete('users', array(2,3), array('log'=>'user_id'))){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
+
+veya
+
+    if($this->delete('users', array(4,5), array('log'=>'user_id'), true)){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
+
+veya
 
     if($this->delete('users', 'Fatih', 'username', array('log'=>'username'))){
         echo 'Kayıtlar silindi.';
@@ -832,7 +885,23 @@ veya
 
 veya
 
+    if($this->delete('users', 'Fatih', 'username', array('log'=>'username'), true)){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }    
+
+veya
+
     if($this->delete('users', array('Fatih','aliyilmaz'), 'username', array('log'=>'username'))){
+        echo 'Kayıtlar silindi.';
+    } else {
+        echo 'Kayıtlar silinemedi.';
+    }
+
+veya
+
+    if($this->delete('users', array('Fatih','aliyilmaz'), 'username', array('log'=>'username'), true)){
         echo 'Kayıtlar silindi.';
     } else {
         echo 'Kayıtlar silinemedi.';
