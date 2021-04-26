@@ -3208,7 +3208,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 
 ##### type="text" kullanımı
 
-    <form method="post">  
+    <form action="new" method="post">  
 	    <input type="text" name="username"> 
 	    <input type="password" name="password"> 
 	    <button type="submit">Send!</button>
@@ -3220,7 +3220,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 
 ##### type="text" ve type="file" (Dosya) kullanımı
 
-    <form method="post" enctype="multipart/form-data">  
+    <form action="new" method="post" enctype="multipart/form-data">  
     	<input type="text" name="username"> 
     	<input type="password" name="password"> 
     	<input type="file" name="singlefile"> 
@@ -3234,7 +3234,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 
 ##### type="text" ve type="file" (Dosyalar) kullanımı
 
-    <form method="post" enctype="multipart/form-data">  
+    <form action="new" method="post" enctype="multipart/form-data">  
     	<input type="text" name="username"> 
     	<input type="password" name="password"> 
     	<input type="file" name="multifile[]" multiple="multiple"> 
