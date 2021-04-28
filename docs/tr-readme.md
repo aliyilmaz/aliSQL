@@ -290,6 +290,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
 -   [filter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#filter)
 -   [firewall](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#firewall)
+-   [csrf_token](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#csrf_token)
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
@@ -3297,7 +3298,7 @@ SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için k
 
 Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `csrf_token`, parametre uzunluğuysa `200` belirtilmiştir.
 
-##### Örnek
+##### Tanımlanma
 
     $conf = array(
         'host'      =>  'localhost',
@@ -3309,7 +3310,7 @@ Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` beli
             'nosniff'   =>  false,
             'noxss'     =>  false,
             'ssl'       =>  false,
-            'csrf'      =>  false
+            // 'csrf'      =>  false
             // 'csrf'      =>  true
             // 'csrf'      =>  array('limit'=>150)
             // 'csrf'      =>  array('name'=>'_token')
@@ -3321,6 +3322,20 @@ Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` beli
 
     echo 'Uzaktan erişime açıktır';
 
+
+##### Kullanma
+
+    <?=$this->csrf_token();?>
+
+----------
+
+## csrf_token()
+
+index.php dosyasında CSRF kuralı etkinleştirildiğinde kullanıldığı yere `token` taşıyan `hidden` tipinde bir input geri döndürmeye yarar.
+
+###### Örnek
+
+    <?=$this->csrf_token();?>
 
 ----------
 

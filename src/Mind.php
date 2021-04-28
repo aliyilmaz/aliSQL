@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.8
+ * @version    Release: 4.4.9
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2777,22 +2777,33 @@ class Mind extends PDO
                 }
             }
 
-            if(!isset($_SESSION[$name])){
-                $_SESSION[$name] = $this->generateToken($limit);
+            if(!isset($_SESSION['csrf']['token'])){
+                $_SESSION['csrf']['name'] = $name;
+                $_SESSION['csrf']['token'] = $this->generateToken($limit);
             }
             
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                if($_SESSION[$name] === $this->post[$name]){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if($_SESSION['csrf']['token'] === $this->post[$name]){
                     unset($this->post[$name]);
-                    $_SESSION[$name] = $this->generateToken($limit);
+                    $_SESSION['csrf']['name'] = $name;
+                    $_SESSION['csrf']['token'] = $this->generateToken($limit);
                 } else {
                     die('A valid token could not be found.');
                 }
             }
-        
-            echo "<script>document.addEventListener('DOMContentLoaded', (event) => { function appendItem(element, value){ let elements = document.querySelectorAll(element); if(elements.length >= 1){ elements.forEach(function(element) { if(element.value === undefined){ element.innerHTML += value; } else { element.value += value; } }); } } appendItem('form', '<input type=\"hidden\" name=\"".$name."\" value=\"".$_SESSION[$name]."\">'); });</script>";
 
         } 
+    }
+
+    /**
+     * CSRF input
+     * 
+     * @return string
+     */
+    public function csrf_token(){
+        if(isset($_SESSION['csrf']['name']) AND isset($_SESSION['csrf']['token'])){
+            return '<input type="hidden" name="'.$_SESSION['csrf']['name'].'" value="'.$_SESSION['csrf']['token'].'">';
+        }
     }
 
     /**
