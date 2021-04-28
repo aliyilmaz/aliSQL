@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.4.7
+ * @version    Release: 4.4.8
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -76,8 +76,6 @@ class Mind extends PDO
             $this->allow_folders = $conf['allow_folders'];
         }
 
-        $this->firewall($conf);
-
         try {
             parent::__construct('mysql:host=' . $this->host, $this->username, $this->password);
             if($this->is_db($this->dbname)){
@@ -94,6 +92,8 @@ class Mind extends PDO
 
         $this->request();
         $this->session_check();
+
+        $this->firewall($conf);
 
         error_reporting(-1);
         error_reporting(E_ALL);
@@ -2605,7 +2605,7 @@ class Mind extends PDO
     /**
      * Array sorting function
      * 
-     * @param array $data
+     * @param mixed $data
      * @param string $sort
      * @param string|int $column
      * @return array|json
@@ -2754,6 +2754,43 @@ class Mind extends PDO
                 header($hsts);
             }
 
+        }
+
+        $limit = 200;
+        $name = 'csrf_token';
+        if(isset($conf['firewall']['csrf'])){
+            if($conf['firewall']['csrf'] !== false){
+
+                if(is_array($conf['firewall']['csrf'])){
+                    if(isset($conf['firewall']['csrf']['name']) AND !isset($conf['firewall']['csrf']['limit'])){
+                    $name = $conf['firewall']['csrf']['name'];
+                    }
+                    if(!isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
+                        $limit = $conf['firewall']['csrf']['limit'];
+                    }
+                    if(isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
+                        $name = $conf['firewall']['csrf']['name'];
+                        $limit = $conf['firewall']['csrf']['limit'];
+                    }
+                }
+
+                if(!isset($_SESSION[$name])){
+                    $_SESSION[$name] = $this->generateToken($limit);
+                }
+                
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    if($_SESSION[$name] === $this->post[$name]){
+                        unset($this->post[$name]);
+                        $_SESSION[$name] = $this->generateToken($limit);
+                    } else {
+                        die('A valid token could not be found.');
+                    }
+                }
+            
+                echo "<script>document.addEventListener('DOMContentLoaded', (event) => { function appendItem(element, value){ let elements = document.querySelectorAll(element); if(elements.length >= 1){ elements.forEach(function(element) { if(element.value === undefined){ element.innerHTML += value; } else { element.value += value; } }); } } appendItem('form', '<input type=\"hidden\" name=\"".$name."\" value=\"".$_SESSION[$name]."\">'); });</script>";
+
+            } 
+            
         }
     }
 

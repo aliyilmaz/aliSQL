@@ -3268,7 +3268,7 @@ veya
 
 ## firewall()
 
-Bu fonksiyon, Clickjacking, XSS ve MIME Sniffing davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
+Bu fonksiyon, Clickjacking, XSS, MIME Sniffing, CSRF davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
 
 #### noiframe
 
@@ -3292,19 +3292,28 @@ SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek içi
 
 SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için kullanılır, bu sayede kullanıcıyla sunucu arasındaki haberleşmenin SSL ile korunması sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
 
+
+#### csrf
+
+Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `_token`, parametre uzunluğuysa `200` belirtilmiştir.
+
 ##### Örnek
 
     $conf = array(
         'host'      =>  'localhost',
         'dbname'    =>  'mydb',
         'username'  =>  'root',
-        'password'  =>  '',
+        'password'  =>  '',    
         'firewall'  =>  array(
             'noiframe'  =>  false,
             'nosniff'   =>  false,
             'noxss'     =>  false,
             'ssl'       =>  false,
-            'hsts'      =>  false
+            'csrf'      =>  false
+            // 'csrf'      =>  true
+            // 'csrf'      =>  array('limit'=>150)
+            // 'csrf'      =>  array('name'=>'_token')
+            // 'csrf'      =>  array('name'=>'_token', 'limit'=>150)
         )
     );
 
