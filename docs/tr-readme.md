@@ -3295,7 +3295,7 @@ SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için k
 
 #### csrf
 
-Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `_token`, parametre uzunluğuysa `200` belirtilmiştir.
+Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `csrf_token`, parametre uzunluğuysa `200` belirtilmiştir.
 
 ##### Örnek
 
