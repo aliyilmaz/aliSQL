@@ -2758,40 +2758,41 @@ class Mind extends PDO
 
         $limit = 200;
         $name = 'csrf_token';
-        if(isset($conf['firewall']['csrf'])){
-            if($conf['firewall']['csrf'] !== false){
-
-                if(is_array($conf['firewall']['csrf'])){
-                    if(isset($conf['firewall']['csrf']['name']) AND !isset($conf['firewall']['csrf']['limit'])){
-                    $name = $conf['firewall']['csrf']['name'];
-                    }
-                    if(!isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
-                        $limit = $conf['firewall']['csrf']['limit'];
-                    }
-                    if(isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
-                        $name = $conf['firewall']['csrf']['name'];
-                        $limit = $conf['firewall']['csrf']['limit'];
-                    }
-                }
-
-                if(!isset($_SESSION[$name])){
-                    $_SESSION[$name] = $this->generateToken($limit);
-                }
-                
-                if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                    if($_SESSION[$name] === $this->post[$name]){
-                        unset($this->post[$name]);
-                        $_SESSION[$name] = $this->generateToken($limit);
-                    } else {
-                        die('A valid token could not be found.');
-                    }
-                }
-            
-                echo "<script>document.addEventListener('DOMContentLoaded', (event) => { function appendItem(element, value){ let elements = document.querySelectorAll(element); if(elements.length >= 1){ elements.forEach(function(element) { if(element.value === undefined){ element.innerHTML += value; } else { element.value += value; } }); } } appendItem('form', '<input type=\"hidden\" name=\"".$name."\" value=\"".$_SESSION[$name]."\">'); });</script>";
-
-            } 
-            
+        
+        if(!isset($conf['firewall']['csrf'])){
+            $conf['firewall']['csrf'] = true;
         }
+        if($conf['firewall']['csrf'] !== false){
+
+            if(is_array($conf['firewall']['csrf'])){
+                if(isset($conf['firewall']['csrf']['name']) AND !isset($conf['firewall']['csrf']['limit'])){
+                $name = $conf['firewall']['csrf']['name'];
+                }
+                if(!isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
+                    $limit = $conf['firewall']['csrf']['limit'];
+                }
+                if(isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
+                    $name = $conf['firewall']['csrf']['name'];
+                    $limit = $conf['firewall']['csrf']['limit'];
+                }
+            }
+
+            if(!isset($_SESSION[$name])){
+                $_SESSION[$name] = $this->generateToken($limit);
+            }
+            
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                if($_SESSION[$name] === $this->post[$name]){
+                    unset($this->post[$name]);
+                    $_SESSION[$name] = $this->generateToken($limit);
+                } else {
+                    die('A valid token could not be found.');
+                }
+            }
+        
+            echo "<script>document.addEventListener('DOMContentLoaded', (event) => { function appendItem(element, value){ let elements = document.querySelectorAll(element); if(elements.length >= 1){ elements.forEach(function(element) { if(element.value === undefined){ element.innerHTML += value; } else { element.value += value; } }); } } appendItem('form', '<input type=\"hidden\" name=\"".$name."\" value=\"".$_SESSION[$name]."\">'); });</script>";
+
+        } 
     }
 
     /**
