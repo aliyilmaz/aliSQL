@@ -2756,54 +2756,6 @@ class Mind extends PDO
 
         }
 
-        $limit = 200;
-        $name = 'csrf_token';
-        
-        if(!isset($conf['firewall']['csrf'])){
-            $conf['firewall']['csrf'] = true;
-        }
-        if($conf['firewall']['csrf'] !== false){
-
-            if(is_array($conf['firewall']['csrf'])){
-                if(isset($conf['firewall']['csrf']['name']) AND !isset($conf['firewall']['csrf']['limit'])){
-                $name = $conf['firewall']['csrf']['name'];
-                }
-                if(!isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
-                    $limit = $conf['firewall']['csrf']['limit'];
-                }
-                if(isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
-                    $name = $conf['firewall']['csrf']['name'];
-                    $limit = $conf['firewall']['csrf']['limit'];
-                }
-            }
-
-            if(!isset($_SESSION['csrf']['token'])){
-                $_SESSION['csrf']['name'] = $name;
-                $_SESSION['csrf']['token'] = $this->generateToken($limit);
-            }
-            
-            if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                if($_SESSION['csrf']['token'] === $this->post[$name]){
-                    unset($this->post[$name]);
-                    $_SESSION['csrf']['name'] = $name;
-                    $_SESSION['csrf']['token'] = $this->generateToken($limit);
-                } else {
-                    die('A valid token could not be found.');
-                }
-            }
-
-        } 
-    }
-
-    /**
-     * CSRF input
-     * 
-     * @return string
-     */
-    public function csrf_token(){
-        if(isset($_SESSION['csrf']['name']) AND isset($_SESSION['csrf']['token'])){
-            return '<input type="hidden" name="'.$_SESSION['csrf']['name'].'" value="'.$_SESSION['csrf']['token'].'">';
-        }
     }
 
     /**

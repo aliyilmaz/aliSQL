@@ -290,7 +290,6 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [request](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#request)
 -   [filter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#filter)
 -   [firewall](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#firewall)
--   [csrf_token](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#csrf_token)
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
@@ -3269,7 +3268,7 @@ veya
 
 ## firewall()
 
-Bu fonksiyon, Clickjacking, XSS, MIME Sniffing, CSRF davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
+Bu fonksiyon, Clickjacking, XSS ve MIME Sniffing davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
 
 #### noiframe
 
@@ -3294,10 +3293,6 @@ SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek içi
 SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için kullanılır, bu sayede kullanıcıyla sunucu arasındaki haberleşmenin SSL ile korunması sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
 
 
-#### csrf
-
-Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `csrf_token`, parametre uzunluğuysa `200` belirtilmiştir.
-
 ##### Tanımlanma
 
     $conf = array(
@@ -3309,12 +3304,7 @@ Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` beli
             'noiframe'  =>  false,
             'nosniff'   =>  false,
             'noxss'     =>  false,
-            'ssl'       =>  false,
-            // 'csrf'      =>  false
-            // 'csrf'      =>  true
-            // 'csrf'      =>  array('limit'=>150)
-            // 'csrf'      =>  array('name'=>'_token')
-            // 'csrf'      =>  array('name'=>'_token', 'limit'=>150)
+            'ssl'       =>  false
         )
     );
 
@@ -3322,20 +3312,6 @@ Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` beli
 
     echo 'Uzaktan erişime açıktır';
 
-
-##### Kullanma
-
-    <?=$this->csrf_token();?>
-
-----------
-
-## csrf_token()
-
-index.php dosyasında CSRF kuralı etkinleştirildiğinde kullanıldığı yere `token` taşıyan `hidden` tipinde bir input geri döndürmeye yarar.
-
-###### Örnek
-
-    <?=$this->csrf_token();?>
 
 ----------
 
