@@ -2709,59 +2709,59 @@ class Mind extends PDO
      */
     public function firewall($conf=array()){
 
-        if(!empty($conf)){
+        $noiframe = "X-Frame-Options: SAMEORIGIN";
+        $noxss = "X-XSS-Protection: 1; mode=block";
+        $nosniff = "X-Content-Type-Options: nosniff";
+        $ssl = "Set-Cookie: user=t=".$this->generateToken()."; path=/; Secure";
+        $hsts = "Strict-Transport-Security: max-age=16070400; includeSubDomains; preload";
 
-            $noiframe = "X-Frame-Options: SAMEORIGIN";
-            $noxss = "X-XSS-Protection: 1; mode=block";
-            $nosniff = "X-Content-Type-Options: nosniff";
-            $ssl = "Set-Cookie: user=t=".$this->generateToken()."; path=/; Secure";
-            $hsts = "Strict-Transport-Security: max-age=16070400; includeSubDomains; preload";
-
-            if(isset($conf['firewall']['noiframe'])){
-                if($conf['firewall']['noiframe']){
-                    header($noiframe);
-                }
-            } else {
+        if(isset($conf['firewall']['noiframe'])){
+            if($conf['firewall']['noiframe']){
                 header($noiframe);
             }
-            if(isset($conf['firewall']['noxss'])){
-                if($conf['firewall']['noxss']){
-                    header($noxss);
-                }
-            } else {
+        } else {
+            header($noiframe);
+        }
+        if(isset($conf['firewall']['noxss'])){
+            if($conf['firewall']['noxss']){
                 header($noxss);
             }
-            if(isset($conf['firewall']['nosniff'])){
-                if($conf['firewall']['nosniff']){
-                    header($nosniff);
-                }
-            } else {
+        } else {
+            header($noxss);
+        }
+        if(isset($conf['firewall']['nosniff'])){
+            if($conf['firewall']['nosniff']){
                 header($nosniff);
             }
+        } else {
+            header($nosniff);
+        }
 
-            if($this->is_ssl()){
+        if($this->is_ssl()){
 
-                if(isset($conf['firewall']['ssl'])){
-                    if($conf['firewall']['ssl']){
-                        header($ssl);
-                    }
-                } else {
+            if(isset($conf['firewall']['ssl'])){
+                if($conf['firewall']['ssl']){
                     header($ssl);
                 }
-                if(isset($conf['firewall']['hsts'])){
-                    if($conf['firewall']['hsts']){
-                        header($hsts);
-                    }
-                } else {
+            } else {
+                header($ssl);
+            }
+            if(isset($conf['firewall']['hsts'])){
+                if($conf['firewall']['hsts']){
                     header($hsts);
                 }
-
+            } else {
+                header($hsts);
             }
-            
-            $limit = 200;
-            $name = 'csrf_token';
-            $status = true;
-    
+
+        }
+
+        $limit = 200;
+        $name = 'csrf_token';
+        $status = true;
+
+        if(!empty($conf)){
+
             if(isset($conf['firewall']['csrf'])){
                 if(!empty($conf['firewall']['csrf']['name'])){
                     $name = $conf['firewall']['csrf']['name'];
