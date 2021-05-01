@@ -2777,22 +2777,24 @@ class Mind extends PDO
                 }
             }
             
-            if(!isset($_SESSION['csrf']['token']) OR !isset($_SESSION['csrf']['name']) OR !isset($_SESSION['csrf']['input'])){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if(isset($this->post[$name]) AND isset($_SESSION['csrf']['token'])){
+                    if($this->post[$name] !== $_SESSION['csrf']['token']){
+                        die('A valid token could not be found.');
+                    } 
+                    unset($this->post[$name]);
+                } else {
+                    die('Token not found.');
+                }
+                if(isset($this->post[$name])){
+                    $_SESSION['csrf']['token'] = $this->generateToken($limit);
+                }
+            } else {
                 $_SESSION['csrf'] = array(
                     'name'  =>  $name,
                     'token' =>  $this->generateToken($limit)                    
                 );
                 $_SESSION['csrf']['input'] = "<input type=\"hidden\" name=\"".$_SESSION['csrf']['name']."\" value=\"".$_SESSION['csrf']['token']."\">";
-            }   
-            
-            if(isset($this->post[$name]) AND $_SERVER['REQUEST_METHOD'] === 'POST'){
-                
-                if($this->post[$name] !== $_SESSION['csrf']['token']){
-                    die('A valid token could not be found.');
-                } else {
-                    unset($this->post[$name]);
-                    unset($_SESSION['csrf']);
-                }
             }
             
         } 
