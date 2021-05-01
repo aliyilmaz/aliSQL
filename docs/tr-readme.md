@@ -3268,7 +3268,7 @@ veya
 
 ## firewall()
 
-Bu fonksiyon, Clickjacking, XSS ve MIME Sniffing davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
+Bu fonksiyon, Clickjacking, XSS, MIME Sniffing, CSRF davranışlarını engellemeye yarar. Varsayılan olarak tüm alt ayarlar tanımlandığı için parametre belirtme zorunluluğu yoktur. Varsayılan olarak __construct() metodu içerisinde çalıştırılarak etkinleştirilmiştir.
 
 #### noiframe
 
@@ -3293,7 +3293,13 @@ SSL etkin bir projenin oturumlarını, SSL üzerinden kullanıcıya iletmek içi
 SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için kullanılır, bu sayede kullanıcıyla sunucu arasındaki haberleşmenin SSL ile korunması sağlanmış olur. Varsayılan olarak `true` belirtilmiştir.
 
 
-##### Tanımlanma
+#### csrf
+
+Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `csrf_token`, parametre uzunluğuysa `200` belirtilmiştir. 
+
+Bu alt ayar etkin olduğu sürece herhangi bir form'dan gönderilenlerde `csrf_token` parametresini arayacak, bulamadığı taktirde ise söz konusu isteği durduracaktır. Form'a token input'unu eklemek için form içinde bir yere bu `<?=$_SESSION['csrf']['input'];?>` parametreyi belirtmek gerekir. 
+
+##### Örnek
 
     $conf = array(
         'host'      =>  'localhost',
@@ -3304,7 +3310,12 @@ SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için k
             'noiframe'  =>  false,
             'nosniff'   =>  false,
             'noxss'     =>  false,
-            'ssl'       =>  false
+            'ssl'       =>  false,
+            'csrf'      =>  false
+            // 'csrf'      =>  true
+            // 'csrf'      =>  array('limit'=>150)
+            // 'csrf'      =>  array('name'=>'_token')
+            // 'csrf'      =>  array('name'=>'_token', 'limit'=>150)
         )
     );
 
@@ -3312,6 +3323,7 @@ SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için k
 
     echo 'Uzaktan erişime açıktır';
 
+**Bilgi:** Her geçerli `token`'a sahip HTTP POST isteği sonrası parametreler değiştirilir.
 
 ----------
 
