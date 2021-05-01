@@ -2709,95 +2709,96 @@ class Mind extends PDO
      */
     public function firewall($conf=array()){
 
-        $noiframe = "X-Frame-Options: SAMEORIGIN";
-        $noxss = "X-XSS-Protection: 1; mode=block";
-        $nosniff = "X-Content-Type-Options: nosniff";
-        $ssl = "Set-Cookie: user=t=".$this->generateToken()."; path=/; Secure";
-        $hsts = "Strict-Transport-Security: max-age=16070400; includeSubDomains; preload";
+        if(!empty($conf)){
 
-        if(isset($conf['firewall']['noiframe'])){
-            if($conf['firewall']['noiframe']){
+            $noiframe = "X-Frame-Options: SAMEORIGIN";
+            $noxss = "X-XSS-Protection: 1; mode=block";
+            $nosniff = "X-Content-Type-Options: nosniff";
+            $ssl = "Set-Cookie: user=t=".$this->generateToken()."; path=/; Secure";
+            $hsts = "Strict-Transport-Security: max-age=16070400; includeSubDomains; preload";
+
+            if(isset($conf['firewall']['noiframe'])){
+                if($conf['firewall']['noiframe']){
+                    header($noiframe);
+                }
+            } else {
                 header($noiframe);
             }
-        } else {
-            header($noiframe);
-        }
-        if(isset($conf['firewall']['noxss'])){
-            if($conf['firewall']['noxss']){
+            if(isset($conf['firewall']['noxss'])){
+                if($conf['firewall']['noxss']){
+                    header($noxss);
+                }
+            } else {
                 header($noxss);
             }
-        } else {
-            header($noxss);
-        }
-        if(isset($conf['firewall']['nosniff'])){
-            if($conf['firewall']['nosniff']){
+            if(isset($conf['firewall']['nosniff'])){
+                if($conf['firewall']['nosniff']){
+                    header($nosniff);
+                }
+            } else {
                 header($nosniff);
             }
-        } else {
-            header($nosniff);
-        }
 
-        if($this->is_ssl()){
+            if($this->is_ssl()){
 
-            if(isset($conf['firewall']['ssl'])){
-                if($conf['firewall']['ssl']){
+                if(isset($conf['firewall']['ssl'])){
+                    if($conf['firewall']['ssl']){
+                        header($ssl);
+                    }
+                } else {
                     header($ssl);
                 }
-            } else {
-                header($ssl);
-            }
-            if(isset($conf['firewall']['hsts'])){
-                if($conf['firewall']['hsts']){
+                if(isset($conf['firewall']['hsts'])){
+                    if($conf['firewall']['hsts']){
+                        header($hsts);
+                    }
+                } else {
                     header($hsts);
                 }
-            } else {
-                header($hsts);
+
             }
-
-        }
-
-        $limit = 200;
-        $name = 'csrf_token';
-        
-        if(!isset($conf['firewall']['csrf'])){
-            $conf['firewall']['csrf'] = true;
-        }
-        if($conf['firewall']['csrf'] !== false){
-
-            if(is_array($conf['firewall']['csrf'])){
-                if(isset($conf['firewall']['csrf']['name']) AND !isset($conf['firewall']['csrf']['limit'])){
-                $name = $conf['firewall']['csrf']['name'];
-                }
-                if(!isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
-                    $limit = $conf['firewall']['csrf']['limit'];
-                }
-                if(isset($conf['firewall']['csrf']['name']) AND isset($conf['firewall']['csrf']['limit'])){
+            
+            $limit = 200;
+            $name = 'csrf_token';
+            $status = true;
+    
+            if(isset($conf['firewall']['csrf'])){
+                if(!empty($conf['firewall']['csrf']['name'])){
                     $name = $conf['firewall']['csrf']['name'];
+                }
+                if(!empty($conf['firewall']['csrf']['limit'])){
                     $limit = $conf['firewall']['csrf']['limit'];
                 }
-            }
-            
-            if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                if(isset($this->post[$name]) AND isset($_SESSION['csrf']['token'])){
-                    if($this->post[$name] !== $_SESSION['csrf']['token']){
-                        die('A valid token could not be found.');
-                    } 
-                    unset($this->post[$name]);
-                } else {
-                    die('Token not found.');
+                if(is_bool($conf['firewall']['csrf'])){
+                    $status = $conf['firewall']['csrf'];
                 }
-                if(isset($this->post[$name])){
-                    $_SESSION['csrf']['token'] = $this->generateToken($limit);
+            }
+    
+            if($status){
+                if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    if(isset($this->post[$name]) AND isset($_SESSION['csrf']['token'])){
+                        if($this->post[$name] !== $_SESSION['csrf']['token']){
+                            die('A valid token could not be found.');
+                        } 
+                        unset($this->post[$name]);
+                    } else {
+                        die('Token not found.');
+                    }
+                    if(isset($this->post[$name])){
+                        $_SESSION['csrf']['token'] = $this->generateToken($limit);
+                    }
+                } else {
+                    $_SESSION['csrf'] = array(
+                        'name'  =>  $name,
+                        'token' =>  $this->generateToken($limit)                    
+                    );
+                    $_SESSION['csrf']['input'] = "<input type=\"hidden\" name=\"".$_SESSION['csrf']['name']."\" value=\"".$_SESSION['csrf']['token']."\">";
                 }
             } else {
-                $_SESSION['csrf'] = array(
-                    'name'  =>  $name,
-                    'token' =>  $this->generateToken($limit)                    
-                );
-                $_SESSION['csrf']['input'] = "<input type=\"hidden\" name=\"".$_SESSION['csrf']['name']."\" value=\"".$_SESSION['csrf']['token']."\">";
+                unset($_SESSION['csrf']);
             }
             
-        } 
+        }
     }
 
     /**
