@@ -2863,12 +2863,26 @@ Veritabanı tablosunda olan bir verinin belirtilmesi gerektiğini ifade eder.
 
 
 
-    unique:users
+    available:users
 
 veya
 
 
-    unique:products
+    available:products
+
+
+##### knownunique
+
+Belirtilen parametrenin, veritabanı tablosunda olan bir kaydın mevcut parametreleri veya kendisi dışındaki herhangi bir kayıt ile eşleşmeyen bir parametre olması gerektiğini belirtmek için kullanılır. Sadece 3'ncü parametre belirtilirse, veri anahtarıyla aynı isme sahip sütunda kontrol edilir, 4'ncü parametre belirtilirse 3'ncü parametre sütun adı, 4'ncü parametre ise değer olarak algılanır.
+
+
+
+    knownunique:users:aliyilmaz
+
+veya
+
+
+    knownunique:users:username:aliyilmaz
 
 
 

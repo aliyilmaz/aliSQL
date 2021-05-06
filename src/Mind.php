@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.5.0
+ * @version    Release: 4.5.1
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2180,6 +2180,9 @@ class Mind extends PDO
                     if(count($ruleData) == 3){
                         list($name, $extra, $limit) = $ruleData;
                     }
+                    if(count($ruleData) == 4){
+                        list($name, $extra, $knownColumn, $knownValue) = $ruleData;
+                    }
                     // farklı zaman damgaları kontrolüne müsaade edildi.
                     if(count($ruleData) > 2 AND strstr($name, ' ')){
                         $x = explode(' ', $name);
@@ -2340,6 +2343,32 @@ class Mind extends PDO
                         if(!$this->do_have($extra, $data[$column], $column)){
                             $this->errors[$column][$name] = $message[$column][$name];
                         } 
+                    break;
+                    case 'known':
+                        if(!$this->is_table($extra)){
+                            $this->errors[$column][$name][] = 'Table not found.';
+                        }
+                        
+                        if(!$this->is_column($extra, $column)){
+                            $this->errors[$column][$name][] = 'Column not found.';
+                        }
+
+                        if(!isset($knownColumn) AND !isset($knownValue) AND isset($limit)){
+                            $knownColumn = $column;
+                            $knownValue = $limit;
+                        }
+
+                        if(!isset($limit)){
+                            $this->errors[$column][$name] = $message[$column][$name];
+                        } else {
+
+                            $item = $this->theodore($extra, array($knownColumn=>$knownValue));
+                            if($data[$column] != $item[$column] AND $this->do_have($extra, array($column=>$data[$column]))){
+                                $this->errors[$column][$name] = $message[$column][$name];
+                            }     
+                                    
+                        }
+
                     break;
                     // Doğrulama kuralı 
                     case 'bool':

@@ -9,8 +9,9 @@ $Mind = new Mind();
  | --------------------------------------------------------
  | required, email, url, phone, color, https, http,
  | json, max-num, min-num, max-char, min-char, numeric,
- | min-age, max-age, date, unique, available, unchanged, bool, 
- | iban, ipv4, ipv6, blood, coordinate, distance, languages
+ | min-age, max-age, date, unique, knownunique, available, 
+ | unchanged, bool, iban, ipv4, ipv6, blood, coordinate, 
+ | distance, languages
  | 
  */
 
@@ -46,6 +47,8 @@ $data = array(
 // Rule
 $rule = array(
     'username'          =>  'available:users',
+    // 'username'          =>  'knownunique:users:username:aliyilmaz'
+    // 'username'          =>  'knownunique:users:aliyilmaz'
     'title'             =>  'required|unique:posts',
     'email'             =>  'email|unique:users',
     'phone_number'      =>  'phone',
