@@ -2614,8 +2614,10 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
     // Kural
     $rule = array(
         'username'          =>  'available:users',
+        // 'username'          =>  'knownunique:users:username:aliyilmaz'
+        // 'username'          =>  'knownunique:users:aliyilmaz'
         'title'             =>  'required|unique:posts',
-        'email'             =>  'email|unique:users:1',
+        'email'             =>  'email|unique:users',
         'phone_number'      =>  'phone',
         'background_color'  =>  'color',
         'webpage'           =>  'url',
@@ -2624,7 +2626,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         'json_data'         =>  'json',
         'content'           =>  'max-char:7',
         'summary'           =>  'min-char:6|max-char:10',
-        'quentity'          =>  'max-num:4|min-num:2',
+        'quentity'          =>  'min-num:2|max-num:4',
         'numeric_str'       =>  'numeric',
         'birthday'          =>  'min-age:33|max-age:40',
         'register_date'     =>  'date:Y-m-d H:i:s',
@@ -2637,6 +2639,7 @@ Her anahtar adına birden çok kural tanımlamak için kurallar `|` sembolü yar
         'distances'         =>  'distance:349 km',
         'language'          =>  'languages'
     );
+
 
     // Mesaj
     $message = array(
