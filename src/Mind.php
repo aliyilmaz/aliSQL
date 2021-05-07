@@ -2181,7 +2181,7 @@ class Mind extends PDO
                         list($name, $extra, $limit) = $ruleData;
                     }
                     if(count($ruleData) == 4){
-                        list($name, $extra, $knownColumn, $knownValue) = $ruleData;
+                        list($name, $extra, $knownuniqueColumn, $knownuniqueValue) = $ruleData;
                     }
                     // farklı zaman damgaları kontrolüne müsaade edildi.
                     if(count($ruleData) > 2 AND strstr($name, ' ')){
@@ -2344,7 +2344,7 @@ class Mind extends PDO
                             $this->errors[$column][$name] = $message[$column][$name];
                         } 
                     break;
-                    case 'known':
+                    case 'knownunique':
                         if(!$this->is_table($extra)){
                             $this->errors[$column][$name][] = 'Table not found.';
                         }
@@ -2353,16 +2353,16 @@ class Mind extends PDO
                             $this->errors[$column][$name][] = 'Column not found.';
                         }
 
-                        if(!isset($knownColumn) AND !isset($knownValue) AND isset($limit)){
-                            $knownColumn = $column;
-                            $knownValue = $limit;
+                        if(!isset($knownuniqueColumn) AND !isset($knownuniqueValue) AND isset($limit)){
+                            $knownuniqueColumn = $column;
+                            $knownuniqueValue = $limit;
                         }
 
                         if(!isset($limit)){
                             $this->errors[$column][$name] = $message[$column][$name];
                         } else {
 
-                            $item = $this->theodore($extra, array($knownColumn=>$knownValue));
+                            $item = $this->theodore($extra, array($knownuniqueColumn=>$knownuniqueValue));
                             if($data[$column] != $item[$column] AND $this->do_have($extra, array($column=>$data[$column]))){
                                 $this->errors[$column][$name] = $message[$column][$name];
                             }     
