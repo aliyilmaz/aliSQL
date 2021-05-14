@@ -2871,7 +2871,7 @@ Veritabanı tablosunda olan bir verinin belirtilmesi gerektiğini ifade eder.
 veya
 
 
-    available:products
+    available:users:username
 
 
 ##### knownunique
