@@ -292,6 +292,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [firewall](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#firewall)
 -   [redirect](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#redirect)
 -   [permalink](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#permalink)
+-   [timeAgo](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timeago)
 -   [timezones](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#timezones)
 -   [languages](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#languages-1)
 -   [currencies](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#currencies)
@@ -3552,9 +3553,97 @@ veya
     
 ----------
 
+## timeAgo()
+
+Belirtilen zaman damgasının ne kadar süre geçmişte kaldığını öğrenmek için kullanılır, iki parametre alır, ilki zorunlu ikincisi zorunlu değildir.
+
+**Kullanılabilir Parametreler**
+
+* y ( Yıl )
+* m ( Ay )
+* w ( Hafta )
+* d ( Gün )
+* h ( Saat )
+* i ( Dakika )
+* s ( Saniye )
+* a ( Önce )
+* p ( Çoğul takısı )
+* j ( Şimdi )
+* f ( Tam zaman açıklamasının görünüp görünmemesi )
+
+##### Örnek
+
+    $datetime = $this->timestamp;
+    echo $this->timeAgo($datetime); // just now
+
+veya
+
+
+    $datetime = '2020-04-19 11:38:43';
+    echo $this->timeAgo($datetime); // 1 year ago
+
+veya
+
+    echo $this->timeAgo('2020-04-19 11:38:43', ['f'=>true]); //4 months, 1 week, 4 days, 23 hours, 5 minutes, 19 seconds
+
+veya
+
+    echo $this->timeAgo('2010-10-20'); // 9 years
+
+veya
+
+    echo $this->timeAgo('2010-10-20', ['f'=>true]); //10 years, 10 months, 1 week, 4 days, 10 hours, 45 minutes, 32 seconds
+
+veya
+
+    echo $this->timeAgo('@1598867187'); // 8 months ago
+
+veya
+
+    echo $this->timeAgo('@1598867187', ['f'=>true]); // 8 months, 2 weeks, 5 days, 22 hours, 20 minutes, 49 seconds ago
+
+veya
+
+    $options = array(
+        'y' => 'Yıl',
+        'm' => 'Ay',
+        'w' => 'Hafta',
+        'd' => 'Gün',
+        'h' => 'Saat',
+        'i' => 'Dakika',
+        's' => 'Saniye',
+        'a' => 'Önce'
+    );
+
+    $datetime = '2020-04-19 11:38:43';
+    echo $this->timeAgo($datetime, $options); // 1 Yıl Önce
+
+veya
+
+    $options = array(
+        'y' => 'Yıl',
+        'm' => 'Ay',
+        'w' => 'Hafta',
+        'd' => 'Gün',
+        'h' => 'Saat',
+        'i' => 'Dakika',
+        's' => 'Saniye',
+        'a' => 'Önce',
+        'p' => '',
+        'f' => true 
+    );
+
+    $datetime = '2020-04-19 11:38:43';
+    echo $this->timeAgo($datetime, $options); // 1 Yıl, 1 Ay, 23 Saats, 32 Dakikas, 3 Saniyes Önce
+
+----------
+
 ## timezones()
 
 Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_default_timezone_set()` fonksiyonunda kullanılabilen bölge kodlarını dizi halinde sunar. Daha fazla bilgi için [Desteklenen Zaman Dilimlerinin Listesi](https://secure.php.net/manual/tr/timezones.php) sayfasını inceleyebilirsiniz.
+
+##### Örnek
+
 
     $this->print_pre($this->timezones());
 
@@ -3564,6 +3653,9 @@ Bu fonksiyon, zaman damgasını isabetli kılmak amacıyla tercih edilen `date_d
 
 Bu fonksiyon, 182 adet dilin evrensel ve yerel ismi ile kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Stackoverflow](https://stackoverflow.com/a/4900304) sayfasını inceleyebilirsiniz.
 
+##### Örnek
+
+
     $this->print_pre($this->languages());
 
 ----------
@@ -3571,6 +3663,9 @@ Bu fonksiyon, 182 adet dilin evrensel ve yerel ismi ile kısaltmasını dizi hal
 ## currencies()
 
 Bu fonksiyon, 162 adet para birimi isim ve kısaltmasını dizi halinde sunar. Daha fazla bilgi için [Github Gist](https://gist.github.com/champsupertramp/95493faa7ba12b61bf6e#gistcomment-2085024) sayfasını inceleyebilirsiniz.
+
+##### Örnek
+
 
     $this->print_pre($this->currencies());
 
@@ -3580,6 +3675,8 @@ Bu fonksiyon, 162 adet para birimi isim ve kısaltmasını dizi halinde sunar. D
 
 `session_start()` komutunun kişiselleştirilmiş şekilde uygulanmasını sağlamak amacıyla kullanılır, Oturum Ayarları kısmında bulunan ayarlar ışığında oturumun akıbetini belirlemeye yarar,**Mind.php** dosyasında bulunan `__construct()` metodu içinde çalıştırılarak etkin hale getirilmiştir.
 
+##### Örnek
+
     $this->session_check();
 
 ----------
@@ -3587,6 +3684,8 @@ Bu fonksiyon, 162 adet para birimi isim ve kısaltmasını dizi halinde sunar. D
 ## remoteFileSize()
 
 Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
+
+##### Örnek
 
     echo $this->remoteFileSize('https://github.com/fluidicon.png');
 
