@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.5.3
+ * @version    Release: 4.5.4
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2809,27 +2809,32 @@ class Mind extends PDO
             }
     
             if($status){
+
                 if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     if(isset($this->post[$name]) AND isset($_SESSION['csrf']['token'])){
                         if($this->post[$name] !== $_SESSION['csrf']['token']){
                             die('A valid token could not be found.');
                         } 
                         unset($this->post[$name]);
+                        unset($_SESSION['csrf']);
                     } else {
                         die('Token not found.');
                     }
-                    if(isset($this->post[$name])){
-                        $_SESSION['csrf']['token'] = $this->generateToken($limit);
-                    }
-                } else {
+                } 
+
+                if(!isset($_SESSION['csrf']['token'])){
+
                     $_SESSION['csrf'] = array(
                         'name'  =>  $name,
                         'token' =>  $this->generateToken($limit)                    
                     );
                     $_SESSION['csrf']['input'] = "<input type=\"hidden\" name=\"".$_SESSION['csrf']['name']."\" value=\"".$_SESSION['csrf']['token']."\">";
                 }
+                
             } else {
-                unset($_SESSION['csrf']);
+                if(isset($_SESSION['csrf'])){
+                    unset($_SESSION['csrf']);
+                }
             }
             
         }
