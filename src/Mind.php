@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.5.4
+ * @version    Release: 4.5.5
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -2342,11 +2342,11 @@ class Mind extends PDO
                         }
                         
                         if(!$this->is_column($extra,$availableColumn)){
-                            $this->errors[$availableColumn][$name][] = 'Column not found.';
+                            $this->errors[$column][$name][] = 'Column not found.';
                         }
 
                         if(!$this->do_have($extra, $data[$column],$availableColumn)){
-                            $this->errors[$availableColumn][$name] = $message[$column][$name];
+                            $this->errors[$column][$name] = $message[$column][$name];
                         } 
                     break;
                     case 'knownunique':
