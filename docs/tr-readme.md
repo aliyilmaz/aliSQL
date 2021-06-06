@@ -4328,6 +4328,40 @@ veya
     $this->print_pre($data);
 
 
+veya
+
+
+    $xml_data ='<?xml version="1.0" encoding="UTF-8"?>'.
+        
+        '<smspack ka="kullanici_adi" pwd="kullanici_parolasi" org="Originator_adi" >'.
+        
+        '<mesaj>'.
+        
+            '<metin>'.$this->post['metin'].'</metin>'.
+        
+                '<nums>'.$this->post['telefon'].'</nums>'.
+        
+        '</mesaj>'.
+        
+        
+        
+        '<mesaj>'.
+        
+                '<metin>'.$this->post['metin'].'</metin>'.
+        
+                '<nums>'.$this->post['telefon'].'</nums>'.
+        
+        '</mesaj>'.
+        
+    '</smspack>';
+    
+    $options = array(
+        'post'=>$xml_data
+    );
+    
+  $output = $this->get_contents('', '', 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex', $options);
+
+
 ----------
 
 
