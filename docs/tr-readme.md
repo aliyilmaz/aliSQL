@@ -4359,7 +4359,7 @@ veya
         'post'=>$xml_data
     );
     
-  $output = $this->get_contents('', '', 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex', $options);
+    $output = $this->get_contents('', '', 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex', $options);
 
 
 ----------

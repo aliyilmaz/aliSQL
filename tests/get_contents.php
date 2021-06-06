@@ -51,23 +51,54 @@ $right = '&#039;';
 $data 	= $Mind->get_contents($left, $right, $url);
 print_r($data);*/
 
-$url = 'https://www.example.com/login';
-$left = '';
-$right = '';
+// $url = 'https://www.example.com/login';
+// $left = '';
+// $right = '';
+// $options = array(
+// //    'referer'=>$url,
+//     'post'=>array(
+//         'username'=>'aliyilmaz',
+//         'password'=>'123456'
+//     )
+// );
+
+// // Start connection.
+// $Mind->get_contents($left, $right, $url, $options);
+
+// // Session access.
+// $url = 'https://www.example.com/admin/users';
+// $left = '<title>';
+// $right = '</title>';
+// $data = $Mind->get_contents($left, $right, $url);
+// $Mind->print_pre($data);
+
+
+$xml_data ='<?xml version="1.0" encoding="UTF-8"?>'.
+    
+    '<smspack ka="kullanici_adi" pwd="kullanici_parolasi" org="Originator_adi" >'.
+    
+    '<mesaj>'.
+    
+        '<metin>'.$this->post['metin'].'</metin>'.
+    
+            '<nums>'.$this->post['telefon'].'</nums>'.
+    
+    '</mesaj>'.
+    
+    
+    
+    '<mesaj>'.
+    
+            '<metin>'.$this->post['metin'].'</metin>'.
+    
+            '<nums>'.$this->post['telefon'].'</nums>'.
+    
+    '</mesaj>'.
+    
+'</smspack>';
+
 $options = array(
-//    'referer'=>$url,
-    'post'=>array(
-        'username'=>'aliyilmaz',
-        'password'=>'123456'
-    )
+    'post'=>$xml_data
 );
 
-// Start connection.
-$Mind->get_contents($left, $right, $url, $options);
-
-// Session access.
-$url = 'https://www.example.com/admin/users';
-$left = '<title>';
-$right = '</title>';
-$data = $Mind->get_contents($left, $right, $url);
-$Mind->print_pre($data);
+$output = $this->get_contents('', '', 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex', $options);
