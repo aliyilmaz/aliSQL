@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.5.6
+ * @version    Release: 4.5.7
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -42,6 +42,8 @@ class Mind extends PDO
         'return'                =>  'text',
         'lang'                  =>  'TR'
     );
+
+    public  $sms_conf       =  array();
     public  $error_status   =  false;
     public  $error_file     =  'app/views/errors/404';
     public  $errors         =  array();
@@ -129,6 +131,12 @@ class Mind extends PDO
                 $this->lang['lang'] = $conf['translate']['lang'];
             }
 
+        }
+
+        if(isset($conf['sms'])){
+            if(is_array($conf['sms'])){
+                $this->sms_conf = $conf['sms'];
+            }
         }
 
         $baseDir = $this->get_absolute_path(dirname($_SERVER['SCRIPT_NAME']));
@@ -1959,10 +1967,10 @@ class Mind extends PDO
      * Blood group verification
      *
      * @param $blood
-     * @param string $needle
+     * @param string $donor
      * @return bool
      */
-    public function is_blood($blood, $needle = null){
+    public function is_blood($blood, $donor = null){
 
         $bloods = array(
             'AB+'=> array(
@@ -1995,15 +2003,15 @@ class Mind extends PDO
 
         //  hasta ve varsa donör parametreleri filtreden geçirilir
         $blood = str_replace(array('RH', ' '), '', mb_strtoupper($blood));
-        if(!is_null($needle)) $needle = str_replace(array('RH', ' '), '', mb_strtoupper($needle));
+        if(!is_null($donor)) $donor = str_replace(array('RH', ' '), '', mb_strtoupper($donor));
 
         // Kan grubu kontrolü
-        if(in_array($blood, $map) AND is_null($needle)){
+        if(in_array($blood, $map) AND is_null($donor)){
             return true;
         }
 
         // Donör uyumu kontrolü
-        if(in_array($blood, $map) AND in_array($needle, $bloods[$blood]) AND !is_null($needle)){
+        if(in_array($blood, $map) AND in_array($donor, $bloods[$blood]) AND !is_null($donor)){
             return true;
         }
 
@@ -4025,6 +4033,64 @@ class Mind extends PDO
         $output = ob_get_contents();
         ob_end_clean();
         echo $output;
+    }
+
+    /**
+     * SMS message sender
+     * 
+     * @param string $message
+     * @param string $numbers
+     * @param array|null conf
+     * @return bool
+     */
+    public function sms($message, $numbers, $conf=null){
+        
+        if(!is_null($conf) OR is_array($conf)){
+            $this->sms_conf = $conf;
+        }
+
+        foreach($this->sms_conf as $brand => $sms_conf){
+
+            switch($brand){
+            
+                case 'mutlucell':
+                    
+                    $url = 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex';
+
+                    $charset = '';
+                    if(!empty($sms_conf['charset'])){
+                        if($sms_conf['charset'] === 'turkish'){
+                            $charset = ' charset="'.$sms_conf['charset'].'"';
+                        }
+                    }
+                    
+                    $xml_data ='<?xml version="1.0" encoding="UTF-8"?>'.
+                    '<smspack ka="'.$sms_conf['ka'].'" pwd="'.$sms_conf['pwd'].'" org="'.$sms_conf['org'].'"'.$charset.'>'.
+                    '<mesaj>'.
+                    
+                        '<metin>'.$message.'</metin>'.
+                    
+                        '<nums>'.$numbers.'</nums>'.
+                    
+                    '</mesaj>'.
+                    
+                    '</smspack>';
+
+                    $options = array(
+                        'post'=>$xml_data
+                    );
+
+                    $output = $this->get_contents('', '', $url, $options);
+                    if(!is_array($output)){
+                        if(strstr($output, '$')){
+                            return true;
+                        } 
+                    }
+                    return false;
+
+                    break;
+            }
+        }
     }
 }
 
