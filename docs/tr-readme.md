@@ -199,6 +199,10 @@ Projenin zaman damgası, **yıl-ay-gün saat:dakika:saniye** biçiminde `$this->
 
 Çoklu dil desteği için ayarların tutulduğu değişkendir, Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
 
+##### public $sms_conf
+
+SMS api sağlayıcılarının bilgilerinin tutulduğu değişkendir, Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
 ##### public $error_status
 
 Hata durumlarını `true` veya `false` olarak taşıyan değişkendir, varsayılan olarak `false` belirtilmiştir. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
@@ -318,6 +322,7 @@ Hata mesajlarının tutulduğu değişkendir, dışarıdan erişime izin vermek 
 -   [get_contents](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#get_contents)
 -   [distanceMeter](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#distanceMeter)
 -   [evalContainer](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#evalContainer)
+-   [sms](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#sms)
 
 ----------
 
@@ -4487,3 +4492,77 @@ veya
 
     $this-&gt;print_pre($array);';
     $this->evalContainer($code);
+
+## sms()
+
+Belirtilen mesajı, belirtilen telefon numarasına göndermeye yarar, 3 parametre alır, ilk parametre mesaj metni, ikinci parametre telefon numarası, üçüncü parametre ise SMS api sağlayıcısı bilgilerini ve mesaj ayarlarını barındırır.
+
+**Bilgi:** Birden çok telefon numarasına mesaj göndermek için numaralar arasına virgül koymak gerekmektedir. Örnek telefon numarası yazılma biçimleri `532 567 89 90, 05556667788, +905551112233, 905324441122` gibidir.
+
+**SMS API bilgileri aşağıdaki şekillerde tanımlanabilir.**
+
+**Mind.php** dosyasında bulunan `$sms_conf` dizi değişkenine aşağıdaki gibi tanımlanarak
+
+    public $sms_conf = array(
+        'mutlucell'=>array(
+            'ka'=>'',
+            'pwd'=>'',
+            'org'=>'',
+            'charset'=>'turkish'
+        )
+    );
+
+Kullanımı
+
+    $status = $this->sms('Bu bir test mesajıdır', '+905551112233');
+    if($status){
+        echo 'SMS gönderildi.';
+    } else {
+        echo 'SMS gönderilemedi.';
+    }
+
+Veya **index.php** dosyasında **Mind** çağırılırken belirtilebilir.
+
+    $conf = array(
+        'sms'=>array(
+            'mutlucell'=>array(
+                'ka'=>'',
+                'pwd'=>'',
+                'org'=>'',
+                'charset'=>'turkish'
+            )
+        )
+    );
+    $Mind = new Mind($conf);
+
+Kullanımı
+
+    $status = $Mind->sms('Bu bir test mesajıdır', '+905551112233');
+    if($status){
+        echo 'SMS gönderildi.';
+    } else {
+        echo 'SMS gönderilemedi.';
+    }
+
+
+Veya sms metodu harici olarak kullanılmak istendiğinde SMS API bilgileri belirtilerek kullanılabilir.
+
+    $conf = array(
+        'mutlucell'=>array(
+            'ka'=>'',
+            'pwd'=>'',
+            'org'=>'',
+            'charset'=>'turkish'
+        )
+    );
+    $status = $Mind->sms('Bu bir test mesajıdır', '+905551112233', $conf);
+    if($status){
+        echo 'SMS gönderildi.';
+    } else {
+        echo 'SMS gönderilemedi.';
+    }
+
+
+**Desteklenen SMS API sağlayıcıları Listesi**
+
+* [Mutlucell](https://www.mutlucell.com.tr)
