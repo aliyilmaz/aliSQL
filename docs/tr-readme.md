@@ -3234,6 +3234,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
     <form action="new" method="post">  
 	    <input type="text" name="username"> 
 	    <input type="password" name="password"> 
+        <?=$_SESSION['csrf']['input'];?>
 	    <button type="submit">Send!</button>
      </form>
 
@@ -3247,6 +3248,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
     	<input type="text" name="username"> 
     	<input type="password" name="password"> 
     	<input type="file" name="singlefile"> 
+        <?=$_SESSION['csrf']['input'];?>
     	<button type="submit">Send!</button>
      </form>
 
@@ -3261,6 +3263,7 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
     	<input type="text" name="username"> 
     	<input type="password" name="password"> 
     	<input type="file" name="multifile[]" multiple="multiple"> 
+        <?=$_SESSION['csrf']['input'];?>
     	<button type="submit">Send!</button>
      </form>
 
@@ -3320,7 +3323,7 @@ SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için k
 
 Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `csrf_token`, parametre uzunluğuysa `200` belirtilmiştir. 
 
-Bu alt ayar etkin olduğu sürece herhangi bir form'dan gönderilenlerde `csrf_token` parametresini arayacak, bulamadığı taktirde ise söz konusu isteği durduracaktır. Form'a token input'unu eklemek için form içinde bir yere bu `<?=$_SESSION['csrf']['input'];?>` parametreyi belirtmek gerekir. 
+Bu alt ayar etkin olduğu sürece herhangi bir form'dan gönderilenlerde `csrf_token` parametresini arayacak, bulamadığı taktirde ise söz konusu isteği durduracaktır. Form'a token input'unu eklemek için form içinde bir yere bu `<?=$_SESSION['csrf']['input'];?>` parametreyi belirtmek gerekir. Eğer javascript ile form göndermek icap ediyorsa token parametresi bu şekilde javascript kodları içinde`<?=$_SESSION['csrf']['token'];?>` kullanılabilir.
 
 ##### Örnek
 
@@ -4186,6 +4189,7 @@ Belirtilen dosya veya dosyaları, belirtilen klasöre yüklemek amacıyla kullan
     	<input type="text" name="username"> 
     	<input type="password" name="password"> 
     	<input type="file" name="singlefile"> 
+        <?=$_SESSION['csrf']['input'];?>
     	<button type="submit">Send!</button>
      </form>
     
@@ -4203,6 +4207,7 @@ veya
     	<input type="text" name="username"> 
     	<input type="password" name="password"> 
     	<input type="file" name="multifile[]" multiple="multiple"> 
+        <?=$_SESSION['csrf']['input'];?>
     	<button type="submit">Send!</button>
      </form>
 
