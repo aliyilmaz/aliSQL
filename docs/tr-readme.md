@@ -4542,7 +4542,7 @@ Veya **index.php** dosyasında **Mind** çağırılırken belirtilebilir.
 
 Kullanımı
 
-    $status = $Mind->sms('Bu bir test mesajıdır', '+905551112233');
+    $status = $this->sms('Bu bir test mesajıdır', '+905551112233');
     if($status){
         echo 'SMS gönderildi.';
     } else {
@@ -4560,7 +4560,7 @@ Veya sms metodu harici olarak kullanılmak istendiğinde SMS API bilgileri belir
             'charset'=>'turkish'
         )
     );
-    $status = $Mind->sms('Bu bir test mesajıdır', '+905551112233', $conf);
+    $status = $this->sms('Bu bir test mesajıdır', '+905551112233', $conf);
     if($status){
         echo 'SMS gönderildi.';
     } else {
