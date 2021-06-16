@@ -3232,11 +3232,11 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 ##### type="text" kullanımı
 
     <form action="new" method="post">  
-	    <input type="text" name="username"> 
-	    <input type="password" name="password"> 
+        <input type="text" name="username"> 
+        <input type="password" name="password"> 
         <?=$_SESSION['csrf']['input'];?>
-	    <button type="submit">Send!</button>
-     </form>
+        <button type="submit">Send!</button>
+    </form>
 
     $this->print_pre($this->post);
     echo $this->post['username'];
@@ -3245,12 +3245,12 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 ##### type="text" ve type="file" (Dosya) kullanımı
 
     <form action="new" method="post" enctype="multipart/form-data">  
-    	<input type="text" name="username"> 
-    	<input type="password" name="password"> 
-    	<input type="file" name="singlefile"> 
+        <input type="text" name="username"> 
+        <input type="password" name="password"> 
+        <input type="file" name="singlefile">
         <?=$_SESSION['csrf']['input'];?>
-    	<button type="submit">Send!</button>
-     </form>
+        <button type="submit">Send!</button>
+    </form>
 
     $this->print_pre($this->post);
     echo $this->post['username'];
@@ -3260,12 +3260,12 @@ Bu fonksiyon dosya barındıran bir yola ait bilgilere ulaşmak amacıyla kullan
 ##### type="text" ve type="file" (Dosyalar) kullanımı
 
     <form action="new" method="post" enctype="multipart/form-data">  
-    	<input type="text" name="username"> 
-    	<input type="password" name="password"> 
-    	<input type="file" name="multifile[]" multiple="multiple"> 
+        <input type="text" name="username"> 
+        <input type="password" name="password"> 
+        <input type="file" name="multifile[]" multiple="multiple"> 
         <?=$_SESSION['csrf']['input'];?>
-    	<button type="submit">Send!</button>
-     </form>
+        <button type="submit">Send!</button>
+    </form>
 
     $this->print_pre($this->post);
     echo $this->post['username'];
