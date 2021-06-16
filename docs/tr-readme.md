@@ -3323,7 +3323,7 @@ SSL etkin bir projenin veri trafiğini, SSL üzerinden iletmeye zorlamak için k
 
 Yetkisiz HTTP POST isteklerini engellemeye yarar, varsayılan olarak `true` belirtilmiştir. `token` adı ve rastgele parametre uzunluğu belirtmek mümkündür, varsayılan olarak token adı `csrf_token`, parametre uzunluğuysa `200` belirtilmiştir. 
 
-Bu alt ayar etkin olduğu sürece herhangi bir form'dan gönderilenlerde `csrf_token` parametresini arayacak, bulamadığı taktirde ise söz konusu isteği durduracaktır. Form'a token input'unu eklemek için form içinde bir yere bu `<?=$_SESSION['csrf']['input'];?>` parametreyi belirtmek gerekir. Eğer javascript ile form göndermek icap ediyorsa token parametresi bu şekilde javascript kodları içinde`<?=$_SESSION['csrf']['token'];?>` kullanılabilir.
+Bu alt ayar etkin olduğu sürece herhangi bir form'dan gönderilenlerde `csrf_token` parametresini arayacak, bulamadığı taktirde ise söz konusu isteği durduracaktır. Form'a token input'unu eklemek için form içinde bir yere bu `<?=$_SESSION['csrf']['input'];?>` parametreyi belirtmek gerekir. Eğer javascript ile form göndermek icap ediyorsa token parametresi bu şekilde javascript kodları içinde`<?=$_SESSION['csrf']['token'];?>` kullanılabilir, token'ın taşındığı anahtar adı ise `<?=$_SESSION['csrf']['name'];?>` ile kullanılabilir.
 
 ##### Örnek
 
