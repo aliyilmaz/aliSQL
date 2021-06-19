@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.5.7
+ * @version    Release: 4.5.8
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3202,45 +3202,65 @@ class Mind extends PDO
     /**
      * Layer installer.
      *
-     * @param mixed $file
-     * @param mixed $cache
+     * @param string|array|null $file
+     * @param string|array|null $cache
      */
-    public function mindLoad($file, $cache=null){
+    public function mindLoad($file=null, $cache=null){
 
         $fileExt = '.php';
 
-        if (!empty($cache) AND !is_array($cache)) {
-            $cache = array($cache);
+        $minds = array();
+
+        $caches = array();
+        if(!is_null($cache)){
+            if(!is_array($cache)){
+                $caches = array($cache);
+            } else {
+                $caches = $cache;
+            }
         }
 
-        if (!empty($cache)) {
-            foreach ($cache as $cacheFile) {
+        $files = array();
+        if(!is_null($file)){
+            if(!is_array($file)){
+                $files = array($file);
+            } else {
+                $files = $file;
+            }
+        }
 
-                $cacheExplode = $this->pGenerator($cacheFile);
-                if (!empty($cacheExplode['name'])){
+        foreach (array_merge($caches, $files) as $mind){
+            $minds[] = $mind;
+        }
 
-                    $cacheFile = $cacheExplode['name'];
-                    $fileName = basename($cacheExplode['name']);
+        if (!empty($minds)) {
+            foreach ($minds as $mindFile) {
 
-                    if (empty($cacheFile)){
-                        $cacheFile = '';
+                $mindExplode = $this->pGenerator($mindFile);
+                if (!empty($mindExplode['name'])){
+
+                    $mindFile = $mindExplode['name'];
+                    $fileName = basename($mindExplode['name']);
+
+                    if (empty($mindFile)){
+                        $mindFile = '';
                     }
 
-                    if (file_exists($cacheFile . $fileExt)) {
+                    if (file_exists($mindFile . $fileExt)) {
 
                         /*
                          * PHPSTORM: In Settings search for 'unresolved include' which is under
                          * Editor > Inspections; PHP > General > Unresolved include and uncheck the box.
                          * */
-                        require_once($cacheFile . $fileExt);
+                        require_once($mindFile . $fileExt);
 
                         if (class_exists($fileName)){
-                            if (!empty($cacheExplode['params'])){
+                            if (!empty($mindExplode['params'])){
 
                                 $ClassName = new $fileName();
                                 $funcList = get_class_methods($fileName);
 
-                                foreach ($cacheExplode['params'] as $param) {
+                                foreach ($mindExplode['params'] as $param) {
 
                                     if (in_array($param, $funcList)){
                                         $ClassName->$param();
@@ -3254,21 +3274,7 @@ class Mind extends PDO
             }
         }
 
-        if(!empty($file)){
-
-            if(!is_array($file)){
-                $files = array($file);
-            } else {
-                $files = $file;
-            }
-
-            foreach ($files as $file){
-
-                if (file_exists($file . $fileExt)) {
-                    require_once($file . $fileExt);
-                }
-            }
-        }
+        
     }
 
     /**

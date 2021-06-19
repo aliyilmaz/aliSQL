@@ -3705,7 +3705,9 @@ Uzak sunucuda barınan dosyanın boyunutunu(byte olarak) öğrenmeye yarar.
 
 Her iki değişkene de `string` veya `array` olarak dosya yolları gönderilebilir, eğer dosyalar varsa projeye `require_once` yöntemiyle dahil edilirler. 
 
-İki parametre alır, ilk önce ikinci parametre olan `$cache` dosyaları, ardından birinci parametre olan `$file` değişkeninde bulunan dosyalar projeye dahil edilir. `$cache` değişkeni isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+İki parametre alır, ilk önce ikinci parametre olan `$cache` dosyaları, ardından birinci parametre olan `$file` değişkeninde bulunan dosyalar projeye dahil edilir. `$file` ve `$cache` parametreleri isteğe bağlı olup, belirtilme zorunluluğu bulunmamaktadır. Sınıf dışından erişime izin vermek için `public` özelliği tanımlanmıştır.
+
+Her iki parametreye de uzantısız dosya yolları string veya dizi biçiminde belirtilebileceği gibi, bu dosya yolları içinde sınıf metodu çağıran yollar da tanımlanabilir.
 
 ##### Örnek
 
@@ -3737,6 +3739,32 @@ veya
         'app/model/home'
     );
     $this->mindLoad($file, $cache);
+
+veya 
+
+    $this->mindLoad('HomeController:index@create',
+    [
+        'BlogController:index@create',
+        'LogController:index@create'
+    ]);
+
+veya
+
+    $this->mindLoad([
+        'BlogController:index@create',
+        'LogController:index@create'
+    ]);
+
+veya 
+
+    $this->mindLoad([
+        'HomeController:index@create',
+        'StoreController:index@create'
+    ],
+    [
+        'BlogController:index@create',
+        'LogController:index@create'
+    ]);
 
 ----------
 
@@ -4003,6 +4031,13 @@ Route fonksiyonu özelleştirilebilir rotalar tanımlamak ve bu rotalara özel z
   
 Rotalar, `Mind.php` dosyasıyla aynı dizinde bulunan `index.php` dosyası içine tanımlanır, dolayısıyla `new Mind()` çağrısının atandığı değişkeni ön ek kabul ederek çalışır.
 
+`url`, `file` ve `cache` parametreleri alabilen `route()` fonksiyonu, `url` parametresini `string` olarak kabul eder, `file` ve `cache` parametreleriniyse `string` ve `array` olarak kabul etmektedir. Bu üç parametreden `file` ve `cache` parametrelerinin belirtilme zorunluluğu yoktur. 
+
+`file` ve `cache` parametreleri, uzantısı belirtilmeyen `php` dosyalarının yollarından meydana gelir. `file` ve `cache` parametresi aynı zamanda sınıf metodlarını çağırmak için de kullanılabilir. 
+
+Katmanların yüklenmesi hakkında daha fazla bilgi için, [mindLoad()](https://github.com/aliyilmaz/Mind/blob/master/docs/tr-readme.md#mindLoad) maddesini inceleyebilirsiniz.
+
+
 ##### Örnek
 
     <?php
@@ -4015,10 +4050,6 @@ Rotalar, `Mind.php` dosyasıyla aynı dizinde bulunan `index.php` dosyası için
 
     ?>
 
-
-#### Giriş
-
-`url`, `file` ve `cache` parametreleri alabilen `route()` fonksiyonu, `url` parametresini `string` olarak kabul eder, `file` ve `cache` parametreleriniyse `string` ve `array` olarak kabul etmektedir. Bu üç parametreden sadece `cache` parametresinin belirtilme zorunluluğu yoktur. `file` ve `cache` parametreleri, uzantısı belirtilmeyen `php` dosyalarının yollarından meydana gelir. `cache` parametresi aynı zamanda sınıf metodlarını çağırmak için de kullanılabilir.
 
 #### Url
 
@@ -4071,7 +4102,7 @@ veya
 
 #### Cache
 
-Eğer `cache` parametresi belirtilirse, belirtilen `cache` dosyaları, `file` parametresinde belirtilen dosya(lar) henüz projeye dahil edilmeden önce, ilk eklenenden son eklenene doğru tek tek varlık kontrolünden geçirilerek projeye dahil edilir. İsteğe bağlı olarak `cache` parametresinde sınıfa ait metod veya metodlar çalıştırılabilir.
+Eğer `cache` parametresi belirtilirse, belirtilen `cache` dosyaları, `file` parametresinde belirtilen dosya(lar) henüz projeye dahil edilmeden önce, ilk eklenenden son eklenene doğru tek tek varlık kontrolünden geçirilerek projeye dahil edilir. 
 
 ##### Örnek
 
@@ -4124,23 +4155,6 @@ Oluşturulan bu `HomeController` sınıfı içinden `Mind` metodlarına `$this->
 
 Eğer metod çağırılırsa sınıf adıyla dosya adının aynı olması gerekmektedir.
 
-
-#### .htaccess
-
-`route()` fonksiyonu kullanıldığı zaman, eğer **Mind.php** dosyasının bulunduğu dizinde ve o dizinde ki klasörlerde `.htaccess` dosyası yoksa oluşturulur. Klasörlerin içinde oluşturulan `.htaccess` dosyası direkt erişimi engelleyen komut içerir. **Mind.php** ile aynı dizinde oluşturulan `.htaccess` dosyası ise anlamlı `url` rotalarını elde etmeyi sağlayan aşağıda ki komutları içerir.
-
-##### Örnek (Erişimi kısıtlanan dizinler için)
-
-    Deny from all
-
-veya (Mind.php dosyasının olduğu dizin için)
-
-    RewriteEngine On  
-    RewriteCond %{REQUEST_FILENAME} -s [OR]  
-    RewriteCond %{REQUEST_FILENAME} -l [OR]  
-    RewriteCond %{REQUEST_FILENAME} -d  
-    RewriteRule ^.*$ - [NC,L]  
-    RewriteRule ^.*$ index.php [NC,L]
 
 ----------
 
