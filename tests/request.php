@@ -8,6 +8,7 @@ $Mind = new Mind();
 <form method="post">
     <input type="text" name="username">
     <input type="password" name="password">
+    <?=$_SESSION['csrf']['input'];?>
     <button type="submit">Send!</button>
 </form>
 
@@ -17,6 +18,7 @@ $Mind = new Mind();
     <input type="text" name="username">
     <input type="password" name="password">
     <input type="file" name="singlefile">
+    <?=$_SESSION['csrf']['input'];?>
     <button type="submit">Send!</button>
 </form>
 <hr>
@@ -25,6 +27,7 @@ $Mind = new Mind();
     <input type="text" name="username">
     <input type="password" name="password">
     <input type="file" name="multifile[]" multiple="multiple">
+    <?=$_SESSION['csrf']['input'];?>
     <button type="submit">Send!</button>
 </form>
 <hr>
