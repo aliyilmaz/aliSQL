@@ -1786,7 +1786,7 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu çeviri desteğini sağla
                 array(
                     "name" => "dashboard",
                     "text" => "Dashboard",
-                    "lang" => "GB",
+                    "lang" => "EN",
                     "user_id" => 1,
                     "_token" => $this->generateToken(),
                     "status" => 1,
@@ -1795,7 +1795,7 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu çeviri desteğini sağla
                 array(
                     "name" => "profile-signout",
                     "text" => "Sign out",
-                    "lang" => "GB",
+                    "lang" => "EN",
                     "user_id" => 1,
                     "_token" => $this->generateToken(),
                     "status" => 1,
