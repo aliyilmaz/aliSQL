@@ -1832,7 +1832,7 @@ Bu fonksiyon, veritabanı altyapısına dayanan çoklu çeviri desteğini sağla
     echo '<br />';
     echo $this->translate('dashboard', 'TR'); // Başlangıç
     echo '<br />';
-    echo $this->translate('dashboard', 'GB'); // Dashboard
+    echo $this->translate('dashboard', 'EN'); // Dashboard
 
 ### Çeviri ayarlarının Mind'a tanımlanması
 
