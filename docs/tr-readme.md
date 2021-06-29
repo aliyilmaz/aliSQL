@@ -4289,6 +4289,15 @@ Bir veya birden fazla öğe bulunuyorsa hepsini bir `array` olarak sunar. Eğer 
 
 veya
 
+    $url = 'https://www.hepsiburada.com/';
+    $left = '';
+    $right = '';
+    $data 	= $this->get_contents($left, $right, $url);
+    $this->print_pre($data);
+
+
+veya
+
     $url 	= 'https://www.cloudflare.com/';
     $left 	= '<title>';
     $right	= '</title>';

@@ -7,15 +7,24 @@ $Mind = new Mind();
 $left = '';
 $right = '';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);
+$Mind->print_pre($data);
+
+echo '<br><br>';
+*/
+$url = 'https://www.hepsiburada.com/';
+$left = '';
+$right = '';
+$data 	= $Mind->get_contents($left, $right, $url);
+$Mind->print_pre($data);
 
 echo '<br><br>';
 
+/*
 $url 	= 'https://www.cloudflare.com/';
 $left 	= '<title>';
 $right	= '</title>';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);
+$Mind->print_pre($data);
 
 
 echo '<br><br>';
@@ -24,7 +33,7 @@ $url 	= 'https://www.cloudflare.com/';
 $left 	= '<link rel="alternate" hreflang="';
 $right	= '"';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);
+$Mind->print_pre($data);
 
 
 echo '<br><br>';
@@ -33,7 +42,7 @@ $url 	= 'Örnek bir içeriktir. <title>Merhaba Dünya!</title>';
 $left 	= '<title>';
 $right	= '</title>';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);
+$Mind->print_pre($data);
 
 echo '<br><br>';
 
@@ -41,7 +50,7 @@ $url = 'src=\'-str\'-after src=\'-str\'-after src=\'-str\'-after src=\'-str\'-af
 $left = 'src=\'';
 $right = '\'-after';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);
+$Mind->print_pre($data);
 
 echo '<br><br>';
 
@@ -49,7 +58,7 @@ $url = '{"filmler": [  {"imdb": "tt0116231", "url": "&lt;iframe src=&#039;https:
 $left = 'src=&#039;';
 $right = '&#039;';
 $data 	= $Mind->get_contents($left, $right, $url);
-print_r($data);*/
+$Mind->print_pre($data);*/
 
 // $url = 'https://www.example.com/login';
 // $left = '';
@@ -72,7 +81,7 @@ print_r($data);*/
 // $data = $Mind->get_contents($left, $right, $url);
 // $Mind->print_pre($data);
 
-
+/*
 $xml_data ='<?xml version="1.0" encoding="UTF-8"?>'.
     
     '<smspack ka="kullanici_adi" pwd="kullanici_parolasi" org="Originator_adi" >'.
@@ -102,3 +111,4 @@ $options = array(
 );
 
 $output = $this->get_contents('', '', 'https://smsgw.mutlucell.com/smsgw-ws/sndblkex', $options);
+*/

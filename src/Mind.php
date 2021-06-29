@@ -3,7 +3,7 @@
 /**
  *
  * @package    Mind
- * @version    Release: 4.5.8
+ * @version    Release: 4.5.9
  * @license    GPL3
  * @author     Ali YILMAZ <aliyilmaz.work@gmail.com>
  * @category   Php Framework, Design pattern builder for PHP.
@@ -3845,7 +3845,11 @@ class Mind extends PDO
         if($this->is_url($url)) {
             $ch = curl_init();
             curl_setopt($ch,CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                "Accept-Language:".$_SERVER['HTTP_ACCEPT_LANGUAGE'],
+                "Connection: keep-alive",
+            ));
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
