@@ -3846,10 +3846,12 @@ class Mind extends PDO
             $ch = curl_init();
             curl_setopt($ch,CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HEADER, false);
+
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 "Accept-Language:".$_SERVER['HTTP_ACCEPT_LANGUAGE'],
                 "Connection: keep-alive",
             ));
+            
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);

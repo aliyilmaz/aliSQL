@@ -11,6 +11,7 @@ $Mind->print_pre($data);
 
 echo '<br><br>';
 */
+
 $url = 'https://www.hepsiburada.com/';
 $left = '';
 $right = '';
